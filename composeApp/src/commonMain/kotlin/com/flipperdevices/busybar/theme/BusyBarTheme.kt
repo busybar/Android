@@ -1,0 +1,80 @@
+package com.flipperdevices.busybar.theme
+
+import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.selection.LocalTextSelectionColors
+import androidx.compose.foundation.text.selection.TextSelectionColors
+import androidx.compose.material.Colors
+import androidx.compose.material.LocalContentColor
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Shapes
+import androidx.compose.material.contentColorFor
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.unit.dp
+import com.flipperdevices.busybar.theme.generated.BusyBarPallet
+import com.flipperdevices.busybar.theme.generated.getDarkPallet
+import com.flipperdevices.busybar.theme.generated.getLightPallet
+import com.flipperdevices.busybar.theme.generated.toAnimatePallet
+
+val LocalPallet = compositionLocalOf<BusyBarPallet> { error("No local pallet") }
+
+@Composable
+private fun getThemedPallet(isLight: Boolean): BusyBarPallet {
+    return remember(isLight) {
+        if (isLight) {
+            getLightPallet()
+        } else {
+            getDarkPallet()
+        }
+    }.toAnimatePallet()
+}
+
+internal fun BusyBarPallet.toMaterialColors(isLight: Boolean) = Colors(
+    primary = brand.primary,
+    primaryVariant = brand.primary,
+    secondary = brand.secondary,
+    secondaryVariant = brand.secondary,
+    background = background.primary,
+    surface = background.secondary,
+    error = danger.primary,
+    onPrimary = onColor.white,
+    onSecondary = onColor.black,
+    onBackground = onColor.black,
+    onSurface = onColor.black,
+    onError = onColor.black,
+    isLight = isLight
+)
+
+internal fun BusyBarPallet.toTextSelectionColors() = TextSelectionColors(
+    handleColor = brand.primary,
+    backgroundColor = background.primary
+)
+
+@Composable
+fun BusyBarTheme(
+    content: @Composable () -> Unit
+) {
+    val isLight = isSystemInDarkTheme().not()
+    val pallet = getThemedPallet(
+        isLight = isLight
+    )
+    val colors = pallet.toMaterialColors(isLight)
+    val shapes = Shapes(medium = RoundedCornerShape(size = 10.dp))
+
+    MaterialTheme(
+        shapes = shapes,
+        colors = colors
+    ) {
+        CompositionLocalProvider(
+            LocalPallet provides pallet,
+            LocalContentColor provides colors.contentColorFor(backgroundColor = colors.background),
+            LocalTextSelectionColors provides pallet.toTextSelectionColors(),
+            content = content
+        )
+    }
+}
+

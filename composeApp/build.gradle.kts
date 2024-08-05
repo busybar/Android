@@ -75,7 +75,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.flipperdevices.bar"
+    namespace = "com.flipperdevices.busybar"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -83,7 +83,7 @@ android {
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
-        applicationId = "com.flipperdevices.bar"
+        applicationId = "com.flipperdevices.busybar"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
@@ -113,11 +113,11 @@ android {
 
 compose.desktop {
     application {
-        mainClass = "MainKt"
+        mainClass = "com.flipperdevices.busybar.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.flipperdevices.bar"
+            packageName = "com.flipperdevices.busybar"
             packageVersion = "1.0.0"
         }
     }

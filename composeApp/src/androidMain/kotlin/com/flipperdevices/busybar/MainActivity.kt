@@ -1,6 +1,5 @@
-package com.flipperdevices.bar
+package com.flipperdevices.busybar
 
-import App
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
