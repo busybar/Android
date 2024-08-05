@@ -35,7 +35,7 @@ fun ComposableBottomBar(
                 Text(
                     text = stringResource(bottomBarTab.tabName),
                     fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
-                    fontWeight = FontWeight.W500,
+                    fontWeight = FontWeight.Normal,
                     fontSize = 12.sp
                 )
             },
