@@ -1,0 +1,94 @@
+name: Build desktop apps
+on:
+  workflow_call:
+    outputs:
+      ARTIFACTS_NAME:
+        description: "The name of artifact archive name"
+        value: ${{ jobs.collect.outputs.ARTIFACTS_NAME }}
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup Java JDK
+        uses: actions/setup-java@v2.1.0
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+      - name: Build the project
+        run: ./gradlew packageDistributionForCurrentOS
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts-windows
+          path: composeApp/build/compose/binaries/main/msi/
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup Java JDK
+        uses: actions/setup-java@v2.1.0
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+      - name: Build the project
+        run: ./gradlew packageDistributionForCurrentOS
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts-linux
+          path: composeApp/build/compose/binaries/main/deb/
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup Java JDK
+        uses: actions/setup-java@v2.1.0
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+      - name: Build the project
+        run: ./gradlew packageDistributionForCurrentOS
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts-macos
+          path: composeApp/build/compose/binaries/main/dmg/
+  collect:
+    name: Collect all artifacts to one archive
+    runs-on: ubuntu-latest
+    needs: [ build-windows, build-linux, build-macos ]
+    outputs:
+      ARTIFACTS_NAME: ${{ steps.echo_output.outputs.ARTIFACTS_NAME }}
+    steps:
+      - uses: actions/download-artifact@v4
+        id: download-windows
+        with:
+          name: artifacts-windows
+          path: download/artifacts-windows
+      - uses: actions/download-artifact@v4
+        id: download-macos
+        with:
+          name: artifacts-macos
+          path: download/artifacts-macos
+      - uses: actions/download-artifact@v4
+        id: download-linux
+        with:
+          name: artifacts-linux
+          path: download/artifacts-linux
+      - name: 'Copy artifacts'
+        id: artifacts_copy
+        run: |
+          mkdir artifacts
+          cp ${{steps.download-windows.outputs.download-path}}/* artifacts/
+          cp ${{steps.download-macos.outputs.download-path}}/* artifacts/
+          cp ${{steps.download-linux.outputs.download-path}}/* artifacts/
+          echo "path=artifacts/" >> $GITHUB_OUTPUT
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts-output
+          path: artifacts/
+      - id: echo_output
+        run: echo "ARTIFACTS_NAME=artifacts-output" >> $GITHUB_OUTPU

@@ -28,7 +28,7 @@ jobs:
           name: artifacts
           path: composeApp/build/dist/wasmJs/productionExecutable
   deploy:
-    needs: build
+    needs: build_web
     permissions:
       contents: write
     runs-on: ubuntu-latest
