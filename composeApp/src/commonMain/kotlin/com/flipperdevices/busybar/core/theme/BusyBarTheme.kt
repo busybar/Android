@@ -1,6 +1,5 @@
 package com.flipperdevices.busybar.core.theme
 
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
@@ -64,6 +63,7 @@ fun BusyBarTheme(
     )
     val colors = pallet.toMaterialColors(isLight)
     val shapes = Shapes(medium = RoundedCornerShape(size = 10.dp))
+    val fonts = getBusyBarFonts()
 
     MaterialTheme(
         shapes = shapes,
@@ -71,6 +71,7 @@ fun BusyBarTheme(
     ) {
         CompositionLocalProvider(
             LocalPallet provides pallet,
+            LocalBusyBarFonts provides fonts,
             LocalContentColor provides colors.contentColorFor(backgroundColor = colors.background),
             LocalTextSelectionColors provides pallet.toTextSelectionColors(),
             content = content
