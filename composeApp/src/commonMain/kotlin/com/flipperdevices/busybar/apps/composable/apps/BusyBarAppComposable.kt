@@ -26,6 +26,7 @@ import busystatusbar.composeapp.generated.resources.apps_block_customize
 import busystatusbar.composeapp.generated.resources.apps_block_run
 import busystatusbar.composeapp.generated.resources.ic_navigation
 import busystatusbar.composeapp.generated.resources.login_btn
+import com.flipperdevices.busybar.core.ktx.clickableRipple
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
 import org.jetbrains.compose.resources.DrawableResource
@@ -36,14 +37,16 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun BusyBarAppComposable(
     modifier: Modifier = Modifier,
-    app: BusyBarApp
+    app: BusyBarApp,
+    onClick: () -> Unit
 ) = Column(
     modifier = modifier.padding(16.dp),
     verticalArrangement = Arrangement.spacedBy(20.dp)
 ) {
     BusyBarAppHeaderComposable(
         icon = app.icon,
-        title = app.title
+        title = app.title,
+        onClick = onClick
     )
     Image(
         modifier = Modifier.fillMaxWidth(),
@@ -56,6 +59,7 @@ fun BusyBarAppComposable(
         modifier = Modifier.fillMaxWidth()
             .clip(RoundedCornerShape(8.dp))
             .background(LocalPallet.current.brand.primary)
+            .clickableRipple(onClick = onClick)
             .padding(vertical = 14.dp),
         text = stringResource(Res.string.apps_block_run),
         fontSize = 16.sp,
@@ -69,7 +73,8 @@ fun BusyBarAppComposable(
 @Composable
 private fun BusyBarAppHeaderComposable(
     icon: DrawableResource,
-    title: StringResource
+    title: StringResource,
+    onClick: () -> Unit
 ) = Row(
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.spacedBy(10.dp)
@@ -89,7 +94,10 @@ private fun BusyBarAppHeaderComposable(
         color = LocalPallet.current.invert.black,
     )
 
-    Row {
+    Row(
+        modifier = Modifier.clickableRipple(onClick = onClick),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Text(
             text = stringResource(Res.string.apps_block_customize),
             fontSize = 12.sp,

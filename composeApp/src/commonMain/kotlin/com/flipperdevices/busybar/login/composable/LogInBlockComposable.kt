@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
@@ -18,12 +19,19 @@ import androidx.compose.ui.unit.sp
 import busystatusbar.composeapp.generated.resources.Res
 import busystatusbar.composeapp.generated.resources.login_btn
 import busystatusbar.composeapp.generated.resources.login_forgot_password
+import com.flipperdevices.busybar.core.ktx.clickableRipple
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun LogInBlockComposable(modifier: Modifier) = Column(modifier) {
+fun LogInBlockComposable(
+    modifier: Modifier,
+    onClick: () -> Unit
+) = Column(
+    modifier,
+    horizontalAlignment = Alignment.End
+) {
     EmailFieldComposable(
         modifier = Modifier
     )
@@ -33,8 +41,9 @@ fun LogInBlockComposable(modifier: Modifier) = Column(modifier) {
     )
 
     Text(
-        modifier = Modifier.fillMaxWidth()
-            .padding(vertical = 24.dp),
+        modifier = Modifier
+            .padding(vertical = 24.dp)
+            .clickableRipple(onClick = onClick),
         text = stringResource(Res.string.login_forgot_password),
         textAlign = TextAlign.End,
         fontSize = 18.sp,
@@ -47,6 +56,7 @@ fun LogInBlockComposable(modifier: Modifier) = Column(modifier) {
         modifier = Modifier.fillMaxWidth()
             .clip(RoundedCornerShape(8.dp))
             .background(LocalPallet.current.brand.primary)
+            .clickableRipple(onClick = onClick)
             .padding(16.dp),
         text = stringResource(Res.string.login_btn),
         fontSize = 16.sp,

@@ -23,13 +23,17 @@ import busystatusbar.composeapp.generated.resources.device_btn_change_app
 import busystatusbar.composeapp.generated.resources.device_btn_update_firmware
 import busystatusbar.composeapp.generated.resources.device_section_about_title
 import busystatusbar.composeapp.generated.resources.ic_navigation
+import com.flipperdevices.busybar.core.ktx.clickableRipple
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun AboutDeviceComposable(modifier: Modifier) = Column(
+fun AboutDeviceComposable(
+    modifier: Modifier,
+    onClick: () -> Unit
+) = Column(
     modifier,
     verticalArrangement = Arrangement.spacedBy(12.dp)
 ) {
@@ -43,6 +47,7 @@ fun AboutDeviceComposable(modifier: Modifier) = Column(
     UpdateFirmwareButton(
         Modifier.fillMaxWidth()
             .padding(vertical = 12.dp)
+            .clickableRipple(onClick = onClick)
     )
     AboutDeviceRowsComposable(Modifier)
 }

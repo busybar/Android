@@ -19,24 +19,32 @@ import androidx.compose.ui.unit.sp
 import busystatusbar.composeapp.generated.resources.Res
 import busystatusbar.composeapp.generated.resources.ic_google
 import busystatusbar.composeapp.generated.resources.login_or_login_with
+import com.flipperdevices.busybar.core.ktx.clickableRipple
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun OrLoginWithComposable(modifier: Modifier) = Column(modifier) {
+fun OrLoginWithComposable(
+    modifier: Modifier,
+    onClick: () -> Unit
+) = Column(modifier) {
     HorizontalLineWithText()
-    SignInGoogle(Modifier.padding(top = 18.dp))
+    SignInGoogle(Modifier.padding(top = 18.dp), onClick)
 }
 
 @Composable
-private fun SignInGoogle(modifier: Modifier = Modifier) {
+private fun SignInGoogle(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
     Box(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(size = 4.dp))
-            .background(LocalPallet.current.transparent.black.tertiary),
+            .background(LocalPallet.current.transparent.black.tertiary)
+            .clickableRipple(onClick = onClick),
         contentAlignment = Alignment.Center
     ) {
         Image(

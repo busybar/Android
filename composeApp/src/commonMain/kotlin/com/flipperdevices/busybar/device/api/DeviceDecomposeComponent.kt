@@ -17,7 +17,8 @@ class DeviceDecomposeComponent(
     @Composable
     override fun Render(modifier: Modifier) {
         DeviceScreenComposable(
-            modifier.statusBarsPadding()
+            modifier.statusBarsPadding(),
+            onClick = {}
         )
     }
 }

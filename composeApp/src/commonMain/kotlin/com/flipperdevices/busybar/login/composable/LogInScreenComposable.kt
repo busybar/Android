@@ -19,7 +19,10 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun LogInScreenComposable(modifier: Modifier) {
+fun LogInScreenComposable(
+    modifier: Modifier,
+    onClick: () -> Unit
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -37,18 +40,20 @@ fun LogInScreenComposable(modifier: Modifier) {
             contentAlignment = Alignment.Center
         ) {
             LogInBlockComposable(
-                modifier = Modifier.padding(horizontal = 24.dp)
+                modifier = Modifier.padding(horizontal = 24.dp),
+                onClick = onClick
             )
         }
 
-        OrLoginWithComposable(Modifier.padding(horizontal = 24.dp))
+        OrLoginWithComposable(Modifier.padding(horizontal = 24.dp), onClick)
         SignUpBlockComposable(
             modifier = Modifier.padding(
                 start = 24.dp,
                 end = 24.dp,
                 top = 81.dp,
                 bottom = 46.dp
-            ).fillMaxWidth()
+            ).fillMaxWidth(),
+            onClick = onClick
         )
     }
 }
@@ -57,6 +62,6 @@ fun LogInScreenComposable(modifier: Modifier) {
 @Composable
 private fun LogInScreenComposablePreview() {
     BusyBarThemeInternal {
-        LogInScreenComposable(Modifier)
+        LogInScreenComposable(Modifier) {}
     }
 }

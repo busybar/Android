@@ -35,7 +35,7 @@ class BottomBarDecomposeComponentImpl(
         childStack(
             source = navigation,
             serializer = BottomBarConfig.serializer(),
-            initialConfiguration = BottomBarConfig.Apps,
+            initialConfiguration = BottomBarConfig.Device,
             childFactory = ::child,
         )
 

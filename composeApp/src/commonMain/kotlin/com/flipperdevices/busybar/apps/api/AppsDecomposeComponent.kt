@@ -17,8 +17,8 @@ class AppsDecomposeComponent(
     @Composable
     override fun Render(modifier: Modifier) {
         AppsScreenComposable(
-
-            modifier.statusBarsPadding()
+            modifier.statusBarsPadding(),
+            onClick = {}
         )
     }
 }

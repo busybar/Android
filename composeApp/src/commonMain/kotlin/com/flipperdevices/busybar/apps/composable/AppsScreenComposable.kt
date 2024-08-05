@@ -13,15 +13,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.flipperdevices.busybar.apps.composable.apps.APPS
 import com.flipperdevices.busybar.apps.composable.apps.BusyBarAppComposable
+import com.flipperdevices.busybar.core.ktx.clickableRipple
 import com.flipperdevices.busybar.core.theme.LocalPallet
 
 @Composable
-fun AppsScreenComposable(modifier: Modifier) = Column(modifier) {
-    CreateStatusComposable()
+fun AppsScreenComposable(
+    modifier: Modifier,
+    onClick: () -> Unit
+) = Column(modifier) {
+    CreateStatusComposable(Modifier.clickableRipple(onClick = onClick))
 
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         APPS.forEachIndexed { index, app ->
-            BusyBarAppComposable(app = app)
+            BusyBarAppComposable(app = app, onClick = onClick)
             if (index != APPS.lastIndex) {
                 Box(
                     Modifier

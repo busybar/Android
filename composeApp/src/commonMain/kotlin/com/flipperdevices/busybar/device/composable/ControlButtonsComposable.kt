@@ -23,18 +23,23 @@ import busystatusbar.composeapp.generated.resources.device_btn_reboot
 import busystatusbar.composeapp.generated.resources.device_btn_turn_off
 import busystatusbar.composeapp.generated.resources.ic_settings
 import busystatusbar.composeapp.generated.resources.login_btn
+import com.flipperdevices.busybar.core.ktx.clickableRipple
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun ControlButtonsComposable(modifier: Modifier) {
+fun ControlButtonsComposable(
+    modifier: Modifier,
+    onClick: () -> Unit
+) {
     Column(modifier) {
         Text(
             modifier = Modifier.fillMaxWidth()
                 .clip(RoundedCornerShape(8.dp))
                 .background(LocalPallet.current.transparent.black.quaternary)
+                .clickableRipple(onClick = onClick)
                 .padding(vertical = 18.dp, horizontal = 32.dp),
             text = stringResource(Res.string.device_btn_turn_off),
             fontSize = 16.sp,
@@ -52,6 +57,7 @@ fun ControlButtonsComposable(modifier: Modifier) {
                 modifier = Modifier.weight(1f)
                     .clip(RoundedCornerShape(8.dp))
                     .background(LocalPallet.current.transparent.black.quaternary)
+                    .clickableRipple(onClick = onClick)
                     .padding(vertical = 18.dp),
                 text = stringResource(Res.string.device_btn_mute),
                 fontSize = 16.sp,
@@ -64,6 +70,7 @@ fun ControlButtonsComposable(modifier: Modifier) {
                 modifier = Modifier.weight(1f)
                     .clip(RoundedCornerShape(8.dp))
                     .background(LocalPallet.current.transparent.black.quaternary)
+                    .clickableRipple(onClick = onClick)
                     .padding(vertical = 18.dp),
                 text = stringResource(Res.string.device_btn_reboot),
                 fontSize = 16.sp,
@@ -76,6 +83,7 @@ fun ControlButtonsComposable(modifier: Modifier) {
                 modifier = Modifier.weight(1f)
                     .clip(RoundedCornerShape(8.dp))
                     .background(LocalPallet.current.transparent.black.quaternary)
+                    .clickableRipple(onClick = onClick)
                     .padding(vertical = 18.dp),
                 painter = painterResource(Res.drawable.ic_settings),
                 contentDescription = null,

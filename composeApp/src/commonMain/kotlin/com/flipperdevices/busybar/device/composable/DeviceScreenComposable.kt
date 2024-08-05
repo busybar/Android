@@ -9,25 +9,32 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun DeviceScreenComposable(modifier: Modifier) = Column(
+fun DeviceScreenComposable(
+    modifier: Modifier,
+    onClick: () -> Unit
+) = Column(
     modifier = modifier.padding(horizontal = 14.dp)
         .verticalScroll(rememberScrollState())
 ) {
     BarHeaderComposable(
         Modifier.padding(
             top = 26.dp,
-        )
+        ),
+        onClick = onClick
     )
 
     ControlButtonsComposable(
-        modifier = Modifier.padding(top = 24.dp)
+        modifier = Modifier.padding(top = 24.dp),
+        onClick = onClick
     )
 
     RemoteButtonsComposable(
-        modifier = Modifier.padding(top = 40.dp)
+        modifier = Modifier.padding(top = 40.dp),
+        onClick = onClick
     )
 
     AboutDeviceComposable(
-        modifier = Modifier.padding(top = 40.dp, bottom = 26.dp)
+        modifier = Modifier.padding(top = 40.dp, bottom = 26.dp),
+        onClick = onClick
     )
 }

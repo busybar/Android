@@ -12,13 +12,15 @@ import androidx.compose.ui.unit.sp
 import busystatusbar.composeapp.generated.resources.Res
 import busystatusbar.composeapp.generated.resources.login_no_account
 import busystatusbar.composeapp.generated.resources.login_no_account_signup
+import com.flipperdevices.busybar.core.ktx.clickableRipple
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SignUpBlockComposable(
-    modifier: Modifier
+    modifier: Modifier,
+    onClick: () -> Unit
 ) {
     Row(
         modifier = modifier,
@@ -32,7 +34,8 @@ fun SignUpBlockComposable(
             color = LocalPallet.current.neutral.tertiary,
         )
         Text(
-            modifier = Modifier.padding(start = 18.dp),
+            modifier = Modifier.padding(start = 18.dp)
+                .clickableRipple(onClick = onClick),
             text = stringResource(Res.string.login_no_account_signup),
             fontSize = 16.sp,
             fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,

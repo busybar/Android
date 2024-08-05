@@ -17,7 +17,8 @@ class LogInDecomposeComponent(
     @Composable
     override fun Render(modifier: Modifier) {
         LogInScreenComposable(
-            modifier.statusBarsPadding()
+            modifier.statusBarsPadding(),
+            onClick = {}
         )
     }
 }

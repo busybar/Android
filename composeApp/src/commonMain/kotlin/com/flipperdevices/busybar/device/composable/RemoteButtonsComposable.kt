@@ -24,6 +24,7 @@ import busystatusbar.composeapp.generated.resources.device_wifi_title
 import busystatusbar.composeapp.generated.resources.ic_bluetooth
 import busystatusbar.composeapp.generated.resources.ic_navigation
 import busystatusbar.composeapp.generated.resources.ic_wifi
+import com.flipperdevices.busybar.core.ktx.clickableRipple
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
 import org.jetbrains.compose.resources.DrawableResource
@@ -32,19 +33,22 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun RemoteButtonsComposable(modifier: Modifier) = Row(
+fun RemoteButtonsComposable(
+    modifier: Modifier,
+    onClick: () -> Unit
+) = Row(
     modifier = modifier,
     horizontalArrangement = Arrangement.spacedBy(8.dp)
 ) {
     RemoteButtonComposable(
-        modifier = Modifier.weight(1f),
+        modifier = Modifier.weight(1f).clickableRipple(onClick = onClick),
         color = LocalPallet.current.wifi.primary,
         title = Res.string.device_wifi_title,
         icon = Res.drawable.ic_wifi
     )
 
     RemoteButtonComposable(
-        modifier = Modifier.weight(1f),
+        modifier = Modifier.weight(1f).clickableRipple(onClick = onClick),
         color = LocalPallet.current.bluetooth.primary,
         title = Res.string.device_bluetooth_title,
         icon = Res.drawable.ic_bluetooth
