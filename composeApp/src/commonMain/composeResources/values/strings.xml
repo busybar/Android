@@ -9,4 +9,19 @@
     <string name="login_or_login_with">Or Login with</string>
     <string name="login_no_account">Don’t have an account?</string>
     <string name="login_no_account_signup">SIGN UP</string>
+
+    <string name="device_btn_change_app">CHANGE APP</string>
+    <string name="device_btn_turn_off">TURN OFF</string>
+    <string name="device_btn_mute">MUTE</string>
+    <string name="device_btn_reboot">REBOOT</string>
+    <string name="device_wifi_title">WIFI</string>
+    <string name="device_bluetooth_title">BLUETOOTH</string>
+    <string name="device_status_connected">CONNECTED</string>
+    <string name="device_section_about_title">ABOUT DEVICE</string>
+    <string name="device_btn_update_firmware">UPDATE FIRMWARE</string>
+    <string name="device_section_about_version_title">Firmware version</string>
+    <string name="device_section_about_version_value">BSB_0R1.5</string>
+    <string name="device_section_about_dev_mode_title">Dev mode</string>
+    <string name="device_section_about_dev_mode_value">Off</string>
+
 </resources>

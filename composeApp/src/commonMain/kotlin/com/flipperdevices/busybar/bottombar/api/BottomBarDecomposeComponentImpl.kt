@@ -14,8 +14,9 @@ import com.arkivanov.decompose.value.Value
 import com.flipperdevices.busybar.core.decompose.DecomposeComponent
 import com.flipperdevices.busybar.core.decompose.ScreenDecomposeComponent
 import com.flipperdevices.busybar.bottombar.composable.ComposableBottomBarScreen
-import com.lionzxy.flippertesttask.bottombar.config.BottomBarConfig
+import com.flipperdevices.busybar.bottombar.config.BottomBarConfig
 import com.flipperdevices.busybar.bottombar.config.BottomBarEnum
+import com.flipperdevices.busybar.device.api.DeviceDecomposeComponent
 import com.flipperdevices.busybar.login.api.LogInDecomposeComponent
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
@@ -23,7 +24,8 @@ import me.tatarka.inject.annotations.Inject
 @Inject
 class BottomBarDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
-    private val logInDecomposeComponentFactory: (componentContext: ComponentContext) -> LogInDecomposeComponent
+    private val logInDecomposeComponentFactory: (componentContext: ComponentContext) -> LogInDecomposeComponent,
+    private val deviceDecomposeComponentFactory: (componentContext: ComponentContext) -> DeviceDecomposeComponent
 ) : ScreenDecomposeComponent(componentContext) {
     private val navigation = StackNavigation<BottomBarConfig>()
 
@@ -45,9 +47,9 @@ class BottomBarDecomposeComponentImpl(
             modifier = Modifier.fillMaxSize(),
             onSelect = {
                 when (it) {
-                    BottomBarEnum.LOGIN -> navigation.bringToFront(BottomBarConfig.Device)
-                    BottomBarEnum.DEVICE -> navigation.bringToFront(BottomBarConfig.Archive)
-                    BottomBarEnum.APPS -> navigation.bringToFront(BottomBarConfig.Hub)
+                    BottomBarEnum.LOGIN -> navigation.bringToFront(BottomBarConfig.Login)
+                    BottomBarEnum.DEVICE -> navigation.bringToFront(BottomBarConfig.Device)
+                    BottomBarEnum.APPS -> navigation.bringToFront(BottomBarConfig.Apps)
                 }
             }
         )
@@ -58,15 +60,15 @@ class BottomBarDecomposeComponentImpl(
         config: BottomBarConfig,
         componentContext: ComponentContext
     ): DecomposeComponent = when (config) {
-        BottomBarConfig.Archive -> logInDecomposeComponentFactory(
+        BottomBarConfig.Device -> deviceDecomposeComponentFactory(
             componentContext
         )
 
-        BottomBarConfig.Device ->  logInDecomposeComponentFactory(
+        BottomBarConfig.Login -> logInDecomposeComponentFactory(
             componentContext
         )
 
-        is BottomBarConfig.Hub ->  logInDecomposeComponentFactory(
+        is BottomBarConfig.Apps -> logInDecomposeComponentFactory(
             componentContext
         )
     }

@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.router.stack.ChildStack
-import com.lionzxy.flippertesttask.bottombar.config.BottomBarConfig
+import com.flipperdevices.busybar.bottombar.config.BottomBarConfig
 import com.flipperdevices.busybar.bottombar.config.BottomBarEnum
 import com.flipperdevices.busybar.core.decompose.DecomposeComponent
 
