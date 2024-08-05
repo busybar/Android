@@ -65,9 +65,9 @@ jobs:
         id: artifacts_copy
         run: |
           mkdir artifacts
-          cp ${{ steps.sign_aab.outputs.signedReleaseFile }} artifacts/busystatusbar-${{ matrix.target }}.aab
-          cp ${{ steps.sign_apk.outputs.signedReleaseFile }} artifacts/busystatusbar-${{ matrix.target }}.apk
-          cp composeApp/build/outputs/mapping/release/mapping.txt artifacts/mapping-${{ matrix.target }}.txt
+          cp ${{ steps.sign_aab.outputs.signedReleaseFile }} artifacts/busystatusbar.aab
+          cp ${{ steps.sign_apk.outputs.signedReleaseFile }} artifacts/busystatusbar.apk
+          cp composeApp/build/outputs/mapping/release/mapping.txt artifacts/mapping.txt
           echo "path=artifacts/" >> $GITHUB_OUTPUT
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
