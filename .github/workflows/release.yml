@@ -107,7 +107,7 @@ jobs:
         id: mappings
         run: |
           mkdir mappings
-          mv "${{ steps.artifacts_copy.outputs.path }}/mapping.txt" mappings/ ; done
+          mv "${{ steps.artifacts_copy.outputs.path }}/mapping.txt" mappings/
           zip -qq -r mappings.zip mappings
           echo "archive=mappings.zip" >> $GITHUB_OUTPUT
       - name: Prepare other builds
