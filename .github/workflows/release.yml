@@ -76,7 +76,7 @@ jobs:
           path: ${{ steps.artifacts_copy.outputs.path }}
   build_desktop:
     name: "Build desktop app"
-    uses: ./.github/workflows/call-validate-gradle-wrapper.yml
+    uses: ./.github/workflows/call-desktop-build.yml
   upload_to_github:
     name: Upload to Github Releases
     runs-on: ubuntu-latest
