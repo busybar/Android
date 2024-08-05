@@ -1,10 +1,8 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -80,6 +78,9 @@ kotlin {
     }
 }
 
+val versionCodeExternal = providers.gradleProperty("version_code")
+    .getOrElse(Int.MAX_VALUE.toString()).toInt()
+
 android {
     namespace = "com.flipperdevices.busybar"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
@@ -92,8 +93,8 @@ android {
         applicationId = "com.flipperdevices.busybar"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = versionCodeExternal
+        versionName = "0.0.$versionCodeExternal"
     }
     packaging {
         resources {
