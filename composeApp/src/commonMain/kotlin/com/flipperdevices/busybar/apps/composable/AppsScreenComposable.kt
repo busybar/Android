@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -18,7 +16,7 @@ import com.flipperdevices.busybar.apps.composable.apps.BusyBarAppComposable
 import com.flipperdevices.busybar.core.theme.LocalPallet
 
 @Composable
-fun AppsScreenComposable() = Column {
+fun AppsScreenComposable(modifier: Modifier) = Column(modifier) {
     CreateStatusComposable()
 
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {

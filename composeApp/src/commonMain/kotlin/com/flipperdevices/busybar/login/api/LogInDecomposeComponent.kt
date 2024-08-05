@@ -1,5 +1,6 @@
 package com.flipperdevices.busybar.login.api
 
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,6 +16,8 @@ class LogInDecomposeComponent(
 ) : ScreenDecomposeComponent(componentContext) {
     @Composable
     override fun Render(modifier: Modifier) {
-        LogInScreenComposable(modifier)
+        LogInScreenComposable(
+            modifier.statusBarsPadding()
+        )
     }
 }

@@ -9,8 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun DeviceScreenComposable() = Column(
-    modifier = Modifier.padding(horizontal = 14.dp)
+fun DeviceScreenComposable(modifier: Modifier) = Column(
+    modifier = modifier.padding(horizontal = 14.dp)
         .verticalScroll(rememberScrollState())
 ) {
     BarHeaderComposable(

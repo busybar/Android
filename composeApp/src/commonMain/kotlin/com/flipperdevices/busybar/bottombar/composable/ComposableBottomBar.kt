@@ -1,7 +1,8 @@
 package com.flipperdevices.busybar.bottombar.composable
 
-import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material.Icon
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
@@ -21,10 +22,13 @@ fun ComposableBottomBar(
     selectedTab: BottomBarEnum,
     onSelect: (BottomBarEnum) -> Unit
 ) = TabRow(
-    modifier = Modifier.fillMaxWidth(),
+    modifier = Modifier.fillMaxWidth()
+        .background(LocalPallet.current.background.tertiary)
+        .navigationBarsPadding(),
     selectedTabIndex = BottomBarEnum.entries.indexOf(selectedTab),
     backgroundColor = LocalPallet.current.background.tertiary,
-    indicator = {}
+    indicator = {},
+    divider = {}
 ) {
     BottomBarEnum.entries.forEach { bottomBarTab ->
         val isSelected = selectedTab == bottomBarTab

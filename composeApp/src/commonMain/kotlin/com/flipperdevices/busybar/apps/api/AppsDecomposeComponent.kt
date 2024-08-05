@@ -1,5 +1,6 @@
 package com.flipperdevices.busybar.apps.api
 
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
@@ -15,6 +16,9 @@ class AppsDecomposeComponent(
 ) : ScreenDecomposeComponent(componentContext) {
     @Composable
     override fun Render(modifier: Modifier) {
-        AppsScreenComposable()
+        AppsScreenComposable(
+
+            modifier.statusBarsPadding()
+        )
     }
 }
