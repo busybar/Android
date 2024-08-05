@@ -114,7 +114,6 @@ jobs:
         id: other
         run: |
           mkdir other
-          mv ${{steps.download-desktop.outputs.download-path}}/* other/
           mv ${{ steps.artifacts_copy.outputs.path }}/*.aab other/
           zip -qq -r other.zip other
           echo "archive=other.zip" >> $GITHUB_OUTPUT
@@ -138,6 +137,7 @@ jobs:
             ${{ steps.mappings.outputs.archive }}
             ${{ steps.other.outputs.archive }}
             ${{ steps.artifacts_copy.outputs.path }}/busystatusbar-${{ steps.vars.outputs.major_version }}.${{ steps.vars.outputs.minor_version }}.apk
+            ${{steps.download-desktop.outputs.download-path}}/*
           tag_name: ${{ steps.vars.outputs.major_version }}.${{ steps.vars.outputs.minor_version }}
           name: Busy Status Bar ${{ steps.vars.outputs.major_version }}.${{ steps.vars.outputs.minor_version }}
           draft: false
