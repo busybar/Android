@@ -16,12 +16,15 @@ import com.flipperdevices.busybar.core.decompose.ScreenDecomposeComponent
 import com.flipperdevices.busybar.bottombar.composable.ComposableBottomBarScreen
 import com.lionzxy.flippertesttask.bottombar.config.BottomBarConfig
 import com.flipperdevices.busybar.bottombar.config.BottomBarEnum
+import com.flipperdevices.busybar.login.api.LogInDecomposeComponent
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
-class BottomBarDecomposeComponentImpl @Inject constructor(
-    @Assisted componentContext: ComponentContext
-) : ScreenDecomposeComponent(componentContext), ComponentContext by componentContext {
+@Inject
+class BottomBarDecomposeComponentImpl(
+    @Assisted componentContext: ComponentContext,
+    private val logInDecomposeComponentFactory: (componentContext: ComponentContext) -> LogInDecomposeComponent
+) : ScreenDecomposeComponent(componentContext) {
     private val navigation = StackNavigation<BottomBarConfig>()
 
     private val stack: Value<ChildStack<BottomBarConfig, DecomposeComponent>> =
@@ -55,10 +58,16 @@ class BottomBarDecomposeComponentImpl @Inject constructor(
         config: BottomBarConfig,
         componentContext: ComponentContext
     ): DecomposeComponent = when (config) {
-        BottomBarConfig.Archive -> TODO()
+        BottomBarConfig.Archive -> logInDecomposeComponentFactory(
+            componentContext
+        )
 
-        BottomBarConfig.Device -> TODO()
+        BottomBarConfig.Device ->  logInDecomposeComponentFactory(
+            componentContext
+        )
 
-        is BottomBarConfig.Hub -> TODO()
+        is BottomBarConfig.Hub ->  logInDecomposeComponentFactory(
+            componentContext
+        )
     }
 }

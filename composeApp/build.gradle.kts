@@ -1,8 +1,10 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -130,4 +132,8 @@ compose.desktop {
 dependencies {
     add("kspCommonMainMetadata", libs.kotlin.inject.ksp)
     add("kspAndroid", libs.kotlin.inject.ksp)
+    add("kspIosArm64", libs.kotlin.inject.ksp)
+    add("kspIosSimulatorArm64", libs.kotlin.inject.ksp)
+    add("kspDesktop", libs.kotlin.inject.ksp)
+    add("kspWasmJs", libs.kotlin.inject.ksp)
 }

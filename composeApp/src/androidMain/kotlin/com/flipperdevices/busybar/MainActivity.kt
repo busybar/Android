@@ -3,21 +3,24 @@ package com.flipperdevices.busybar
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import com.arkivanov.decompose.defaultComponentContext
+import com.flipperdevices.busybar.di.createAppComponent
 
 class MainActivity : ComponentActivity() {
+    private val appComponent by lazy { createAppComponent() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (savedInstanceState != null) {
+            return
+        }
+        val rootComponent = appComponent.rootComponent(
+            defaultComponentContext()
+        )
+
         setContent {
-            App()
+            App(rootComponent)
         }
     }
-}
-
-@Preview
-@Composable
-fun AppAndroidPreview() {
-    App()
 }
