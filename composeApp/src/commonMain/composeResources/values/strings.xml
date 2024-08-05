@@ -24,4 +24,15 @@
     <string name="device_section_about_dev_mode_title">Dev mode</string>
     <string name="device_section_about_dev_mode_value">Off</string>
 
+    <string name="apps_create_status">CREATE STATUS</string>
+
+    <string name="apps_block_customize">CUSTOMIZE</string>
+    <string name="apps_block_run">RUN APP</string>
+
+    <string name="apps_list_busy">BUSY STATUS</string>
+    <string name="apps_list_tomato">TOMATO TIMER</string>
+    <string name="apps_list_wallpapers">WALLPAPERS &amp; GIFS</string>
+    <string name="apps_list_clock">CLOCK &amp; WEATHER</string>
+    <string name="apps_list_instagram">INSTAGRAM STATS</string>
+
 </resources>

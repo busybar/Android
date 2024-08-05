@@ -11,6 +11,7 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
+import com.flipperdevices.busybar.apps.api.AppsDecomposeComponent
 import com.flipperdevices.busybar.core.decompose.DecomposeComponent
 import com.flipperdevices.busybar.core.decompose.ScreenDecomposeComponent
 import com.flipperdevices.busybar.bottombar.composable.ComposableBottomBarScreen
@@ -25,7 +26,8 @@ import me.tatarka.inject.annotations.Inject
 class BottomBarDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     private val logInDecomposeComponentFactory: (componentContext: ComponentContext) -> LogInDecomposeComponent,
-    private val deviceDecomposeComponentFactory: (componentContext: ComponentContext) -> DeviceDecomposeComponent
+    private val deviceDecomposeComponentFactory: (componentContext: ComponentContext) -> DeviceDecomposeComponent,
+    private val appsDecomposeComponentFactory: (componentContext: ComponentContext) -> AppsDecomposeComponent,
 ) : ScreenDecomposeComponent(componentContext) {
     private val navigation = StackNavigation<BottomBarConfig>()
 
@@ -33,7 +35,7 @@ class BottomBarDecomposeComponentImpl(
         childStack(
             source = navigation,
             serializer = BottomBarConfig.serializer(),
-            initialConfiguration = BottomBarConfig.Device,
+            initialConfiguration = BottomBarConfig.Apps,
             childFactory = ::child,
         )
 
@@ -68,7 +70,7 @@ class BottomBarDecomposeComponentImpl(
             componentContext
         )
 
-        is BottomBarConfig.Apps -> logInDecomposeComponentFactory(
+        is BottomBarConfig.Apps -> appsDecomposeComponentFactory(
             componentContext
         )
     }
