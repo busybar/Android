@@ -5,7 +5,7 @@
     <string name="login_email_hint">Email Address</string>
     <string name="login_password_hint">Password</string>
     <string name="login_forgot_password">Forgot Password?</string>
-    <string name="login_btn">LOGIN</string>
+    <string name="login_btn">LOG IN</string>
     <string name="login_or_login_with">Or Login with</string>
     <string name="login_no_account">Don’t have an account?</string>
     <string name="login_no_account_signup">SIGN UP</string>
