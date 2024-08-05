@@ -74,4 +74,4 @@ jobs:
           name: artifacts-output
           path: ${{steps.download.outputs.download-path}}
       - id: echo_output
-        run: echo "ARTIFACTS_NAME=artifacts-output" >> $GITHUB_OUTPU
+        run: echo "ARTIFACTS_NAME=artifacts-output" >> $GITHUB_OUTPUT
