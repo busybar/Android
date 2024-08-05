@@ -1,0 +1,5 @@
+<resources>
+    <string name="tab_login_title">LOG IN</string>
+    <string name="tab_device_title">DEVICE</string>
+    <string name="tab_apps_title">APPS</string>
+</resources>

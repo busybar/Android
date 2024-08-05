@@ -1,4 +1,4 @@
-package com.flipperdevices.busybar.theme
+package com.flipperdevices.busybar.core.theme
 
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -15,10 +15,10 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
-import com.flipperdevices.busybar.theme.generated.BusyBarPallet
-import com.flipperdevices.busybar.theme.generated.getDarkPallet
-import com.flipperdevices.busybar.theme.generated.getLightPallet
-import com.flipperdevices.busybar.theme.generated.toAnimatePallet
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet
+import com.flipperdevices.busybar.core.theme.generated.getDarkPallet
+import com.flipperdevices.busybar.core.theme.generated.getLightPallet
+import com.flipperdevices.busybar.core.theme.generated.toAnimatePallet
 
 val LocalPallet = compositionLocalOf<BusyBarPallet> { error("No local pallet") }
 

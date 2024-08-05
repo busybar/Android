@@ -1,19 +1,19 @@
-package com.flipperdevices.busybar.theme.generated
+package com.flipperdevices.busybar.core.theme.generated
 
 import androidx.compose.ui.graphics.Color
-import com.flipperdevices.busybar.theme.generated.BusyBarPallet.Background
-import com.flipperdevices.busybar.theme.generated.BusyBarPallet.Bluetooth
-import com.flipperdevices.busybar.theme.generated.BusyBarPallet.Brand
-import com.flipperdevices.busybar.theme.generated.BusyBarPallet.Danger
-import com.flipperdevices.busybar.theme.generated.BusyBarPallet.Invert
-import com.flipperdevices.busybar.theme.generated.BusyBarPallet.Neutral
-import com.flipperdevices.busybar.theme.generated.BusyBarPallet.OnColor
-import com.flipperdevices.busybar.theme.generated.BusyBarPallet.Success
-import com.flipperdevices.busybar.theme.generated.BusyBarPallet.Transparent
-import com.flipperdevices.busybar.theme.generated.BusyBarPallet.Transparent.Black
-import com.flipperdevices.busybar.theme.generated.BusyBarPallet.Transparent.White
-import com.flipperdevices.busybar.theme.generated.BusyBarPallet.Warning
-import com.flipperdevices.busybar.theme.generated.BusyBarPallet.Wifi
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Background
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Bluetooth
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Brand
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Danger
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Invert
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Neutral
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.OnColor
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Success
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Transparent
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Transparent.Black
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Transparent.White
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Warning
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Wifi
 import kotlin.Suppress
 
 /**

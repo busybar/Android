@@ -1,4 +1,4 @@
-package com.flipperdevices.busybar.theme.generated
+package com.flipperdevices.busybar.core.theme.generated
 
 import androidx.compose.ui.graphics.Color
 

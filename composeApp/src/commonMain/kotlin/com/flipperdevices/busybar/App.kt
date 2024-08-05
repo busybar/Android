@@ -15,7 +15,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import busystatusbar.composeapp.generated.resources.Res
 import busystatusbar.composeapp.generated.resources.compose_multiplatform
-import com.flipperdevices.busybar.theme.BusyBarTheme
+import com.flipperdevices.busybar.core.theme.BusyBarTheme
 
 @Composable
 @Preview

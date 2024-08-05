@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -67,6 +68,9 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.kotlin.inject.runtime)
+            implementation(libs.decompose)
+            implementation(libs.decompose.composeExtension)
+            implementation(libs.kotlin.serialization.json)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
