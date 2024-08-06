@@ -1,11 +1,7 @@
 package com.flipperdevices.busybar.login.composable
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -23,20 +19,22 @@ fun LogInScreenComposable(
     modifier: Modifier,
     onClick: () -> Unit
 ) {
+    val scrollState = rememberScrollState()
+
     Column(
         modifier = modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .verticalScroll(scrollState),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
         Image(
-            modifier = Modifier.padding(top = 50.dp),
+            modifier = Modifier.padding(top = 50.dp, bottom = 12.dp),
             painter = painterResource(Res.drawable.pic_busy_cloud),
             contentDescription = null
         )
 
         Box(
-            modifier = Modifier.weight(1f),
             contentAlignment = Alignment.Center
         ) {
             LogInBlockComposable(
@@ -45,16 +43,18 @@ fun LogInScreenComposable(
             )
         }
 
-        OrLoginWithComposable(Modifier.padding(horizontal = 24.dp), onClick)
-        SignUpBlockComposable(
-            modifier = Modifier.padding(
-                start = 24.dp,
-                end = 24.dp,
-                top = 81.dp,
-                bottom = 46.dp
-            ).fillMaxWidth(),
-            onClick = onClick
-        )
+        Column(Modifier.padding(top = 12.dp)) {
+            OrLoginWithComposable(Modifier.padding(horizontal = 24.dp), onClick)
+            SignUpBlockComposable(
+                modifier = Modifier.padding(
+                    start = 24.dp,
+                    end = 24.dp,
+                    top = 81.dp,
+                    bottom = 46.dp
+                ).fillMaxWidth(),
+                onClick = onClick
+            )
+        }
     }
 }
 
