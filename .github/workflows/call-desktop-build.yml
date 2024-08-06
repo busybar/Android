@@ -8,7 +8,7 @@ on:
     inputs:
       BUILD_NUMBER:
         required: true
-        type: number
+        type: string
 
 jobs:
   build-windows:
