@@ -5,6 +5,10 @@ on:
       ARTIFACTS_NAME:
         description: "The name of artifact archive name"
         value: ${{ jobs.collect.outputs.ARTIFACTS_NAME }}
+    inputs:
+      BUILD_NUMBER:
+        required: true
+        type: number
 
 jobs:
   build-windows:
@@ -17,6 +21,8 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
       - name: Build the project
+        env:
+          ORG_GRADLE_PROJECT_version_code: ${{ inputs.BUILD_NUMBER }}
         run: ./gradlew packageDistributionForCurrentOS
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -33,6 +39,8 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
       - name: Build the project
+        env:
+          ORG_GRADLE_PROJECT_version_code: ${{ inputs.BUILD_NUMBER }}
         run: ./gradlew packageDistributionForCurrentOS
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -49,6 +57,8 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
       - name: Build the project
+        env:
+          ORG_GRADLE_PROJECT_version_code: ${{ inputs.BUILD_NUMBER }}
         run: ./gradlew packageDistributionForCurrentOS
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4

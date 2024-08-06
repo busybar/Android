@@ -76,7 +76,10 @@ jobs:
           path: ${{ steps.artifacts_copy.outputs.path }}
   build_desktop:
     name: "Build desktop app"
+    needs: [ build_number ]
     uses: ./.github/workflows/call-desktop-build.yml
+    with:
+      BUILD_NUMBER: ${{ needs.build_number.outputs.number }}
   upload_to_github:
     name: Upload to Github Releases
     runs-on: ubuntu-latest
@@ -94,7 +97,7 @@ jobs:
         id: download-desktop
         with:
           name: ${{ needs.build_desktop.outputs.ARTIFACTS_NAME }}
-          path: download/artifacts
+          path: download/artifacts-desktop
       - name: 'Copy artifacts'
         id: artifacts_copy
         run: |

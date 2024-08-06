@@ -79,7 +79,7 @@ kotlin {
 }
 
 val versionCodeExternal = providers.gradleProperty("version_code")
-    .getOrElse(Int.MAX_VALUE.toString()).toInt()
+    .getOrElse("1").toInt()
 
 android {
     namespace = "com.flipperdevices.busybar"
@@ -94,7 +94,7 @@ android {
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = versionCodeExternal
-        versionName = "0.0.$versionCodeExternal"
+        versionName = "1.0.$versionCodeExternal"
     }
     packaging {
         resources {
@@ -130,8 +130,20 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.flipperdevices.busybar"
-            packageVersion = "1.0.0"
+            packageName = "Busy Status Bar"
+            packageVersion = "1.0.$versionCodeExternal"
+            vendor = "Flipper Devices Inc"
+
+            macOS {
+                dockName = "Busy Status Bar"
+                iconFile.set(project.file("icons/icon.icns"))
+            }
+            windows {
+                iconFile.set(project.file("icons/icon.ico"))
+            }
+            linux {
+                iconFile.set(project.file("icons/icon.png"))
+            }
         }
     }
 }
