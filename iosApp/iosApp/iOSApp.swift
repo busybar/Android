@@ -1,4 +1,5 @@
 import SwiftUI
+import ComposeApp
 
 @main
 struct iOSApp: App {
@@ -14,7 +15,7 @@ struct iOSApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ComposeView(rootHolder.componentContext)
+            ComposeView(componentContext: rootHolder.componentContext)
                 .onChange(of: scenePhase) { newPhase in
                     switch newPhase {
                     case .background: LifecycleRegistryExtKt.stop(rootHolder.lifecycle)

@@ -13,7 +13,6 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
 import com.flipperdevices.busybar.apps.api.AppsDecomposeComponent
 import com.flipperdevices.busybar.core.decompose.DecomposeComponent
-import com.flipperdevices.busybar.core.decompose.ScreenDecomposeComponent
 import com.flipperdevices.busybar.bottombar.composable.ComposableBottomBarScreen
 import com.flipperdevices.busybar.bottombar.config.BottomBarConfig
 import com.flipperdevices.busybar.bottombar.config.BottomBarEnum
@@ -28,7 +27,7 @@ class BottomBarDecomposeComponentImpl(
     private val logInDecomposeComponentFactory: (componentContext: ComponentContext) -> LogInDecomposeComponent,
     private val deviceDecomposeComponentFactory: (componentContext: ComponentContext) -> DeviceDecomposeComponent,
     private val appsDecomposeComponentFactory: (componentContext: ComponentContext) -> AppsDecomposeComponent,
-) : ScreenDecomposeComponent(componentContext) {
+) : DecomposeComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<BottomBarConfig>()
 
     private val stack: Value<ChildStack<BottomBarConfig, DecomposeComponent>> =

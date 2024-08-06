@@ -5,15 +5,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
 import com.flipperdevices.busybar.apps.composable.AppsScreenComposable
-import com.flipperdevices.busybar.core.decompose.ScreenDecomposeComponent
-import com.flipperdevices.busybar.device.composable.DeviceScreenComposable
+import com.flipperdevices.busybar.core.decompose.DecomposeComponent
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
 @Inject
 class AppsDecomposeComponent(
     @Assisted componentContext: ComponentContext
-) : ScreenDecomposeComponent(componentContext) {
+) : DecomposeComponent, ComponentContext by componentContext {
     @Composable
     override fun Render(modifier: Modifier) {
         AppsScreenComposable(
