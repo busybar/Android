@@ -49,6 +49,9 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+
+            export(libs.decompose)
+            export(libs.essenty.lifecycle)
         }
     }
 
@@ -68,9 +71,11 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.kotlin.inject.runtime)
-            implementation(libs.decompose)
             implementation(libs.decompose.composeExtension)
             implementation(libs.kotlin.serialization.json)
+
+            api(libs.decompose)
+            api(libs.essenty.lifecycle)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -152,6 +157,7 @@ dependencies {
     add("kspCommonMainMetadata", libs.kotlin.inject.ksp)
     add("kspAndroid", libs.kotlin.inject.ksp)
     add("kspIosArm64", libs.kotlin.inject.ksp)
+    add("kspIosX64", libs.kotlin.inject.ksp)
     add("kspIosSimulatorArm64", libs.kotlin.inject.ksp)
     add("kspDesktop", libs.kotlin.inject.ksp)
     add("kspWasmJs", libs.kotlin.inject.ksp)
