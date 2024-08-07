@@ -76,8 +76,11 @@ kotlin {
             implementation(libs.kotlin.serialization.json)
             implementation(libs.settings)
 
+            implementation(libs.moko.permissions)
+
             implementation(libs.decompose)
             implementation(libs.essenty.lifecycle)
+            implementation(libs.essenty.lifecycle.coroutines)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

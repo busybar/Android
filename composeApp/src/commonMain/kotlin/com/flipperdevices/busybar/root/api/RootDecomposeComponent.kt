@@ -11,6 +11,7 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.router.stack.pushToFront
+import com.arkivanov.decompose.router.stack.replaceAll
 import com.arkivanov.decompose.value.Value
 import com.flipperdevices.busybar.apps.api.AppsDecomposeComponent
 import com.flipperdevices.busybar.apps.composable.apps.BusyBarApp
@@ -18,6 +19,10 @@ import com.flipperdevices.busybar.core.decompose.DecomposeComponent
 import com.flipperdevices.busybar.core.decompose.DecomposeOnBackParameter
 import com.flipperdevices.busybar.device.api.DeviceDecomposeComponent
 import com.flipperdevices.busybar.root.config.RootScreenConfig
+import com.flipperdevices.busybar.search.api.PREFS_SEARCH_SKIP
+import com.flipperdevices.busybar.search.api.SearchDecomposeComponent
+import com.russhwolf.settings.Settings
+import com.russhwolf.settings.get
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
@@ -33,6 +38,11 @@ class RootDecomposeComponent(
         navigationApi: RootNavigationApi,
         onBack: DecomposeOnBackParameter
     ) -> AppsDecomposeComponent,
+    private val searchDecomposeComponentFactory: (
+        componentContext: ComponentContext,
+        navigationApi: RootNavigationApi,
+    ) -> SearchDecomposeComponent,
+    private val settings: Settings,
 ) : DecomposeComponent, RootNavigationApi, ComponentContext by componentContext {
     private val navigation = StackNavigation<RootScreenConfig>()
 
@@ -40,7 +50,7 @@ class RootDecomposeComponent(
         childStack(
             source = navigation,
             serializer = RootScreenConfig.serializer(),
-            initialConfiguration = RootScreenConfig.DEVICE,
+            initialConfiguration = getRootScreen(),
             childFactory = ::child,
             handleBackButton = true
         )
@@ -56,6 +66,10 @@ class RootDecomposeComponent(
         navigation.pushToFront(config)
     }
 
+    override fun openRootScreen() {
+        navigation.replaceAll(getRootScreen())
+    }
+
     override fun onAppSelected(barApp: BusyBarApp) {
         val deviceStackItem = stack.value.items.find { it.configuration == RootScreenConfig.DEVICE }
         val deviceComponent = deviceStackItem?.instance as? DeviceDecomposeComponent ?: return
@@ -66,8 +80,12 @@ class RootDecomposeComponent(
         config: RootScreenConfig,
         componentContext: ComponentContext
     ): DecomposeComponent = when (config) {
-        RootScreenConfig.DEVICE,
-        RootScreenConfig.SEARCH -> deviceDecomposeComponentFactory(
+        RootScreenConfig.SEARCH -> searchDecomposeComponentFactory(
+            componentContext,
+            this
+        )
+
+        RootScreenConfig.DEVICE -> deviceDecomposeComponentFactory(
             componentContext,
             this
         )
@@ -77,5 +95,12 @@ class RootDecomposeComponent(
             this,
             navigation::pop
         )
+    }
+
+    private fun getRootScreen(): RootScreenConfig {
+        val skipSearch = settings[PREFS_SEARCH_SKIP, false]
+        return if (skipSearch) {
+            RootScreenConfig.DEVICE
+        } else RootScreenConfig.SEARCH
     }
 }

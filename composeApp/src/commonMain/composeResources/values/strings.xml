@@ -35,4 +35,8 @@
     <string name="apps_list_clock">CLOCK &amp; WEATHER</string>
     <string name="apps_list_instagram">INSTAGRAM STATS</string>
 
+    <string name="search_permission_needed">Please provide permissions to find the real device</string>
+    <string name="search_permission_btn">Request permissions</string>
+    <string name="search_demo_btn">Demo mode</string>
+
 </resources>

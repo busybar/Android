@@ -6,5 +6,7 @@ import com.flipperdevices.busybar.root.config.RootScreenConfig
 interface RootNavigationApi {
     fun push(config: RootScreenConfig)
 
+    fun openRootScreen()
+
     fun onAppSelected(barApp: BusyBarApp)
 }
