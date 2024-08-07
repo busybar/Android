@@ -11,6 +11,7 @@ import com.flipperdevices.busybar.core.decompose.DecomposeComponent
 import com.flipperdevices.busybar.device.composable.DeviceScreenComposable
 import com.flipperdevices.busybar.root.api.RootNavigationApi
 import com.flipperdevices.busybar.root.config.RootScreenConfig
+import com.russhwolf.settings.Settings
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import me.tatarka.inject.annotations.Assisted

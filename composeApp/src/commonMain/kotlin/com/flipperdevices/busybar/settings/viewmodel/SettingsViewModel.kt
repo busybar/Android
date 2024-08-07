@@ -30,6 +30,9 @@ class SettingsViewModel(
         if (settingsEnum == SettingsEnum.DARK_THEME) {
             DarkModeSingleton.darkMode.update { value }
         }
+        if (settingsEnum == SettingsEnum.DEV_MODE) {
+            DarkModeSingleton.devMode.update { value }
+        }
     }
 
     private fun invalidate() {

@@ -55,6 +55,7 @@ class RootDecomposeComponent(
 
     init {
         DarkModeSingleton.darkMode.update { settings[SettingsEnum.DARK_THEME.key, false] }
+        DarkModeSingleton.devMode.update { settings[SettingsEnum.DEV_MODE.key, false] }
     }
 
     private val stack: Value<ChildStack<RootScreenConfig, DecomposeComponent>> =

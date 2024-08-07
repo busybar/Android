@@ -9,4 +9,5 @@ import me.tatarka.inject.annotations.Inject
 
 object DarkModeSingleton {
     val darkMode = MutableStateFlow(false)
+    val devMode = MutableStateFlow(false)
 }

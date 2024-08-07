@@ -10,18 +10,22 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import busystatusbar.composeapp.generated.resources.Res
+import busystatusbar.composeapp.generated.resources.device_section_about_dev_mode_off
+import busystatusbar.composeapp.generated.resources.device_section_about_dev_mode_on
 import busystatusbar.composeapp.generated.resources.device_section_about_dev_mode_title
-import busystatusbar.composeapp.generated.resources.device_section_about_dev_mode_value
 import busystatusbar.composeapp.generated.resources.device_section_about_serial_number_title
 import busystatusbar.composeapp.generated.resources.device_section_about_serial_number_value
 import busystatusbar.composeapp.generated.resources.device_section_about_version_title
 import busystatusbar.composeapp.generated.resources.device_section_about_version_value
+import com.flipperdevices.busybar.core.theme.DarkModeSingleton
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
 import org.jetbrains.compose.resources.StringResource
@@ -31,9 +35,14 @@ import org.jetbrains.compose.resources.stringResource
 fun AboutDeviceRowsComposable(
     modifier: Modifier
 ) {
+    val devMode by DarkModeSingleton.devMode.collectAsState()
     val pairs = listOf(
         Res.string.device_section_about_version_title to Res.string.device_section_about_version_value,
-        Res.string.device_section_about_dev_mode_title to Res.string.device_section_about_dev_mode_value,
+        Res.string.device_section_about_dev_mode_title to if (devMode) {
+            Res.string.device_section_about_dev_mode_on
+        } else {
+            Res.string.device_section_about_dev_mode_off
+        },
         Res.string.device_section_about_serial_number_title to Res.string.device_section_about_serial_number_value
     )
 
