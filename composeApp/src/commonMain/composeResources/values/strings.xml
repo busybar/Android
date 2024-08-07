@@ -13,10 +13,12 @@
     <string name="device_btn_change_app">CHANGE APP</string>
     <string name="device_btn_turn_off">TURN OFF</string>
     <string name="device_btn_mute">MUTE</string>
+    <string name="device_btn_unmute">UNMUTE</string>
     <string name="device_btn_reboot">REBOOT</string>
     <string name="device_wifi_title">WIFI</string>
     <string name="device_bluetooth_title">BLUETOOTH</string>
     <string name="device_status_connected">CONNECTED</string>
+    <string name="device_status_not_connected">NOT CONNECTED</string>
     <string name="device_section_about_title">ABOUT DEVICE</string>
     <string name="device_btn_update_firmware">UPDATE FIRMWARE</string>
     <string name="device_btn_update_firmware_dialog">No Update Found</string>

@@ -14,6 +14,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
+import com.arkivanov.decompose.extensions.compose.stack.animation.LocalStackAnimationProvider
 import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet
 import com.flipperdevices.busybar.core.theme.generated.getDarkPallet
 import com.flipperdevices.busybar.core.theme.generated.getLightPallet
@@ -89,6 +90,7 @@ fun BusyBarThemeInternal(
             LocalBusyBarFonts provides fonts,
             LocalContentColor provides colors.contentColorFor(backgroundColor = colors.background),
             LocalTextSelectionColors provides pallet.toTextSelectionColors(),
+            LocalStackAnimationProvider provides BusyBarAnimationProvider,
             content = content
         )
     }

@@ -11,6 +11,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
@@ -21,6 +25,7 @@ import busystatusbar.composeapp.generated.resources.Res
 import busystatusbar.composeapp.generated.resources.device_btn_mute
 import busystatusbar.composeapp.generated.resources.device_btn_reboot
 import busystatusbar.composeapp.generated.resources.device_btn_turn_off
+import busystatusbar.composeapp.generated.resources.device_btn_unmute
 import busystatusbar.composeapp.generated.resources.ic_settings
 import busystatusbar.composeapp.generated.resources.login_btn
 import com.flipperdevices.busybar.core.ktx.clickableRipple
@@ -54,13 +59,20 @@ fun ControlButtonsComposable(
             modifier = Modifier.padding(top = 8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+            var isMute by remember { mutableStateOf(false) }
             Text(
                 modifier = Modifier.weight(1f)
                     .clip(RoundedCornerShape(8.dp))
                     .background(LocalPallet.current.transparent.black.quaternary)
-                    .clickableRipple(onClick = onClick)
+                    .clickableRipple(onClick = {
+                        isMute = !isMute
+                    })
                     .padding(vertical = 18.dp),
-                text = stringResource(Res.string.device_btn_mute),
+                text = if (isMute) {
+                    stringResource(Res.string.device_btn_unmute)
+                } else {
+                    stringResource(Res.string.device_btn_mute)
+                },
                 fontSize = 16.sp,
                 fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
                 fontWeight = FontWeight.W500,
