@@ -144,3 +144,8 @@ jobs:
           tag_name: ${{ steps.vars.outputs.major_version }}.${{ steps.vars.outputs.minor_version }}
           name: Busy Status Bar ${{ steps.vars.outputs.major_version }}.${{ steps.vars.outputs.minor_version }}
           draft: false
+          body: |
+            Web version: [https://busybar.github.io/Android/](https://busybar.github.io/Android/)
+            
+            Doesn't work on Safari until this [PR by Apple](https://github.com/WebKit/WebKit/pull/31854) is released
+            
