@@ -9,14 +9,18 @@ data class BusyBarApp(
     val pic: DrawableResource,
     val icon: DrawableResource,
     val title: StringResource
-)
+) {
+    companion object {
+        val default = BusyBarApp(
+            pic = Res.drawable.pic_apps_busy,
+            icon = Res.drawable.ic_apps_busy,
+            title = Res.string.apps_list_busy
+        )
+    }
+}
 
 val APPS = listOf(
-    BusyBarApp(
-        pic = Res.drawable.pic_apps_busy,
-        icon = Res.drawable.ic_apps_busy,
-        title = Res.string.apps_list_busy
-    ),
+    BusyBarApp.default,
     BusyBarApp(
         pic = Res.drawable.pic_apps_tomato,
         icon = Res.drawable.ic_apps_tomato,

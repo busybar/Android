@@ -37,29 +37,24 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun BusyBarAppComposable(
     modifier: Modifier = Modifier,
-    app: BusyBarApp,
-    onClick: () -> Unit
+    app: BusyBarApp
 ) = Column(
     modifier = modifier.padding(16.dp),
     verticalArrangement = Arrangement.spacedBy(20.dp)
 ) {
     BusyBarAppHeaderComposable(
         icon = app.icon,
-        title = app.title,
-        onClick = onClick
+        title = app.title
     )
-    Image(
+    BusyBarAppPreviewComposable(
         modifier = Modifier.fillMaxWidth(),
-        painter = painterResource(app.pic),
-        contentDescription = stringResource(app.title),
-        contentScale = ContentScale.FillWidth
+        busyBarApp = app
     )
 
     Text(
         modifier = Modifier.fillMaxWidth()
             .clip(RoundedCornerShape(8.dp))
             .background(LocalPallet.current.brand.primary)
-            .clickableRipple(onClick = onClick)
             .padding(vertical = 14.dp),
         text = stringResource(Res.string.apps_block_run),
         fontSize = 16.sp,
@@ -73,8 +68,7 @@ fun BusyBarAppComposable(
 @Composable
 private fun BusyBarAppHeaderComposable(
     icon: DrawableResource,
-    title: StringResource,
-    onClick: () -> Unit
+    title: StringResource
 ) = Row(
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.spacedBy(10.dp)
@@ -93,24 +87,4 @@ private fun BusyBarAppHeaderComposable(
         fontWeight = FontWeight.W400,
         color = LocalPallet.current.invert.black,
     )
-
-    Row(
-        modifier = Modifier.clickableRipple(onClick = onClick),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = stringResource(Res.string.apps_block_customize),
-            fontSize = 12.sp,
-            fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
-            fontWeight = FontWeight.W500,
-            color = LocalPallet.current.neutral.tertiary,
-        )
-
-        Icon(
-            modifier = Modifier.size(14.dp).padding(start = 2.dp),
-            painter = painterResource(Res.drawable.ic_navigation),
-            contentDescription = stringResource(Res.string.apps_block_customize),
-            tint = LocalPallet.current.neutral.tertiary
-        )
-    }
 }

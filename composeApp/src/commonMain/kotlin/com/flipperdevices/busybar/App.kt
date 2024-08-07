@@ -6,7 +6,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import com.flipperdevices.busybar.core.theme.BusyBarTheme
-import com.flipperdevices.busybar.di.RootDecomposeComponent
+import com.flipperdevices.busybar.root.api.RootDecomposeComponent
 
 @Composable
 @Preview

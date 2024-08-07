@@ -26,6 +26,7 @@ import busystatusbar.composeapp.generated.resources.Res
 import busystatusbar.composeapp.generated.resources.device_btn_change_app
 import busystatusbar.composeapp.generated.resources.ic_navigation
 import busystatusbar.composeapp.generated.resources.pic_device_main
+import com.flipperdevices.busybar.apps.composable.apps.BusyBarApp
 import com.flipperdevices.busybar.core.ktx.clickableRipple
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
@@ -35,22 +36,20 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun BarHeaderComposable(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    busyBarApp: BusyBarApp,
+    onChangeApp: () -> Unit
 ) = Column(modifier = modifier) {
-    Image(
+    BusyBarAppStreamingComposable(
         modifier = Modifier
             .fillMaxWidth(),
-        contentScale = ContentScale.FillWidth,
-        painter = painterResource(Res.drawable.pic_device_main),
-        contentDescription = null
+        busyBarApp = busyBarApp
     )
-
     Row(
         Modifier.fillMaxWidth()
             .padding(top = 18.dp)
             .clip(RoundedCornerShape(8.dp))
             .background(LocalPallet.current.brand.primary)
-            .clickableRipple(onClick = onClick)
+            .clickableRipple(onClick = onChangeApp)
             .padding(vertical = 14.dp, horizontal = 12.dp),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
