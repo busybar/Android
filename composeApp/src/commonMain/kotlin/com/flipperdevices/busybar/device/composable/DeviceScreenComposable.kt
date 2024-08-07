@@ -14,6 +14,7 @@ fun DeviceScreenComposable(
     modifier: Modifier,
     busyBarApp: BusyBarApp,
     onChangeApp: () -> Unit,
+    onOpenSettings: () -> Unit,
     onClick: () -> Unit
 ) = Column(
     modifier = modifier.padding(horizontal = 14.dp)
@@ -29,7 +30,8 @@ fun DeviceScreenComposable(
 
     ControlButtonsComposable(
         modifier = Modifier.padding(top = 24.dp),
-        onClick = onClick
+        onClick = onClick,
+        onOpenSettings = onOpenSettings
     )
 
     RemoteButtonsComposable(

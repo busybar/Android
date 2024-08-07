@@ -30,7 +30,8 @@ class DeviceDecomposeComponent(
             modifier.statusBarsPadding(),
             busyBarApp = currentApp,
             onChangeApp = { navigationApi.push(RootScreenConfig.APPS) },
-            onClick = {}
+            onClick = {},
+            onOpenSettings = { navigationApi.push(RootScreenConfig.SETTINGS) }
         )
     }
 

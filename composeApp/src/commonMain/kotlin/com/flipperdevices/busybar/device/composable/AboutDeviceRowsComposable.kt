@@ -56,7 +56,7 @@ fun AboutDeviceRowsComposable(
 }
 
 @Composable
-private fun AboutDeviceRowComposable(
+fun AboutDeviceRowComposable(
     key: StringResource,
     value: StringResource
 ) {

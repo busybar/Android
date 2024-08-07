@@ -6,5 +6,6 @@ import kotlinx.serialization.Serializable
 enum class RootScreenConfig {
     SEARCH,
     DEVICE,
-    APPS
+    APPS,
+    SETTINGS
 }

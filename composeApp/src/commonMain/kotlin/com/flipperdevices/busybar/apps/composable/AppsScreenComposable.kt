@@ -66,7 +66,8 @@ fun AppsScreenComposableBar(onBack: () -> Unit) {
                 .size(24.dp)
                 .clickableRipple(onClick = onBack),
             painter = painterResource(Res.drawable.ic_back),
-            contentDescription = null
+            contentDescription = null,
+            tint = LocalPallet.current.neutral.tertiary
         )
     }
 }

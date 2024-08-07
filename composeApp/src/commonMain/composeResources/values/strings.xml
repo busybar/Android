@@ -43,4 +43,7 @@
     <string name="search_permission_btn">Request permissions</string>
     <string name="search_demo_btn">Demo mode</string>
 
+    <string name="settings_firmware_update">Automatic firmware update</string>
+    <string name="settings_dark_theme">Dark theme</string>
+    <string name="settings_forget">FORGET THIS DEVICE</string>
 </resources>

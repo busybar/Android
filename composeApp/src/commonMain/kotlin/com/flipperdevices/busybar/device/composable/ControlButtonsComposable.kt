@@ -32,6 +32,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun ControlButtonsComposable(
     modifier: Modifier,
+    onOpenSettings: () -> Unit,
     onClick: () -> Unit
 ) {
     Column(modifier) {
@@ -83,7 +84,7 @@ fun ControlButtonsComposable(
                 modifier = Modifier.weight(1f)
                     .clip(RoundedCornerShape(8.dp))
                     .background(LocalPallet.current.transparent.black.quaternary)
-                    .clickableRipple(onClick = onClick)
+                    .clickableRipple(onClick = onOpenSettings)
                     .padding(vertical = 18.dp),
                 painter = painterResource(Res.drawable.ic_settings),
                 contentDescription = null,

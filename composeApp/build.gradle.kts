@@ -77,6 +77,7 @@ kotlin {
             implementation(libs.decompose.composeExtension)
             implementation(libs.kotlin.serialization.json)
             implementation(libs.settings)
+            implementation(libs.settings.coroutines)
 
             implementation(libs.decompose)
             implementation(libs.essenty.lifecycle)

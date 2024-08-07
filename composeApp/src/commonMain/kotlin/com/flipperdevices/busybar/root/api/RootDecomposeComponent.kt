@@ -9,7 +9,6 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
-import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.router.stack.pushToFront
 import com.arkivanov.decompose.router.stack.replaceAll
 import com.arkivanov.decompose.value.Value
@@ -17,12 +16,15 @@ import com.flipperdevices.busybar.apps.api.AppsDecomposeComponent
 import com.flipperdevices.busybar.apps.composable.apps.BusyBarApp
 import com.flipperdevices.busybar.core.decompose.DecomposeComponent
 import com.flipperdevices.busybar.core.decompose.DecomposeOnBackParameter
+import com.flipperdevices.busybar.core.theme.DarkModeSingleton
 import com.flipperdevices.busybar.device.api.DeviceDecomposeComponent
 import com.flipperdevices.busybar.root.config.RootScreenConfig
-import com.flipperdevices.busybar.search.api.PREFS_SEARCH_SKIP
 import com.flipperdevices.busybar.search.api.SearchDecomposeComponent
+import com.flipperdevices.busybar.settings.api.SettingsDecomposeComponent
+import com.flipperdevices.busybar.settings.model.SettingsEnum
 import com.russhwolf.settings.Settings
 import com.russhwolf.settings.get
+import kotlinx.coroutines.flow.update
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
@@ -43,8 +45,17 @@ class RootDecomposeComponent(
         navigationApi: RootNavigationApi,
     ) -> SearchDecomposeComponent,
     private val settings: Settings,
+    private val settingsDecomposeComponentFactory: (
+        componentContext: ComponentContext,
+        onBackParameter: DecomposeOnBackParameter,
+        rootNavigationApi: RootNavigationApi
+    ) -> SettingsDecomposeComponent
 ) : DecomposeComponent, RootNavigationApi, ComponentContext by componentContext {
     private val navigation = StackNavigation<RootScreenConfig>()
+
+    init {
+        DarkModeSingleton.darkMode.update { settings[SettingsEnum.DARK_THEME.key, false] }
+    }
 
     private val stack: Value<ChildStack<RootScreenConfig, DecomposeComponent>> =
         childStack(
@@ -95,10 +106,16 @@ class RootDecomposeComponent(
             this,
             navigation::pop
         )
+
+        RootScreenConfig.SETTINGS -> settingsDecomposeComponentFactory(
+            componentContext,
+            navigation::pop,
+            this
+        )
     }
 
     private fun getRootScreen(): RootScreenConfig {
-        val skipSearch = settings[PREFS_SEARCH_SKIP, false]
+        val skipSearch = settings[SettingsEnum.SKIP_SEARCH.key, false]
         return if (skipSearch) {
             RootScreenConfig.DEVICE
         } else RootScreenConfig.SEARCH

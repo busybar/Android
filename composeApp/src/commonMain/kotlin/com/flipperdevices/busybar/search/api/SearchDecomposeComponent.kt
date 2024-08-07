@@ -15,12 +15,11 @@ import com.flipperdevices.busybar.search.permissions.BindEffect
 import com.flipperdevices.busybar.search.permissions.PermissionsController
 import com.flipperdevices.busybar.search.permissions.rememberPermissionsControllerFactory
 import com.flipperdevices.busybar.search.viewmodel.SearchViewModel
+import com.flipperdevices.busybar.settings.model.SettingsEnum
 import com.russhwolf.settings.Settings
 import com.russhwolf.settings.set
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
-
-const val PREFS_SEARCH_SKIP = "skip_search"
 
 @Inject
 class SearchDecomposeComponent(
@@ -46,7 +45,7 @@ class SearchDecomposeComponent(
             searchScreenState = searchScreenState,
             onInvalidate = viewModel::invalidate,
             onDemo = {
-                settings[PREFS_SEARCH_SKIP] = true
+                settings[SettingsEnum.SKIP_SEARCH.key] = true
                 navigationApi.openRootScreen()
             }
         )

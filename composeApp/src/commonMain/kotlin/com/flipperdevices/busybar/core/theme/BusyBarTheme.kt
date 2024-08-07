@@ -55,9 +55,12 @@ internal fun BusyBarPallet.toTextSelectionColors() = TextSelectionColors(
 
 @Composable
 fun BusyBarTheme(
+    darkMode: Boolean,
     content: @Composable () -> Unit
 ) {
-    val isLight = isSystemInDarkTheme().not()
+    val isLight = if (darkMode) {
+        false
+    } else isSystemInDarkTheme().not()
     BusyBarThemeInternal(
         isLight = isLight,
         content = content
