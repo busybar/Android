@@ -12,9 +12,13 @@ string|device_btn_change_app|Q0hBTkdFIEFQUA==
 string|device_btn_mute|TVVURQ==
 string|device_btn_reboot|UkVCT09U
 string|device_btn_turn_off|VFVSTiBPRkY=
+string|device_btn_update_firmware_dialog_ok|T2s=
+string|device_btn_update_firmware_dialog|Tm8gVXBkYXRlIEZvdW5k
 string|device_btn_update_firmware|VVBEQVRFIEZJUk1XQVJF
 string|device_section_about_dev_mode_title|RGV2IG1vZGU=
 string|device_section_about_dev_mode_value|T2Zm
+string|device_section_about_serial_number_title|U2VyaWFsIE51bWJlcg==
+string|device_section_about_serial_number_value|MTI3LjEyLjA=
 string|device_section_about_title|QUJPVVQgREVWSUNF
 string|device_section_about_version_title|RmlybXdhcmUgdmVyc2lvbg==
 string|device_section_about_version_value|QlNCXzBSMS41
