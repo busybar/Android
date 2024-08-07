@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import com.arkivanov.decompose.defaultComponentContext
 import com.flipperdevices.busybar.di.createAppComponent
 import com.russhwolf.settings.SharedPreferencesSettings
+import dev.icerock.moko.permissions.compose.rememberPermissionsControllerFactory
 
 class MainActivity : ComponentActivity() {
     private val settings by lazy {

@@ -11,12 +11,12 @@ import com.flipperdevices.busybar.core.decompose.DecomposeComponent
 import com.flipperdevices.busybar.core.decompose.viewModelWithFactory
 import com.flipperdevices.busybar.root.api.RootNavigationApi
 import com.flipperdevices.busybar.search.composable.SearchScreenComposable
+import com.flipperdevices.busybar.search.permissions.BindEffect
+import com.flipperdevices.busybar.search.permissions.PermissionsController
+import com.flipperdevices.busybar.search.permissions.rememberPermissionsControllerFactory
 import com.flipperdevices.busybar.search.viewmodel.SearchViewModel
 import com.russhwolf.settings.Settings
 import com.russhwolf.settings.set
-import dev.icerock.moko.permissions.PermissionsController
-import dev.icerock.moko.permissions.compose.BindEffect
-import dev.icerock.moko.permissions.compose.rememberPermissionsControllerFactory
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 

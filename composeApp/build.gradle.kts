@@ -62,6 +62,8 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+
+            implementation(libs.moko.permissions)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -76,8 +78,6 @@ kotlin {
             implementation(libs.kotlin.serialization.json)
             implementation(libs.settings)
 
-            implementation(libs.moko.permissions)
-
             implementation(libs.decompose)
             implementation(libs.essenty.lifecycle)
             implementation(libs.essenty.lifecycle.coroutines)
@@ -89,6 +89,8 @@ kotlin {
             api(libs.decompose)
             api(libs.essenty.lifecycle)
             api(libs.settings)
+            
+            implementation(libs.moko.permissions)
         }
     }
 }

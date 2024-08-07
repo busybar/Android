@@ -7,9 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -18,20 +15,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import busystatusbar.composeapp.generated.resources.Res
-import busystatusbar.composeapp.generated.resources.apps_block_run
 import busystatusbar.composeapp.generated.resources.search_permission_btn
 import busystatusbar.composeapp.generated.resources.search_permission_needed
 import com.flipperdevices.busybar.core.ktx.clickableRipple
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
-import dev.icerock.moko.permissions.Permission
-import dev.icerock.moko.permissions.PermissionsController
-import dev.icerock.moko.permissions.compose.PermissionsControllerFactory
-import dev.icerock.moko.permissions.compose.rememberPermissionsControllerFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

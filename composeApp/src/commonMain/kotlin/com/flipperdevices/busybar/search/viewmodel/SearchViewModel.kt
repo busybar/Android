@@ -2,9 +2,9 @@ package com.flipperdevices.busybar.search.viewmodel
 
 import com.flipperdevices.busybar.core.decompose.DecomposeViewModel
 import com.flipperdevices.busybar.search.model.SearchScreenState
-import dev.icerock.moko.permissions.DeniedAlwaysException
-import dev.icerock.moko.permissions.Permission
-import dev.icerock.moko.permissions.PermissionsController
+import com.flipperdevices.busybar.search.permissions.DeniedAlwaysException
+import com.flipperdevices.busybar.search.permissions.Permission
+import com.flipperdevices.busybar.search.permissions.PermissionsController
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
