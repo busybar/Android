@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,6 +25,7 @@ import busystatusbar.composeapp.generated.resources.device_wifi_title
 import busystatusbar.composeapp.generated.resources.ic_bluetooth
 import busystatusbar.composeapp.generated.resources.ic_navigation
 import busystatusbar.composeapp.generated.resources.ic_wifi
+import com.flipperdevices.busybar.core.autosize.AutoSizeText
 import com.flipperdevices.busybar.core.ktx.clickableRipple
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
@@ -86,10 +88,9 @@ private fun RemoteButtonComposable(
             fontWeight = FontWeight.W500,
             color = LocalPallet.current.invert.black,
         )
-        Text(
+        AutoSizeText(
+            modifier = Modifier.height(14.dp),
             text = stringResource(Res.string.device_status_connected),
-            fontSize = 14.sp,
-            lineHeight = 14.sp,
             fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
             fontWeight = FontWeight.W500,
             color = color,
