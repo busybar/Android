@@ -18,6 +18,7 @@ ksp = "2.0.0-1.0.24"
 kotlin-inject = "0.7.1"
 decompose = "3.1.0"
 essenty = "2.1.0"
+settings = "1.1.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -36,6 +37,7 @@ decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decom
 decompose-composeExtension = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization-runtime" }
 essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
+settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "settings" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

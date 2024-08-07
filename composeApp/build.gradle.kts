@@ -52,6 +52,7 @@ kotlin {
 
             export(libs.decompose)
             export(libs.essenty.lifecycle)
+            export(libs.settings)
         }
     }
 
@@ -73,12 +74,18 @@ kotlin {
             implementation(libs.kotlin.inject.runtime)
             implementation(libs.decompose.composeExtension)
             implementation(libs.kotlin.serialization.json)
+            implementation(libs.settings)
 
-            api(libs.decompose)
-            api(libs.essenty.lifecycle)
+            implementation(libs.decompose)
+            implementation(libs.essenty.lifecycle)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+        }
+        iosMain.dependencies {
+            api(libs.decompose)
+            api(libs.essenty.lifecycle)
+            api(libs.settings)
         }
     }
 }

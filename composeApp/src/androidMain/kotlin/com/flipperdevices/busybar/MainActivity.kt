@@ -6,9 +6,18 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.arkivanov.decompose.defaultComponentContext
 import com.flipperdevices.busybar.di.createAppComponent
+import com.russhwolf.settings.SharedPreferencesSettings
 
 class MainActivity : ComponentActivity() {
-    private val appComponent by lazy { createAppComponent() }
+    private val settings by lazy {
+        SharedPreferencesSettings(
+            baseContext.getSharedPreferences(
+                "settings",
+                MODE_PRIVATE
+            )
+        )
+    }
+    private val appComponent by lazy { createAppComponent(settings) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
