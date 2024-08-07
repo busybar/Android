@@ -18,6 +18,8 @@ import androidx.compose.ui.unit.sp
 import busystatusbar.composeapp.generated.resources.Res
 import busystatusbar.composeapp.generated.resources.device_section_about_dev_mode_title
 import busystatusbar.composeapp.generated.resources.device_section_about_dev_mode_value
+import busystatusbar.composeapp.generated.resources.device_section_about_serial_number_title
+import busystatusbar.composeapp.generated.resources.device_section_about_serial_number_value
 import busystatusbar.composeapp.generated.resources.device_section_about_version_title
 import busystatusbar.composeapp.generated.resources.device_section_about_version_value
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
@@ -31,7 +33,8 @@ fun AboutDeviceRowsComposable(
 ) {
     val pairs = listOf(
         Res.string.device_section_about_version_title to Res.string.device_section_about_version_value,
-        Res.string.device_section_about_dev_mode_title to Res.string.device_section_about_dev_mode_value
+        Res.string.device_section_about_dev_mode_title to Res.string.device_section_about_dev_mode_value,
+        Res.string.device_section_about_serial_number_title to Res.string.device_section_about_serial_number_value
     )
 
     Column(
