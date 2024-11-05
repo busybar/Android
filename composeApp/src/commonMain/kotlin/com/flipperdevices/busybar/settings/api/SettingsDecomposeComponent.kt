@@ -11,6 +11,7 @@ import com.flipperdevices.busybar.core.decompose.DecomposeComponent
 import com.flipperdevices.busybar.core.decompose.DecomposeOnBackParameter
 import com.flipperdevices.busybar.core.decompose.viewModelWithFactory
 import com.flipperdevices.busybar.root.api.RootNavigationApi
+import com.flipperdevices.busybar.root.config.RootScreenConfig
 import com.flipperdevices.busybar.settings.viewmodel.SettingsViewModel
 import com.flipperdevices.busybar.settings.composable.SettingsScreenComposable
 import com.flipperdevices.busybar.settings.model.SettingsEnum
@@ -42,6 +43,9 @@ class SettingsDecomposeComponent(
             onForgetDevice = {
                 viewModel.onChange(SettingsEnum.SKIP_SEARCH, false)
                 rootNavigationApi.openRootScreen()
+            },
+            onOpenLogIn = {
+                rootNavigationApi.push(RootScreenConfig.LOGIN)
             }
         )
     }

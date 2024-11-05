@@ -35,6 +35,7 @@ import busystatusbar.composeapp.generated.resources.search_demo_btn
 import busystatusbar.composeapp.generated.resources.settings_dark_theme
 import busystatusbar.composeapp.generated.resources.settings_firmware_update
 import busystatusbar.composeapp.generated.resources.settings_forget
+import busystatusbar.composeapp.generated.resources.settings_login
 import com.flipperdevices.busybar.core.ktx.clickableRipple
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
@@ -51,7 +52,8 @@ fun SettingsScreenComposable(
     settingsState: SettingsState,
     onBack: () -> Unit,
     onChange: (SettingsEnum, Boolean) -> Unit,
-    onForgetDevice: () -> Unit
+    onForgetDevice: () -> Unit,
+    onOpenLogIn: () -> Unit
 ) = Column(
     modifier = modifier.fillMaxHeight(),
     horizontalAlignment = Alignment.CenterHorizontally,
@@ -90,6 +92,22 @@ fun SettingsScreenComposable(
                 settingsState.darkTheme,
                 onChange = { onChange(SettingsEnum.DARK_THEME, it) }
             )
+            Line()
+
+            Row(
+                Modifier.clickableRipple { onOpenLogIn() }.padding(vertical = 12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    modifier = Modifier.weight(1f),
+                    text = stringResource(Res.string.settings_login),
+                    fontSize = 16.sp,
+                    fontFamily = LocalBusyBarFonts.current.jetbrainsMono,
+                    fontWeight = FontWeight.W400,
+                    color = LocalPallet.current.black.invert,
+                    letterSpacing = 0.48.sp,
+                )
+            }
         }
     }
 

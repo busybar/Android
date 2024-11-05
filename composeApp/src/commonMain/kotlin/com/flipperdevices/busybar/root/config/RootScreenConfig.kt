@@ -7,5 +7,6 @@ enum class RootScreenConfig {
     SEARCH,
     DEVICE,
     APPS,
-    SETTINGS
+    SETTINGS,
+    LOGIN
 }
