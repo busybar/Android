@@ -30,6 +30,7 @@ string|device_wifi_title|V0lGSQ==
 string|login_btn|TE9HIElO
 string|login_email_hint|RW1haWwgQWRkcmVzcw==
 string|login_forgot_password|Rm9yZ290IFBhc3N3b3JkPw==
+string|login_main_title|TG9nIGluIHRvIEJ1c3kgQ2xvdWQ=
 string|login_no_account_signup|U0lHTiBVUA==
 string|login_no_account|RG9u4oCZdCBoYXZlIGFuIGFjY291bnQ/
 string|login_or_login_with|T3IgTG9naW4gd2l0aA==
@@ -40,6 +41,7 @@ string|search_permission_needed|UGxlYXNlIHByb3ZpZGUgcGVybWlzc2lvbnMgdG8gZmluZCB0
 string|settings_dark_theme|RGFyayB0aGVtZQ==
 string|settings_firmware_update|QXV0b21hdGljIGZpcm13YXJlIHVwZGF0ZQ==
 string|settings_forget|Rk9SR0VUIFRISVMgREVWSUNF
+string|settings_login|T3BlbiBsb2dpbiBzY3JlZW4=
 string|tab_apps_title|QVBQUw==
 string|tab_device_title|REVWSUNF
 string|tab_login_title|TE9HIElO
