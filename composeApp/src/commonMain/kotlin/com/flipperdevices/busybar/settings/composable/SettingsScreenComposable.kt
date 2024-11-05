@@ -121,7 +121,7 @@ private fun BooleanRowComposable(
             fontSize = 16.sp,
             fontFamily = LocalBusyBarFonts.current.jetbrainsMono,
             fontWeight = FontWeight.W400,
-            color = LocalPallet.current.invert.black,
+            color = LocalPallet.current.black.invert,
             letterSpacing = 0.48.sp,
         )
 
@@ -133,7 +133,7 @@ private fun BooleanRowComposable(
                 checkedTrackColor = LocalPallet.current.brand.secondary,
                 checkedThumbColor = LocalPallet.current.brand.primary,
                 uncheckedTrackColor = LocalPallet.current.brand.primary,
-                uncheckedThumbColor = LocalPallet.current.onColor.white
+                uncheckedThumbColor = LocalPallet.current.white.onColor
             )
         )
     }

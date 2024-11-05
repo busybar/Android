@@ -61,7 +61,7 @@ fun BusyBarAppComposable(
         fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
         fontWeight = FontWeight.W500,
         textAlign = TextAlign.Center,
-        color = LocalPallet.current.onColor.white
+        color = LocalPallet.current.white.onColor
     )
 }
 
@@ -77,7 +77,7 @@ private fun BusyBarAppHeaderComposable(
         modifier = Modifier.size(26.dp),
         painter = painterResource(icon),
         contentDescription = stringResource(title),
-        tint = LocalPallet.current.invert.black
+        tint = LocalPallet.current.black.invert
     )
     Text(
         modifier = Modifier.weight(1f),
@@ -85,6 +85,6 @@ private fun BusyBarAppHeaderComposable(
         fontSize = 18.sp,
         fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
         fontWeight = FontWeight.W400,
-        color = LocalPallet.current.invert.black,
+        color = LocalPallet.current.black.invert
     )
 }

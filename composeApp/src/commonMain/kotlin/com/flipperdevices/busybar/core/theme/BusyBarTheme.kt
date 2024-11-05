@@ -38,20 +38,20 @@ internal fun BusyBarPallet.toMaterialColors(isLight: Boolean) = Colors(
     primaryVariant = brand.primary,
     secondary = brand.secondary,
     secondaryVariant = brand.secondary,
-    background = background.primary,
-    surface = background.secondary,
+    background = surface.primary,
+    surface = surface.primary,
     error = danger.primary,
-    onPrimary = onColor.white,
-    onSecondary = onColor.black,
-    onBackground = onColor.black,
-    onSurface = onColor.black,
-    onError = onColor.black,
+    onPrimary = white.onColor,
+    onSecondary = black.onColor,
+    onBackground = black.onColor,
+    onSurface = black.onColor,
+    onError = white.onColor,
     isLight = isLight
 )
 
 internal fun BusyBarPallet.toTextSelectionColors() = TextSelectionColors(
     handleColor = brand.primary,
-    backgroundColor = background.primary
+    backgroundColor = surface.primary
 )
 
 @Composable

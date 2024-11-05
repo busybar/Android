@@ -38,7 +38,7 @@ fun PermissionComposable(
             lineHeight = 18.sp,
             fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
             fontWeight = FontWeight(500),
-            color = LocalPallet.current.invert.black,
+            color = LocalPallet.current.black.invert,
             textAlign = TextAlign.Center,
         )
 
@@ -53,7 +53,7 @@ fun PermissionComposable(
             fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
             fontWeight = FontWeight.W500,
             textAlign = TextAlign.Center,
-            color = LocalPallet.current.onColor.white
+            color = LocalPallet.current.white.onColor
         )
     }
 }

@@ -79,7 +79,7 @@ private fun RemoteButtonComposable(
     Row(
         modifier = modifier
             .clip(RoundedCornerShape(8.dp))
-            .background(LocalPallet.current.transparent.black.quaternary)
+            .background(LocalPallet.current.transparent.blackInvert.quaternary)
             .clickableRipple { disabled = !disabled }
             .padding(top = 12.dp, start = 8.dp, end = 8.dp, bottom = 12.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -104,7 +104,7 @@ private fun RemoteButtonComposable(
                 lineHeight = 10.sp,
                 fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
                 fontWeight = FontWeight.W500,
-                color = LocalPallet.current.invert.black,
+                color = LocalPallet.current.black.invert,
             )
             AutoSizeText(
                 modifier = Modifier.height(14.dp),

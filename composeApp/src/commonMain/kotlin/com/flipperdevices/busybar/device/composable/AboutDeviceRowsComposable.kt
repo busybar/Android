@@ -78,7 +78,7 @@ fun AboutDeviceRowComposable(
             fontSize = 16.sp,
             fontFamily = LocalBusyBarFonts.current.jetbrainsMono,
             fontWeight = FontWeight.W400,
-            color = LocalPallet.current.invert.black,
+            color = LocalPallet.current.black.invert,
             letterSpacing = 0.48.sp,
         )
         Text(

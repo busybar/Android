@@ -59,7 +59,7 @@ fun BarHeaderComposable(
             fontSize = 16.sp,
             fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
             fontWeight = FontWeight.W500,
-            color = LocalPallet.current.onColor.white,
+            color = LocalPallet.current.white.onColor,
         )
         Icon(
             modifier = Modifier
@@ -67,7 +67,7 @@ fun BarHeaderComposable(
                 .size(14.dp),
             painter = painterResource(Res.drawable.ic_navigation),
             contentDescription = null,
-            tint = LocalPallet.current.onColor.white
+            tint = LocalPallet.current.white.onColor
         )
     }
 }

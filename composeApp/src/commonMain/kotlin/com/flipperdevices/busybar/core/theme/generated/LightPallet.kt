@@ -1,18 +1,18 @@
 package com.flipperdevices.busybar.core.theme.generated
 
 import androidx.compose.ui.graphics.Color
-import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Background
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Black
 import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Bluetooth
 import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Brand
 import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Danger
-import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Invert
 import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Neutral
-import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.OnColor
 import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Success
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Surface
 import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Transparent
-import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Transparent.Black
-import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Transparent.White
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Transparent.BlackInvert
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Transparent.WhiteInvert
 import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Warning
+import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.White
 import com.flipperdevices.busybar.core.theme.generated.BusyBarPallet.Wifi
 import kotlin.Suppress
 
@@ -21,19 +21,23 @@ import kotlin.Suppress
  */
 @Suppress("MagicNumber","LongMethod")
 internal fun getLightPallet(): BusyBarPallet = BusyBarPallet(
-  invert = Invert(
-    black = Color(0xFF000000),
-    white = Color(0xFFFFFFFF)
+  black = Black(
+    invert = Color(0xFF000000),
+    onColor = Color(0xFF000000)
+  ),
+  white = White(
+    invert = Color(0xFFFFFFFF),
+    onColor = Color(0xFFFFFFFF)
   ),
   transparent = Transparent(
-    black = Black(
+    blackInvert = BlackInvert(
       primary = Color(0x80000000),
       secondary = Color(0x4D000000),
       tertiary = Color(0x1A000000),
       quaternary = Color(0x0D000000),
       quinary = Color(0x05000000)
     ),
-    white = White(
+    whiteInvert = WhiteInvert(
       primary = Color(0x80FFFFFF),
       secondary = Color(0x4DFFFFFF),
       tertiary = Color(0x1AFFFFFF),
@@ -50,7 +54,7 @@ internal fun getLightPallet(): BusyBarPallet = BusyBarPallet(
     senary = Color(0xFFF2F2F2),
     septenary = Color(0xFFFAFAFA)
   ),
-  background = Background(
+  surface = Surface(
     primary = Color(0xFFFFFFFF),
     secondary = Color(0xFFFAFAFA),
     tertiary = Color(0xFFF2F2F2)
@@ -66,27 +70,23 @@ internal fun getLightPallet(): BusyBarPallet = BusyBarPallet(
     tertiary = Color(0x1A137FF1)
   ),
   wifi = Wifi(
-    primary = Color(0xFF00A824),
-    secondary = Color(0x4D00A824),
-    tertiary = Color(0x1A00A824)
+    primary = Color(0xFF80CC03),
+    secondary = Color(0x4D80CC03),
+    tertiary = Color(0x1A80CC03)
   ),
   success = Success(
-    primary = Color(0xFF34C78A),
-    secondary = Color(0x4D34C78A),
-    tertiary = Color(0x1A34C78A)
+    primary = Color(0xFF10B981),
+    secondary = Color(0x4D10B981),
+    tertiary = Color(0x1A10B981)
   ),
   danger = Danger(
-    primary = Color(0xFFF63F3F),
-    secondary = Color(0x4DF63F3F),
-    tertiary = Color(0x1AF63F3F)
+    primary = Color(0xFFEF4444),
+    secondary = Color(0x4DEF4444),
+    tertiary = Color(0x1AEF4444)
   ),
   warning = Warning(
-    primary = Color(0xFFFECF5D),
-    secondary = Color(0x4DFECF5D),
-    tertiary = Color(0x1AFECF5D)
-  ),
-  onColor = OnColor(
-    black = Color(0xFF000000),
-    white = Color(0xFFFFFFFF)
+    primary = Color(0xFFF59E0B),
+    secondary = Color(0x4DF59E0B),
+    tertiary = Color(0x1AF59E0B)
   )
 )

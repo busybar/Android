@@ -44,7 +44,7 @@ fun ControlButtonsComposable(
         Text(
             modifier = Modifier.fillMaxWidth()
                 .clip(RoundedCornerShape(8.dp))
-                .background(LocalPallet.current.transparent.black.quaternary)
+                .background(LocalPallet.current.transparent.blackInvert.quaternary)
                 .clickableRipple(onClick = onClick)
                 .padding(vertical = 18.dp, horizontal = 32.dp),
             text = stringResource(Res.string.device_btn_turn_off),
@@ -52,7 +52,7 @@ fun ControlButtonsComposable(
             fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
             fontWeight = FontWeight.W500,
             textAlign = TextAlign.Center,
-            color = LocalPallet.current.invert.black
+            color = LocalPallet.current.black.invert
         )
 
         Row(
@@ -63,7 +63,7 @@ fun ControlButtonsComposable(
             Text(
                 modifier = Modifier.weight(1f)
                     .clip(RoundedCornerShape(8.dp))
-                    .background(LocalPallet.current.transparent.black.quaternary)
+                    .background(LocalPallet.current.transparent.blackInvert.quaternary)
                     .clickableRipple(onClick = {
                         isMute = !isMute
                     })
@@ -77,12 +77,12 @@ fun ControlButtonsComposable(
                 fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
                 fontWeight = FontWeight.W500,
                 textAlign = TextAlign.Center,
-                color = LocalPallet.current.invert.black
+                color = LocalPallet.current.black.invert
             )
             Text(
                 modifier = Modifier.weight(1f)
                     .clip(RoundedCornerShape(8.dp))
-                    .background(LocalPallet.current.transparent.black.quaternary)
+                    .background(LocalPallet.current.transparent.blackInvert.quaternary)
                     .clickableRipple(onClick = onClick)
                     .padding(vertical = 18.dp),
                 text = stringResource(Res.string.device_btn_reboot),
@@ -90,12 +90,12 @@ fun ControlButtonsComposable(
                 fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
                 fontWeight = FontWeight.W500,
                 textAlign = TextAlign.Center,
-                color = LocalPallet.current.invert.black
+                color = LocalPallet.current.black.invert
             )
             Icon(
                 modifier = Modifier.weight(1f)
                     .clip(RoundedCornerShape(8.dp))
-                    .background(LocalPallet.current.transparent.black.quaternary)
+                    .background(LocalPallet.current.transparent.blackInvert.quaternary)
                     .clickableRipple(onClick = onOpenSettings)
                     .padding(vertical = 18.dp),
                 painter = painterResource(Res.drawable.ic_settings),
