@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
 import com.flipperdevices.busybar.core.decompose.DecomposeComponent
 import com.flipperdevices.busybar.login.main.composable.LogInMainComposable
+import com.flipperdevices.busybar.login.main.composable.LogInMainComposableScreen
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
@@ -14,6 +15,6 @@ class LogInMainDecomposeComponent(
 ) : DecomposeComponent, ComponentContext by componentContext  {
     @Composable
     override fun Render(modifier: Modifier) {
-        LogInMainComposable()
+        LogInMainComposableScreen()
     }
 }

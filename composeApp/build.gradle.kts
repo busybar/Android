@@ -77,6 +77,7 @@ kotlin {
             implementation(libs.decompose.composeExtension)
             implementation(libs.kotlin.serialization.json)
             implementation(libs.settings)
+            implementation(libs.constraintlayout)
 
             implementation(libs.decompose)
             implementation(libs.essenty.lifecycle)
@@ -89,7 +90,7 @@ kotlin {
             api(libs.decompose)
             api(libs.essenty.lifecycle)
             api(libs.settings)
-            
+
             implementation(libs.moko.permissions)
         }
     }
