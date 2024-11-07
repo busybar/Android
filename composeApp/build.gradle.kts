@@ -78,6 +78,7 @@ kotlin {
             implementation(libs.kotlin.serialization.json)
             implementation(libs.settings)
             implementation(libs.constraintlayout)
+            implementation(libs.markdown.renderer)
 
             implementation(libs.decompose)
             implementation(libs.essenty.lifecycle)

@@ -9,6 +9,8 @@
     <string name="login_or_login_with">Or Login with</string>
     <string name="login_no_account">Don’t have an account?</string>
     <string name="login_no_account_signup">SIGN UP</string>
+    <string name="login_main_email_hint">Email</string>
+    <string name="login_main_footer">By proceeding, you agree to our [Terms of Service](https://busy.app) and [Privacy Policy](https://busy.app)</string>
 
     <string name="device_btn_change_app">CHANGE APP</string>
     <string name="device_btn_turn_off">TURN OFF</string>

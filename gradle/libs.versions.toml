@@ -14,6 +14,7 @@ decompose = "3.2.1"
 essenty = "2.2.1"
 settings = "1.1.1"
 moko-permissions = "0.18.0"
+markdown = "0.27.0" # https://github.com/mikepenz/multiplatform-markdown-renderer/releases
 
 [libraries]
 constraintlayout = { module = "tech.annexflow.compose:constraintlayout-compose-multiplatform", version.ref = "constraintlayout" }
@@ -25,6 +26,7 @@ decompose-composeExtension = { module = "com.arkivanov.decompose:extensions-comp
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization-runtime" }
 essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
 essenty-lifecycle-coroutines = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "essenty" }
+markdown-renderer = { module = "com.mikepenz:multiplatform-markdown-renderer", version.ref = "markdown" }
 
 settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "settings" }
 moko-permissions = { module = "dev.icerock.moko:permissions-compose", version.ref = "moko-permissions" }
