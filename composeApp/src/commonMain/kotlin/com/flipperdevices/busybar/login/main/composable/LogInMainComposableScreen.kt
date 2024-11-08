@@ -1,8 +1,13 @@
 package com.flipperdevices.busybar.login.main.composable
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,19 +33,18 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun LogInMainComposableScreen() {
     Column(
-        Modifier
-            .fillMaxSize()
-            .systemBarsPadding(),
+        Modifier.fillMaxSize().systemBarsPadding(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LogInAppBarComposable(Res.string.login_main_title)
 
         LogInMainComposable(
-            modifier = Modifier.weight(1f)
+            modifier = Modifier
+                .weight(1f)
         )
-
         Markdown(
-            stringResource(Res.string.login_main_footer),
+            modifier = Modifier,
+            content = stringResource(Res.string.login_main_footer),
             components = markdownComponents(),
             colors = markdownColor(),
             typography = markdownTypography()
