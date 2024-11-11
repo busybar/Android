@@ -40,6 +40,10 @@ string|login_no_account_signup|U0lHTiBVUA==
 string|login_no_account|RG9u4oCZdCBoYXZlIGFuIGFjY291bnQ/
 string|login_or_login_with|T3IgTG9naW4gd2l0aA==
 string|login_password_hint|UGFzc3dvcmQ=
+string|login_signin_btn|TG9nIGlu
+string|login_signin_desc|WW91IGFyZSBsb2dnaW5nIGluIHRvIHRoZSBhY2NvdW50Og==
+string|login_signin_forgot_password|Rm9yZ290IHBhc3N3b3JkPw==
+string|login_signin_password_hint|UGFzc3dvcmQ=
 string|login_signin_title|RW50ZXIgcGFzc3dvcmQ=
 string|login_signup_title|Q3JlYXRlIGFjY291bnQ/
 string|search_demo_btn|RGVtbyBtb2Rl
