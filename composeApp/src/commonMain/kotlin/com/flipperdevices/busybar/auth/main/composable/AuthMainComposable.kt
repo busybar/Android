@@ -12,6 +12,7 @@ import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -23,17 +24,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import busystatusbar.composeapp.generated.resources.Res
 import busystatusbar.composeapp.generated.resources.ic_apple
+import busystatusbar.composeapp.generated.resources.ic_apple_dark
 import busystatusbar.composeapp.generated.resources.ic_google
 import busystatusbar.composeapp.generated.resources.ic_microsoft
 import busystatusbar.composeapp.generated.resources.login_main_btn
 import busystatusbar.composeapp.generated.resources.login_main_email_title
 import busystatusbar.composeapp.generated.resources.pic_busycloud
+import busystatusbar.composeapp.generated.resources.pic_busycloud_dark
 import com.flipperdevices.busybar.auth.common.composable.BusyBarButtonComposable
 import com.flipperdevices.busybar.auth.common.composable.UiConstants
 import com.flipperdevices.busybar.auth.main.model.AuthMainState
+import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
+import com.flipperdevices.busybar.core.theme.LocalPallet
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -56,20 +63,31 @@ fun AuthMainComposable(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(Res.drawable.pic_busycloud),
+            painter = painterResource(
+                if (MaterialTheme.colors.isLight) {
+                    Res.drawable.pic_busycloud
+                } else {
+                    Res.drawable.pic_busycloud_dark
+                }
+            ),
             contentDescription = null
         )
 
         Text(
             modifier = Modifier.padding(vertical = 16.dp),
-            text = stringResource(Res.string.login_main_email_title)
+            text = stringResource(Res.string.login_main_email_title),
+            fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
+            fontSize = 16.sp,
+            color = LocalPallet.current.black.invert,
+            fontWeight = FontWeight.W400
         )
 
         var email by remember { mutableStateOf("") }
 
         EmailEditFieldComposable(
             modifier = Modifier
-                .fillMaxWidth().onFocusChanged {
+                .fillMaxWidth()
+                .onFocusChanged {
                     if (it.isFocused) {
                         coroutineScope.launch { bringIntoViewRequester.bringIntoView() }
                     }
@@ -118,7 +136,11 @@ fun AuthMainComposable(
             )
             SignInWithButtonComposable(
                 modifier = Modifier.weight(1f),
-                icon = Res.drawable.ic_apple,
+                icon = if (MaterialTheme.colors.isLight) {
+                    Res.drawable.ic_apple
+                } else {
+                    Res.drawable.ic_apple_dark
+                },
                 onClick = {}
             )
             SignInWithButtonComposable(

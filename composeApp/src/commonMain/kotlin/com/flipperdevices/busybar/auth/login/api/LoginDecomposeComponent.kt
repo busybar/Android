@@ -10,13 +10,20 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.flipperdevices.busybar.auth.signup.model.SignUpNavigationConfig
 import com.flipperdevices.busybar.auth.signup.api.SignUpPasswordDecomposeComponent
 import com.flipperdevices.busybar.core.decompose.DecomposeComponent
+import com.flipperdevices.busybar.core.decompose.DecomposeOnBackParameter
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
 @Inject
 class LoginDecomposeComponent(
     @Assisted componentContext: ComponentContext,
-    private val loginPasswordDecomposeComponent: (ComponentContext) -> LoginPasswordDecomposeComponent
+    @Assisted private val onBack: DecomposeOnBackParameter,
+    @Assisted private val email: String,
+    private val loginPasswordDecomposeComponent: (
+        componentContext: ComponentContext,
+        onBack: DecomposeOnBackParameter,
+        email: String
+    ) -> LoginPasswordDecomposeComponent
 ) : DecomposeComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<SignUpNavigationConfig>()
 
@@ -39,6 +46,10 @@ class LoginDecomposeComponent(
         config: SignUpNavigationConfig,
         componentContext: ComponentContext
     ): DecomposeComponent = when (config) {
-        SignUpNavigationConfig.Password -> loginPasswordDecomposeComponent(componentContext)
+        SignUpNavigationConfig.Password -> loginPasswordDecomposeComponent(
+            componentContext,
+            onBack,
+            email
+        )
     }
 }

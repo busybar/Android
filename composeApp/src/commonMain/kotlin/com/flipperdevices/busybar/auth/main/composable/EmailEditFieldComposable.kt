@@ -2,15 +2,12 @@ package com.flipperdevices.busybar.auth.main.composable
 
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import busystatusbar.composeapp.generated.resources.Res
 import busystatusbar.composeapp.generated.resources.ic_user
+import busystatusbar.composeapp.generated.resources.login_main_email_hint
 import com.flipperdevices.busybar.auth.common.composable.textfield.AuthCommonTextFieldComposable
 
 @Composable
@@ -29,6 +26,7 @@ fun EmailEditFieldComposable(
             keyboardType = KeyboardType.Email,
             imeAction = ImeAction.Next
         ),
-        disabled = disabled
+        disabled = disabled,
+        hint = Res.string.login_main_email_hint
     )
 }

@@ -11,17 +11,24 @@ import com.flipperdevices.busybar.core.decompose.DecomposeComponent
 import com.flipperdevices.busybar.auth.common.model.AuthRootNavigationConfig
 import com.flipperdevices.busybar.auth.login.api.LoginDecomposeComponent
 import com.flipperdevices.busybar.auth.signup.api.SignUpDecomposeComponent
+import com.flipperdevices.busybar.core.decompose.DecomposeOnBackParameter
+import com.flipperdevices.busybar.core.decompose.popOr
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
 @Inject
 class AuthDecomposeComponent(
     @Assisted componentContext: ComponentContext,
+    @Assisted private val onBack: DecomposeOnBackParameter,
     private val authMainDecomposeComponentFactory: (
         componentContext: ComponentContext,
         authNavigation: StackNavigation<AuthRootNavigationConfig>
     ) -> AuthMainDecomposeComponent,
-    private val logInDecomposeComponentFactory: (ComponentContext) -> LoginDecomposeComponent,
+    private val logInDecomposeComponentFactory: (
+        componentContext: ComponentContext,
+        onBack: DecomposeOnBackParameter,
+        email: String,
+    ) -> LoginDecomposeComponent,
     private val signUpDecomposeComponentFactory: (ComponentContext) -> SignUpDecomposeComponent
 ) : DecomposeComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<AuthRootNavigationConfig>()
@@ -50,7 +57,12 @@ class AuthDecomposeComponent(
             navigation
         )
 
-        AuthRootNavigationConfig.Login -> logInDecomposeComponentFactory(componentContext)
+        is AuthRootNavigationConfig.Login -> logInDecomposeComponentFactory(
+            componentContext,
+            { navigation.popOr(onBack::invoke) },
+            config.email
+        )
+
         AuthRootNavigationConfig.SignUp -> signUpDecomposeComponentFactory(componentContext)
     }
 }

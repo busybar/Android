@@ -1,6 +1,5 @@
 package com.flipperdevices.busybar.auth.main.composable
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,7 +18,7 @@ import busystatusbar.composeapp.generated.resources.login_main_footer
 import busystatusbar.composeapp.generated.resources.login_main_title
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
-import com.flipperdevices.busybar.auth.common.composable.LogInAppBarComposable
+import com.flipperdevices.busybar.auth.common.composable.appbar.LogInAppBarComposable
 import com.flipperdevices.busybar.auth.main.model.AuthMainState
 import com.mikepenz.markdown.compose.Markdown
 import com.mikepenz.markdown.compose.components.markdownComponents

@@ -16,6 +16,10 @@
     <string name="login_main_footer">By proceeding, you agree to our [Terms of Service](https://busy.app) and [Privacy Policy](https://busy.app)</string>
 
     <string name="login_signin_title">Enter password</string>
+    <string name="login_signin_desc">You are logging in to the account:</string>
+    <string name="login_signin_password_hint">Password</string>
+    <string name="login_signin_btn">Log in</string>
+    <string name="login_signin_forgot_password">Forgot password?</string>
     <string name="login_signup_title">Create account?</string>
 
     <string name="device_btn_change_app">CHANGE APP</string>

@@ -36,7 +36,7 @@ class AuthMainViewModel(
             }.onSuccess { userExist ->
                 withContext(Dispatchers.Main) {
                     if (userExist) {
-                        navigationStack.pushNew(AuthRootNavigationConfig.Login)
+                        navigationStack.pushNew(AuthRootNavigationConfig.Login(email))
                     } else {
                         navigationStack.pushNew(AuthRootNavigationConfig.SignUp)
                     }

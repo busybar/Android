@@ -19,6 +19,7 @@ import com.flipperdevices.busybar.core.decompose.DecomposeOnBackParameter
 import com.flipperdevices.busybar.core.theme.DarkModeSingleton
 import com.flipperdevices.busybar.device.api.DeviceDecomposeComponent
 import com.flipperdevices.busybar.auth.main.api.AuthDecomposeComponent
+import com.flipperdevices.busybar.core.decompose.popOr
 import com.flipperdevices.busybar.root.config.RootScreenConfig
 import com.flipperdevices.busybar.search.api.SearchDecomposeComponent
 import com.flipperdevices.busybar.settings.api.SettingsDecomposeComponent
@@ -51,7 +52,7 @@ class RootDecomposeComponent(
         onBackParameter: DecomposeOnBackParameter,
         rootNavigationApi: RootNavigationApi
     ) -> SettingsDecomposeComponent,
-    private val authDecomposeComponent: (ComponentContext) -> AuthDecomposeComponent
+    private val authDecomposeComponent: (ComponentContext, DecomposeOnBackParameter) -> AuthDecomposeComponent
 ) : DecomposeComponent, RootNavigationApi, ComponentContext by componentContext {
     private val navigation = StackNavigation<RootScreenConfig>()
 
@@ -117,7 +118,8 @@ class RootDecomposeComponent(
         )
 
         RootScreenConfig.LOGIN -> authDecomposeComponent(
-            componentContext
+            componentContext,
+            navigation::pop
         )
     }
 

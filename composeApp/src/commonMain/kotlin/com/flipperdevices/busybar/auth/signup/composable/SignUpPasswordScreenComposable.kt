@@ -8,15 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import busystatusbar.composeapp.generated.resources.Res
-import busystatusbar.composeapp.generated.resources.login_main_footer
-import busystatusbar.composeapp.generated.resources.login_main_title
 import busystatusbar.composeapp.generated.resources.login_signup_title
-import com.flipperdevices.busybar.auth.common.composable.LogInAppBarComposable
-import com.flipperdevices.busybar.auth.main.composable.markdownColor
-import com.flipperdevices.busybar.auth.main.composable.markdownTypography
-import com.mikepenz.markdown.compose.Markdown
-import com.mikepenz.markdown.compose.components.markdownComponents
-import org.jetbrains.compose.resources.stringResource
+import com.flipperdevices.busybar.auth.common.composable.appbar.LogInAppBarComposable
 
 @Composable
 fun SignUpPasswordScreenComposable() {
