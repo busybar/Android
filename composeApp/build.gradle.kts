@@ -64,6 +64,8 @@ kotlin {
             implementation(libs.androidx.activity.compose)
 
             implementation(libs.moko.permissions)
+            implementation(libs.ktor.client.cio)
+            implementation(libs.timber)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -83,9 +85,15 @@ kotlin {
             implementation(libs.decompose)
             implementation(libs.essenty.lifecycle)
             implementation(libs.essenty.lifecycle.coroutines)
+
+            implementation(libs.ktor.client)
+            implementation(libs.ktor.negotiation)
+            implementation(libs.ktor.serialization)
+            implementation(libs.ktor.client.logging)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+            implementation(libs.ktor.client.cio)
         }
         iosMain.dependencies {
             api(libs.decompose)
@@ -93,6 +101,10 @@ kotlin {
             api(libs.settings)
 
             implementation(libs.moko.permissions)
+            implementation(libs.ktor.client.cio)
+        }
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.client.js)
         }
     }
 }

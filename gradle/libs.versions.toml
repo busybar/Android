@@ -15,6 +15,8 @@ essenty = "2.2.1"
 settings = "1.1.1"
 moko-permissions = "0.18.0"
 markdown = "0.27.0" # https://github.com/mikepenz/multiplatform-markdown-renderer/releases
+ktor = "3.0.1" # https://ktor.io/
+timber = "5.0.1" # https://github.com/JakeWharton/timber/releases
 
 [libraries]
 constraintlayout = { module = "tech.annexflow.compose:constraintlayout-compose-multiplatform", version.ref = "constraintlayout" }
@@ -30,6 +32,17 @@ markdown-renderer = { module = "com.mikepenz:multiplatform-markdown-renderer", v
 
 settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "settings" }
 moko-permissions = { module = "dev.icerock.moko:permissions-compose", version.ref = "moko-permissions" }
+
+# Ktor
+ktor-client = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-js = { module = "io.ktor:ktor-client-js-wasm-js", version.ref = "ktor" }
+ktor-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
+
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
