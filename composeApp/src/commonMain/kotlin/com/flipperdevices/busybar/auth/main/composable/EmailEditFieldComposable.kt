@@ -15,18 +15,20 @@ import com.flipperdevices.busybar.auth.common.composable.textfield.AuthCommonTex
 
 @Composable
 fun EmailEditFieldComposable(
-    modifier: Modifier
+    modifier: Modifier,
+    text: String,
+    onTextChange: (String) -> Unit,
+    disabled: Boolean
 ) {
-    var text by remember { mutableStateOf("") }
-
     AuthCommonTextFieldComposable(
         modifier = modifier,
         icon = Res.drawable.ic_user,
         text = text,
-        onTextChange = { text = it },
+        onTextChange = onTextChange,
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Email,
             imeAction = ImeAction.Next
-        )
+        ),
+        disabled = disabled
     )
 }

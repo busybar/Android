@@ -16,11 +16,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import busystatusbar.composeapp.generated.resources.Res
 import busystatusbar.composeapp.generated.resources.login_main_email_hint
+import com.flipperdevices.busybar.auth.common.composable.UiConstants
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
 import org.jetbrains.compose.resources.DrawableResource
@@ -34,10 +36,16 @@ fun AuthCommonTextFieldComposable(
     onTextChange: (String) -> Unit,
     icon: DrawableResource,
     endBlock: (@Composable () -> Unit)? = null,
-    keyboardOptions: KeyboardOptions
+    keyboardOptions: KeyboardOptions,
+    disabled: Boolean = false
 ) {
     BasicTextField(
-        modifier = modifier,
+        modifier = modifier.graphicsLayer {
+            if (disabled) {
+                this.alpha = UiConstants.ALPHA_DISABLED
+            }
+        },
+        enabled = disabled.not(),
         value = text,
         keyboardOptions = keyboardOptions,
         onValueChange = { onTextChange(it) },

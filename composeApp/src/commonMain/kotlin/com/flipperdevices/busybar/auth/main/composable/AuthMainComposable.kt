@@ -14,13 +14,16 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
 import busystatusbar.composeapp.generated.resources.Res
 import busystatusbar.composeapp.generated.resources.ic_apple
 import busystatusbar.composeapp.generated.resources.ic_google
@@ -29,6 +32,7 @@ import busystatusbar.composeapp.generated.resources.login_main_btn
 import busystatusbar.composeapp.generated.resources.login_main_email_title
 import busystatusbar.composeapp.generated.resources.pic_busycloud
 import com.flipperdevices.busybar.auth.common.composable.BusyBarButtonComposable
+import com.flipperdevices.busybar.auth.common.composable.UiConstants
 import com.flipperdevices.busybar.auth.main.model.AuthMainState
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
@@ -38,6 +42,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun AuthMainComposable(
     state: AuthMainState,
+    onLogin: (String) -> Unit,
     modifier: Modifier
 ) {
     val verticalScroll = rememberScrollState()
@@ -60,6 +65,8 @@ fun AuthMainComposable(
             text = stringResource(Res.string.login_main_email_title)
         )
 
+        var email by remember { mutableStateOf("") }
+
         EmailEditFieldComposable(
             modifier = Modifier
                 .fillMaxWidth().onFocusChanged {
@@ -67,6 +74,12 @@ fun AuthMainComposable(
                         coroutineScope.launch { bringIntoViewRequester.bringIntoView() }
                     }
                 },
+            text = email,
+            onTextChange = { email = it },
+            disabled = when (state) {
+                AuthMainState.WaitingForInput -> false
+                AuthMainState.AuthInProgress -> true
+            }
         )
 
         BusyBarButtonComposable(
@@ -75,7 +88,11 @@ fun AuthMainComposable(
                 .fillMaxWidth()
                 .bringIntoViewRequester(bringIntoViewRequester),
             text = Res.string.login_main_btn,
-            onClick = {}
+            onClick = { onLogin(email) },
+            inProgress = when (state) {
+                AuthMainState.WaitingForInput -> false
+                AuthMainState.AuthInProgress -> true
+            }
         )
 
         OrLineComposable(
@@ -84,7 +101,14 @@ fun AuthMainComposable(
         )
 
         Row(
-            Modifier.fillMaxWidth(),
+            Modifier.fillMaxWidth().graphicsLayer {
+                when (state) {
+                    AuthMainState.WaitingForInput -> {}
+                    AuthMainState.AuthInProgress -> {
+                        this.alpha = UiConstants.ALPHA_DISABLED
+                    }
+                }
+            },
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             SignInWithButtonComposable(

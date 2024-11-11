@@ -7,4 +7,6 @@ sealed interface AuthRootNavigationConfig {
     data object Main : AuthRootNavigationConfig
 
     data object Login : AuthRootNavigationConfig
+
+    data object SignUp : AuthRootNavigationConfig
 }

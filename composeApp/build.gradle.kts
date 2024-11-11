@@ -90,6 +90,7 @@ kotlin {
             implementation(libs.ktor.negotiation)
             implementation(libs.ktor.serialization)
             implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.client.auth)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

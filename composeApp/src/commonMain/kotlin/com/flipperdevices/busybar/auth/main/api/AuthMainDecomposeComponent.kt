@@ -27,6 +27,9 @@ class AuthMainDecomposeComponent(
     @Composable
     override fun Render(modifier: Modifier) {
         val state by authViewModel.getState().collectAsState()
-        AuthMainComposableScreen(state)
+        AuthMainComposableScreen(
+            state,
+            authViewModel::onLogin
+        )
     }
 }

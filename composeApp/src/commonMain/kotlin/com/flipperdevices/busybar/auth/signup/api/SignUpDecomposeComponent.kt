@@ -1,4 +1,4 @@
-package com.flipperdevices.busybar.auth.login.api
+package com.flipperdevices.busybar.auth.signup.api
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -8,15 +8,14 @@ import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.flipperdevices.busybar.auth.signup.model.SignUpNavigationConfig
-import com.flipperdevices.busybar.auth.signup.api.SignUpPasswordDecomposeComponent
 import com.flipperdevices.busybar.core.decompose.DecomposeComponent
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
 @Inject
-class LoginDecomposeComponent(
+class SignUpDecomposeComponent(
     @Assisted componentContext: ComponentContext,
-    private val loginPasswordDecomposeComponent: (ComponentContext) -> LoginPasswordDecomposeComponent
+    private val signUpPasswordDecomposeComponent: (ComponentContext) -> SignUpPasswordDecomposeComponent
 ) : DecomposeComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<SignUpNavigationConfig>()
 
@@ -39,6 +38,6 @@ class LoginDecomposeComponent(
         config: SignUpNavigationConfig,
         componentContext: ComponentContext
     ): DecomposeComponent = when (config) {
-        SignUpNavigationConfig.Password -> loginPasswordDecomposeComponent(componentContext)
+        SignUpNavigationConfig.Password -> signUpPasswordDecomposeComponent(componentContext)
     }
 }

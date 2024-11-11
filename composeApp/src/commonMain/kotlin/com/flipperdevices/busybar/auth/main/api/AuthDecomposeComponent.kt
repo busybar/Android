@@ -10,7 +10,7 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.flipperdevices.busybar.core.decompose.DecomposeComponent
 import com.flipperdevices.busybar.auth.common.model.AuthRootNavigationConfig
 import com.flipperdevices.busybar.auth.login.api.LoginDecomposeComponent
-import com.flipperdevices.busybar.auth.login.api.LoginPasswordDecomposeComponent
+import com.flipperdevices.busybar.auth.signup.api.SignUpDecomposeComponent
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
@@ -21,7 +21,8 @@ class AuthDecomposeComponent(
         componentContext: ComponentContext,
         authNavigation: StackNavigation<AuthRootNavigationConfig>
     ) -> AuthMainDecomposeComponent,
-    private val loginDecomposeComponentFactory: (ComponentContext) -> LoginDecomposeComponent
+    private val logInDecomposeComponentFactory: (ComponentContext) -> LoginDecomposeComponent,
+    private val signUpDecomposeComponentFactory: (ComponentContext) -> SignUpDecomposeComponent
 ) : DecomposeComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<AuthRootNavigationConfig>()
 
@@ -49,6 +50,7 @@ class AuthDecomposeComponent(
             navigation
         )
 
-        AuthRootNavigationConfig.Login -> loginDecomposeComponentFactory(componentContext)
+        AuthRootNavigationConfig.Login -> logInDecomposeComponentFactory(componentContext)
+        AuthRootNavigationConfig.SignUp -> signUpDecomposeComponentFactory(componentContext)
     }
 }

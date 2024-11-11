@@ -64,7 +64,7 @@ class RootDecomposeComponent(
         childStack(
             source = navigation,
             serializer = RootScreenConfig.serializer(),
-            initialConfiguration = RootScreenConfig.LOGIN,
+            initialConfiguration = getRootScreen(),
             childFactory = ::child,
             handleBackButton = true
         )
