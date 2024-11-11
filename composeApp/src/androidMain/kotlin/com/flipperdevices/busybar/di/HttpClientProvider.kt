@@ -14,12 +14,10 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-import me.tatarka.inject.annotations.Provides
 
 val ktorTimber = TaggedLogger("Ktor")
 
-@Provides
-fun httpClient() = HttpClient(CIO) {
+actual fun httpClient() = HttpClient(CIO) {
     expectSuccess = true
     install(ContentNegotiation) {
         json(

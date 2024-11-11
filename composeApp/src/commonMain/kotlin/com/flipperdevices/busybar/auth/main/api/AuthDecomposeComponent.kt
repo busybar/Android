@@ -17,7 +17,10 @@ import me.tatarka.inject.annotations.Inject
 @Inject
 class AuthDecomposeComponent(
     @Assisted componentContext: ComponentContext,
-    private val authMainDecomposeComponentFactory: (ComponentContext) -> AuthMainDecomposeComponent,
+    private val authMainDecomposeComponentFactory: (
+        componentContext: ComponentContext,
+        authNavigation: StackNavigation<AuthRootNavigationConfig>
+    ) -> AuthMainDecomposeComponent,
     private val loginDecomposeComponentFactory: (ComponentContext) -> LoginDecomposeComponent
 ) : DecomposeComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<AuthRootNavigationConfig>()
@@ -41,7 +44,11 @@ class AuthDecomposeComponent(
         config: AuthRootNavigationConfig,
         componentContext: ComponentContext
     ): DecomposeComponent = when (config) {
-        AuthRootNavigationConfig.Main -> authMainDecomposeComponentFactory(componentContext)
+        AuthRootNavigationConfig.Main -> authMainDecomposeComponentFactory(
+            componentContext,
+            navigation
+        )
+
         AuthRootNavigationConfig.Login -> loginDecomposeComponentFactory(componentContext)
     }
 }

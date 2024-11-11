@@ -3,6 +3,7 @@ package com.flipperdevices.busybar.auth.main.composable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -11,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import busystatusbar.composeapp.generated.resources.Res
 import busystatusbar.composeapp.generated.resources.login_main_footer
@@ -18,6 +20,7 @@ import busystatusbar.composeapp.generated.resources.login_main_title
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
 import com.flipperdevices.busybar.auth.common.composable.LogInAppBarComposable
+import com.flipperdevices.busybar.auth.main.model.AuthMainState
 import com.mikepenz.markdown.compose.Markdown
 import com.mikepenz.markdown.compose.components.markdownComponents
 import com.mikepenz.markdown.model.DefaultMarkdownColors
@@ -27,16 +30,19 @@ import com.mikepenz.markdown.model.MarkdownTypography
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun AuthMainComposableScreen() {
+fun AuthMainComposableScreen(
+    state: AuthMainState
+) {
     Column(
         Modifier.fillMaxSize().systemBarsPadding(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LogInAppBarComposable(Res.string.login_main_title)
 
         AuthMainComposable(
-            modifier = Modifier
+            modifier = Modifier.padding(top = 32.dp)
+                .weight(1f),
+            state = state
         )
 
         Markdown(

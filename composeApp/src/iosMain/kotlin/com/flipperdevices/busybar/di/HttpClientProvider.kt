@@ -18,8 +18,7 @@ import me.tatarka.inject.annotations.Provides
 
 val ktorTimber = TaggedLogger("Ktor")
 
-@Provides
-fun httpClient() = HttpClient(CIO) {
+actual fun httpClient() = HttpClient(CIO) {
     expectSuccess = true
     install(ContentNegotiation) {
         json(

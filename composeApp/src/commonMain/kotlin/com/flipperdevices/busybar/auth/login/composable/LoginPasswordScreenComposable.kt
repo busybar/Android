@@ -28,9 +28,6 @@ fun LoginPasswordScreenComposable() {
     ) {
         LogInAppBarComposable(Res.string.login_main_title)
 
-        AuthMainComposable(
-            modifier = Modifier
-        )
 
         Markdown(
             modifier = Modifier,

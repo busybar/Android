@@ -5,9 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.arkivanov.decompose.defaultComponentContext
+import com.flipperdevices.busybar.di.HttpClientComponent
+import com.flipperdevices.busybar.di.create
 import com.flipperdevices.busybar.di.createAppComponent
 import com.russhwolf.settings.SharedPreferencesSettings
-import dev.icerock.moko.permissions.compose.rememberPermissionsControllerFactory
 
 class MainActivity : ComponentActivity() {
     private val settings by lazy {
@@ -18,7 +19,12 @@ class MainActivity : ComponentActivity() {
             )
         )
     }
-    private val appComponent by lazy { createAppComponent(settings) }
+    private val appComponent by lazy {
+        createAppComponent(
+            settings,
+            HttpClientComponent::class.create()
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -3,6 +3,7 @@ package com.flipperdevices.busybar.auth.main.composable
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
@@ -15,6 +16,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.unit.dp
@@ -27,6 +29,7 @@ import busystatusbar.composeapp.generated.resources.login_main_btn
 import busystatusbar.composeapp.generated.resources.login_main_email_title
 import busystatusbar.composeapp.generated.resources.pic_busycloud
 import com.flipperdevices.busybar.auth.common.composable.BusyBarButtonComposable
+import com.flipperdevices.busybar.auth.main.model.AuthMainState
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -34,45 +37,32 @@ import org.jetbrains.compose.resources.stringResource
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun AuthMainComposable(
+    state: AuthMainState,
     modifier: Modifier
 ) {
     val verticalScroll = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
     val coroutineScope = rememberCoroutineScope()
-    ConstraintLayout(
+    Column(
         modifier
             .verticalScroll(verticalScroll)
             .imePadding()
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val (signIn, orLine, btn, editText, title, image) = createRefs()
-
         Image(
-            modifier = Modifier.constrainAs(image) {
-                bottom.linkTo(title.top)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-            },
             painter = painterResource(Res.drawable.pic_busycloud),
             contentDescription = null
         )
 
         Text(
-            modifier = Modifier.padding(vertical = 16.dp)
-                .constrainAs(title) {
-                    bottom.linkTo(editText.top)
-                },
+            modifier = Modifier.padding(vertical = 16.dp),
             text = stringResource(Res.string.login_main_email_title)
         )
 
         EmailEditFieldComposable(
             modifier = Modifier
-                .fillMaxWidth()
-                .constrainAs(editText) {
-                    bottom.linkTo(btn.top)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                }.onFocusChanged {
+                .fillMaxWidth().onFocusChanged {
                     if (it.isFocused) {
                         coroutineScope.launch { bringIntoViewRequester.bringIntoView() }
                     }
@@ -83,13 +73,7 @@ fun AuthMainComposable(
             modifier = Modifier
                 .padding(vertical = 32.dp)
                 .fillMaxWidth()
-                .bringIntoViewRequester(bringIntoViewRequester)
-                .constrainAs(btn) {
-                    top.linkTo(parent.top)
-                    bottom.linkTo(parent.bottom)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                },
+                .bringIntoViewRequester(bringIntoViewRequester),
             text = Res.string.login_main_btn,
             onClick = {}
         )
@@ -97,16 +81,10 @@ fun AuthMainComposable(
         OrLineComposable(
             Modifier.fillMaxWidth()
                 .padding(bottom = 32.dp)
-                .constrainAs(orLine) {
-                    top.linkTo(btn.bottom)
-                }
         )
 
         Row(
-            Modifier.fillMaxWidth()
-                .constrainAs(signIn) {
-                    top.linkTo(orLine.bottom)
-                },
+            Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             SignInWithButtonComposable(
