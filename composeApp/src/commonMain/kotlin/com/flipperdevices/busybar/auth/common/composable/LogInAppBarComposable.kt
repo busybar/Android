@@ -1,4 +1,4 @@
-package com.flipperdevices.busybar.login.common.composable
+package com.flipperdevices.busybar.auth.common.composable
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding

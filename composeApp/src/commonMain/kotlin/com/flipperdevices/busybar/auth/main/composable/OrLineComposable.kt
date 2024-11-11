@@ -1,4 +1,4 @@
-package com.flipperdevices.busybar.login.main.composable
+package com.flipperdevices.busybar.auth.main.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

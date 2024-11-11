@@ -1,13 +1,9 @@
-package com.flipperdevices.busybar.login.main.composable
+package com.flipperdevices.busybar.auth.main.composable
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,7 +17,7 @@ import busystatusbar.composeapp.generated.resources.login_main_footer
 import busystatusbar.composeapp.generated.resources.login_main_title
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
-import com.flipperdevices.busybar.login.common.composable.LogInAppBarComposable
+import com.flipperdevices.busybar.auth.common.composable.LogInAppBarComposable
 import com.mikepenz.markdown.compose.Markdown
 import com.mikepenz.markdown.compose.components.markdownComponents
 import com.mikepenz.markdown.model.DefaultMarkdownColors
@@ -31,17 +27,18 @@ import com.mikepenz.markdown.model.MarkdownTypography
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun LogInMainComposableScreen() {
+fun AuthMainComposableScreen() {
     Column(
         Modifier.fillMaxSize().systemBarsPadding(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
         LogInAppBarComposable(Res.string.login_main_title)
 
-        LogInMainComposable(
+        AuthMainComposable(
             modifier = Modifier
-                .weight(1f)
         )
+
         Markdown(
             modifier = Modifier,
             content = stringResource(Res.string.login_main_footer),

@@ -1,4 +1,4 @@
-package com.flipperdevices.busybar.login.main.api
+package com.flipperdevices.busybar.auth.login.api
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -7,22 +7,22 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.flipperdevices.busybar.auth.login.model.LoginNavigationConfig
 import com.flipperdevices.busybar.core.decompose.DecomposeComponent
-import com.flipperdevices.busybar.login.common.model.LogInNavigationConfig
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
 @Inject
-class LogInDecomposeComponent(
+class LoginDecomposeComponent(
     @Assisted componentContext: ComponentContext,
-    private val logInMainDecomposeComponentFactory: (ComponentContext) -> LogInMainDecomposeComponent
+    private val loginPasswordDecomposeComponent: (ComponentContext) -> LoginPasswordDecomposeComponent
 ) : DecomposeComponent, ComponentContext by componentContext {
-    private val navigation = StackNavigation<LogInNavigationConfig>()
+    private val navigation = StackNavigation<LoginNavigationConfig>()
 
     private val stack = childStack(
         source = navigation,
-        serializer = LogInNavigationConfig.serializer(),
-        initialConfiguration = LogInNavigationConfig.Main,
+        serializer = LoginNavigationConfig.serializer(),
+        initialConfiguration = LoginNavigationConfig.Password,
         childFactory = ::child,
         handleBackButton = true
     )
@@ -35,9 +35,9 @@ class LogInDecomposeComponent(
     }
 
     private fun child(
-        config: LogInNavigationConfig,
+        config: LoginNavigationConfig,
         componentContext: ComponentContext
     ): DecomposeComponent = when (config) {
-        LogInNavigationConfig.Main -> logInMainDecomposeComponentFactory(componentContext)
+        LoginNavigationConfig.Password -> loginPasswordDecomposeComponent(componentContext)
     }
 }

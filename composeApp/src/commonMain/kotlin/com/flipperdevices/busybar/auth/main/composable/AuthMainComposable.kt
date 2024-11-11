@@ -1,15 +1,12 @@
-package com.flipperdevices.busybar.login.main.composable
+package com.flipperdevices.busybar.auth.main.composable
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
@@ -22,24 +19,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import busystatusbar.composeapp.generated.resources.Res
 import busystatusbar.composeapp.generated.resources.ic_apple
 import busystatusbar.composeapp.generated.resources.ic_google
 import busystatusbar.composeapp.generated.resources.ic_microsoft
 import busystatusbar.composeapp.generated.resources.login_main_btn
 import busystatusbar.composeapp.generated.resources.login_main_email_title
-import busystatusbar.composeapp.generated.resources.login_main_title
 import busystatusbar.composeapp.generated.resources.pic_busycloud
-import com.flipperdevices.busybar.login.common.composable.BusyBarButtonComposable
-import com.flipperdevices.busybar.login.common.composable.LogInAppBarComposable
+import com.flipperdevices.busybar.auth.common.composable.BusyBarButtonComposable
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun LogInMainComposable(
+fun AuthMainComposable(
     modifier: Modifier
 ) {
     val verticalScroll = rememberScrollState()
