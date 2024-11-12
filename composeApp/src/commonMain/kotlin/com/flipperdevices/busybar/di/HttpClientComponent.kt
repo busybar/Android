@@ -46,12 +46,6 @@ abstract class HttpClientComponent {
             level = LogLevel.INFO
         }
 
-        install(Auth) {
-            basic {
-                credentials { BasicAuthCredentials("busy", "demo") }
-            }
-        }
-
         install(DefaultRequest) {
             header(HttpHeaders.ContentType, ContentType.Application.Json)
         }

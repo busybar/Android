@@ -149,6 +149,5 @@ fun AuthMainComposable(
                 onClick = {}
             )
         }
-
     }
 }
