@@ -1,9 +1,12 @@
 package com.flipperdevices.busybar.cloud.api
 
 import com.flipperdevices.busybar.cloud.model.BSBCheckUserRequest
+import com.flipperdevices.busybar.cloud.model.BSBSignInRequest
+import com.flipperdevices.busybar.core.log.LogTagProvider
+import com.flipperdevices.busybar.core.log.info
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
-import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
@@ -17,24 +20,36 @@ private val networkDispatcher = Dispatchers.Default
 @Inject
 class BSBAuthApi(
     private val httpClient: HttpClient
-) {
-    suspend fun isUserExist(email: String): Boolean = withContext(networkDispatcher) {
-        val result = runCatching {
+) : LogTagProvider {
+    override val TAG = "BSBAuthApi"
+
+    suspend fun isUserExist(email: String): Result<Boolean> = withContext(networkDispatcher) {
+        runCatching {
             httpClient.post {
                 url("${NetworkConstants.BASE_URL}/v0/auth/sign-up/check-user")
                 setBody(BSBCheckUserRequest(email))
             }
-        }
-        if (result.isSuccess) {
-            return@withContext true
-        } else {
-            val exception = result.exceptionOrNull() ?: error("Fail receive error")
-            if (exception is ClientRequestException
-                && exception.response.status == HttpStatusCode.NotFound
-            ) {
-                return@withContext false
+        }.map { true }
+            .recoverCatching { exception ->
+                if (exception is ClientRequestException
+                    && exception.response.status == HttpStatusCode.NotFound
+                ) {
+                    return@withContext Result.success(false)
+                }
+                return@withContext Result.failure(exception)
             }
-            throw exception
-        }
     }
+
+    suspend fun signIn(email: String, password: String): Result<Unit> =
+        withContext(networkDispatcher) {
+            runCatching {
+                httpClient.post {
+                    url("${NetworkConstants.BASE_URL}/v0/auth/sign-in")
+                    setBody(BSBSignInRequest(email, password))
+                }
+            }.onSuccess {
+                info { it.body<String>().toString() }
+            }.map { }
+
+        }
 }

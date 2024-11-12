@@ -14,11 +14,14 @@ import androidx.compose.ui.unit.dp
 import busystatusbar.composeapp.generated.resources.Res
 import busystatusbar.composeapp.generated.resources.login_signin_title
 import com.flipperdevices.busybar.auth.common.composable.appbar.LogInAppBarComposable
+import com.flipperdevices.busybar.auth.login.model.LoginState
 
 @Composable
 fun LoginPasswordScreenComposable(
+    state: LoginState,
     email: String,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onLogin: (String) -> Unit
 ) {
     Column(
         Modifier.fillMaxSize().systemBarsPadding(),
@@ -34,7 +37,9 @@ fun LoginPasswordScreenComposable(
                 vertical = 32.dp,
                 horizontal = 16.dp
             ),
-            email = email
+            email = email,
+            onLogin = onLogin,
+            state = state
         )
     }
 }

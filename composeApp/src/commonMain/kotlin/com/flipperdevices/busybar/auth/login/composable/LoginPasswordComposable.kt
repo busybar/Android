@@ -12,8 +12,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
@@ -27,6 +30,7 @@ import busystatusbar.composeapp.generated.resources.login_signin_desc
 import busystatusbar.composeapp.generated.resources.login_signin_forgot_password
 import busystatusbar.composeapp.generated.resources.pic_user_password
 import com.flipperdevices.busybar.auth.common.composable.BusyBarButtonComposable
+import com.flipperdevices.busybar.auth.login.model.LoginState
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
 import kotlinx.coroutines.launch
@@ -37,7 +41,9 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun LoginPasswordComposable(
     modifier: Modifier,
-    email: String
+    state: LoginState,
+    email: String,
+    onLogin: (String) -> Unit
 ) {
     val verticalScroll = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
@@ -69,6 +75,8 @@ fun LoginPasswordComposable(
             textAlign = TextAlign.Center,
             color = LocalPallet.current.black.invert
         )
+        var password by remember { mutableStateOf("") }
+
         PasswordTextFieldComposable(
             Modifier.fillMaxWidth()
                 .padding(top = 16.dp)
@@ -76,7 +84,13 @@ fun LoginPasswordComposable(
                     if (it.isFocused) {
                         coroutineScope.launch { bringIntoViewRequester.bringIntoView() }
                     }
-                }
+                },
+            password = password,
+            onPasswordChange = { password = it },
+            disabled = when (state) {
+                LoginState.AuthInProgress -> true
+                LoginState.WaitingForInput -> false
+            }
         )
         BusyBarButtonComposable(
             modifier = Modifier
@@ -87,7 +101,11 @@ fun LoginPasswordComposable(
                     bottom = 32.dp
                 ),
             text = Res.string.login_signin_btn,
-            onClick = {}
+            onClick = { onLogin(password) },
+            inProgress = when (state) {
+                LoginState.AuthInProgress -> true
+                LoginState.WaitingForInput -> false
+            }
         )
         Text(
             modifier = Modifier.fillMaxWidth()

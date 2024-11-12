@@ -25,14 +25,16 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun PasswordTextFieldComposable(
     modifier: Modifier,
+    password: String,
+    onPasswordChange: (String) -> Unit,
+    disabled: Boolean
 ) {
-    var password by remember { mutableStateOf("") }
     var passwordHidden by remember { mutableStateOf(true) }
 
     AuthCommonTextFieldComposable(
         modifier = modifier,
         text = password,
-        onTextChange = { password = it },
+        onTextChange = onPasswordChange,
         hint = Res.string.login_signin_password_hint,
         icon = Res.drawable.ic_lock,
         endBlock = {
@@ -46,7 +48,10 @@ fun PasswordTextFieldComposable(
         ),
         visualTransformation = if (passwordHidden) {
             PasswordVisualTransformation()
-        } else VisualTransformation.None
+        } else {
+            VisualTransformation.None
+        },
+        disabled = disabled
     )
 }
 

@@ -31,9 +31,7 @@ class AuthMainViewModel(
         info { "Start check email..." }
         viewModelScope.launch {
             state.emit(AuthMainState.AuthInProgress)
-            runCatching {
-                authApi.isUserExist(email)
-            }.onSuccess { userExist ->
+            authApi.isUserExist(email).onSuccess { userExist ->
                 withContext(Dispatchers.Main) {
                     if (userExist) {
                         navigationStack.pushNew(AuthRootNavigationConfig.Login(email))
