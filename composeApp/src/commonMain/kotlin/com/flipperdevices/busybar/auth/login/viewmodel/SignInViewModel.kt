@@ -6,12 +6,16 @@ import com.flipperdevices.busybar.core.decompose.DecomposeViewModel
 import com.flipperdevices.busybar.core.ktx.transform
 import com.flipperdevices.busybar.core.log.LogTagProvider
 import com.flipperdevices.busybar.core.log.error
+import com.flipperdevices.busybar.settings.model.SettingsEnum
+import com.russhwolf.settings.ExperimentalSettingsApi
 import com.russhwolf.settings.Settings
+import com.russhwolf.settings.serialization.encodeValue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import me.tatarka.inject.annotations.Assisted
@@ -32,6 +36,7 @@ class SignInViewModel(
 
     fun getState() = state.asStateFlow()
 
+    @OptIn(ExperimentalSerializationApi::class, ExperimentalSettingsApi::class)
     fun onLogin(password: String) = viewModelScope.launch {
         state.emit(LoginState.AuthInProgress)
         bsbAuthApi.signIn(email, password)
@@ -39,7 +44,7 @@ class SignInViewModel(
                 bsbAuthApi.getUser()
             }
             .onSuccess { user ->
-                settings.putString(KEY_USER_DATA, Json.encodeToString(user))
+                settings.encodeValue(SettingsEnum.USER_DATA.key, user)
                 withContext(Dispatchers.Main) {
                     onComplete()
                 }

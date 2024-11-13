@@ -25,7 +25,6 @@ import busystatusbar.composeapp.generated.resources.device_section_about_serial_
 import busystatusbar.composeapp.generated.resources.device_section_about_serial_number_value
 import busystatusbar.composeapp.generated.resources.device_section_about_version_title
 import busystatusbar.composeapp.generated.resources.device_section_about_version_value
-import com.flipperdevices.busybar.core.theme.DarkModeSingleton
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
 import org.jetbrains.compose.resources.StringResource

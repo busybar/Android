@@ -1,6 +1,13 @@
+@file:OptIn(ExperimentalSerializationApi::class)
+
 package com.flipperdevices.busybar.di.http
 
+import com.flipperdevices.busybar.settings.model.SettingsEnum
+import com.russhwolf.settings.ExperimentalSettingsApi
 import com.russhwolf.settings.Settings
+import com.russhwolf.settings.serialization.decodeValue
+import com.russhwolf.settings.serialization.decodeValueOrNull
+import com.russhwolf.settings.serialization.encodeValue
 import com.russhwolf.settings.set
 import io.ktor.client.plugins.cookies.CookiesStorage
 import io.ktor.client.plugins.cookies.fillDefaults
@@ -10,6 +17,7 @@ import io.ktor.http.Url
 import io.ktor.util.date.getTimeMillis
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
@@ -31,15 +39,13 @@ private data class CookieData(
     val cookies: List<CookieWithTimestamp> = emptyList()
 )
 
-private const val KEY_COOKIE_DATA = "cookie"
-
+@ExperimentalSettingsApi
 @Inject
 class KmpSettingsStorage(
     private val settings: Settings
 ) : CookiesStorage {
     private var cookieData =
-        settings.getStringOrNull(KEY_COOKIE_DATA)?.let { Json.decodeFromString<CookieData>(it) }
-            ?: CookieData()
+        settings.decodeValue<CookieData>(SettingsEnum.SESSIONS.key, CookieData())
 
     private var oldestCookie = 0L
     private val mutex = Mutex()
@@ -76,7 +82,7 @@ class KmpSettingsStorage(
                 }
             }
             cookieData = CookieData(newList)
-            settings[KEY_COOKIE_DATA] = Json.encodeToString(cookieData)
+            settings.encodeValue(SettingsEnum.SESSIONS.key, cookieData)
         }
     }
 
@@ -98,7 +104,7 @@ class KmpSettingsStorage(
         oldestCookie = newOldest
 
         cookieData = CookieData(newList)
-        settings[KEY_COOKIE_DATA] = Json.encodeToString(cookieData)
+        settings.encodeValue(SettingsEnum.SESSIONS.key, cookieData)
     }
 
     private fun Cookie.maxAgeOrExpires(createdAt: Long): Long? =

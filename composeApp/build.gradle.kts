@@ -80,6 +80,9 @@ kotlin {
             implementation(libs.kotlin.serialization.json)
             implementation(libs.kotlin.datetime)
             implementation(libs.settings)
+            implementation(libs.settings.observable)
+            implementation(libs.settings.coroutines)
+            implementation(libs.settings.serialization)
             implementation(libs.constraintlayout)
             implementation(libs.markdown.renderer)
 

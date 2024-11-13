@@ -16,7 +16,6 @@ import com.flipperdevices.busybar.apps.api.AppsDecomposeComponent
 import com.flipperdevices.busybar.apps.composable.apps.BusyBarApp
 import com.flipperdevices.busybar.core.decompose.DecomposeComponent
 import com.flipperdevices.busybar.core.decompose.DecomposeOnBackParameter
-import com.flipperdevices.busybar.core.theme.DarkModeSingleton
 import com.flipperdevices.busybar.device.api.DeviceDecomposeComponent
 import com.flipperdevices.busybar.auth.main.api.AuthDecomposeComponent
 import com.flipperdevices.busybar.core.decompose.popOr
@@ -24,7 +23,10 @@ import com.flipperdevices.busybar.root.config.RootScreenConfig
 import com.flipperdevices.busybar.search.api.SearchDecomposeComponent
 import com.flipperdevices.busybar.settings.api.SettingsDecomposeComponent
 import com.flipperdevices.busybar.settings.model.SettingsEnum
+import com.russhwolf.settings.ExperimentalSettingsApi
+import com.russhwolf.settings.ObservableSettings
 import com.russhwolf.settings.Settings
+import com.russhwolf.settings.coroutines.toFlowSettings
 import com.russhwolf.settings.get
 import kotlinx.coroutines.flow.update
 import me.tatarka.inject.annotations.Assisted
@@ -46,7 +48,7 @@ class RootDecomposeComponent(
         componentContext: ComponentContext,
         navigationApi: RootNavigationApi,
     ) -> SearchDecomposeComponent,
-    private val settings: Settings,
+    private val settings: ObservableSettings,
     private val settingsDecomposeComponentFactory: (
         componentContext: ComponentContext,
         onBackParameter: DecomposeOnBackParameter,
@@ -59,11 +61,6 @@ class RootDecomposeComponent(
     ) -> AuthDecomposeComponent
 ) : DecomposeComponent, RootNavigationApi, ComponentContext by componentContext {
     private val navigation = StackNavigation<RootScreenConfig>()
-
-    init {
-        DarkModeSingleton.darkMode.update { settings[SettingsEnum.DARK_THEME.key, false] }
-        DarkModeSingleton.devMode.update { settings[SettingsEnum.DEV_MODE.key, false] }
-    }
 
     private val stack: Value<ChildStack<RootScreenConfig, DecomposeComponent>> =
         childStack(
@@ -134,4 +131,9 @@ class RootDecomposeComponent(
             RootScreenConfig.DEVICE
         } else RootScreenConfig.SEARCH
     }
+
+    @OptIn(ExperimentalSettingsApi::class)
+    fun isDarkModeFlow() = settings
+        .toFlowSettings()
+        .getBooleanFlow(SettingsEnum.DARK_THEME.key, false)
 }

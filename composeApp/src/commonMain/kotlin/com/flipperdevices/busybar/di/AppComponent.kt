@@ -3,16 +3,25 @@ package com.flipperdevices.busybar.di
 import com.arkivanov.decompose.ComponentContext
 import com.flipperdevices.busybar.di.http.KmpSettingsStorage
 import com.flipperdevices.busybar.root.api.RootDecomposeComponent
+import com.russhwolf.settings.ExperimentalSettingsApi
 import com.russhwolf.settings.Settings
+import com.russhwolf.settings.observable.makeObservable
 import me.tatarka.inject.annotations.Component
 import me.tatarka.inject.annotations.KmpComponentCreate
 import me.tatarka.inject.annotations.Provides
 
 @Component
 abstract class AppComponent(
-    @get:Provides protected val settings: Settings
+    settings: Settings
 ) {
     abstract val rootComponent: (componentContext: ComponentContext) -> RootDecomposeComponent
+
+    @OptIn(ExperimentalSettingsApi::class)
+    @get:Provides
+    val observableSettings = settings.makeObservable()
+
+    @Provides
+    fun provideSimpleSettings(): Settings = observableSettings
 
     @Provides
     fun provideHttpClient(

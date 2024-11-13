@@ -1,7 +1,6 @@
 package com.flipperdevices.busybar.settings.viewmodel
 
 import com.flipperdevices.busybar.core.decompose.DecomposeViewModel
-import com.flipperdevices.busybar.core.theme.DarkModeSingleton
 import com.flipperdevices.busybar.settings.model.SettingsEnum
 import com.flipperdevices.busybar.settings.model.SettingsState
 import com.russhwolf.settings.Settings
