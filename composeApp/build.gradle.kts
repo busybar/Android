@@ -14,7 +14,6 @@ plugins {
 }
 
 kotlin {
-    @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         moduleName = "composeApp"
         browser {
@@ -79,7 +78,9 @@ kotlin {
             implementation(libs.decompose.composeExtension)
             implementation(libs.kotlin.serialization.json)
             implementation(libs.kotlin.datetime)
+            implementation(libs.kotlin.coroutines)
             implementation(libs.settings)
+            implementation(libs.settings.coroutines)
             implementation(libs.constraintlayout)
             implementation(libs.markdown.renderer)
 
@@ -103,9 +104,11 @@ kotlin {
 
             implementation(libs.moko.permissions)
             implementation(libs.ktor.client.cio)
+            implementation(libs.settings.observable)
         }
         wasmJsMain.dependencies {
             implementation(libs.ktor.client.js)
+            implementation(libs.settings.observable)
         }
     }
 }

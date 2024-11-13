@@ -25,7 +25,6 @@ import busystatusbar.composeapp.generated.resources.device_section_about_serial_
 import busystatusbar.composeapp.generated.resources.device_section_about_serial_number_value
 import busystatusbar.composeapp.generated.resources.device_section_about_version_title
 import busystatusbar.composeapp.generated.resources.device_section_about_version_value
-import com.flipperdevices.busybar.core.theme.DarkModeSingleton
 import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
 import com.flipperdevices.busybar.core.theme.LocalPallet
 import org.jetbrains.compose.resources.StringResource
@@ -33,9 +32,9 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AboutDeviceRowsComposable(
-    modifier: Modifier
+    modifier: Modifier,
+    devMode: Boolean
 ) {
-    val devMode by DarkModeSingleton.devMode.collectAsState()
     val pairs = listOf(
         Res.string.device_section_about_version_title to Res.string.device_section_about_version_value,
         Res.string.device_section_about_dev_mode_title to if (devMode) {

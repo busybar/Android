@@ -7,13 +7,14 @@ androidx-activityCompose = "1.9.3"
 constraintlayout = "0.5.0"
 compose-plugin = "1.7.0"
 kotlin = "2.0.21"
+kotlin-coroutines = "1.9.0"
 kotlin-serialization-runtime = "1.7.3"
 kotlin-datetime = "0.6.1" # https://github.com/Kotlin/kotlinx-datetime/releases
 ksp = "2.0.21-1.0.26"
 kotlin-inject = "0.7.1"
 decompose = "3.2.1"
 essenty = "2.2.1"
-settings = "1.1.1"
+settings = "1.2.0"
 moko-permissions = "0.18.0"
 markdown = "0.27.0" # https://github.com/mikepenz/multiplatform-markdown-renderer/releases
 ktor = "3.0.1" # https://ktor.io/
@@ -26,13 +27,19 @@ kotlin-inject-ksp = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp", v
 kotlin-inject-runtime = { module = "me.tatarka.inject:kotlin-inject-runtime-kmp", version.ref = "kotlin-inject" }
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-composeExtension = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
+
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization-runtime" }
 kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlin-datetime" }
+kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlin-coroutines" }
+
 essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
 essenty-lifecycle-coroutines = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "essenty" }
 markdown-renderer = { module = "com.mikepenz:multiplatform-markdown-renderer", version.ref = "markdown" }
 
 settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "settings" }
+settings-observable = { module = "com.russhwolf:multiplatform-settings-make-observable", version.ref = "settings" }
+settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "settings" }
+settings-serialization = { module = "com.russhwolf:multiplatform-settings-serialization", version.ref = "settings" }
 moko-permissions = { module = "dev.icerock.moko:permissions-compose", version.ref = "moko-permissions" }
 
 # Ktor

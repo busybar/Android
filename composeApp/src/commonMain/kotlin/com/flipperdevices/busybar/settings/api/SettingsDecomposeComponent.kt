@@ -43,9 +43,6 @@ class SettingsDecomposeComponent(
             onForgetDevice = {
                 viewModel.onChange(SettingsEnum.SKIP_SEARCH, false)
                 rootNavigationApi.openRootScreen()
-            },
-            onOpenLogIn = {
-                rootNavigationApi.push(RootScreenConfig.LOGIN)
             }
         )
     }
