@@ -19,10 +19,12 @@ class LoginDecomposeComponent(
     @Assisted componentContext: ComponentContext,
     @Assisted private val onBack: DecomposeOnBackParameter,
     @Assisted private val email: String,
+    @Assisted private val onComplete: () -> Unit,
     private val loginPasswordDecomposeComponent: (
         componentContext: ComponentContext,
         onBack: DecomposeOnBackParameter,
-        email: String
+        email: String,
+        onComplete: () -> Unit,
     ) -> LoginPasswordDecomposeComponent
 ) : DecomposeComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<SignUpNavigationConfig>()
@@ -49,7 +51,8 @@ class LoginDecomposeComponent(
         SignUpNavigationConfig.Password -> loginPasswordDecomposeComponent(
             componentContext,
             onBack,
-            email
+            email,
+            onComplete
         )
     }
 }

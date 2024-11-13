@@ -1,10 +1,6 @@
 package com.flipperdevices.busybar.core.data
 
-import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toInstant
-import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
@@ -17,12 +13,13 @@ object DateSerializer : KSerializer<LocalDateTime> {
         PrimitiveSerialDescriptor("LocalDateTime", PrimitiveKind.LONG)
 
     override fun deserialize(decoder: Decoder): LocalDateTime {
-        val rawDate = decoder.decodeLong()
+        val rawDate = decoder.decodeString()
 
-        return Instant.fromEpochSeconds(rawDate).toLocalDateTime(TimeZone.UTC)
+        return LocalDateTime.Formats.ISO.parse(rawDate)
     }
 
     override fun serialize(encoder: Encoder, value: LocalDateTime) {
-        encoder.encodeLong(value.toInstant(TimeZone.UTC).epochSeconds)
+        val rawDate = LocalDateTime.Formats.ISO.format(value)
+        encoder.encodeString(rawDate)
     }
 }
