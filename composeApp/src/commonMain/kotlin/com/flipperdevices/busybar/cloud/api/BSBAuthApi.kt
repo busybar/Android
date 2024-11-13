@@ -2,11 +2,13 @@ package com.flipperdevices.busybar.cloud.api
 
 import com.flipperdevices.busybar.cloud.model.BSBCheckUserRequest
 import com.flipperdevices.busybar.cloud.model.BSBSignInRequest
+import com.flipperdevices.busybar.cloud.model.BSBUserObject
 import com.flipperdevices.busybar.core.log.LogTagProvider
 import com.flipperdevices.busybar.core.log.info
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
+import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
@@ -40,16 +42,22 @@ class BSBAuthApi(
             }
     }
 
-    suspend fun signIn(email: String, password: String): Result<Unit> =
-        withContext(networkDispatcher) {
-            runCatching {
-                httpClient.post {
-                    url("${NetworkConstants.BASE_URL}/v0/auth/sign-in")
-                    setBody(BSBSignInRequest(email, password))
-                }
-            }.onSuccess {
-                info { it.body<String>().toString() }
-            }.map { }
+    suspend fun signIn(
+        email: String, password: String
+    ): Result<Unit> = withContext(networkDispatcher) {
+        runCatching {
+            httpClient.post {
+                url("${NetworkConstants.BASE_URL}/v0/auth/sign-in")
+                setBody(BSBSignInRequest(email, password))
+            }
+        }.map { }
+    }
 
+    suspend fun getUser(): Result<BSBUserObject> = withContext(networkDispatcher) {
+        return@withContext runCatching {
+            httpClient.get {
+                url("${NetworkConstants.BASE_URL}/v0/auth/me")
+            }.body<BSBUserObject>()
         }
+    }
 }

@@ -5,8 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.arkivanov.decompose.defaultComponentContext
-import com.flipperdevices.busybar.di.HttpClientComponent
-import com.flipperdevices.busybar.di.create
 import com.flipperdevices.busybar.di.createAppComponent
 import com.russhwolf.settings.SharedPreferencesSettings
 
@@ -21,8 +19,7 @@ class MainActivity : ComponentActivity() {
     }
     private val appComponent by lazy {
         createAppComponent(
-            settings,
-            HttpClientComponent::class.create()
+            settings
         )
     }
 

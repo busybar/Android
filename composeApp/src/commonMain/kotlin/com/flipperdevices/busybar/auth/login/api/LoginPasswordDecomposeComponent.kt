@@ -18,13 +18,14 @@ class LoginPasswordDecomposeComponent(
     @Assisted componentContext: ComponentContext,
     @Assisted private val onBack: DecomposeOnBackParameter,
     @Assisted private val email: String,
+    @Assisted private val onComplete: () -> Unit,
     signInViewModel: (
         email: String,
         onComplete: () -> Unit
     ) -> SignInViewModel
 ) : DecomposeComponent, ComponentContext by componentContext {
     private val signInViewModel = viewModelWithFactoryWithoutRemember(email) {
-        signInViewModel(email, {})
+        signInViewModel(email, onComplete)
     }
 
     @Composable

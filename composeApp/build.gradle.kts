@@ -78,6 +78,7 @@ kotlin {
             implementation(libs.kotlin.inject.runtime)
             implementation(libs.decompose.composeExtension)
             implementation(libs.kotlin.serialization.json)
+            implementation(libs.kotlin.datetime)
             implementation(libs.settings)
             implementation(libs.constraintlayout)
             implementation(libs.markdown.renderer)
@@ -90,7 +91,6 @@ kotlin {
             implementation(libs.ktor.negotiation)
             implementation(libs.ktor.serialization)
             implementation(libs.ktor.client.logging)
-            //implementation(libs.ktor.client.cookies)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

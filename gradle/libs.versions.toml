@@ -8,6 +8,7 @@ constraintlayout = "0.5.0"
 compose-plugin = "1.7.0"
 kotlin = "2.0.21"
 kotlin-serialization-runtime = "1.7.3"
+kotlin-datetime = "0.6.1" # https://github.com/Kotlin/kotlinx-datetime/releases
 ksp = "2.0.21-1.0.26"
 kotlin-inject = "0.7.1"
 decompose = "3.2.1"
@@ -26,6 +27,7 @@ kotlin-inject-runtime = { module = "me.tatarka.inject:kotlin-inject-runtime-kmp"
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-composeExtension = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization-runtime" }
+kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlin-datetime" }
 essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
 essenty-lifecycle-coroutines = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "essenty" }
 markdown-renderer = { module = "com.mikepenz:multiplatform-markdown-renderer", version.ref = "markdown" }
@@ -36,7 +38,6 @@ moko-permissions = { module = "dev.icerock.moko:permissions-compose", version.re
 # Ktor
 ktor-client = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
-ktor-client-cookies = { module = "io.ktor:ktor-client-cookies", version.ref = "ktor" }
 ktor-client-js = { module = "io.ktor:ktor-client-js-wasm-js", version.ref = "ktor" }
 ktor-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }

@@ -52,7 +52,11 @@ class RootDecomposeComponent(
         onBackParameter: DecomposeOnBackParameter,
         rootNavigationApi: RootNavigationApi
     ) -> SettingsDecomposeComponent,
-    private val authDecomposeComponent: (ComponentContext, DecomposeOnBackParameter) -> AuthDecomposeComponent
+    private val authDecomposeComponent: (
+        componentContext: ComponentContext,
+        onBack: DecomposeOnBackParameter,
+        onComplete: () -> Unit
+    ) -> AuthDecomposeComponent
 ) : DecomposeComponent, RootNavigationApi, ComponentContext by componentContext {
     private val navigation = StackNavigation<RootScreenConfig>()
 
@@ -119,7 +123,8 @@ class RootDecomposeComponent(
 
         RootScreenConfig.LOGIN -> authDecomposeComponent(
             componentContext,
-            navigation::pop
+            navigation::pop,
+            { navigation.replaceAll(getRootScreen()) }
         )
     }
 

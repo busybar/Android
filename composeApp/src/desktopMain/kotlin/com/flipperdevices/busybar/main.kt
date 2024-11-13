@@ -6,9 +6,7 @@ import androidx.compose.ui.window.rememberWindowState
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
-import com.flipperdevices.busybar.di.HttpClientComponent
 import com.flipperdevices.busybar.di.createAppComponent
-import com.flipperdevices.busybar.di.create
 import com.russhwolf.settings.PreferencesSettings
 import java.util.prefs.Preferences
 
@@ -18,7 +16,7 @@ fun main() {
 
     val lifecycle = LifecycleRegistry()
     // Always create the root component outside Compose on the UI thread
-    val appComponent = createAppComponent(settings, HttpClientComponent::class.create())
+    val appComponent = createAppComponent(settings)
     val root = runOnUiThread {
         appComponent.rootComponent(
             DefaultComponentContext(lifecycle = lifecycle),

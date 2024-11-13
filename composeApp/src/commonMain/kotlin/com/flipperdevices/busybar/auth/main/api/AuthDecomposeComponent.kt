@@ -20,6 +20,7 @@ import me.tatarka.inject.annotations.Inject
 class AuthDecomposeComponent(
     @Assisted componentContext: ComponentContext,
     @Assisted private val onBack: DecomposeOnBackParameter,
+    @Assisted private val onComplete: () -> Unit,
     private val authMainDecomposeComponentFactory: (
         componentContext: ComponentContext,
         authNavigation: StackNavigation<AuthRootNavigationConfig>
@@ -28,6 +29,7 @@ class AuthDecomposeComponent(
         componentContext: ComponentContext,
         onBack: DecomposeOnBackParameter,
         email: String,
+        onComplete: () -> Unit
     ) -> LoginDecomposeComponent,
     private val signUpDecomposeComponentFactory: (ComponentContext) -> SignUpDecomposeComponent
 ) : DecomposeComponent, ComponentContext by componentContext {
@@ -60,7 +62,8 @@ class AuthDecomposeComponent(
         is AuthRootNavigationConfig.Login -> logInDecomposeComponentFactory(
             componentContext,
             { navigation.popOr(onBack::invoke) },
-            config.email
+            config.email,
+            onComplete
         )
 
         AuthRootNavigationConfig.SignUp -> signUpDecomposeComponentFactory(componentContext)
