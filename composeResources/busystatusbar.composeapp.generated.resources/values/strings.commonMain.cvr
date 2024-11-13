@@ -16,6 +16,8 @@ string|device_btn_unmute|VU5NVVRF
 string|device_btn_update_firmware_dialog_ok|T2s=
 string|device_btn_update_firmware_dialog|Tm8gVXBkYXRlIEZvdW5k
 string|device_btn_update_firmware|VVBEQVRFIEZJUk1XQVJF
+string|device_login_login|TE9HIElO
+string|device_login_logout|TE9HIE9VVA==
 string|device_section_about_dev_mode_off|T2Zm
 string|device_section_about_dev_mode_on|T24=
 string|device_section_about_dev_mode_title|RGV2IG1vZGU=
@@ -52,7 +54,6 @@ string|search_permission_needed|UGxlYXNlIHByb3ZpZGUgcGVybWlzc2lvbnMgdG8gZmluZCB0
 string|settings_dark_theme|RGFyayB0aGVtZQ==
 string|settings_firmware_update|QXV0b21hdGljIGZpcm13YXJlIHVwZGF0ZQ==
 string|settings_forget|Rk9SR0VUIFRISVMgREVWSUNF
-string|settings_login|T3BlbiBsb2dpbiBzY3JlZW4=
 string|tab_apps_title|QVBQUw==
 string|tab_device_title|REVWSUNF
 string|tab_login_title|TE9HIElO
