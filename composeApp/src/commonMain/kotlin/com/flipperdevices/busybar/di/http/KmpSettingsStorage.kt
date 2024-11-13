@@ -2,13 +2,11 @@
 
 package com.flipperdevices.busybar.di.http
 
+import com.flipperdevices.busybar.core.ktx.decodeValue
+import com.flipperdevices.busybar.core.ktx.encodeValue
 import com.flipperdevices.busybar.settings.model.SettingsEnum
 import com.russhwolf.settings.ExperimentalSettingsApi
 import com.russhwolf.settings.Settings
-import com.russhwolf.settings.serialization.decodeValue
-import com.russhwolf.settings.serialization.decodeValueOrNull
-import com.russhwolf.settings.serialization.encodeValue
-import com.russhwolf.settings.set
 import io.ktor.client.plugins.cookies.CookiesStorage
 import io.ktor.client.plugins.cookies.fillDefaults
 import io.ktor.client.plugins.cookies.matches
@@ -20,8 +18,6 @@ import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import me.tatarka.inject.annotations.Inject
 import kotlin.math.min
 
@@ -44,8 +40,7 @@ private data class CookieData(
 class KmpSettingsStorage(
     private val settings: Settings
 ) : CookiesStorage {
-    private var cookieData =
-        settings.decodeValue<CookieData>(SettingsEnum.SESSIONS.key, CookieData())
+    private var cookieData = settings.decodeValue(SettingsEnum.SESSIONS, CookieData())
 
     private var oldestCookie = 0L
     private val mutex = Mutex()
@@ -82,7 +77,7 @@ class KmpSettingsStorage(
                 }
             }
             cookieData = CookieData(newList)
-            settings.encodeValue(SettingsEnum.SESSIONS.key, cookieData)
+            settings.encodeValue(SettingsEnum.SESSIONS, cookieData)
         }
     }
 
@@ -104,7 +99,7 @@ class KmpSettingsStorage(
         oldestCookie = newOldest
 
         cookieData = CookieData(newList)
-        settings.encodeValue(SettingsEnum.SESSIONS.key, cookieData)
+        settings.encodeValue(SettingsEnum.SESSIONS, cookieData)
     }
 
     private fun Cookie.maxAgeOrExpires(createdAt: Long): Long? =

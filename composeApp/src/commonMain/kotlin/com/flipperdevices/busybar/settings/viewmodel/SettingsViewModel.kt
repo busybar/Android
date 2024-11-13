@@ -6,18 +6,10 @@ import com.flipperdevices.busybar.core.decompose.DecomposeViewModel
 import com.flipperdevices.busybar.settings.model.SettingsEnum
 import com.flipperdevices.busybar.settings.model.SettingsState
 import com.russhwolf.settings.ExperimentalSettingsApi
-import com.russhwolf.settings.ObservableSettings
-import com.russhwolf.settings.Settings
 import com.russhwolf.settings.coroutines.FlowSettings
-import com.russhwolf.settings.coroutines.toFlowSettings
-import com.russhwolf.settings.get
-import com.russhwolf.settings.set
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Inject
 

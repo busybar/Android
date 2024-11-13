@@ -78,9 +78,9 @@ kotlin {
             implementation(libs.decompose.composeExtension)
             implementation(libs.kotlin.serialization.json)
             implementation(libs.kotlin.datetime)
+            implementation(libs.kotlin.coroutines)
             implementation(libs.settings)
             implementation(libs.settings.coroutines)
-            implementation(libs.settings.serialization)
             implementation(libs.constraintlayout)
             implementation(libs.markdown.renderer)
 

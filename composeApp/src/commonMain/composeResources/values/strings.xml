@@ -22,6 +22,9 @@
     <string name="login_signin_forgot_password">Forgot password?</string>
     <string name="login_signup_title">Create account?</string>
 
+
+    <string name="device_login_login">LOG IN</string>
+    <string name="device_login_logout">LOG OUT</string>
     <string name="device_btn_change_app">CHANGE APP</string>
     <string name="device_btn_turn_off">TURN OFF</string>
     <string name="device_btn_mute">MUTE</string>
@@ -62,6 +65,5 @@
 
     <string name="settings_firmware_update">Automatic firmware update</string>
     <string name="settings_dark_theme">Dark theme</string>
-    <string name="settings_login">Open login screen</string>
     <string name="settings_forget">FORGET THIS DEVICE</string>
 </resources>

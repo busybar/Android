@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.flipperdevices.busybar.apps.composable.apps.BusyBarApp
+import com.flipperdevices.busybar.device.composable.login.LogInBlockComposable
 
 @Composable
 fun DeviceScreenComposable(
@@ -16,14 +17,24 @@ fun DeviceScreenComposable(
     onChangeApp: () -> Unit,
     onOpenSettings: () -> Unit,
     onClick: () -> Unit,
-    devMode: Boolean
+    devMode: Boolean,
+    email: String?,
+    onOpenLogin: () -> Unit,
+    onLogout: () -> Unit
 ) = Column(
     modifier = modifier.padding(horizontal = 14.dp)
         .verticalScroll(rememberScrollState())
 ) {
+    LogInBlockComposable(
+        Modifier.padding(top = 8.dp),
+        email = email,
+        onOpenLogin = onOpenLogin,
+        onLogout = onLogout
+    )
+
     BarHeaderComposable(
         Modifier.padding(
-            top = 26.dp,
+            top = 32.dp,
         ),
         busyBarApp,
         onChangeApp = onChangeApp

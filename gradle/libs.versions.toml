@@ -7,6 +7,7 @@ androidx-activityCompose = "1.9.3"
 constraintlayout = "0.5.0"
 compose-plugin = "1.7.0"
 kotlin = "2.0.21"
+kotlin-coroutines = "1.9.0"
 kotlin-serialization-runtime = "1.7.3"
 kotlin-datetime = "0.6.1" # https://github.com/Kotlin/kotlinx-datetime/releases
 ksp = "2.0.21-1.0.26"
@@ -26,8 +27,11 @@ kotlin-inject-ksp = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp", v
 kotlin-inject-runtime = { module = "me.tatarka.inject:kotlin-inject-runtime-kmp", version.ref = "kotlin-inject" }
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-composeExtension = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
+
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization-runtime" }
 kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlin-datetime" }
+kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlin-coroutines" }
+
 essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
 essenty-lifecycle-coroutines = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "essenty" }
 markdown-renderer = { module = "com.mikepenz:multiplatform-markdown-renderer", version.ref = "markdown" }
