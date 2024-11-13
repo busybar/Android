@@ -40,7 +40,8 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun AboutDeviceComposable(
     modifier: Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    devMode: Boolean
 ) = Column(
     modifier,
     verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -57,7 +58,7 @@ fun AboutDeviceComposable(
             .padding(vertical = 12.dp)
             .clickableRipple(onClick = onClick)
     )
-    AboutDeviceRowsComposable(Modifier)
+    AboutDeviceRowsComposable(Modifier, devMode)
 }
 
 @Composable

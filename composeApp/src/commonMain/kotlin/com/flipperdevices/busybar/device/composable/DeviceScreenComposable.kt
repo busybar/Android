@@ -15,7 +15,8 @@ fun DeviceScreenComposable(
     busyBarApp: BusyBarApp,
     onChangeApp: () -> Unit,
     onOpenSettings: () -> Unit,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    devMode: Boolean
 ) = Column(
     modifier = modifier.padding(horizontal = 14.dp)
         .verticalScroll(rememberScrollState())
@@ -41,6 +42,7 @@ fun DeviceScreenComposable(
 
     AboutDeviceComposable(
         modifier = Modifier.padding(top = 40.dp, bottom = 26.dp),
-        onClick = onClick
+        onClick = onClick,
+        devMode = devMode
     )
 }

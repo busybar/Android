@@ -9,6 +9,7 @@ import com.arkivanov.essenty.lifecycle.stop
 import com.arkivanov.essenty.statekeeper.StateKeeperDispatcher
 import com.flipperdevices.busybar.di.createAppComponent
 import com.russhwolf.settings.StorageSettings
+import com.russhwolf.settings.observable.makeObservable
 import kotlinx.browser.document
 import kotlinx.browser.localStorage
 import kotlinx.browser.window
@@ -21,7 +22,7 @@ fun main() {
     val lifecycle = LifecycleRegistry()
     val stateKeeper =
         StateKeeperDispatcher(savedState = localStorage[KEY_SAVED_STATE]?.decodeSerializableContainer())
-    val settings = StorageSettings()
+    val settings = StorageSettings().makeObservable()
     val appComponent = createAppComponent(settings)
     val root = appComponent.rootComponent(
         DefaultComponentContext(lifecycle = lifecycle),
