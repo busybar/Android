@@ -89,6 +89,7 @@ kotlin {
         }
         wasmJsMain.dependencies {
             implementation(libs.settings.observable)
+            implementation(libs.kotlin.serialization.json)
         }
     }
 }
