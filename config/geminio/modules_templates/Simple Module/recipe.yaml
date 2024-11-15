@@ -1,0 +1,62 @@
+requiredParams:
+  name: Flipper Blank Module
+  description: Creates empty Gradle-module for general purposes
+
+predefinedFeatures:
+  - enableModuleCreationParams:
+      defaultPackageNamePrefix: com.flipperdevices
+
+widgets:
+  - booleanParameter:
+      id: needCompose
+      name: Add Compose dependencies?
+      help: Adds compose gradle plugin and compose deps
+      default: false
+
+  - booleanParameter:
+      id: needViewModel
+      name: Add ViewModel dependencies?
+      help: Adds viewmodel deps
+      default: false
+
+  - booleanParameter:
+      id: shouldGenerateDI
+      name: Add di?
+      help: Adds Dagger and Anvil deps, and create di component
+      default: false
+
+  - booleanParameter:
+      id: needTest
+      name: Add test?
+      help: Adds testing library
+      default: true
+
+recipe:
+  - mkDirs:
+      - ${srcOut}
+
+  - instantiate:
+      from: root/gitignore.ftl
+      to: ${rootOut}/.gitignore
+
+  - instantiate:
+      from: root/build.gradle.kts.ftl
+      to: ${rootOut}/build.gradle.kts
+
+  - predicate:
+      validIf: ${needCompose}
+      commands:
+        - mkDirs:
+            - ${srcOut}/composable
+        - instantiate:
+            from: root/src/app_package/composable/ComposableBlank.kt.ftl
+            to: ${srcOut}/composable/Composable${__formattedModuleName}.kt
+
+  - predicate:
+      validIf: ${needViewModel}
+      commands:
+        - mkDirs:
+            - ${srcOut}/viewmodel
+        - instantiate:
+            from: root/src/app_package/viewmodel/ViewModelBlank.kt.ftl
+            to: ${srcOut}/viewmodel/${__formattedModuleName}ViewModel.kt

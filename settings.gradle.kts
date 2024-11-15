@@ -2,6 +2,8 @@ rootProject.name = "BusyStatusBar"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
+    includeBuild("build-logic")
+
     repositories {
         google {
             mavenContent {
@@ -28,4 +30,4 @@ dependencyResolutionManagement {
     }
 }
 
-include(":composeApp")
+include(":instances:bsb")

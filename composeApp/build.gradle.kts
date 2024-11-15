@@ -1,7 +1,6 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
@@ -65,6 +64,10 @@ kotlin {
             implementation(libs.moko.permissions)
             implementation(libs.ktor.client.cio)
             implementation(libs.timber)
+
+            implementation(libs.androidx.credentials)
+            implementation(libs.androidx.credentials.play)
+            implementation(libs.identity)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -75,6 +78,9 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.kotlin.inject.runtime)
+            implementation(libs.kotlin.inject.anvil.runtime)
+            implementation(libs.kotlin.inject.anvil.runtime.optional)
+
             implementation(libs.decompose.composeExtension)
             implementation(libs.kotlin.serialization.json)
             implementation(libs.kotlin.datetime)
@@ -92,6 +98,7 @@ kotlin {
             implementation(libs.ktor.negotiation)
             implementation(libs.ktor.serialization)
             implementation(libs.ktor.client.logging)
+
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -191,4 +198,6 @@ dependencies {
     add("kspIosSimulatorArm64", libs.kotlin.inject.ksp)
     add("kspDesktop", libs.kotlin.inject.ksp)
     add("kspWasmJs", libs.kotlin.inject.ksp)
+
+    add("kspCommonMainMetadata", libs.kotlin.inject.anvil.ksp)
 }
