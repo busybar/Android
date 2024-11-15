@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.2"
+agp = "8.7.0"
 android-compileSdk = "34"
 android-minSdk = "24"
 android-targetSdk = "34"
@@ -67,8 +67,7 @@ markdown-renderer = { module = "com.mikepenz:multiplatform-markdown-renderer", v
 settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "settings" }
 settings-observable = { module = "com.russhwolf:multiplatform-settings-make-observable", version.ref = "settings" }
 settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "settings" }
-settings-serialization = { module = "com.russhwolf:multiplatform-settings-serialization", version.ref = "settings" }
-moko-permissions = { module = "dev.icerock.moko:permissions-compose", version.ref = "moko-permissions" }
+    moko-permissions = { module = "dev.icerock.moko:permissions-compose", version.ref = "moko-permissions" }
 
 # Ktor
 ktor-client = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }

@@ -11,7 +11,10 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.ksp)
     id("flipper.android-app")
+    id("flipper.multiplatform-dependencies")
 }
+
+android.namespace = "com.flipperdevices.app"
 
 kotlin {
     wasmJs {
@@ -59,14 +62,33 @@ kotlin {
         val desktopMain by getting
 
         androidMain.dependencies {
+            implementation(libs.androidx.activity.compose)
+            implementation(libs.timber)
         }
         commonMain.dependencies {
+            implementation(compose.ui)
+
+            implementation(libs.settings)
+
+            implementation(libs.kotlin.inject.runtime)
+            implementation(libs.kotlin.inject.anvil.runtime)
+            implementation(libs.kotlin.inject.anvil.runtime.optional)
+
+            implementation(libs.decompose)
         }
         desktopMain.dependencies {
+            implementation(compose.desktop.currentOs)
+            implementation(libs.decompose.composeExtension)
         }
         iosMain.dependencies {
+            api(libs.decompose)
+            api(libs.essenty.lifecycle)
+            api(libs.settings)
+
+            implementation(libs.settings.observable)
         }
         wasmJsMain.dependencies {
+            implementation(libs.settings.observable)
         }
     }
 }
@@ -93,4 +115,26 @@ compose.desktop {
             }
         }
     }
+}
+
+commonDependencies {
+    implementation(projects.components.core.di)
+}
+
+dependencies {
+    add("kspCommonMainMetadata", libs.kotlin.inject.ksp)
+    add("kspAndroid", libs.kotlin.inject.ksp)
+    add("kspIosArm64", libs.kotlin.inject.ksp)
+    add("kspIosX64", libs.kotlin.inject.ksp)
+    add("kspIosSimulatorArm64", libs.kotlin.inject.ksp)
+    add("kspDesktop", libs.kotlin.inject.ksp)
+    add("kspWasmJs", libs.kotlin.inject.ksp)
+
+    add("kspCommonMainMetadata", libs.kotlin.inject.anvil.ksp)
+    add("kspAndroid", libs.kotlin.inject.anvil.ksp)
+    add("kspIosArm64", libs.kotlin.inject.anvil.ksp)
+    add("kspIosX64", libs.kotlin.inject.anvil.ksp)
+    add("kspIosSimulatorArm64", libs.kotlin.inject.anvil.ksp)
+    add("kspDesktop", libs.kotlin.inject.anvil.ksp)
+    add("kspWasmJs", libs.kotlin.inject.anvil.ksp)
 }

@@ -30,4 +30,8 @@ dependencyResolutionManagement {
     }
 }
 
-include(":instances:bsb")
+include(
+    ":instances:bsb",
+
+    "components:core:di"
+)

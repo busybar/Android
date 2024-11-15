@@ -16,6 +16,14 @@ kotlin {
 }
 
 dependencies {
+    add("kspCommonMainMetadata", libs.kotlin.inject.ksp)
+    add("kspAndroid", libs.kotlin.inject.ksp)
+    add("kspIosArm64", libs.kotlin.inject.ksp)
+    add("kspIosX64", libs.kotlin.inject.ksp)
+    add("kspIosSimulatorArm64", libs.kotlin.inject.ksp)
+    add("kspDesktop", libs.kotlin.inject.ksp)
+    add("kspWasmJs", libs.kotlin.inject.ksp)
+
     add("kspCommonMainMetadata", libs.kotlin.inject.anvil.ksp)
     add("kspAndroid", libs.kotlin.inject.anvil.ksp)
     add("kspIosArm64", libs.kotlin.inject.anvil.ksp)
