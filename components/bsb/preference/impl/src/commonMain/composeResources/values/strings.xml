@@ -1,0 +1,9 @@
+<resources>
+    <string name="device_section_about_version_title">Firmware version</string>
+    <string name="device_section_about_version_value">BSB_0R1.5</string>
+    <string name="device_section_about_dev_mode_title">Dev mode</string>
+    <string name="device_section_about_dev_mode_on">On</string>
+    <string name="device_section_about_dev_mode_off">Off</string>
+    <string name="device_section_about_serial_number_title">Serial Number</string>
+    <string name="device_section_about_serial_number_value">127.12.0</string>
+</resources>

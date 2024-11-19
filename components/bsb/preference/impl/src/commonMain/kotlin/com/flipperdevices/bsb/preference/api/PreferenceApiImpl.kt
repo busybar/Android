@@ -3,7 +3,6 @@ package com.flipperdevices.bsb.preference.api
 import com.flipperdevices.bsb.preference.model.SettingsEnum
 import com.flipperdevices.core.di.AppGraph
 import com.russhwolf.settings.ObservableSettings
-import com.russhwolf.settings.coroutines.FlowSettings
 import com.russhwolf.settings.coroutines.toFlowSettings
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding

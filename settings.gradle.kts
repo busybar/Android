@@ -35,7 +35,10 @@ include(
 
     ":components:core:di",
     ":components:core:activityholder",
+    ":components:core:log",
+    ":components:core:ktx",
     ":components:core:ui:decompose",
+    ":components:core:ui:lifecycle",
 
     ":components:bsb:core:theme",
 

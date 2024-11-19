@@ -8,6 +8,7 @@ commonDependencies {
     implementation(projects.components.bsb.preference.api)
 
     implementation(projects.components.core.di)
+    implementation(projects.components.bsb.core.theme)
     implementation(projects.components.core.ui.decompose)
 
     implementation(libs.decompose)
