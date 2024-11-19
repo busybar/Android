@@ -1,0 +1,76 @@
+requiredParams:
+  name: KMP Api Impl Module
+  description: Creates template API and IMPL Gradle-module for KMP feature
+
+predefinedFeatures:
+  - enableModuleCreationParams:
+      defaultPackageNamePrefix: com.flipperdevices.bsb
+
+widgets:
+  - booleanParameter:
+      id: isScreenComponent
+      name: Is that Decompose Screen?
+      help: Adds decompose screen component
+      default: false
+  - booleanParameter:
+      id: isCompositeComponent
+      name: Is that Composite Decompose Component?
+      help: Adds decompose component which support many screens
+      default: false
+
+recipe:
+  - mkDirs:
+    - ${__moduleName}:
+        - api:
+            - src:
+                - commonMain:
+                    - kotlin:
+                        - com:
+                            - flipperdevices:
+                                - bsb:
+                                    - ${__moduleName}:
+                                        - api
+        - impl:
+            - src:
+                - commonMain:
+                    - composeResources:
+                    - kotlin:
+                        - com:
+                            - flipperdevices:
+                                - bsb:
+                                    - ${__moduleName}:
+                                        - api
+
+  - instantiate:
+      from: root/api/build.gradle.kts.ftl
+      to: ${__moduleName}/api/build.gradle.kts
+
+  - instantiate:
+      from: root/impl/build.gradle.kts.ftl
+      to: ${__moduleName}/impl/build.gradle.kts
+
+  - predicate:
+      validIf: ${isScreenComponent}
+      commands:
+        - instantiate:
+            from: root/api/src/app_package/api/SubFeatureCompositeScreenDecomposeComponent.kt.ftl
+            to: api/src/commonMain/kotlin/com/flipperdevices/bsb/${__moduleName}/api/${__formattedModuleName}ScreenDecomposeComponent.kt
+        - instantiate:
+            from: root/impl/src/app_package/api/FeatureScreenDecomposeComponent.kt.ftl
+            to: impl/src/commonMain/kotlin/com/flipperdevices/bsb/${__moduleName}/api/${__formattedModuleName}ScreenDecomposeComponentImpl.kt
+
+  - predicate:
+      validIf: ${isCompositeComponent}
+      commands:
+        - instantiate:
+            from: root/api/src/app_package/api/FeatureCompositeDecomposeComponent.kt.ftl
+            to: api/src/commonMain/kotlin/com/flipperdevices/bsb/${__moduleName}/api/${__formattedModuleName}DecomposeComponent.kt
+        - instantiate:
+            from: root/impl/src/app_package/api/FeatureCompositeDecomposeComponent.kt.ftl
+            to: impl/src/commonMain/kotlin/com/flipperdevices/bsb/${__moduleName}/api/${__formattedModuleName}DecomposeComponent.kt
+        - instantiate:
+            from: root/impl/src/app_package/api/SubFeatureCompositeScreenDecomposeComponent.kt.ftl
+            to: impl/src/commonMain/kotlin/com/flipperdevices/bsb/${__moduleName}/api/${__formattedModuleName}ScreenDecomposeComponent.kt
+        - instantiate:
+            from: root/impl/src/app_package/model/FeatureNavigationConfig.kt.ftl
+            to: impl/src/commonMain/kotlin/com/flipperdevices/bsb/${__moduleName}/model/${__formattedModuleName}NavigationConfig.kt

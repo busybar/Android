@@ -1,6 +1,6 @@
-
 package com.flipperdevices.busybar.di
 
+import com.flipperdevices.bsb.root.api.RootDecomposeComponent
 import com.flipperdevices.core.di.AppGraph
 import com.russhwolf.settings.ObservableSettings
 import me.tatarka.inject.annotations.Provides
@@ -12,6 +12,7 @@ import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
 abstract class AppComponent(
     @get:Provides protected val observableSettings: ObservableSettings
 ) {
+    abstract val rootDecomposeComponentFactory: RootDecomposeComponent.Factory
 }
 
 @MergeComponent.CreateComponent

@@ -1,4 +1,4 @@
-package ${packageName}
+package com.flipperdevices.bsb.root.api
 
 import androidx.compose.runtime.Composable
 import com.arkivanov.decompose.ComponentContext
@@ -7,7 +7,7 @@ import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
 @Inject
-class ${componentName}DecomposeComponentImpl(
+class RootScreenDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext
 ) : ScreenDecomposeComponent(componentContext) {
     @Composable

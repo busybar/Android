@@ -64,6 +64,8 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
             implementation(libs.timber)
+
+            implementation(projects.components.core.activityholder)
         }
         commonMain.dependencies {
             implementation(compose.ui)
@@ -120,6 +122,11 @@ compose.desktop {
 
 commonDependencies {
     implementation(projects.components.core.di)
+    implementation(projects.components.core.ui.decompose)
+
+
+    implementation(projects.components.bsb.root.api)
+    implementation(projects.components.bsb.root.impl)
 }
 
 dependencies {

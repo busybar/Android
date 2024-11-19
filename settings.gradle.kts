@@ -33,5 +33,10 @@ dependencyResolutionManagement {
 include(
     ":instances:bsb",
 
-    "components:core:di"
+    ":components:core:di",
+    ":components:core:activityholder",
+    ":components:core:ui:decompose",
+
+    ":components:bsb:root:api",
+    ":components:bsb:root:impl",
 )

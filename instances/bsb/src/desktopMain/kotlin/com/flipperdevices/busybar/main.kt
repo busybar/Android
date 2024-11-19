@@ -17,11 +17,11 @@ fun main() {
     val lifecycle = LifecycleRegistry()
     // Always create the root component outside Compose on the UI thread
     val appComponent = createAppComponent(settings)
-    /*val root = runOnUiThread {
-        appComponent.rootComponent(
+    val root = runOnUiThread {
+        appComponent.rootDecomposeComponentFactory(
             DefaultComponentContext(lifecycle = lifecycle),
         )
-    }*/
+    }
     application {
         val windowState = rememberWindowState()
 
@@ -31,7 +31,7 @@ fun main() {
             state = windowState,
             title = "BusyStatusBar",
         ) {
-            //App(root)
+            App(root)
         }
     }
 }
