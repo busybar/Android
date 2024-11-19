@@ -37,6 +37,10 @@ include(
     ":components:core:activityholder",
     ":components:core:ui:decompose",
 
+    ":components:bsb:core:theme",
+
     ":components:bsb:root:api",
     ":components:bsb:root:impl",
+    ":components:bsb:preference:api",
+    ":components:bsb:preference:impl",
 )

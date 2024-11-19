@@ -13,7 +13,7 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 class ${__formattedModuleName}DecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     private val ${__moduleName}ScreenDecomposeComponent: (ComponentContext) -> ${__formattedModuleName}ScreenDecomposeComponentImpl
-) : ${__formattedModuleName}DecomposeComponent(),
+) : ${__formattedModuleName}DecomposeComponent<${__formattedModuleName}NavigationConfig>(),
     ComponentContext by componentContext {
     override val stack = childStack(
         source = navigation,

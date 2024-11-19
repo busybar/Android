@@ -5,6 +5,8 @@ requiredParams:
 predefinedFeatures:
   - enableModuleCreationParams:
       defaultPackageNamePrefix: com.flipperdevices.bsb
+      defaultSourceSetName: commonMain
+      defaultSourceCodeFolderName: kotlin
 
 widgets:
   - booleanParameter:
@@ -20,40 +22,38 @@ widgets:
 
 recipe:
   - mkDirs:
-    - ${__moduleName}:
-        - api:
-            - src:
-                - commonMain:
-                    - kotlin:
-                        - com:
-                            - flipperdevices:
-                                - bsb:
-                                    - ${__moduleName}:
-                                        - api
-        - impl:
-            - src:
-                - commonMain:
-                    - composeResources:
-                    - kotlin:
-                        - com:
-                            - flipperdevices:
-                                - bsb:
-                                    - ${__moduleName}:
-                                        - api
+      - api:
+          - src:
+              - commonMain:
+                  - kotlin:
+                      - com:
+                          - flipperdevices:
+                              - bsb:
+                                  - ${__moduleName}:
+                                      - api
+      - impl:
+          - src:
+              - commonMain:
+                  - kotlin:
+                      - com:
+                          - flipperdevices:
+                              - bsb:
+                                  - ${__moduleName}:
+                                      - api
 
   - instantiate:
       from: root/api/build.gradle.kts.ftl
-      to: ${__moduleName}/api/build.gradle.kts
+      to: api/build.gradle.kts
 
   - instantiate:
       from: root/impl/build.gradle.kts.ftl
-      to: ${__moduleName}/impl/build.gradle.kts
+      to: impl/build.gradle.kts
 
   - predicate:
       validIf: ${isScreenComponent}
       commands:
         - instantiate:
-            from: root/api/src/app_package/api/SubFeatureCompositeScreenDecomposeComponent.kt.ftl
+            from: root/api/src/app_package/api/FeatureScreenDecomposeComponent.kt.ftl
             to: api/src/commonMain/kotlin/com/flipperdevices/bsb/${__moduleName}/api/${__formattedModuleName}ScreenDecomposeComponent.kt
         - instantiate:
             from: root/impl/src/app_package/api/FeatureScreenDecomposeComponent.kt.ftl

@@ -1,5 +1,6 @@
 import androidx.compose.ui.window.ComposeUIViewController
 import com.arkivanov.decompose.ComponentContext
+import com.flipperdevices.busybar.App
 import com.flipperdevices.busybar.di.createAppComponent
 import com.russhwolf.settings.Settings
 import com.russhwolf.settings.observable.makeObservable
@@ -10,8 +11,8 @@ fun MainViewController(
     settings: Settings
 ): UIViewController {
     val appComponent = createAppComponent(settings.makeObservable())
-    //val rootComponent = appComponent.rootComponent(componentContext)
+    val rootComponent = appComponent.rootDecomposeComponentFactory(componentContext)
     return ComposeUIViewController {
-        //App(rootComponent)
+        App(rootComponent, appComponent)
     }
 }

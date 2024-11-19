@@ -32,7 +32,12 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
 
+        val rootComponent = appComponent.rootDecomposeComponentFactory(
+            defaultComponentContext()
+        )
+
         setContent {
+            App(rootComponent, appComponent)
         }
     }
 }

@@ -31,7 +31,7 @@ fun main() {
             state = windowState,
             title = "BusyStatusBar",
         ) {
-            App(root)
+            App(root, appComponent)
         }
     }
 }

@@ -24,9 +24,9 @@ fun main() {
         StateKeeperDispatcher(savedState = localStorage[KEY_SAVED_STATE]?.decodeSerializableContainer())
     val settings = StorageSettings().makeObservable()
     val appComponent = createAppComponent(settings)
-    /*val root = appComponent.rootComponent(
+    val root = appComponent.rootDecomposeComponentFactory(
         DefaultComponentContext(lifecycle = lifecycle),
-    )*/
+    )
     lifecycle.attachToDocument()
 
     window.onbeforeunload = {
@@ -34,7 +34,7 @@ fun main() {
         null
     }
     ComposeViewport(document.body!!) {
-        //App(root)
+        App(root, appComponent)
     }
 }
 

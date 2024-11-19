@@ -123,10 +123,12 @@ compose.desktop {
 commonDependencies {
     implementation(projects.components.core.di)
     implementation(projects.components.core.ui.decompose)
-
+    implementation(projects.components.bsb.core.theme)
 
     implementation(projects.components.bsb.root.api)
     implementation(projects.components.bsb.root.impl)
+    implementation(projects.components.bsb.preference.api)
+    implementation(projects.components.bsb.preference.impl)
 }
 
 dependencies {

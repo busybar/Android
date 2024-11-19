@@ -1,5 +1,6 @@
 package com.flipperdevices.busybar.di
 
+import com.flipperdevices.bsb.preference.api.PreferenceApi
 import com.flipperdevices.bsb.root.api.RootDecomposeComponent
 import com.flipperdevices.core.di.AppGraph
 import com.russhwolf.settings.ObservableSettings
@@ -13,6 +14,7 @@ abstract class AppComponent(
     @get:Provides protected val observableSettings: ObservableSettings
 ) {
     abstract val rootDecomposeComponentFactory: RootDecomposeComponent.Factory
+    abstract val preferenceApi: PreferenceApi
 }
 
 @MergeComponent.CreateComponent
