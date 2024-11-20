@@ -5,4 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface PreferenceApi {
     fun getFlow(key: SettingsEnum, default: Boolean = false): Flow<Boolean>
+    suspend fun set(key: SettingsEnum, value: Boolean)
 }

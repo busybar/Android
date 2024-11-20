@@ -2,6 +2,7 @@
 
 package com.flipperdevices.bsb.preference.viewmodel
 
+import com.flipperdevices.bsb.preference.api.PreferenceApi
 import com.flipperdevices.bsb.preference.model.SettingsEnum
 import com.flipperdevices.bsb.preference.model.SettingsState
 import com.flipperdevices.core.ui.lifecycle.DecomposeViewModel
@@ -15,12 +16,12 @@ import me.tatarka.inject.annotations.Inject
 
 @Inject
 class SettingsViewModel(
-    private val settings: FlowSettings
+    private val settings: PreferenceApi
 ) : DecomposeViewModel() {
     private val stateFlow = combine(
-        settings.getBooleanFlow(SettingsEnum.DEV_MODE.key, false),
-        settings.getBooleanFlow(SettingsEnum.AUTO_UPDATE.key, false),
-        settings.getBooleanFlow(SettingsEnum.DARK_THEME.key, false)
+        settings.getFlow(SettingsEnum.DEV_MODE, false),
+        settings.getFlow(SettingsEnum.AUTO_UPDATE, false),
+        settings.getFlow(SettingsEnum.DARK_THEME, false)
     ) { devMode, automaticFirmwareUpdate, darkTheme ->
         SettingsState(
             devMode = devMode,
@@ -32,6 +33,6 @@ class SettingsViewModel(
     fun getState() = stateFlow
 
     fun onChange(settingsEnum: SettingsEnum, value: Boolean) = viewModelScope.launch {
-        settings.putBoolean(settingsEnum.key, value)
+        settings.set(settingsEnum, value)
     }
 }

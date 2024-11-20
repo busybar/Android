@@ -19,4 +19,8 @@ class PreferenceApiImpl(
     override fun getFlow(
         key: SettingsEnum, default: Boolean
     ) = flowSettings.getBooleanFlow(key.key, default)
+
+    override suspend fun set(key: SettingsEnum, value: Boolean) {
+        flowSettings.putBoolean(key.key, value)
+    }
 }

@@ -98,7 +98,7 @@ kotlin {
 
 compose.desktop {
     application {
-        mainClass = "com.flipperdevices.busybar.MainKt"
+        mainClass = "com.flipperdevices.bsb.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
