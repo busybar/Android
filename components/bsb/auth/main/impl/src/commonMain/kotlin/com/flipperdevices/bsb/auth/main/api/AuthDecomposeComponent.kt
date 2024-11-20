@@ -3,7 +3,10 @@ package com.flipperdevices.bsb.auth.main.api
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pop
+import com.flipperdevices.bsb.auth.login.api.LoginDecomposeComponent
 import com.flipperdevices.bsb.auth.main.model.AuthRootNavigationConfig
+import com.flipperdevices.bsb.auth.signup.api.SignupDecomposeComponent
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.ui.decompose.DecomposeComponent
 import me.tatarka.inject.annotations.Assisted
@@ -16,7 +19,9 @@ class AuthDecomposeComponentImpl(
     private val mainScreenDecomposeComponent: (
         ComponentContext,
         StackNavigation<AuthRootNavigationConfig>
-    ) -> MainScreenDecomposeComponentImpl
+    ) -> MainScreenDecomposeComponentImpl,
+    private val loginDecomposeComponentFactory: LoginDecomposeComponent.Factory,
+    private val signupDecomposeComponentFactory: SignupDecomposeComponent.Factory
 ) : AuthDecomposeComponent(),
     ComponentContext by componentContext {
     override val stack = childStack(
@@ -36,8 +41,16 @@ class AuthDecomposeComponentImpl(
             navigation
         )
 
-        is AuthRootNavigationConfig.LogIn -> TODO()
-        AuthRootNavigationConfig.SignUp -> TODO()
+        is AuthRootNavigationConfig.LogIn -> loginDecomposeComponentFactory(
+            componentContext,
+            onBack = navigation::pop,
+            email = config.email,
+            onComplete = {}
+        )
+
+        AuthRootNavigationConfig.SignUp -> signupDecomposeComponentFactory(
+            componentContext
+        )
     }
 
     @Inject

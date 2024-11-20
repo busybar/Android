@@ -55,4 +55,8 @@ include(
     ":components:bsb:auth:main:impl",
     ":components:bsb:auth:main:api",
     ":components:bsb:auth:main:impl",
+    ":components:bsb:auth:login:api",
+    ":components:bsb:auth:login:impl",
+    ":components:bsb:auth:signup:api",
+    ":components:bsb:auth:signup:impl",
 )

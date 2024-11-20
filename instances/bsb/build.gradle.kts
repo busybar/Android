@@ -137,6 +137,10 @@ commonDependencies {
 
     implementation(projects.components.bsb.auth.main.api)
     implementation(projects.components.bsb.auth.main.impl)
+    implementation(projects.components.bsb.auth.login.api)
+    implementation(projects.components.bsb.auth.login.impl)
+    implementation(projects.components.bsb.auth.signup.api)
+    implementation(projects.components.bsb.auth.signup.impl)
 }
 
 dependencies {

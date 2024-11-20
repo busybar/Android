@@ -1,4 +1,4 @@
-package ${packageName}.api
+package com.flipperdevices.bsb.auth.signup.api
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -8,7 +8,7 @@ import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
 @Inject
-class ${__formattedModuleName}ScreenDecomposeComponentImpl(
+class SignupScreenDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext
 ) : ScreenDecomposeComponent(componentContext) {
     @Composable

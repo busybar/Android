@@ -1,6 +1,7 @@
 package ${packageName}.api
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
 import com.flipperdevices.core.di.AppGraph
 import me.tatarka.inject.annotations.Assisted
@@ -12,7 +13,7 @@ class ${__formattedModuleName}ScreenDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
 ) : ${__formattedModuleName}ScreenDecomposeComponent(componentContext) {
     @Composable
-    override fun Render() {
+    override fun Render(modifier: Modifier) {
 
     }
 

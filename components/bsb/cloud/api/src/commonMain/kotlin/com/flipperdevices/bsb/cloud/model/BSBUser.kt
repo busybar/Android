@@ -1,3 +1,10 @@
 package com.flipperdevices.bsb.cloud.model
 
-data class BSBUser(val email: String)
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class BSBUser(
+    @SerialName("email")
+    val email: String
+)
