@@ -59,4 +59,7 @@ include(
     ":components:bsb:auth:login:impl",
     ":components:bsb:auth:signup:api",
     ":components:bsb:auth:signup:impl",
+
+    ":components:bsb:timer:setup:api",
+    ":components:bsb:timer:setup:impl",
 )
