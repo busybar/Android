@@ -20,13 +20,13 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
       - name: Build static files
-        run:  ./gradlew wasmJsBrowserDistribution
+        run: ./gradlew wasmJsBrowserDistribution
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: artifacts
-          path: composeApp/build/dist/wasmJs/productionExecutable
+          path: instances/bsb/build/dist/wasmJs/productionExecutable
   deploy:
     needs: build_web
     permissions:

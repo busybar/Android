@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifacts-windows
-          path: composeApp/build/compose/binaries/main/msi/*
+          path: instances/bsb/build/compose/binaries/main/msi/*
   build-linux:
     runs-on: ubuntu-latest
     steps:
@@ -46,7 +46,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifacts-linux
-          path: composeApp/build/compose/binaries/main/deb/*
+          path: instances/bsb/build/compose/binaries/main/deb/*
   build-macos:
     runs-on: macos-latest
     steps:
@@ -64,7 +64,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifacts-macos
-          path: composeApp/build/compose/binaries/main/dmg/*
+          path: instances/bsb/build/compose/binaries/main/dmg/*
   collect:
     name: Collect all artifacts to one archive
     runs-on: ubuntu-latest

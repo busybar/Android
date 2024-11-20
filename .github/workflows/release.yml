@@ -43,7 +43,7 @@ jobs:
         id: sign_aab
         uses: r0adkll/sign-android-release@v1
         with:
-          releaseDirectory: composeApp/build/outputs/bundle/release
+          releaseDirectory: instances/bsb/build/outputs/bundle/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
           alias: ${{ secrets.KEY_ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
@@ -54,7 +54,7 @@ jobs:
         id: sign_apk
         uses: r0adkll/sign-android-release@v1
         with:
-          releaseDirectory: composeApp/build/outputs/apk/release
+          releaseDirectory: instances/bsb/build/outputs/apk/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
           alias: ${{ secrets.KEY_ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
@@ -67,7 +67,7 @@ jobs:
           mkdir artifacts
           cp ${{ steps.sign_aab.outputs.signedReleaseFile }} artifacts/busystatusbar.aab
           cp ${{ steps.sign_apk.outputs.signedReleaseFile }} artifacts/busystatusbar.apk
-          cp composeApp/build/outputs/mapping/release/mapping.txt artifacts/mapping.txt
+          cp instances/bsb/build/outputs/mapping/release/mapping.txt artifacts/mapping.txt
           echo "path=artifacts/" >> $GITHUB_OUTPUT
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
