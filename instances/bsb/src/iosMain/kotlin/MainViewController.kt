@@ -1,7 +1,7 @@
 import androidx.compose.ui.window.ComposeUIViewController
 import com.arkivanov.decompose.ComponentContext
-import com.flipperdevices.busybar.App
-import com.flipperdevices.busybar.di.createAppComponent
+import com.flipperdevices.bsb.App
+import com.flipperdevices.bsb.di.createAppComponent
 import com.russhwolf.settings.Settings
 import com.russhwolf.settings.observable.makeObservable
 import platform.UIKit.UIViewController

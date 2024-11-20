@@ -14,7 +14,7 @@ plugins {
     id("flipper.multiplatform-dependencies")
 }
 
-android.namespace = "com.flipperdevices.app"
+android.namespace = "com.flipperdevices.bsb"
 
 kotlin {
     wasmJs {

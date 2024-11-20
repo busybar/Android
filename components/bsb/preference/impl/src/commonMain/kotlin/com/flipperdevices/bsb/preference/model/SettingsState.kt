@@ -1,4 +1,4 @@
-package com.flipperdevices.busybar.settings.model
+package com.flipperdevices.bsb.preference.model
 
 data class SettingsState(
     val devMode: Boolean = false,

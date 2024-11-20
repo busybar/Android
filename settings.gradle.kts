@@ -37,10 +37,12 @@ include(
     ":components:core:activityholder",
     ":components:core:log",
     ":components:core:ktx",
+    ":components:core:build-konfig",
     ":components:core:ui:decompose",
     ":components:core:ui:lifecycle",
 
     ":components:bsb:core:theme",
+    ":components:bsb:core:res",
 
     ":components:bsb:root:api",
     ":components:bsb:root:impl",

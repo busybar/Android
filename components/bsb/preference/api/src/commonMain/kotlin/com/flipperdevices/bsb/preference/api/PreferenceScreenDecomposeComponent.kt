@@ -1,6 +1,7 @@
 package com.flipperdevices.bsb.preference.api
 
 import com.arkivanov.decompose.ComponentContext
+import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
 import com.flipperdevices.ui.decompose.ScreenDecomposeComponent
 
 abstract class PreferenceScreenDecomposeComponent(
@@ -9,6 +10,7 @@ abstract class PreferenceScreenDecomposeComponent(
     fun interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,
+            onBackParameter: DecomposeOnBackParameter
         ): PreferenceScreenDecomposeComponent
     }
 }

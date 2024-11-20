@@ -6,4 +6,8 @@
     <string name="device_section_about_dev_mode_off">Off</string>
     <string name="device_section_about_serial_number_title">Serial Number</string>
     <string name="device_section_about_serial_number_value">127.12.0</string>
+
+    <string name="settings_firmware_update">Automatic firmware update</string>
+    <string name="settings_dark_theme">Dark theme</string>
+    <string name="settings_forget">FORGET THIS DEVICE</string>
 </resources>

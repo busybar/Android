@@ -1,18 +1,45 @@
 package com.flipperdevices.core.log
 
-/**
- * Main idea of this class - remove debug log execution in prod
- */
-expect inline fun error(logMessage: () -> String)
+import com.flipperdevices.core.buildkonfig.BuildKonfig
 
-expect inline fun error(error: Throwable, logMessage: () -> String)
+inline fun error(logMessage: () -> String) {
+    if (BuildKonfig.IS_LOG_ENABLED) {
+        error(null, logMessage)
+    }
+}
 
-expect inline fun info(logMessage: () -> String)
+inline fun error(error: Throwable, logMessage: () -> String) {
+    if (BuildKonfig.IS_LOG_ENABLED) {
+        error(null, error, logMessage)
+    }
+}
 
-expect inline fun verbose(logMessage: () -> String)
+inline fun info(logMessage: () -> String) {
+    if (BuildKonfig.IS_LOG_ENABLED) {
+        info(null, logMessage)
+    }
+}
 
-expect inline fun warn(logMessage: () -> String)
+inline fun verbose(logMessage: () -> String) {
+    if (BuildKonfig.IS_LOG_ENABLED) {
+        verbose(null, logMessage)
+    }
+}
 
-expect inline fun debug(logMessage: () -> String)
+inline fun warn(logMessage: () -> String) {
+    if (BuildKonfig.IS_LOG_ENABLED) {
+        warn(null, logMessage)
+    }
+}
 
-expect inline fun wtf(logMessage: () -> String)
+inline fun debug(logMessage: () -> String) {
+    if (BuildKonfig.IS_LOG_ENABLED) {
+        debug(null, logMessage)
+    }
+}
+
+inline fun wtf(logMessage: () -> String) {
+    if (BuildKonfig.IS_LOG_ENABLED) {
+        wtf(null, logMessage)
+    }
+}

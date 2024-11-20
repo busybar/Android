@@ -15,7 +15,10 @@ configure<BaseExtension> {
 }
 
 android.namespace = "com.flipperdevices.${
-    project.path.removePrefix(":components:").replace(":", ".")
+    project.path
+        .removePrefix(":components:")
+        .replace(":", ".")
+        .replace("-", "")
 }"
 
 @OptIn(ExperimentalKotlinGradlePluginApi::class)

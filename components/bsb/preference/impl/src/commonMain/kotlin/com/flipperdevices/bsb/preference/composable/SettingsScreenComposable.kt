@@ -1,7 +1,6 @@
-package com.flipperdevices.busybar.settings.composable
+package com.flipperdevices.bsb.preference.composable
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,12 +9,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
-import androidx.compose.material.RadioButton
-import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Switch
 import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
@@ -26,19 +22,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import busystatusbar.composeapp.generated.resources.Res
-import busystatusbar.composeapp.generated.resources.device_section_about_dev_mode_title
-import busystatusbar.composeapp.generated.resources.device_section_about_version_title
-import busystatusbar.composeapp.generated.resources.device_section_about_version_value
-import busystatusbar.composeapp.generated.resources.ic_back
-import busystatusbar.composeapp.generated.resources.settings_dark_theme
-import busystatusbar.composeapp.generated.resources.settings_firmware_update
-import busystatusbar.composeapp.generated.resources.settings_forget
-import com.flipperdevices.busybar.core.ktx.clickableRipple
-import com.flipperdevices.busybar.core.theme.LocalBusyBarFonts
-import com.flipperdevices.busybar.core.theme.LocalPallet
-import com.flipperdevices.busybar.device.composable.AboutDeviceRowComposable
-import com.flipperdevices.busybar.settings.model.SettingsState
+import busystatusbar.components.bsb.preference.impl.generated.resources.Res
+import busystatusbar.components.bsb.preference.impl.generated.resources.device_section_about_dev_mode_title
+import busystatusbar.components.bsb.preference.impl.generated.resources.device_section_about_version_title
+import busystatusbar.components.bsb.preference.impl.generated.resources.device_section_about_version_value
+import busystatusbar.components.bsb.preference.impl.generated.resources.settings_dark_theme
+import busystatusbar.components.bsb.preference.impl.generated.resources.settings_firmware_update
+import busystatusbar.components.bsb.preference.impl.generated.resources.settings_forget
+import busystatusbar.components.bsb.core.res.generated.resources.Res as CommonRes
+import busystatusbar.components.bsb.core.res.generated.resources.ic_back
+import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
+import com.flipperdevices.bsb.core.theme.LocalPallet
+import com.flipperdevices.bsb.preference.model.SettingsEnum
+import com.flipperdevices.bsb.preference.model.SettingsState
+import com.flipperdevices.core.ktx.jre.clickableRipple
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -155,7 +152,7 @@ fun ScreenComposableBar(onBack: () -> Unit) {
         Icon(
             modifier = Modifier.padding(start = 14.dp).size(24.dp)
                 .clickableRipple(onClick = onBack),
-            painter = painterResource(Res.drawable.ic_back),
+            painter = painterResource(CommonRes.drawable.ic_back),
             contentDescription = null,
             tint = LocalPallet.current.neutral.tertiary
         )

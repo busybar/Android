@@ -1,6 +1,7 @@
 plugins {
     id("flipper.multiplatform-compose")
     id("flipper.multiplatform-dependencies")
+    alias(libs.plugins.atomicflu)
 }
 
 commonDependencies {
@@ -11,4 +12,8 @@ commonDependencies {
     implementation(libs.kotlin.coroutines)
     api(libs.essenty.lifecycle)
     implementation(libs.essenty.lifecycle.coroutines)
+
+
+    implementation(libs.androidx.annotation)
+    implementation(libs.atomicflu)
 }

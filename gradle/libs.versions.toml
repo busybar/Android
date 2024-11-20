@@ -1,9 +1,7 @@
 [versions]
 agp = "8.6.1"
-android-compileSdk = "34"
-android-minSdk = "24"
-android-targetSdk = "34"
 androidx-activityCompose = "1.9.3"
+androidx-annotation = "1.9.1"
 constraintlayout = "0.5.0"
 compose-plugin = "1.7.0"
 kotlin = "2.0.21"
@@ -26,6 +24,8 @@ detekt = "1.23.7" # https://detekt.dev/docs/gettingstarted/gradle/
 detekt-ruleset-compiler = "0.0.4" # https://github.com/BraisGabin/detekt-compiler-rules/releases
 detekt-ruleset-compose = "0.4.17" # https://github.com/mrmans0n/compose-rules/releases
 detekt-ruleset-decompose = "1.0.1" # https://github.com/LionZXY/detekt-decompose-rule/releases
+buildkonfig = "5.4.0"
+atomicflu = "0.26.0" # https://github.com/Kotlin/kotlinx-atomicfu
 
 [libraries]
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -41,9 +41,9 @@ detekt-ruleset-ktlint = { module = "io.gitlab.arturbosch.detekt:detekt-formattin
 detekt-ruleset-compose = { module = "io.nlopez.compose.rules:detekt", version.ref = "detekt-ruleset-compose" }
 detekt-ruleset-decompose = { module = "uk.kulikov.detekt.decompose:decompose-detekt-rules", version.ref = "detekt-ruleset-decompose" }
 
-
 constraintlayout = { module = "tech.annexflow.compose:constraintlayout-compose-multiplatform", version.ref = "constraintlayout" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "androidx-annotation" }
 kotlin-inject-ksp = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp", version.ref = "kotlin-inject" }
 kotlin-inject-runtime = { module = "me.tatarka.inject:kotlin-inject-runtime-kmp", version.ref = "kotlin-inject" }
 kotlin-inject-anvil-ksp = { module = "software.amazon.lastmile.kotlin.inject.anvil:compiler", version.ref = "kotlin-inject-anvil" }
@@ -67,7 +67,7 @@ markdown-renderer = { module = "com.mikepenz:multiplatform-markdown-renderer", v
 settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "settings" }
 settings-observable = { module = "com.russhwolf:multiplatform-settings-make-observable", version.ref = "settings" }
 settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "settings" }
-    moko-permissions = { module = "dev.icerock.moko:permissions-compose", version.ref = "moko-permissions" }
+moko-permissions = { module = "dev.icerock.moko:permissions-compose", version.ref = "moko-permissions" }
 
 # Ktor
 ktor-client = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
@@ -77,6 +77,8 @@ ktor-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version
 ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
+
+atomicflu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "atomicflu" }
 
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
@@ -88,3 +90,5 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+buildkonfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildkonfig" }
+atomicflu = { id = "org.jetbrains.kotlinx.atomicfu", version.ref = "atomicflu" }

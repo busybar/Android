@@ -7,6 +7,7 @@ import com.flipperdevices.core.log.LogTagProvider
 import com.flipperdevices.core.log.error
 import com.flipperdevices.core.log.info
 import com.flipperdevices.core.log.warn
+import kotlinx.atomicfu.atomic
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -16,17 +17,16 @@ import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.withContext
-import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * This class allows you to run one and only one task
  * at a time with coroutine scope and flipper ble
  */
 abstract class OneTimeExecutionTask<INPUT, STATE> : TaskWithLifecycle(), LogTagProvider {
-    private val taskScope = coroutineScope(FlipperDispatchers.workStealingDispatcher)
+    private val taskScope = coroutineScope(FlipperDispatchers.default)
     private val mutex = Mutex()
     private var job: Job? = null
-    private val isAlreadyLaunched = AtomicBoolean(false)
+    private val isAlreadyLaunched = atomic(false)
 
     fun start(
         input: INPUT,
@@ -40,7 +40,7 @@ abstract class OneTimeExecutionTask<INPUT, STATE> : TaskWithLifecycle(), LogTagP
         launchWithLock(mutex, taskScope) {
             job?.cancelAndJoin()
             job = null
-            job = taskScope.launch(FlipperDispatchers.workStealingDispatcher) {
+            job = taskScope.launch(FlipperDispatchers.default) {
                 val localScope = this
                 // Waiting to be connected to the flipper
                 try {
@@ -54,7 +54,7 @@ abstract class OneTimeExecutionTask<INPUT, STATE> : TaskWithLifecycle(), LogTagP
             }
         }
         onStart()
-        taskScope.launch(FlipperDispatchers.workStealingDispatcher) {
+        taskScope.launch(FlipperDispatchers.default) {
             try {
                 awaitCancellation()
             } finally {
