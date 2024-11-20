@@ -1,0 +1,9 @@
+plugins {
+    id("flipper.multiplatform-compose")
+    id("flipper.multiplatform-dependencies")
+}
+
+commonDependencies {
+    implementation(libs.decompose)
+    implementation(libs.decompose.composeExtension)
+}

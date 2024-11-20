@@ -1,0 +1,7 @@
+<resources>
+    <string name="login_signin_title">Enter password</string>
+    <string name="login_signin_desc">You are logging in to the account:</string>
+    <string name="login_signin_password_hint">Password</string>
+    <string name="login_signin_btn">Log in</string>
+    <string name="login_signin_forgot_password">Forgot password?</string>
+</resources>

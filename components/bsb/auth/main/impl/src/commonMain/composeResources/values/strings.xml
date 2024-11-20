@@ -1,0 +1,8 @@
+<resources>
+    <string name="login_main_title">Log in to Busy Cloud</string>
+    <string name="login_main_email_hint">Email</string>
+    <string name="login_main_email_title">Enter your email to log in or create an account:</string>
+    <string name="login_main_btn">Continue with email</string>
+    <string name="login_main_or_line">Or</string>
+    <string name="login_main_footer">By proceeding, you agree to our [Terms of Service](https://busy.app) and [Privacy Policy](https://busy.app)</string>
+</resources>
