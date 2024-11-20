@@ -1,5 +1,6 @@
 package com.flipperdevices.bsb.di
 
+import com.flipperdevices.bsb.cloud.di.getHttpClient
 import com.flipperdevices.bsb.preference.api.PreferenceApi
 import com.flipperdevices.bsb.root.api.RootDecomposeComponent
 import com.flipperdevices.core.di.AppGraph

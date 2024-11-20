@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed interface RootNavigationConfig {
     @Serializable
-    data object Main : RootNavigationConfig
+    data object Auth : RootNavigationConfig
 }

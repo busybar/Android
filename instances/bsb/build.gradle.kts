@@ -76,6 +76,7 @@ kotlin {
             implementation(libs.kotlin.inject.anvil.runtime)
             implementation(libs.kotlin.inject.anvil.runtime.optional)
 
+            implementation(libs.ktor.client.core)
             implementation(libs.decompose)
         }
         desktopMain.dependencies {
@@ -131,6 +132,11 @@ commonDependencies {
     implementation(projects.components.bsb.root.impl)
     implementation(projects.components.bsb.preference.api)
     implementation(projects.components.bsb.preference.impl)
+    implementation(projects.components.bsb.cloud.api)
+    implementation(projects.components.bsb.cloud.impl)
+
+    implementation(projects.components.bsb.auth.main.api)
+    implementation(projects.components.bsb.auth.main.impl)
 }
 
 dependencies {

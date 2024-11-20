@@ -3,11 +3,12 @@
 package com.flipperdevices.bsb.preference.viewmodel
 
 import com.flipperdevices.bsb.preference.api.PreferenceApi
+import com.flipperdevices.bsb.preference.api.getFlow
+import com.flipperdevices.bsb.preference.api.set
 import com.flipperdevices.bsb.preference.model.SettingsEnum
 import com.flipperdevices.bsb.preference.model.SettingsState
 import com.flipperdevices.core.ui.lifecycle.DecomposeViewModel
 import com.russhwolf.settings.ExperimentalSettingsApi
-import com.russhwolf.settings.coroutines.FlowSettings
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn

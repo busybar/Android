@@ -2,6 +2,7 @@ package com.flipperdevices.ui.decompose
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
@@ -16,13 +17,14 @@ abstract class CompositeDecomposeComponent<C : Any> : DecomposeComponent(), Comp
 
     @Composable
     @Suppress("NonSkippableComposable")
-    override fun Render() {
+    override fun Render(modifier: Modifier) {
         val childStack by stack.subscribeAsState()
 
         Children(
+            modifier = modifier,
             stack = childStack,
         ) {
-            it.instance.Render()
+            it.instance.Render(Modifier)
         }
     }
 }

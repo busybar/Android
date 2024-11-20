@@ -48,4 +48,11 @@ include(
     ":components:bsb:root:impl",
     ":components:bsb:preference:api",
     ":components:bsb:preference:impl",
+    ":components:bsb:cloud:api",
+    ":components:bsb:cloud:impl",
+
+    ":components:bsb:auth:common",
+    ":components:bsb:auth:main:impl",
+    ":components:bsb:auth:main:api",
+    ":components:bsb:auth:main:impl",
 )

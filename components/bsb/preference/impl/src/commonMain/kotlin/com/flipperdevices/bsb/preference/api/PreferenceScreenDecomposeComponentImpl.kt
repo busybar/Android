@@ -24,14 +24,14 @@ class PreferenceScreenDecomposeComponentImpl(
     private val settingsViewModelFactory: () -> SettingsViewModel
 ) : PreferenceScreenDecomposeComponent(componentContext) {
     @Composable
-    override fun Render() {
+    override fun Render(modifier: Modifier) {
         val viewModel = viewModelWithFactory(null) {
             settingsViewModelFactory()
         }
 
         val settingsState by viewModel.getState().collectAsState()
         SettingsScreenComposable(
-            modifier = Modifier.systemBarsPadding()
+            modifier = modifier.systemBarsPadding()
                 .statusBarsPadding(),
             settingsState = settingsState,
             onBack = onBackParameter::invoke,

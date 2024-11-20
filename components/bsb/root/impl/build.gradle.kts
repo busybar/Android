@@ -12,6 +12,8 @@ commonDependencies {
     implementation(projects.components.core.ui.decompose)
 
     implementation(projects.components.bsb.preference.api)
+    implementation(projects.components.bsb.auth.main.api)
 
     implementation(libs.decompose)
+
 }
