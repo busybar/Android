@@ -17,6 +17,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import busystatusbar.components.bsb.timer.main.impl.generated.resources.Res
@@ -69,7 +71,12 @@ fun BusyButtonComposable(
                     fontFamily = LocalBusyBarFonts.current.pragmatica,
                     fontWeight = FontWeight.W500,
                     color = LocalPallet.current.black.invert,
-                    lineHeight = 48.sp
+                    lineHeight = 48.sp,
+                    lineHeightStyle = LineHeightStyle(
+                        alignment = LineHeightStyle.Alignment.Center,
+                        trim = LineHeightStyle.Trim.Both
+                    ),
+                    textAlign = TextAlign.Center
                 )
             ),
         )

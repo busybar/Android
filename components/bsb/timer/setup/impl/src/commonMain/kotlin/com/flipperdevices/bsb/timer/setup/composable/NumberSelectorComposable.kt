@@ -1,8 +1,10 @@
 package com.flipperdevices.bsb.timer.setup.composable
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -110,22 +112,24 @@ private fun NumberElementComposable(
     val numberText = if (number < 10) {
         "0$number"
     } else number.toString()
-    Box(
-        modifier.defaultMinSize(minWidth = 126.dp),
-        contentAlignment = Alignment.CenterEnd
+    Row(
+        modifier
     ) {
-        Text(
-            modifier = Modifier
-                .wrapContentHeight(
-                    align = Alignment.CenterVertically, // aligns to the center vertically (default value)
-                    unbounded = true // Makes sense if the container size less than text's height
-                ),
-            text = numberText,
-            fontSize = 100.sp,
-            color = color,
-            fontWeight = FontWeight.W500,
-            fontFamily = LocalBusyBarFonts.current.pragmatica,
-            textAlign = TextAlign.End
-        )
+        numberText.forEach { symbol ->
+            Text(
+                modifier = Modifier
+                    .width(64.dp)
+                    .wrapContentHeight(
+                        align = Alignment.CenterVertically, // aligns to the center vertically (default value)
+                        unbounded = true // Makes sense if the container size less than text's height
+                    ),
+                text = symbol.toString(),
+                fontSize = 100.sp,
+                color = color,
+                fontWeight = FontWeight.W500,
+                fontFamily = LocalBusyBarFonts.current.pragmatica,
+                textAlign = TextAlign.Center
+            )
+        }
     }
 }
