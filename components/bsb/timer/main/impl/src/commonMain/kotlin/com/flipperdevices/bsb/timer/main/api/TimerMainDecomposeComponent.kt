@@ -1,8 +1,10 @@
 package com.flipperdevices.bsb.timer.main.api
 
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.flipperdevices.bsb.timer.main.model.TimerMainNavigationConfig
+import com.flipperdevices.bsb.timer.setup.model.TimerState
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.ui.decompose.DecomposeComponent
 import me.tatarka.inject.annotations.Assisted
@@ -12,7 +14,14 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 @Inject
 class TimerMainDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
-    private val mainScreenDecomposeComponent: (ComponentContext) -> TimerMainScreenDecomposeComponentImpl
+    private val mainScreenDecomposeComponent: (
+        componentContext: ComponentContext,
+        navigation: StackNavigation<TimerMainNavigationConfig>
+    ) -> TimerMainScreenDecomposeComponentImpl,
+    private val timerStopDecomposeComponent: (
+        componentContext: ComponentContext,
+        initialTimerState: TimerState,
+    ) -> TimerStopScreenDecomposeComponentImpl
 ) : TimerMainDecomposeComponent<TimerMainNavigationConfig>(),
     ComponentContext by componentContext {
     override val stack = childStack(
@@ -27,7 +36,11 @@ class TimerMainDecomposeComponentImpl(
         config: TimerMainNavigationConfig,
         componentContext: ComponentContext
     ): DecomposeComponent = when (config) {
-        TimerMainNavigationConfig.Main -> mainScreenDecomposeComponent(componentContext)
+        TimerMainNavigationConfig.Main -> mainScreenDecomposeComponent(componentContext, navigation)
+        is TimerMainNavigationConfig.Timer -> timerStopDecomposeComponent(
+            componentContext,
+            config.timer
+        )
     }
 
     @Inject
