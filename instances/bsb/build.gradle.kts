@@ -149,6 +149,8 @@ commonDependencies {
 
     implementation(projects.components.bsb.timer.setup.api)
     implementation(projects.components.bsb.timer.setup.impl)
+    implementation(projects.components.bsb.timer.main.api)
+    implementation(projects.components.bsb.timer.main.impl)
 }
 
 dependencies {

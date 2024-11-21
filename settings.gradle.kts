@@ -62,4 +62,6 @@ include(
 
     ":components:bsb:timer:setup:api",
     ":components:bsb:timer:setup:impl",
+    ":components:bsb:timer:main:api",
+    ":components:bsb:timer:main:impl",
 )

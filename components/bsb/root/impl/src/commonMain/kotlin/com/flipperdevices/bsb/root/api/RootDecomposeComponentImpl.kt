@@ -4,7 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.childStack
 import com.flipperdevices.bsb.auth.main.api.AuthDecomposeComponent
 import com.flipperdevices.bsb.root.model.RootNavigationConfig
-import com.flipperdevices.bsb.timer.setup.api.TimerSetupScreenDecomposeComponent
+import com.flipperdevices.bsb.timer.main.api.TimerMainDecomposeComponent
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.ui.decompose.DecomposeComponent
 import me.tatarka.inject.annotations.Assisted
@@ -15,7 +15,7 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 class RootDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     private val authDecomposeComponentFactory: AuthDecomposeComponent.Factory,
-    private val timerSetupDecomposeComponentFactory: TimerSetupScreenDecomposeComponent.Factory
+    private val timerMainDecomposeComponentFactory: TimerMainDecomposeComponent.Factory
 ) : RootDecomposeComponent(),
     ComponentContext by componentContext {
     override val stack = childStack(
@@ -34,7 +34,7 @@ class RootDecomposeComponentImpl(
             componentContext
         )
 
-        RootNavigationConfig.Timer -> timerSetupDecomposeComponentFactory(
+        RootNavigationConfig.Timer -> timerMainDecomposeComponentFactory(
             componentContext
         )
     }

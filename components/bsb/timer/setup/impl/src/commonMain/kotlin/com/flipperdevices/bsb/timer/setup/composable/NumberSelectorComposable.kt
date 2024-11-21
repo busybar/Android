@@ -1,11 +1,14 @@
 package com.flipperdevices.bsb.timer.setup.composable
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.PagerDefaults
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.VerticalPager
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -13,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.BlendMode
@@ -26,6 +30,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.timer.setup.utils.NoLimitPagerSnapDistance
 import kotlin.math.absoluteValue
@@ -34,22 +41,8 @@ import kotlin.math.absoluteValue
 fun NumberSelectorComposable(
     modifier: Modifier,
     count: Int,
-    initialNumber: Int,
-    onSelect: () -> Unit
+    pagerState: PagerState
 ) {
-    val pagerSize = Int.MAX_VALUE - 1
-    val initialPage = remember(
-        pagerSize,
-        initialNumber,
-        count
-    ) {
-        (pagerSize / 2).floorDiv(count) * count + initialNumber
-    }
-    val pagerState = rememberPagerState(
-        initialPage = initialPage,
-        pageCount = {
-            pagerSize
-        })
     val fling = PagerDefaults.flingBehavior(
         state = pagerState,
         pagerSnapDistance = NoLimitPagerSnapDistance
@@ -75,7 +68,8 @@ fun NumberSelectorComposable(
                 },
             state = pagerState,
             contentPadding = PaddingValues(vertical = contentPadding),
-            flingBehavior = fling
+            flingBehavior = fling,
+            horizontalAlignment = Alignment.End
         ) { page ->
             val activeColor = LocalPallet.current.black.invert
             val inactiveColor = LocalPallet.current.transparent.blackInvert.tertiary
@@ -116,10 +110,22 @@ private fun NumberElementComposable(
     val numberText = if (number < 10) {
         "0$number"
     } else number.toString()
-    Text(
-        modifier = modifier,
-        text = numberText,
-        fontSize = 100.sp,
-        color = color
-    )
+    Box(
+        modifier.defaultMinSize(minWidth = 126.dp),
+        contentAlignment = Alignment.CenterEnd
+    ) {
+        Text(
+            modifier = Modifier
+                .wrapContentHeight(
+                    align = Alignment.CenterVertically, // aligns to the center vertically (default value)
+                    unbounded = true // Makes sense if the container size less than text's height
+                ),
+            text = numberText,
+            fontSize = 100.sp,
+            color = color,
+            fontWeight = FontWeight.W500,
+            fontFamily = LocalBusyBarFonts.current.pragmatica,
+            textAlign = TextAlign.End
+        )
+    }
 }
