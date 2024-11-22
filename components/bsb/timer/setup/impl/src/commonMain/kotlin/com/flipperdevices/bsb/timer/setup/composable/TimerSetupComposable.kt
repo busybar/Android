@@ -61,7 +61,7 @@ fun TimerSetupComposable(
                 pagerState = minutesState
             )
             Text(
-                modifier = Modifier.padding(vertical = 8.dp),
+                modifier = Modifier.padding(horizontal = 8.dp),
                 text = ":",
                 fontSize = 100.sp,
                 color = LocalPallet.current.black.invert,
@@ -79,8 +79,8 @@ fun TimerSetupComposable(
             LaunchedEffect(minutesState, secondsState) {
                 snapshotFlow {
                     TimerState(
-                        minute = minutesState.currentPage,
-                        second = secondsState.currentPage
+                        minute = minutesState.currentPage.mod(TOTAL_MINUTES),
+                        second = secondsState.currentPage.mod(TOTAL_SECONDS)
                     )
                 }.distinctUntilChanged()
                     .collect { page ->

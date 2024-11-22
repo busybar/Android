@@ -27,12 +27,17 @@ import busystatusbar.components.bsb.timer.main.impl.generated.resources.timer_ma
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.core.ktx.jre.clickableRipple
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun BusyButtonComposable(
     modifier: Modifier,
+    buttonColor: Color,
+    text: StringResource,
+    icon: DrawableResource,
     onClick: () -> Unit
 ) {
     Row(
@@ -46,7 +51,7 @@ fun BusyButtonComposable(
                 shape = RoundedCornerShape(16.dp)
             )
             .background(
-                Color(0xFFF42323),
+                buttonColor,
                 shape = RoundedCornerShape(16.dp)
             )
             .clickableRipple(onClick = onClick)
@@ -59,12 +64,12 @@ fun BusyButtonComposable(
     ) {
         Icon(
             modifier = Modifier.size(34.dp),
-            painter = painterResource(Res.drawable.ic_play),
+            painter = painterResource(icon),
             contentDescription = null
         )
         Text(
             modifier = Modifier.padding(start = 12.dp),
-            text = stringResource(Res.string.timer_main_busy),
+            text = stringResource(text),
             style = LocalTextStyle.current.merge(
                 TextStyle(
                     fontSize = 48.sp,

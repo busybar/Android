@@ -3,6 +3,7 @@ package com.flipperdevices.bsb.timer.main.api
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -19,12 +20,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.childContext
+import com.arkivanov.decompose.router.stack.pushNew
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.timer.main.composable.BusyButtonComposable
+import com.flipperdevices.bsb.timer.main.composable.StartButtonComposable
+import com.flipperdevices.bsb.timer.main.composable.StopButtonComposable
+import com.flipperdevices.bsb.timer.main.composable.TimerContainerComposable
+import com.flipperdevices.bsb.timer.main.composable.TimerTimeComposable
+import com.flipperdevices.bsb.timer.main.model.TimerMainNavigationConfig
 import com.flipperdevices.bsb.timer.main.viewmodel.BusyTimerViewModel
 import com.flipperdevices.bsb.timer.setup.api.TimerSetupScreenDecomposeComponent
 import com.flipperdevices.bsb.timer.setup.model.TimerState
 import com.flipperdevices.core.ui.lifecycle.viewModelWithFactoryWithoutRemember
+import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
 import com.flipperdevices.ui.decompose.ScreenDecomposeComponent
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
@@ -33,6 +41,7 @@ import me.tatarka.inject.annotations.Inject
 class TimerStopScreenDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     @Assisted initialTimerState: TimerState,
+    @Assisted private val onBackParameter: DecomposeOnBackParameter,
     private val busyTimerViewModel: (TimerState) -> BusyTimerViewModel
 ) : ScreenDecomposeComponent(componentContext) {
     val viewModel = viewModelWithFactoryWithoutRemember(initialTimerState) {
@@ -63,6 +72,7 @@ class TimerStopScreenDecomposeComponentImpl(
             val state by viewModel.getState().collectAsState()
             Column(
                 Modifier
+                    .fillMaxSize()
                     .padding(top = 2.dp)
                     .clip(
                         RoundedCornerShape(
@@ -74,7 +84,25 @@ class TimerStopScreenDecomposeComponentImpl(
                     )
                     .background(Color(0xFFF42323))
             ) {
-                Text(state.toString())
+
+                TimerContainerComposable(
+                    modifier = Modifier.weight(1f),
+                    timerState = state
+                )
+
+                StopButtonComposable(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            top = 16.dp,
+                            bottom = 128.dp,
+                            start = 16.dp,
+                            end = 16.dp
+                        ),
+                    onClick = {
+                        onBackParameter()
+                    }
+                )
             }
         }
     }

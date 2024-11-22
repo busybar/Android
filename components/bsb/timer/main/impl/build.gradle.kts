@@ -17,5 +17,6 @@ commonDependencies {
     implementation(projects.components.bsb.timer.setup.api)
 
     implementation(libs.decompose)
+    implementation(libs.constraintlayout)
     implementation(libs.kotlin.datetime)
 }

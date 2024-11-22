@@ -12,6 +12,7 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
+import kotlin.math.min
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
@@ -32,8 +33,9 @@ class BusyTimerViewModel(
                 }
             }.collect {
                 timer.update {
-                    val duration = startTimerTime - Clock.System.now()
-                    duration.toTimerState(initialTimerState)
+                    val delta = Clock.System.now().epochSeconds - startTimerTime.epochSeconds
+                    val duration = initialTimerState.toDuration() - delta.seconds
+                    duration.toTimerState()
                 }
             }
         }
@@ -42,13 +44,15 @@ class BusyTimerViewModel(
     fun getState() = timer.asStateFlow()
 }
 
-fun Duration.toTimerState(initialTimerState: TimerState): TimerState {
-    var second = initialTimerState.second - inWholeSeconds - inWholeMinutes.minutes.inWholeSeconds
-    if (second < 0) {
-        second += 1.minutes.inWholeSeconds
-    }
+fun TimerState.toDuration(): Duration {
+    return minute.minutes + second.seconds
+}
+
+fun Duration.toTimerState(): TimerState {
+    val seconds = inWholeSeconds - inWholeMinutes * 1.minutes.inWholeSeconds
+
     return TimerState(
-        second = second.toInt(),
-        minute = (initialTimerState.minute - inWholeMinutes).toInt()
+        second = seconds.toInt(),
+        minute = inWholeMinutes.toInt()
     )
 }

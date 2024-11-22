@@ -21,6 +21,7 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.pushNew
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.timer.main.composable.BusyButtonComposable
+import com.flipperdevices.bsb.timer.main.composable.StartButtonComposable
 import com.flipperdevices.bsb.timer.main.model.TimerMainNavigationConfig
 import com.flipperdevices.bsb.timer.setup.api.TimerSetupScreenDecomposeComponent
 import com.flipperdevices.ui.decompose.ScreenDecomposeComponent
@@ -76,7 +77,7 @@ class TimerMainScreenDecomposeComponentImpl(
                         .weight(1f)
                 )
                 val state by setupDecomposeComponent.timerState.collectAsState()
-                BusyButtonComposable(
+                StartButtonComposable(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(

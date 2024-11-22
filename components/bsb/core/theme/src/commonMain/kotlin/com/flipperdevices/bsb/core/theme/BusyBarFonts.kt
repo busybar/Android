@@ -34,7 +34,12 @@ private fun getPragmatica() = FontFamily(
         resource = Res.font.pragmatica_500,
         weight = FontWeight.W500,
         style = FontStyle.Normal
-    )
+    ),
+    Font(
+        resource = Res.font.pragmatica_450,
+        weight = FontWeight.W400,
+        style = FontStyle.Normal
+    ),
 )
 
 @Composable
