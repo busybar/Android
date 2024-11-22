@@ -42,10 +42,10 @@ class TimerStopScreenDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     @Assisted initialTimerState: TimerState,
     @Assisted private val onBackParameter: DecomposeOnBackParameter,
-    private val busyTimerViewModel: (TimerState) -> BusyTimerViewModel
+    private val busyTimerViewModel: (TimerState, onComplete: () -> Unit) -> BusyTimerViewModel
 ) : ScreenDecomposeComponent(componentContext) {
     val viewModel = viewModelWithFactoryWithoutRemember(initialTimerState) {
-        busyTimerViewModel(initialTimerState)
+        busyTimerViewModel(initialTimerState, onBackParameter::invoke)
     }
 
     @Composable
@@ -87,7 +87,8 @@ class TimerStopScreenDecomposeComponentImpl(
 
                 TimerContainerComposable(
                     modifier = Modifier.weight(1f),
-                    timerState = state
+                    timerState = state,
+                    onAction = viewModel::onAction
                 )
 
                 StopButtonComposable(

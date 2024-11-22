@@ -1,5 +1,10 @@
 package com.flipperdevices.bsb.timer.main.composable
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -41,17 +46,34 @@ private fun TimerNumberComposable(number: Int) {
     val numberText = if (number < 10) {
         "0$number"
     } else number.toString()
-    Text(
+    AnimatedContent(
         modifier = Modifier
             .wrapContentHeight(
                 align = Alignment.CenterVertically, // aligns to the center vertically (default value)
                 unbounded = true // Makes sense if the container size less than text's height
             ),
-        text = numberText,
-        fontSize = 100.sp,
-        color = LocalPallet.current.black.invert,
-        fontWeight = FontWeight.W500,
-        fontFamily = LocalBusyBarFonts.current.pragmatica,
-        textAlign = TextAlign.Center
-    )
+        targetState = numberText,
+        transitionSpec = { fadeIn().togetherWith(fadeOut()) },
+        contentKey = { it }
+    ) { animatedState ->
+        Row {
+            numberText.forEach { symbol ->
+                Text(
+                    modifier = Modifier
+                        .padding(top = 2.dp)
+                        .width(64.dp)
+                        .wrapContentHeight(
+                            align = Alignment.CenterVertically, // aligns to the center vertically (default value)
+                            unbounded = true // Makes sense if the container size less than text's height
+                        ),
+                    text = symbol.toString(),
+                    fontSize = 100.sp,
+                    color = LocalPallet.current.black.invert,
+                    fontWeight = FontWeight.W500,
+                    fontFamily = LocalBusyBarFonts.current.pragmatica,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
 }
