@@ -76,7 +76,8 @@ private fun TimerActiveTextComposable(modifier: Modifier) {
                 .padding(end = 12.dp)
                 .size(24.dp),
             painter = painterResource(Res.drawable.ic_play),
-            contentDescription = null
+            contentDescription = null,
+            tint = LocalPallet.current.black.invert
         )
         Text(
             text = stringResource(Res.string.timer_main_stop_active),

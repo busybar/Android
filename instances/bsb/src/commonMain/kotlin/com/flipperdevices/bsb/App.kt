@@ -28,7 +28,7 @@ fun App(
     BusyBarTheme(isDarkMode) {
         rootComponent.Render(
             Modifier
-                .background(MaterialTheme.colors.background)
+                .background(LocalPallet.current.black.invert)
         )
     }
 }

@@ -22,6 +22,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.childContext
 import com.arkivanov.decompose.router.stack.pushNew
 import com.flipperdevices.bsb.core.theme.LocalPallet
+import com.flipperdevices.bsb.preference.api.ThemeStatusBarIconStyleProvider
 import com.flipperdevices.bsb.timer.main.composable.BusyButtonComposable
 import com.flipperdevices.bsb.timer.main.composable.StartButtonComposable
 import com.flipperdevices.bsb.timer.main.composable.StopButtonComposable
@@ -34,6 +35,7 @@ import com.flipperdevices.bsb.timer.setup.model.TimerState
 import com.flipperdevices.core.ui.lifecycle.viewModelWithFactoryWithoutRemember
 import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
 import com.flipperdevices.ui.decompose.ScreenDecomposeComponent
+import com.flipperdevices.ui.decompose.statusbar.StatusBarIconStyleProvider
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
@@ -42,9 +44,10 @@ class TimerStopScreenDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     @Assisted initialTimerState: TimerState,
     @Assisted private val onBackParameter: DecomposeOnBackParameter,
+    iconStyleProvider: ThemeStatusBarIconStyleProvider,
     private val busyTimerViewModel: (TimerState, onComplete: () -> Unit) -> BusyTimerViewModel
-) : ScreenDecomposeComponent(componentContext) {
-    val viewModel = viewModelWithFactoryWithoutRemember(initialTimerState) {
+) : ScreenDecomposeComponent(componentContext), StatusBarIconStyleProvider by iconStyleProvider {
+    private val viewModel = viewModelWithFactoryWithoutRemember(initialTimerState) {
         busyTimerViewModel(initialTimerState, onBackParameter::invoke)
     }
 

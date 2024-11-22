@@ -20,11 +20,14 @@ import com.arkivanov.decompose.childContext
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.pushNew
 import com.flipperdevices.bsb.core.theme.LocalPallet
+import com.flipperdevices.bsb.preference.api.PreferenceApi
+import com.flipperdevices.bsb.preference.api.ThemeStatusBarIconStyleProvider
 import com.flipperdevices.bsb.timer.main.composable.BusyButtonComposable
 import com.flipperdevices.bsb.timer.main.composable.StartButtonComposable
 import com.flipperdevices.bsb.timer.main.model.TimerMainNavigationConfig
 import com.flipperdevices.bsb.timer.setup.api.TimerSetupScreenDecomposeComponent
 import com.flipperdevices.ui.decompose.ScreenDecomposeComponent
+import com.flipperdevices.ui.decompose.statusbar.StatusBarIconStyleProvider
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
@@ -32,8 +35,9 @@ import me.tatarka.inject.annotations.Inject
 class TimerMainScreenDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     @Assisted private val navigation: StackNavigation<TimerMainNavigationConfig>,
+    iconStyleProvider: ThemeStatusBarIconStyleProvider,
     private val timerSetupDecomposeComponentFactory: TimerSetupScreenDecomposeComponent.Factory
-) : ScreenDecomposeComponent(componentContext) {
+) : ScreenDecomposeComponent(componentContext), StatusBarIconStyleProvider by iconStyleProvider {
     private val setupDecomposeComponent = timerSetupDecomposeComponentFactory(
         componentContext = childContext("setupTimerDecomposeComponent")
     )
@@ -42,7 +46,6 @@ class TimerMainScreenDecomposeComponentImpl(
     override fun Render(modifier: Modifier) {
         Column(
             modifier
-                .background(LocalPallet.current.black.invert)
         ) {
             Box(
                 Modifier
@@ -55,7 +58,7 @@ class TimerMainScreenDecomposeComponentImpl(
                             bottomStart = 16.dp
                         )
                     )
-                    .background(LocalPallet.current.white.invert)
+                    .background(LocalPallet.current.surface.primary)
                     .statusBarsPadding()
                     .padding(top = 16.dp)
             )
@@ -70,7 +73,7 @@ class TimerMainScreenDecomposeComponentImpl(
                             bottomStart = 0.dp
                         )
                     )
-                    .background(LocalPallet.current.white.invert)
+                    .background(LocalPallet.current.surface.primary)
             ) {
                 setupDecomposeComponent.Render(
                     Modifier

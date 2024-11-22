@@ -21,9 +21,6 @@ import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import busystatusbar.components.bsb.timer.main.impl.generated.resources.Res
-import busystatusbar.components.bsb.timer.main.impl.generated.resources.ic_play
-import busystatusbar.components.bsb.timer.main.impl.generated.resources.timer_main_busy
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.core.ktx.jre.clickableRipple
@@ -36,6 +33,7 @@ import org.jetbrains.compose.resources.stringResource
 fun BusyButtonComposable(
     modifier: Modifier,
     buttonColor: Color,
+    secondColor: Color,
     text: StringResource,
     icon: DrawableResource,
     onClick: () -> Unit
@@ -43,11 +41,11 @@ fun BusyButtonComposable(
     Row(
         modifier
             .clip(RoundedCornerShape(16.dp))
-            .background(LocalPallet.current.black.invert)
+            .background(secondColor)
             .padding(bottom = 24.dp)
             .border(
                 width = 2.dp,
-                color = LocalPallet.current.black.invert,
+                color = secondColor,
                 shape = RoundedCornerShape(16.dp)
             )
             .background(
@@ -65,7 +63,8 @@ fun BusyButtonComposable(
         Icon(
             modifier = Modifier.size(34.dp),
             painter = painterResource(icon),
-            contentDescription = null
+            contentDescription = null,
+            tint = secondColor
         )
         Text(
             modifier = Modifier.padding(start = 12.dp),
@@ -75,7 +74,7 @@ fun BusyButtonComposable(
                     fontSize = 48.sp,
                     fontFamily = LocalBusyBarFonts.current.pragmatica,
                     fontWeight = FontWeight.W500,
-                    color = LocalPallet.current.black.invert,
+                    color = secondColor,
                     lineHeight = 48.sp,
                     lineHeightStyle = LineHeightStyle(
                         alignment = LineHeightStyle.Alignment.Center,

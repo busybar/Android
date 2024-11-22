@@ -62,7 +62,8 @@ fun TimerControlPanelComposable(
                     Res.drawable.ic_pause
                 }
             ),
-            contentDescription = null
+            contentDescription = null,
+            tint = LocalPallet.current.black.invert
         )
         ControlElementComposable(
             text = "+5",

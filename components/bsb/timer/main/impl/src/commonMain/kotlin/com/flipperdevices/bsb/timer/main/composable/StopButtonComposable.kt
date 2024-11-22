@@ -17,6 +17,7 @@ fun StopButtonComposable(
         buttonColor = LocalPallet.current.white.onColor,
         icon = Res.drawable.ic_stop,
         text = Res.string.timer_main_stop,
-        onClick = onClick
+        onClick = onClick,
+        secondColor = LocalPallet.current.black.onColor
     )
 }

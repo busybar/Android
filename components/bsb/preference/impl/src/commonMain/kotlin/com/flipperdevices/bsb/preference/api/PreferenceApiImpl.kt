@@ -40,8 +40,8 @@ class PreferenceApiImpl(
             }
     }
 
-    override fun getBoolean(key: SettingsEnum, default: Boolean): Boolean {
-        return observableSettings.getBoolean(key.key, default)
+    override fun getBoolean(key: SettingsEnum, default: Boolean?): Boolean? {
+        return observableSettings.getBooleanOrNull(key.key) ?: default
     }
 
     override fun <T> getSerializable(
