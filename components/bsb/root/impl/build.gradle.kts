@@ -13,7 +13,7 @@ commonDependencies {
 
     implementation(projects.components.bsb.preference.api)
     implementation(projects.components.bsb.auth.main.api)
+    implementation(projects.components.bsb.timer.main.api)
 
     implementation(libs.decompose)
-
 }

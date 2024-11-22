@@ -1,6 +1,7 @@
 package com.flipperdevices.bsb
 
 import androidx.compose.foundation.background
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -25,7 +26,9 @@ fun App(
     }.collectAsState(false)
 
     BusyBarTheme(isDarkMode) {
-        rootComponent.Render(Modifier
-            .background(LocalPallet.current.surface.primary))
+        rootComponent.Render(
+            Modifier
+                .background(LocalPallet.current.black.invert)
+        )
     }
 }

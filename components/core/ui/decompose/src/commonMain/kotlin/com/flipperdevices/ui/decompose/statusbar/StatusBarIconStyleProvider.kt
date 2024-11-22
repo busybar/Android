@@ -1,5 +1,5 @@
 package com.flipperdevices.ui.decompose.statusbar
 
-internal interface StatusBarIconStyleProvider {
+interface StatusBarIconStyleProvider {
     fun isStatusBarIconLight(systemIsDark: Boolean): Boolean
 }

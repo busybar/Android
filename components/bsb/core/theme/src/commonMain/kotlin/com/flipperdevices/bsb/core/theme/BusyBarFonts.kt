@@ -11,19 +11,36 @@ import org.jetbrains.compose.resources.Font
 
 val LocalBusyBarFonts = compositionLocalOf<BusyBarFonts> { error("No local pallet") }
 
+//TODO: Replace with variable fonts
 data class BusyBarFonts(
     val ppNeueMontreal: FontFamily,
     val jetbrainsMono: FontFamily,
-    val jetbrainsMonoNL: FontFamily
+    val jetbrainsMonoNL: FontFamily,
+    val pragmatica: FontFamily
 )
 
 @Composable
 fun getBusyBarFonts() = BusyBarFonts(
     ppNeueMontreal = getPPNeueMontreal(),
     jetbrainsMono = getJetBrainsMono(),
-    jetbrainsMonoNL = getJetBrainsMonoNL()
+    jetbrainsMonoNL = getJetBrainsMonoNL(),
+    pragmatica = getPragmatica()
 )
 
+
+@Composable
+private fun getPragmatica() = FontFamily(
+    Font(
+        resource = Res.font.pragmatica_500,
+        weight = FontWeight.W500,
+        style = FontStyle.Normal
+    ),
+    Font(
+        resource = Res.font.pragmatica_450,
+        weight = FontWeight.W400,
+        style = FontStyle.Normal
+    ),
+)
 
 @Composable
 private fun getPPNeueMontreal() = FontFamily(
@@ -42,7 +59,6 @@ private fun getPPNeueMontreal() = FontFamily(
         weight = FontWeight.Normal,
         style = FontStyle.Italic
     ),
-
     Font(
         resource = Res.font.ppneuemontreal_light,
         weight = FontWeight.Light,
@@ -53,7 +69,6 @@ private fun getPPNeueMontreal() = FontFamily(
         weight = FontWeight.Light,
         style = FontStyle.Italic
     ),
-
     Font(
         resource = Res.font.ppneuemontreal_medium,
         weight = FontWeight.Medium,
@@ -79,7 +94,6 @@ private fun getPPNeueMontreal() = FontFamily(
         weight = FontWeight.SemiBold,
         style = FontStyle.Italic
     ),
-
     Font(
         resource = Res.font.ppneuemontreal_thin,
         weight = FontWeight.Thin,

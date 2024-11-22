@@ -16,7 +16,7 @@ interface PreferenceApi {
     ): Flow<T>
 
 
-    fun getBoolean(key: SettingsEnum, default: Boolean): Boolean
+    fun getBoolean(key: SettingsEnum, default: Boolean?): Boolean?
     fun <T> getSerializable(
         serializer: DeserializationStrategy<T>,
         key: SettingsEnum,
