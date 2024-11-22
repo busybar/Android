@@ -2,6 +2,7 @@
 agp = "8.6.1"
 androidx-activityCompose = "1.9.3"
 androidx-annotation = "1.9.1"
+appcompat = "1.7.0" # https://developer.android.com/jetpack/androidx/releases/appcompat
 constraintlayout = "0.5.0"
 compose-plugin = "1.7.1"
 kotlin = "2.0.21"
@@ -44,6 +45,7 @@ detekt-ruleset-decompose = { module = "uk.kulikov.detekt.decompose:decompose-det
 constraintlayout = { module = "tech.annexflow.compose:constraintlayout-compose-multiplatform", version.ref = "constraintlayout" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "androidx-annotation" }
+appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 kotlin-inject-ksp = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp", version.ref = "kotlin-inject" }
 kotlin-inject-runtime = { module = "me.tatarka.inject:kotlin-inject-runtime-kmp", version.ref = "kotlin-inject" }
 kotlin-inject-anvil-ksp = { module = "software.amazon.lastmile.kotlin.inject.anvil:compiler", version.ref = "kotlin-inject-anvil" }

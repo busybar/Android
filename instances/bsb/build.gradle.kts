@@ -66,6 +66,7 @@ kotlin {
             implementation(libs.timber)
 
             implementation(projects.components.core.activityholder)
+            implementation(libs.appcompat)
         }
         commonMain.dependencies {
             implementation(compose.runtime)

@@ -1,6 +1,7 @@
 package com.flipperdevices.bsb
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -28,6 +29,7 @@ fun App(
     BusyBarTheme(isDarkMode) {
         rootComponent.Render(
             Modifier
+                .fillMaxSize()
                 .background(LocalPallet.current.black.invert)
         )
     }
