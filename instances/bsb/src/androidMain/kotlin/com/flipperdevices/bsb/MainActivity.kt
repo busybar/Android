@@ -5,7 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.arkivanov.decompose.defaultComponentContext
-import com.flipperdevices.bsb.di.createAppComponent
+import com.flipperdevices.bsb.di.AndroidAppComponent
+import com.flipperdevices.bsb.di.create
 import com.russhwolf.settings.SharedPreferencesSettings
 
 class MainActivity : ComponentActivity() {
@@ -18,9 +19,7 @@ class MainActivity : ComponentActivity() {
         )
     }
     private val appComponent by lazy {
-        createAppComponent(
-            settings
-        )
+        AndroidAppComponent::class.create(settings)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

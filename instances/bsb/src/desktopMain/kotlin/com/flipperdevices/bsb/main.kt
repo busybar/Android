@@ -6,6 +6,7 @@ import androidx.compose.ui.window.rememberWindowState
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
+import com.flipperdevices.bsb.di.DesktopAppComponent
 import com.flipperdevices.bsb.di.createAppComponent
 import com.russhwolf.settings.PreferencesSettings
 import java.util.prefs.Preferences
@@ -16,7 +17,7 @@ fun main() {
 
     val lifecycle = LifecycleRegistry()
     // Always create the root component outside Compose on the UI thread
-    val appComponent = createAppComponent(settings)
+    val appComponent = DesktopAppComponent::class.create(settings)
     val root = runOnUiThread {
         appComponent.rootDecomposeComponentFactory(
             DefaultComponentContext(lifecycle = lifecycle),
