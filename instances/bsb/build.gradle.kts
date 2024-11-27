@@ -130,6 +130,7 @@ compose.desktop {
 commonDependencies {
     implementation(projects.components.core.di)
     implementation(projects.components.core.log)
+    implementation(projects.components.core.ktx)
     implementation(projects.components.core.ui.decompose)
     implementation(projects.components.core.ui.lifecycle)
     implementation(projects.components.bsb.core.theme)

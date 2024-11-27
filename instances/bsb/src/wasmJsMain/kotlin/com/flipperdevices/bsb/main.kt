@@ -9,11 +9,14 @@ import com.arkivanov.essenty.lifecycle.stop
 import com.arkivanov.essenty.statekeeper.StateKeeperDispatcher
 import com.flipperdevices.bsb.di.WasmJSAppComponent
 import com.flipperdevices.bsb.di.create
+import com.flipperdevices.core.ktx.jre.FlipperDispatchers
 import com.russhwolf.settings.StorageSettings
 import com.russhwolf.settings.observable.makeObservable
 import kotlinx.browser.document
 import kotlinx.browser.localStorage
 import kotlinx.browser.window
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import org.w3c.dom.Document
 import org.w3c.dom.get
 import org.w3c.dom.set
@@ -21,10 +24,17 @@ import org.w3c.dom.set
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
     val lifecycle = LifecycleRegistry()
-    val stateKeeper =
-        StateKeeperDispatcher(savedState = localStorage[KEY_SAVED_STATE]?.decodeSerializableContainer())
+    val stateKeeper = StateKeeperDispatcher(
+        savedState = localStorage[KEY_SAVED_STATE]?.decodeSerializableContainer()
+    )
     val settings = StorageSettings().makeObservable()
-    val appComponent = WasmJSAppComponent::class.create(settings)
+    val applicationScope = CoroutineScope(
+        SupervisorJob() + FlipperDispatchers.default
+    )
+    val appComponent = WasmJSAppComponent::class.create(
+        settings,
+        applicationScope
+    )
     val root = appComponent.rootDecomposeComponentFactory(
         DefaultComponentContext(lifecycle = lifecycle),
     )
