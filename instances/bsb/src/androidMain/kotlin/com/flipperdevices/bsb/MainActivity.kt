@@ -5,6 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.arkivanov.decompose.defaultComponentContext
+import com.flipperdevices.bsb.di.AppComponent
+import com.flipperdevices.core.di.ComponentHolder
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,7 +18,7 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
 
-        val appComponent = (application as BSBApplication).appComponent
+        val appComponent = ComponentHolder.component<AppComponent>()
 
         val rootComponent = appComponent.rootDecomposeComponentFactory(
             defaultComponentContext()
