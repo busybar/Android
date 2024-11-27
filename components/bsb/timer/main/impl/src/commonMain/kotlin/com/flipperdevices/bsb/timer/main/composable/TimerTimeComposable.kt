@@ -1,10 +1,6 @@
 package com.flipperdevices.bsb.timer.main.composable
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -19,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
-import com.flipperdevices.bsb.timer.setup.model.TimerState
+import com.flipperdevices.bsb.timer.background.model.TimerState
 
 @Composable
 fun TimerTimeComposable(

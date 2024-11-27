@@ -30,7 +30,7 @@ fun App(
         rootComponent.Render(
             Modifier
                 .fillMaxSize()
-                .background(LocalPallet.current.black.invert)
+                .background(LocalPallet.current.black.onColor)
         )
     }
 }

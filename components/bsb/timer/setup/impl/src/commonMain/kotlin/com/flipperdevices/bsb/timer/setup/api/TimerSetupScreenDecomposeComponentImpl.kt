@@ -3,10 +3,10 @@ package com.flipperdevices.bsb.timer.setup.api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
+import com.flipperdevices.bsb.timer.background.model.TimerState
 import com.flipperdevices.bsb.timer.setup.composable.DEFAULT_MINUTE
 import com.flipperdevices.bsb.timer.setup.composable.DEFAULT_SECOND
 import com.flipperdevices.bsb.timer.setup.composable.TimerSetupComposable
-import com.flipperdevices.bsb.timer.setup.model.TimerState
 import com.flipperdevices.core.di.AppGraph
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

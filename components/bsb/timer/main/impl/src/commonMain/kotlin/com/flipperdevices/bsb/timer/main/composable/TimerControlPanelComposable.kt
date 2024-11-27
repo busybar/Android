@@ -29,7 +29,7 @@ import busystatusbar.components.bsb.timer.main.impl.generated.resources.ic_pause
 import busystatusbar.components.bsb.timer.main.impl.generated.resources.ic_play
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
-import com.flipperdevices.bsb.timer.main.model.TimerAction
+import com.flipperdevices.bsb.timer.background.model.TimerAction
 import com.flipperdevices.core.ktx.jre.clickableRipple
 import org.jetbrains.compose.resources.painterResource
 

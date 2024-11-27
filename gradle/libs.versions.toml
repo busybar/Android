@@ -27,6 +27,7 @@ detekt-ruleset-compose = "0.4.17" # https://github.com/mrmans0n/compose-rules/re
 detekt-ruleset-decompose = "1.0.1" # https://github.com/LionZXY/detekt-decompose-rule/releases
 buildkonfig = "5.4.0"
 atomicflu = "0.26.0" # https://github.com/Kotlin/kotlinx-atomicfu
+lifecycle = "2.8.7" # https://developer.android.com/jetpack/androidx/releases/lifecycle
 
 [libraries]
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -65,6 +66,8 @@ kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", 
 essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
 essenty-lifecycle-coroutines = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "essenty" }
 markdown-renderer = { module = "com.mikepenz:multiplatform-markdown-renderer", version.ref = "markdown" }
+
+androidx-lifecycle = { module = "androidx.lifecycle:lifecycle-service", version.ref = "lifecycle" }
 
 settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "settings" }
 settings-observable = { module = "com.russhwolf:multiplatform-settings-make-observable", version.ref = "settings" }

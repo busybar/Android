@@ -1,9 +1,8 @@
 package com.flipperdevices.bsb.timer.setup.api
 
 import com.arkivanov.decompose.ComponentContext
-import com.flipperdevices.bsb.timer.setup.model.TimerState
+import com.flipperdevices.bsb.timer.background.model.TimerState
 import com.flipperdevices.ui.decompose.ElementDecomposeComponent
-import com.flipperdevices.ui.decompose.ScreenDecomposeComponent
 import kotlinx.coroutines.flow.StateFlow
 
 abstract class TimerSetupScreenDecomposeComponent(

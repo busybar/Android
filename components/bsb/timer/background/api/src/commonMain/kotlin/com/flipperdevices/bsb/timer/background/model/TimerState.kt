@@ -1,4 +1,4 @@
-package com.flipperdevices.bsb.timer.setup.model
+package com.flipperdevices.bsb.timer.background.model
 
 import kotlinx.serialization.Serializable
 

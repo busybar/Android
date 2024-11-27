@@ -4,11 +4,20 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.replaceAll
+import com.arkivanov.essenty.lifecycle.coroutines.coroutineScope
+import com.arkivanov.essenty.lifecycle.coroutines.withLifecycle
+import com.flipperdevices.bsb.timer.background.api.TimerApi
+import com.flipperdevices.bsb.timer.background.model.ControlledTimerState
+import com.flipperdevices.bsb.timer.background.model.TimerState
 import com.flipperdevices.bsb.timer.main.model.TimerMainNavigationConfig
-import com.flipperdevices.bsb.timer.setup.model.TimerState
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.ui.decompose.DecomposeComponent
 import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.withContext
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
@@ -21,16 +30,25 @@ class TimerMainDecomposeComponentImpl(
         navigation: StackNavigation<TimerMainNavigationConfig>
     ) -> TimerMainScreenDecomposeComponentImpl,
     private val timerStopDecomposeComponent: (
-        componentContext: ComponentContext,
-        initialTimerState: TimerState,
-        onBackParameter: DecomposeOnBackParameter
-    ) -> TimerStopScreenDecomposeComponentImpl
+        componentContext: ComponentContext
+    ) -> TimerStopScreenDecomposeComponentImpl,
+    timerApi: TimerApi
 ) : TimerMainDecomposeComponent<TimerMainNavigationConfig>(),
     ComponentContext by componentContext {
+
+    init {
+        timerApi.getState()
+            .onEach { timerState ->
+                withContext(Dispatchers.Main) {
+                    navigation.replaceAll(timerState.getScreen())
+                }
+            }.launchIn(coroutineScope())
+    }
+
     override val stack = childStack(
         source = navigation,
         serializer = TimerMainNavigationConfig.serializer(),
-        initialConfiguration = TimerMainNavigationConfig.Main,
+        initialConfiguration = timerApi.getState().value.getScreen(),
         handleBackButton = true,
         childFactory = ::child,
     )
@@ -40,11 +58,7 @@ class TimerMainDecomposeComponentImpl(
         componentContext: ComponentContext
     ): DecomposeComponent = when (config) {
         TimerMainNavigationConfig.Main -> mainScreenDecomposeComponent(componentContext, navigation)
-        is TimerMainNavigationConfig.Timer -> timerStopDecomposeComponent(
-            componentContext,
-            config.timer,
-            navigation::pop
-        )
+        TimerMainNavigationConfig.Timer -> timerStopDecomposeComponent(componentContext)
     }
 
     @Inject
@@ -57,5 +71,13 @@ class TimerMainDecomposeComponentImpl(
         override fun invoke(
             componentContext: ComponentContext
         ) = factory(componentContext)
+    }
+}
+
+private fun ControlledTimerState?.getScreen(): TimerMainNavigationConfig {
+    return if (this == null) {
+        TimerMainNavigationConfig.Main
+    } else {
+        TimerMainNavigationConfig.Timer
     }
 }
