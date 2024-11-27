@@ -7,7 +7,7 @@ import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.flipperdevices.bsb.di.DesktopAppComponent
-import com.flipperdevices.bsb.di.createAppComponent
+import com.flipperdevices.bsb.di.create
 import com.russhwolf.settings.PreferencesSettings
 import java.util.prefs.Preferences
 

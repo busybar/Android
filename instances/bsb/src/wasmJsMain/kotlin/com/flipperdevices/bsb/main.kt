@@ -7,7 +7,8 @@ import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.arkivanov.essenty.lifecycle.resume
 import com.arkivanov.essenty.lifecycle.stop
 import com.arkivanov.essenty.statekeeper.StateKeeperDispatcher
-import com.flipperdevices.bsb.di.createAppComponent
+import com.flipperdevices.bsb.di.WasmJSAppComponent
+import com.flipperdevices.bsb.di.create
 import com.russhwolf.settings.StorageSettings
 import com.russhwolf.settings.observable.makeObservable
 import kotlinx.browser.document
@@ -23,7 +24,7 @@ fun main() {
     val stateKeeper =
         StateKeeperDispatcher(savedState = localStorage[KEY_SAVED_STATE]?.decodeSerializableContainer())
     val settings = StorageSettings().makeObservable()
-    val appComponent = createAppComponent(settings)
+    val appComponent = WasmJSAppComponent::class.create(settings)
     val root = appComponent.rootDecomposeComponentFactory(
         DefaultComponentContext(lifecycle = lifecycle),
     )
