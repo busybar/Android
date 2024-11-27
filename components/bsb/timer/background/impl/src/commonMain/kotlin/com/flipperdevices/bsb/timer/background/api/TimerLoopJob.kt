@@ -106,10 +106,10 @@ fun TimerState.add(timerState: TimerState): TimerState {
     val secondsInMinute = 1.minutes.inWholeSeconds.toInt()
     if (seconds < 0) {
         minutes -= 1
-        seconds += secondsInMinute + seconds
+        seconds += secondsInMinute
     } else if (seconds >= secondsInMinute) {
         minutes += seconds.div(secondsInMinute)
-        seconds += seconds.mod(secondsInMinute)
+        seconds = seconds.mod(secondsInMinute)
     }
 
     return TimerState(

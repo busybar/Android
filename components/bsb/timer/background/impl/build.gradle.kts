@@ -18,3 +18,7 @@ commonDependencies {
 androidDependencies {
     implementation(libs.androidx.lifecycle)
 }
+
+commonTestDependencies {
+    implementation(libs.kotlin.test)
+}
