@@ -1,4 +1,4 @@
-package com.flipperdevices.bsb.timer.background.api
+package com.flipperdevices.bsb.timer.background.api.delegates
 
 import com.flipperdevices.bsb.timer.background.model.InternalControlledTimerState
 import com.flipperdevices.bsb.timer.background.model.TimerAction

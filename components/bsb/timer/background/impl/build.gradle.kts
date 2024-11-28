@@ -14,9 +14,12 @@ commonDependencies {
 
     implementation(libs.kotlin.coroutines)
     implementation(libs.kotlin.datetime)
+    implementation(libs.kotlin.immutable)
 }
 
 androidDependencies {
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle)
     implementation(libs.kotlin.serialization.json)
 }

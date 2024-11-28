@@ -7,7 +7,7 @@ import android.content.ServiceConnection
 import android.os.IBinder
 import com.flipperdevices.bsb.timer.background.model.ControlledTimerState
 import com.flipperdevices.bsb.timer.background.model.TimerAction
-import com.flipperdevices.bsb.timer.background.model.TimerServiceActionEnum
+import com.flipperdevices.bsb.timer.background.service.TimerServiceActionEnum
 import com.flipperdevices.bsb.timer.background.model.TimerState
 import com.flipperdevices.bsb.timer.background.service.EXTRA_KEY_TIMER_ACTION
 import com.flipperdevices.bsb.timer.background.service.EXTRA_KEY_TIMER_STATE
