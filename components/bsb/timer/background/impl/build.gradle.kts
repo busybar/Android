@@ -2,6 +2,7 @@ plugins {
     id("flipper.multiplatform")
     id("flipper.multiplatform-dependencies")
     id("flipper.anvil-multiplatform")
+    id("kotlinx-serialization")
 }
 
 commonDependencies {
@@ -17,6 +18,7 @@ commonDependencies {
 
 androidDependencies {
     implementation(libs.androidx.lifecycle)
+    implementation(libs.kotlin.serialization.json)
 }
 
 commonTestDependencies {

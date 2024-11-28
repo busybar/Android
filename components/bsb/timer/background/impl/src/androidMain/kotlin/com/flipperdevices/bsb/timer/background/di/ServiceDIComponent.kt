@@ -7,5 +7,5 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesTo
 
 @ContributesTo(AppGraph::class)
 interface ServiceDIComponent {
-    val timerApi: CommonTimerApi
+    val commonTimerApi: CommonTimerApi
 }
