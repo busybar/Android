@@ -6,8 +6,12 @@ import androidx.compose.ui.window.rememberWindowState
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
-import com.flipperdevices.bsb.di.createAppComponent
+import com.flipperdevices.bsb.di.DesktopAppComponent
+import com.flipperdevices.bsb.di.create
+import com.flipperdevices.core.ktx.jre.FlipperDispatchers
 import com.russhwolf.settings.PreferencesSettings
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import java.util.prefs.Preferences
 
 fun main() {
@@ -15,8 +19,13 @@ fun main() {
     val settings = PreferencesSettings(preferences)
 
     val lifecycle = LifecycleRegistry()
+    val applicationScope = CoroutineScope(
+        SupervisorJob() + FlipperDispatchers.default
+    )
     // Always create the root component outside Compose on the UI thread
-    val appComponent = createAppComponent(settings)
+    val appComponent = DesktopAppComponent::class.create(
+        settings, applicationScope
+    )
     val root = runOnUiThread {
         appComponent.rootDecomposeComponentFactory(
             DefaultComponentContext(lifecycle = lifecycle),

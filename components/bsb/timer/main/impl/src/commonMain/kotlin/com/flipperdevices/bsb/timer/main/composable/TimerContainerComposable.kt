@@ -20,15 +20,15 @@ import busystatusbar.components.bsb.timer.main.impl.generated.resources.ic_play
 import busystatusbar.components.bsb.timer.main.impl.generated.resources.timer_main_stop_active
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
-import com.flipperdevices.bsb.timer.main.model.TimerAction
-import com.flipperdevices.bsb.timer.main.model.TimerControlledState
+import com.flipperdevices.bsb.timer.background.model.ControlledTimerState
+import com.flipperdevices.bsb.timer.background.model.TimerAction
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun TimerContainerComposable(
     modifier: Modifier,
-    timerState: TimerControlledState,
+    timerState: ControlledTimerState,
     onAction: (TimerAction) -> Unit
 ) {
     ConstraintLayout(
@@ -58,7 +58,7 @@ fun TimerContainerComposable(
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
             },
-            isOnPause = timerState.pauseOn != null,
+            isOnPause = timerState.isOnPause,
             onAction = onAction
         )
     }

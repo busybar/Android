@@ -2,6 +2,7 @@
 agp = "8.6.1"
 androidx-activityCompose = "1.9.3"
 androidx-annotation = "1.9.1"
+androidx-core = "1.15.0"
 appcompat = "1.7.0" # https://developer.android.com/jetpack/androidx/releases/appcompat
 constraintlayout = "0.5.0"
 compose-plugin = "1.7.1"
@@ -9,6 +10,7 @@ kotlin = "2.0.21"
 kotlin-coroutines = "1.9.0"
 kotlin-serialization-runtime = "1.7.3"
 kotlin-datetime = "0.6.1" # https://github.com/Kotlin/kotlinx-datetime/releases
+kotlin-immutable = "0.3.8"
 ksp = "2.0.21-1.0.26"
 kotlin-inject = "0.7.2"
 kotlin-inject-anvil = "0.1.0"
@@ -27,6 +29,7 @@ detekt-ruleset-compose = "0.4.17" # https://github.com/mrmans0n/compose-rules/re
 detekt-ruleset-decompose = "1.0.1" # https://github.com/LionZXY/detekt-decompose-rule/releases
 buildkonfig = "5.4.0"
 atomicflu = "0.26.0" # https://github.com/Kotlin/kotlinx-atomicfu
+lifecycle = "2.8.7" # https://developer.android.com/jetpack/androidx/releases/lifecycle
 
 [libraries]
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -45,6 +48,8 @@ detekt-ruleset-decompose = { module = "uk.kulikov.detekt.decompose:decompose-det
 constraintlayout = { module = "tech.annexflow.compose:constraintlayout-compose-multiplatform", version.ref = "constraintlayout" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "androidx-annotation" }
+androidx-core = { module = "androidx.core:core", version.ref = "androidx-core" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 kotlin-inject-ksp = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp", version.ref = "kotlin-inject" }
 kotlin-inject-runtime = { module = "me.tatarka.inject:kotlin-inject-runtime-kmp", version.ref = "kotlin-inject" }
@@ -61,10 +66,14 @@ identity = { module = "com.google.android.libraries.identity.googleid:googleid",
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization-runtime" }
 kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlin-datetime" }
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlin-coroutines" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlin-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlin-immutable" }
 
 essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
 essenty-lifecycle-coroutines = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "essenty" }
 markdown-renderer = { module = "com.mikepenz:multiplatform-markdown-renderer", version.ref = "markdown" }
+
+androidx-lifecycle = { module = "androidx.lifecycle:lifecycle-service", version.ref = "lifecycle" }
 
 settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "settings" }
 settings-observable = { module = "com.russhwolf:multiplatform-settings-make-observable", version.ref = "settings" }

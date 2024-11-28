@@ -1,0 +1,16 @@
+package com.flipperdevices.bsb.di
+
+import com.flipperdevices.core.di.AppGraph
+import com.russhwolf.settings.ObservableSettings
+import kotlinx.coroutines.CoroutineScope
+import me.tatarka.inject.annotations.Provides
+import software.amazon.lastmile.kotlin.inject.anvil.MergeComponent
+import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
+
+@MergeComponent(AppGraph::class)
+@SingleIn(AppGraph::class)
+abstract class DesktopAppComponent(
+    override val observableSettings: ObservableSettings,
+    override val scope: CoroutineScope
+) : AppComponent {
+}

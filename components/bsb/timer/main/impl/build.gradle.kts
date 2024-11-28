@@ -17,8 +17,10 @@ commonDependencies {
 
     implementation(projects.components.bsb.preference.api)
     implementation(projects.components.bsb.timer.setup.api)
+    implementation(projects.components.bsb.timer.background.api)
 
     implementation(libs.decompose)
+    implementation(libs.essenty.lifecycle.coroutines)
     implementation(libs.constraintlayout)
     implementation(libs.kotlin.datetime)
 }

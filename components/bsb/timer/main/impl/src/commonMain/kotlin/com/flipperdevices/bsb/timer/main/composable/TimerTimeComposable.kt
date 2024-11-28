@@ -3,8 +3,9 @@ package com.flipperdevices.bsb.timer.main.composable
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -19,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
-import com.flipperdevices.bsb.timer.setup.model.TimerState
+import com.flipperdevices.bsb.timer.background.model.TimerState
 
 @Composable
 fun TimerTimeComposable(
@@ -48,21 +49,29 @@ private fun TimerNumberComposable(number: Int) {
     } else number.toString()
     Row {
         numberText.forEach { symbol ->
-            Text(
-                modifier = Modifier
-                    .padding(top = 2.dp)
-                    .width(64.dp)
-                    .wrapContentHeight(
-                        align = Alignment.CenterVertically, // aligns to the center vertically (default value)
-                        unbounded = true // Makes sense if the container size less than text's height
-                    ),
-                text = symbol.toString(),
-                fontSize = 100.sp,
-                color = LocalPallet.current.black.invert,
-                fontWeight = FontWeight.W500,
-                fontFamily = LocalBusyBarFonts.current.pragmatica,
-                textAlign = TextAlign.Center
-            )
+            AnimatedContent(
+                targetState = symbol,
+                transitionSpec = {
+                    slideInVertically { height -> height } + fadeIn() togetherWith
+                            slideOutVertically { height -> -height } + fadeOut()
+                }
+            ) {
+                Text(
+                    modifier = Modifier
+                        .padding(top = 2.dp)
+                        .width(64.dp)
+                        .wrapContentHeight(
+                            align = Alignment.CenterVertically, // aligns to the center vertically (default value)
+                            unbounded = true // Makes sense if the container size less than text's height
+                        ),
+                    text = symbol.toString(),
+                    fontSize = 100.sp,
+                    color = LocalPallet.current.black.invert,
+                    fontWeight = FontWeight.W500,
+                    fontFamily = LocalBusyBarFonts.current.pragmatica,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 }

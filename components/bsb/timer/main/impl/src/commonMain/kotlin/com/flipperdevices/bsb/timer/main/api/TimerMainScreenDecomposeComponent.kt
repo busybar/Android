@@ -22,6 +22,7 @@ import com.arkivanov.decompose.router.stack.pushNew
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.preference.api.PreferenceApi
 import com.flipperdevices.bsb.preference.api.ThemeStatusBarIconStyleProvider
+import com.flipperdevices.bsb.timer.background.api.TimerApi
 import com.flipperdevices.bsb.timer.main.composable.BusyButtonComposable
 import com.flipperdevices.bsb.timer.main.composable.StartButtonComposable
 import com.flipperdevices.bsb.timer.main.model.TimerMainNavigationConfig
@@ -36,7 +37,8 @@ class TimerMainScreenDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     @Assisted private val navigation: StackNavigation<TimerMainNavigationConfig>,
     iconStyleProvider: ThemeStatusBarIconStyleProvider,
-    private val timerSetupDecomposeComponentFactory: TimerSetupScreenDecomposeComponent.Factory
+    timerSetupDecomposeComponentFactory: TimerSetupScreenDecomposeComponent.Factory,
+    private val timerApi: TimerApi
 ) : ScreenDecomposeComponent(componentContext), StatusBarIconStyleProvider by iconStyleProvider {
     private val setupDecomposeComponent = timerSetupDecomposeComponentFactory(
         componentContext = childContext("setupTimerDecomposeComponent")
@@ -90,7 +92,7 @@ class TimerMainScreenDecomposeComponentImpl(
                             end = 16.dp
                         ),
                     onClick = {
-                        navigation.pushNew(TimerMainNavigationConfig.Timer(state))
+                        timerApi.startTimer(state)
                     }
                 )
             }

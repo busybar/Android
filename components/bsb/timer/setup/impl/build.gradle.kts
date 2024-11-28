@@ -11,6 +11,8 @@ commonDependencies {
     implementation(projects.components.bsb.core.theme)
     implementation(projects.components.core.ui.decompose)
 
+    implementation(projects.components.bsb.timer.background.api)
+
     implementation(libs.decompose)
     implementation(libs.kotlin.datetime)
 }
