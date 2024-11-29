@@ -52,6 +52,8 @@ include(
     ":components:bsb:preferencescreen:impl",
     ":components:bsb:cloud:api",
     ":components:bsb:cloud:impl",
+    ":components:bsb:dnd:api",
+    ":components:bsb:dnd:impl",
 
     ":components:bsb:auth:common",
     ":components:bsb:auth:main:impl",

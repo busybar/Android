@@ -14,6 +14,7 @@ commonDependencies {
     implementation(projects.components.bsb.core.theme)
 
     implementation(projects.components.bsb.preference.api)
+    implementation(projects.components.bsb.dnd.api)
 
     implementation(libs.decompose)
 }

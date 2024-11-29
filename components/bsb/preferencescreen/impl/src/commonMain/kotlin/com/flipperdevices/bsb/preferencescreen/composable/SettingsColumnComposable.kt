@@ -17,7 +17,8 @@ import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.pr
 
 @Composable
 fun SettingsColumnComposable(
-    modifier: Modifier
+    modifier: Modifier,
+    onRequestDND: () -> Unit
 ) {
     Column(
         modifier,
@@ -29,7 +30,7 @@ fun SettingsColumnComposable(
             title = Res.string.preference_notification_title,
             description = Res.string.preference_notification_desc,
             enabled = dndEnabled,
-            onSwitch = { dndEnabled = it }
+            onSwitch = { onRequestDND() }
         )
 
         var appBlockerEnabled by remember { mutableStateOf(false) }

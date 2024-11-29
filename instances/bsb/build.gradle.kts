@@ -143,6 +143,8 @@ commonDependencies {
     implementation(projects.components.bsb.preferencescreen.impl)
     implementation(projects.components.bsb.cloud.api)
     implementation(projects.components.bsb.cloud.impl)
+    implementation(projects.components.bsb.dnd.api)
+    implementation(projects.components.bsb.dnd.impl)
 
     implementation(projects.components.bsb.auth.main.api)
     implementation(projects.components.bsb.auth.main.impl)

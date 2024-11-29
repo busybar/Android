@@ -30,7 +30,8 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun PreferenceScreenComposable(
-    modifier: Modifier
+    modifier: Modifier,
+    onRequestDND: () -> Unit
 ) {
     Column(
         modifier
@@ -88,7 +89,8 @@ fun PreferenceScreenComposable(
             SettingsColumnComposable(
                 modifier = Modifier
                     .padding(vertical = 24.dp, horizontal = 16.dp)
-                    .weight(1f)
+                    .weight(1f),
+                onRequestDND = onRequestDND
             )
         }
     }
