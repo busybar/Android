@@ -1,8 +1,16 @@
 package com.flipperdevices.bsb.root.api
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.extensions.compose.stack.Children
+import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pushNew
 import com.flipperdevices.bsb.auth.main.api.AuthDecomposeComponent
+import com.flipperdevices.bsb.preferencescreen.api.PreferenceScreenDecomposeComponent
 import com.flipperdevices.bsb.root.model.RootNavigationConfig
 import com.flipperdevices.bsb.timer.main.api.TimerMainDecomposeComponent
 import com.flipperdevices.core.di.AppGraph
@@ -15,7 +23,8 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 class RootDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     private val authDecomposeComponentFactory: AuthDecomposeComponent.Factory,
-    private val timerMainDecomposeComponentFactory: TimerMainDecomposeComponent.Factory
+    private val timerMainDecomposeComponentFactory: TimerMainDecomposeComponent.Factory,
+    private val preferenceScreenComponentFactory: PreferenceScreenDecomposeComponent.Factory
 ) : RootDecomposeComponent(),
     ComponentContext by componentContext {
     override val stack = childStack(
@@ -37,8 +46,31 @@ class RootDecomposeComponentImpl(
         RootNavigationConfig.Timer -> timerMainDecomposeComponentFactory(
             componentContext
         )
+
+        RootNavigationConfig.Settings -> preferenceScreenComponentFactory(
+            componentContext
+        )
     }
 
+    @Composable
+    override fun Render(modifier: Modifier) {
+        val childStack by stack.subscribeAsState()
+
+        CompositionLocalProvider(
+            LocalRootNavigation provides this
+        ) {
+            Children(
+                modifier = modifier,
+                stack = childStack,
+            ) {
+                it.instance.Render(Modifier)
+            }
+        }
+    }
+
+    override fun push(config: RootNavigationConfig) {
+        navigation.pushNew(config)
+    }
 
     @Inject
     @ContributesBinding(AppGraph::class, RootDecomposeComponent.Factory::class)

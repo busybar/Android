@@ -15,6 +15,7 @@ commonDependencies {
     implementation(projects.components.core.ui.decompose)
     implementation(projects.components.core.ui.lifecycle)
 
+    implementation(projects.components.bsb.root.api)
     implementation(projects.components.bsb.preference.api)
     implementation(projects.components.bsb.timer.setup.api)
     implementation(projects.components.bsb.timer.active.api)

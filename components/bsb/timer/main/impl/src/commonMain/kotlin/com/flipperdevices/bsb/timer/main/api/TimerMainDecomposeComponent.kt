@@ -28,7 +28,6 @@ class TimerMainDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     private val mainScreenDecomposeComponent: (
         componentContext: ComponentContext,
-        navigation: StackNavigation<TimerMainNavigationConfig>
     ) -> TimerMainScreenDecomposeComponentImpl,
     private val timerStopDecomposeComponent: ActiveTimerScreenDecomposeComponent.Factory,
     timerApi: TimerApi
@@ -56,7 +55,7 @@ class TimerMainDecomposeComponentImpl(
         config: TimerMainNavigationConfig,
         componentContext: ComponentContext
     ): DecomposeComponent = when (config) {
-        TimerMainNavigationConfig.Main -> mainScreenDecomposeComponent(componentContext, navigation)
+        TimerMainNavigationConfig.Main -> mainScreenDecomposeComponent(componentContext)
         TimerMainNavigationConfig.Timer -> timerStopDecomposeComponent(componentContext)
     }
 

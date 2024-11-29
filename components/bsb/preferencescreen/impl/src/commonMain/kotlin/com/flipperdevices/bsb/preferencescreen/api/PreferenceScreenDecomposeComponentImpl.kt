@@ -3,27 +3,32 @@ package com.flipperdevices.bsb.preferencescreen.api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
+import com.flipperdevices.bsb.preference.api.ThemeStatusBarIconStyleProvider
+import com.flipperdevices.bsb.preferencescreen.composable.PreferenceScreenComposable
 import com.flipperdevices.core.di.AppGraph
+import com.flipperdevices.ui.decompose.statusbar.StatusBarIconStyleProvider
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 
 @Inject
-class PreferenceScreenScreenDecomposeComponentImpl(
+class PreferenceScreenDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
-) : PreferenceScreenScreenDecomposeComponent(componentContext) {
+    private val statusBarIconStyleProvider: ThemeStatusBarIconStyleProvider
+) : PreferenceScreenDecomposeComponent(componentContext),
+    StatusBarIconStyleProvider by statusBarIconStyleProvider {
     @Composable
     override fun Render(modifier: Modifier) {
-
+        PreferenceScreenComposable(modifier)
     }
 
     @Inject
-    @ContributesBinding(AppGraph::class, PreferenceScreenScreenDecomposeComponent.Factory::class)
+    @ContributesBinding(AppGraph::class, PreferenceScreenDecomposeComponent.Factory::class)
     class Factory(
         private val factory: (
             componentContext: ComponentContext
-        ) -> PreferenceScreenScreenDecomposeComponentImpl
-    ) : PreferenceScreenScreenDecomposeComponent.Factory {
+        ) -> PreferenceScreenDecomposeComponentImpl
+    ) : PreferenceScreenDecomposeComponent.Factory {
         override fun invoke(
             componentContext: ComponentContext
         ) = factory(componentContext)

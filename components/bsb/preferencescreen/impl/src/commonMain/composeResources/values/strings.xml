@@ -1,0 +1,7 @@
+<resources>
+    <string name="preference_title">Settings</string>
+    <string name="preference_notification_title">Notification blocker</string>
+    <string name="preference_notification_desc">Notifications will be automatically blocked when BUSY mode is activated</string>
+    <string name="preference_app_blocker_title">App blocker</string>
+    <string name="preference_app_blocker_desc">Distracting apps will be automatically blocked when BUSY mode is activated</string>
+</resources>
