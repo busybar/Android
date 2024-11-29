@@ -1,7 +1,6 @@
-package com.flipperdevices.bsb.timer.main.composable
+package com.flipperdevices.bsb.timer.active.composable
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,9 +14,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import busystatusbar.components.bsb.timer.main.impl.generated.resources.Res
-import busystatusbar.components.bsb.timer.main.impl.generated.resources.ic_play
-import busystatusbar.components.bsb.timer.main.impl.generated.resources.timer_main_stop_active
+import busystatusbar.components.bsb.timer.active.impl.generated.resources.Res
+import busystatusbar.components.bsb.timer.active.impl.generated.resources.timer_active_stop_active
+import busystatusbar.components.bsb.timer.common.generated.resources.ic_play
+import busystatusbar.components.bsb.timer.common.generated.resources.Res as CommonRes
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.timer.background.model.ControlledTimerState
@@ -75,12 +75,12 @@ private fun TimerActiveTextComposable(modifier: Modifier) {
             modifier = Modifier
                 .padding(end = 12.dp)
                 .size(24.dp),
-            painter = painterResource(Res.drawable.ic_play),
+            painter = painterResource(CommonRes.drawable.ic_play),
             contentDescription = null,
             tint = LocalPallet.current.black.invert
         )
         Text(
-            text = stringResource(Res.string.timer_main_stop_active),
+            text = stringResource(Res.string.timer_active_stop_active),
             fontSize = 32.sp,
             color = LocalPallet.current.black.invert,
             fontWeight = FontWeight.W500,

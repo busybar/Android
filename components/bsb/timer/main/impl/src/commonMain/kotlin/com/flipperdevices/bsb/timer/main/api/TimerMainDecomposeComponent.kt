@@ -7,6 +7,7 @@ import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.replaceAll
 import com.arkivanov.essenty.lifecycle.coroutines.coroutineScope
 import com.arkivanov.essenty.lifecycle.coroutines.withLifecycle
+import com.flipperdevices.bsb.timer.active.api.ActiveTimerScreenDecomposeComponent
 import com.flipperdevices.bsb.timer.background.api.TimerApi
 import com.flipperdevices.bsb.timer.background.model.ControlledTimerState
 import com.flipperdevices.bsb.timer.background.model.TimerState
@@ -29,9 +30,7 @@ class TimerMainDecomposeComponentImpl(
         componentContext: ComponentContext,
         navigation: StackNavigation<TimerMainNavigationConfig>
     ) -> TimerMainScreenDecomposeComponentImpl,
-    private val timerStopDecomposeComponent: (
-        componentContext: ComponentContext
-    ) -> TimerStopScreenDecomposeComponentImpl,
+    private val timerStopDecomposeComponent: ActiveTimerScreenDecomposeComponent.Factory,
     timerApi: TimerApi
 ) : TimerMainDecomposeComponent<TimerMainNavigationConfig>(),
     ComponentContext by componentContext {

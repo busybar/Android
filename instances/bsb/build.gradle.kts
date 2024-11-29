@@ -155,6 +155,8 @@ commonDependencies {
     implementation(projects.components.bsb.timer.main.impl)
     implementation(projects.components.bsb.timer.background.api)
     implementation(projects.components.bsb.timer.background.impl)
+    implementation(projects.components.bsb.timer.active.api)
+    implementation(projects.components.bsb.timer.active.impl)
 }
 
 dependencies {

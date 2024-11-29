@@ -1,0 +1,4 @@
+<resources>
+    <string name="timer_active_stop">STOP</string>
+    <string name="timer_active_stop_active">BUSY is active</string>
+</resources>
