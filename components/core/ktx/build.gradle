@@ -10,3 +10,7 @@ commonDependencies {
     implementation(libs.kotlin.coroutines)
     implementation(libs.kotlin.datetime)
 }
+
+androidDependencies {
+    implementation(libs.androidx.core.ktx)
+}

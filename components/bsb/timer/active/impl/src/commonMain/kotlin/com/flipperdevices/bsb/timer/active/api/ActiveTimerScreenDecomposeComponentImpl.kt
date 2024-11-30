@@ -1,4 +1,4 @@
-package com.flipperdevices.bsb.timer.main.api
+package com.flipperdevices.bsb.timer.active.api
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -18,22 +18,21 @@ import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.ComponentContext
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.preference.api.ThemeStatusBarIconStyleProvider
+import com.flipperdevices.bsb.timer.active.composable.StopButtonComposable
+import com.flipperdevices.bsb.timer.active.composable.TimerContainerComposable
 import com.flipperdevices.bsb.timer.background.api.TimerApi
-import com.flipperdevices.bsb.timer.background.model.TimerState
-import com.flipperdevices.bsb.timer.main.composable.StopButtonComposable
-import com.flipperdevices.bsb.timer.main.composable.TimerContainerComposable
-import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
-import com.flipperdevices.ui.decompose.ScreenDecomposeComponent
+import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.ui.decompose.statusbar.StatusBarIconStyleProvider
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
+import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 
 @Inject
-class TimerStopScreenDecomposeComponentImpl(
+class ActiveTimerScreenDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     iconStyleProvider: ThemeStatusBarIconStyleProvider,
     private val timerApi: TimerApi
-) : ScreenDecomposeComponent(componentContext), StatusBarIconStyleProvider by iconStyleProvider {
+) : ActiveTimerScreenDecomposeComponent(componentContext), StatusBarIconStyleProvider by iconStyleProvider {
     @Composable
     override fun Render(modifier: Modifier) {
         Column(
@@ -91,5 +90,17 @@ class TimerStopScreenDecomposeComponentImpl(
                 )
             }
         }
+    }
+
+    @Inject
+    @ContributesBinding(AppGraph::class, ActiveTimerScreenDecomposeComponent.Factory::class)
+    class Factory(
+        private val factory: (
+            componentContext: ComponentContext
+        ) -> ActiveTimerScreenDecomposeComponentImpl
+    ) : ActiveTimerScreenDecomposeComponent.Factory {
+        override fun invoke(
+            componentContext: ComponentContext
+        ) = factory(componentContext)
     }
 }

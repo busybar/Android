@@ -1,4 +1,4 @@
-package com.flipperdevices.bsb.timer.main.composable
+package com.flipperdevices.bsb.timer.active.composable
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn

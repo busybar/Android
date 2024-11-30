@@ -114,6 +114,7 @@ class TimerForegroundService : LifecycleService(), LogTagProvider, TimerStateLis
 
     private fun stopServiceInternal() {
         stopForeground(STOP_FOREGROUND_REMOVE)
+        notificationManager.cancel(NOTIFICATION_ID)
         stopSelf()
     }
 

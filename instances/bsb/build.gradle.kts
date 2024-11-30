@@ -139,8 +139,12 @@ commonDependencies {
     implementation(projects.components.bsb.root.impl)
     implementation(projects.components.bsb.preference.api)
     implementation(projects.components.bsb.preference.impl)
+    implementation(projects.components.bsb.preferencescreen.api)
+    implementation(projects.components.bsb.preferencescreen.impl)
     implementation(projects.components.bsb.cloud.api)
     implementation(projects.components.bsb.cloud.impl)
+    implementation(projects.components.bsb.dnd.api)
+    implementation(projects.components.bsb.dnd.impl)
 
     implementation(projects.components.bsb.auth.main.api)
     implementation(projects.components.bsb.auth.main.impl)
@@ -155,6 +159,8 @@ commonDependencies {
     implementation(projects.components.bsb.timer.main.impl)
     implementation(projects.components.bsb.timer.background.api)
     implementation(projects.components.bsb.timer.background.impl)
+    implementation(projects.components.bsb.timer.active.api)
+    implementation(projects.components.bsb.timer.active.impl)
 }
 
 dependencies {

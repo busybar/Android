@@ -48,8 +48,12 @@ include(
     ":components:bsb:root:impl",
     ":components:bsb:preference:api",
     ":components:bsb:preference:impl",
+    ":components:bsb:preferencescreen:api",
+    ":components:bsb:preferencescreen:impl",
     ":components:bsb:cloud:api",
     ":components:bsb:cloud:impl",
+    ":components:bsb:dnd:api",
+    ":components:bsb:dnd:impl",
 
     ":components:bsb:auth:common",
     ":components:bsb:auth:main:impl",
@@ -60,10 +64,13 @@ include(
     ":components:bsb:auth:signup:api",
     ":components:bsb:auth:signup:impl",
 
+    ":components:bsb:timer:common",
     ":components:bsb:timer:setup:api",
     ":components:bsb:timer:setup:impl",
     ":components:bsb:timer:main:api",
     ":components:bsb:timer:main:impl",
     ":components:bsb:timer:background:api",
     ":components:bsb:timer:background:impl",
+    ":components:bsb:timer:active:api",
+    ":components:bsb:timer:active:impl",
 )
