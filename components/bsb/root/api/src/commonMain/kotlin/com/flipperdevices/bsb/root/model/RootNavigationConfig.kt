@@ -12,4 +12,7 @@ sealed interface RootNavigationConfig {
 
     @Serializable
     data object Settings : RootNavigationConfig
+
+    @Serializable
+    data class AppLockScreen(val packageName: String) : RootNavigationConfig
 }

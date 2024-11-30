@@ -9,9 +9,12 @@ import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
-import com.arkivanov.decompose.router.stack.pushNew
+import com.arkivanov.decompose.router.stack.pushToFront
+import com.flipperdevices.bsb.appblockerscreen.api.AppBlockerScreenDecomposeComponent
 import com.flipperdevices.bsb.auth.main.api.AuthDecomposeComponent
+import com.flipperdevices.bsb.deeplink.model.Deeplink
 import com.flipperdevices.bsb.preferencescreen.api.PreferenceScreenDecomposeComponent
+import com.flipperdevices.bsb.root.deeplink.RootDeeplinkHandlerImpl
 import com.flipperdevices.bsb.root.model.RootNavigationConfig
 import com.flipperdevices.bsb.timer.main.api.TimerMainDecomposeComponent
 import com.flipperdevices.core.di.AppGraph
@@ -23,18 +26,29 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 @Inject
 class RootDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
+    @Assisted initialDeeplink: Deeplink?,
     private val authDecomposeComponentFactory: AuthDecomposeComponent.Factory,
     private val timerMainDecomposeComponentFactory: TimerMainDecomposeComponent.Factory,
-    private val preferenceScreenComponentFactory: PreferenceScreenDecomposeComponent.Factory
+    private val preferenceScreenComponentFactory: PreferenceScreenDecomposeComponent.Factory,
+    private val appLockComponentFactory: AppBlockerScreenDecomposeComponent.Factory
 ) : RootDecomposeComponent(),
     ComponentContext by componentContext {
     override val stack = childStack(
         source = navigation,
         serializer = RootNavigationConfig.serializer(),
-        initialConfiguration = RootNavigationConfig.Timer,
+        initialStack = {
+            if (initialDeeplink != null) {
+                listOf(
+                    RootNavigationConfig.Timer,
+                    RootDeeplinkHandlerImpl.getConfigFromDeeplink(initialDeeplink)
+                )
+            } else listOf(RootNavigationConfig.Timer)
+        },
         handleBackButton = true,
         childFactory = ::child,
     )
+
+    private val deeplinkHandler = RootDeeplinkHandlerImpl(navigation)
 
     private fun child(
         config: RootNavigationConfig,
@@ -51,6 +65,11 @@ class RootDecomposeComponentImpl(
         RootNavigationConfig.Settings -> preferenceScreenComponentFactory(
             componentContext,
             navigation::pop
+        )
+
+        is RootNavigationConfig.AppLockScreen -> appLockComponentFactory(
+            componentContext,
+            config.packageName
         )
     }
 
@@ -71,18 +90,24 @@ class RootDecomposeComponentImpl(
     }
 
     override fun push(config: RootNavigationConfig) {
-        navigation.pushNew(config)
+        navigation.pushToFront(config)
+    }
+
+    override fun handleDeeplink(deeplink: Deeplink) {
+        deeplinkHandler.handleDeeplink(deeplink)
     }
 
     @Inject
     @ContributesBinding(AppGraph::class, RootDecomposeComponent.Factory::class)
     class Factory(
         private val factory: (
-            componentContext: ComponentContext
+            componentContext: ComponentContext,
+            initialDeeplink: Deeplink?
         ) -> RootDecomposeComponentImpl
     ) : RootDecomposeComponent.Factory {
         override fun invoke(
-            componentContext: ComponentContext
-        ) = factory(componentContext)
+            componentContext: ComponentContext,
+            initialDeeplink: Deeplink?
+        ) = factory(componentContext, initialDeeplink)
     }
 }

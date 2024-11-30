@@ -9,12 +9,15 @@ commonDependencies {
     implementation(projects.components.bsb.root.api)
 
     implementation(projects.components.core.di)
+    implementation(projects.components.core.log)
     implementation(projects.components.core.ui.decompose)
 
-    implementation(projects.components.bsb.preference.api)
     implementation(projects.components.bsb.auth.main.api)
     implementation(projects.components.bsb.timer.main.api)
     implementation(projects.components.bsb.preferencescreen.api)
+    implementation(projects.components.bsb.appblockerscreen.api)
+
+    implementation(projects.components.bsb.deeplink.api)
 
     implementation(libs.decompose)
     implementation(libs.decompose.composeExtension)

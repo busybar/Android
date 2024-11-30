@@ -3,6 +3,9 @@ package com.flipperdevices.bsb.appblocker.listener
 import android.app.usage.UsageEvents
 import android.app.usage.UsageStatsManager
 import android.content.Context
+import android.content.Intent
+import com.flipperdevices.bsb.appblocker.deeplink.AppBlockDeeplinkParser
+import com.flipperdevices.core.di.AndroidPlatformDependencies
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.core.ktx.jre.withLock
 import com.flipperdevices.core.log.LogTagProvider
@@ -24,7 +27,8 @@ const val APP_LOCK_CHECK_INTERVAL = 1000L
 @Inject
 class UsageStatsLooper(
     private val context: Context,
-    private val scope: CoroutineScope
+    private val scope: CoroutineScope,
+    private val androidPlatformDependencies: AndroidPlatformDependencies
 ) : LogTagProvider {
     override val TAG = "UsageStatsLooper"
 
@@ -73,6 +77,12 @@ class UsageStatsLooper(
         }
 
         info { "Detect forbidden app" }
-        // Fire screen here!
+
+        val intent = AppBlockDeeplinkParser.getIntent(
+            context,
+            event.packageName,
+            androidPlatformDependencies.splashScreenActivity,
+        )
+        context.startActivity(intent)
     }
 }
