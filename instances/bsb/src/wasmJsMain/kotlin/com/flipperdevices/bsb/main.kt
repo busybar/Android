@@ -37,6 +37,7 @@ fun main() {
     )
     val root = appComponent.rootDecomposeComponentFactory(
         DefaultComponentContext(lifecycle = lifecycle),
+        initialDeeplink = null
     )
     lifecycle.attachToDocument()
 

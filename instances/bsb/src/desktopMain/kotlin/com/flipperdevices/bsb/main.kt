@@ -29,6 +29,7 @@ fun main() {
     val root = runOnUiThread {
         appComponent.rootDecomposeComponentFactory(
             DefaultComponentContext(lifecycle = lifecycle),
+            initialDeeplink = null
         )
     }
     application {

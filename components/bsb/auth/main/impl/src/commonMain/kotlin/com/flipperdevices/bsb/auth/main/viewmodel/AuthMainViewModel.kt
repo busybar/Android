@@ -1,7 +1,7 @@
 package com.flipperdevices.bsb.auth.main.viewmodel
 
 import com.arkivanov.decompose.router.stack.StackNavigation
-import com.arkivanov.decompose.router.stack.pushNew
+import com.arkivanov.decompose.router.stack.pushToFront
 import com.flipperdevices.bsb.auth.main.model.AuthMainState
 import com.flipperdevices.bsb.auth.main.model.AuthRootNavigationConfig
 import com.flipperdevices.bsb.cloud.api.BSBAuthApi
@@ -35,9 +35,9 @@ class AuthMainViewModel(
             authApi.isUserExist(email).onSuccess { userExist ->
                 withContext(Dispatchers.Main) {
                     if (userExist) {
-                        navigationStack.pushNew(AuthRootNavigationConfig.LogIn(email))
+                        navigationStack.pushToFront(AuthRootNavigationConfig.LogIn(email))
                     } else {
-                        navigationStack.pushNew(AuthRootNavigationConfig.SignUp)
+                        navigationStack.pushToFront(AuthRootNavigationConfig.SignUp)
                     }
                 }
             }.onFailure {

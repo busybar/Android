@@ -1,5 +1,6 @@
 package com.flipperdevices.bsb.preferencescreen.viewmodel
 
+import com.flipperdevices.bsb.appblocker.api.AppBlockerApi
 import com.flipperdevices.bsb.dnd.api.BusyDNDApi
 import com.flipperdevices.bsb.preferencescreen.model.PreferenceScreenState
 import com.flipperdevices.core.ui.lifecycle.DecomposeViewModel
@@ -10,13 +11,14 @@ import me.tatarka.inject.annotations.Inject
 
 @Inject
 class PreferenceScreenViewModel(
-    private val dndApi: BusyDNDApi
+    private val dndApi: BusyDNDApi,
+    private val appBlockerApi: AppBlockerApi
 ) : DecomposeViewModel() {
     private val state =
         MutableStateFlow(
             PreferenceScreenState(
                 isDndActive = dndApi.isDNDSupportActive(),
-                false
+                isAppBlockActive = appBlockerApi.isAppBlockerSupportActive()
             )
         )
 
@@ -34,6 +36,13 @@ class PreferenceScreenViewModel(
     }
 
     fun onAppBlock(newState: Boolean) {
-
+        if (newState) {
+            appBlockerApi.enableSupport()
+        } else {
+            appBlockerApi.disableSupport()
+        }
+        state.update {
+            it.copy(isAppBlockActive = appBlockerApi.isAppBlockerSupportActive())
+        }
     }
 }

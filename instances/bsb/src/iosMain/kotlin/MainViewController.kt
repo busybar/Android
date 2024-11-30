@@ -21,7 +21,10 @@ fun MainViewController(
         settings.makeObservable(),
         applicationScope
     )
-    val rootComponent = appComponent.rootDecomposeComponentFactory(componentContext)
+    val rootComponent = appComponent.rootDecomposeComponentFactory(
+        componentContext,
+        initialDeeplink = null
+    )
     return ComposeUIViewController {
         App(rootComponent, appComponent)
     }
