@@ -1,6 +1,8 @@
 package com.flipperdevices.bsb.appblockerscreen.api
 
 import com.arkivanov.decompose.ComponentContext
+import com.flipperdevices.bsb.appblocker.model.ApplicationInfo
+import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
 import com.flipperdevices.ui.decompose.ScreenDecomposeComponent
 
 abstract class AppBlockerScreenDecomposeComponent(
@@ -9,7 +11,8 @@ abstract class AppBlockerScreenDecomposeComponent(
     fun interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,
-            packageName: String
+            applicationInfo: ApplicationInfo,
+            onBackParameter: DecomposeOnBackParameter
         ): AppBlockerScreenDecomposeComponent
     }
 }

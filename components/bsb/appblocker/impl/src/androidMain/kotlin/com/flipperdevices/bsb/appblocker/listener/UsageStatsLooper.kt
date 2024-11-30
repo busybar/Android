@@ -19,7 +19,6 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import me.tatarka.inject.annotations.Inject
-import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
 
 const val APP_LOCK_LOOP_INTERVAL = 500L
 const val APP_LOCK_CHECK_INTERVAL = 1000L
@@ -28,7 +27,8 @@ const val APP_LOCK_CHECK_INTERVAL = 1000L
 class UsageStatsLooper(
     private val context: Context,
     private val scope: CoroutineScope,
-    private val androidPlatformDependencies: AndroidPlatformDependencies
+    private val androidPlatformDependencies: AndroidPlatformDependencies,
+    private val packageFilter: PackageFilter
 ) : LogTagProvider {
     override val TAG = "UsageStatsLooper"
 
@@ -72,8 +72,8 @@ class UsageStatsLooper(
             return // Not activity event
         }
 
-        if (event.packageName == context.packageName) {
-            return // Busy application
+        if (packageFilter.isForbidden(event.packageName).not()) {
+            return
         }
 
         info { "Detect forbidden app" }

@@ -5,5 +5,7 @@ plugins {
 }
 
 commonDependencies {
+    implementation(projects.components.bsb.appblocker.api)
+
     implementation(libs.kotlin.serialization.json)
 }

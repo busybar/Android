@@ -17,6 +17,7 @@ commonDependencies {
     implementation(projects.components.bsb.preferencescreen.api)
     implementation(projects.components.bsb.appblockerscreen.api)
 
+    implementation(projects.components.bsb.appblocker.api)
     implementation(projects.components.bsb.deeplink.api)
 
     implementation(libs.decompose)

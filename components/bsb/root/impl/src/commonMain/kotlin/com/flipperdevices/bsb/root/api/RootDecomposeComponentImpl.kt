@@ -69,7 +69,8 @@ class RootDecomposeComponentImpl(
 
         is RootNavigationConfig.AppLockScreen -> appLockComponentFactory(
             componentContext,
-            config.packageName
+            config.applicationInfo,
+            navigation::pop
         )
     }
 
