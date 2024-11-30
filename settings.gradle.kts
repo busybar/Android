@@ -54,6 +54,8 @@ include(
     ":components:bsb:cloud:impl",
     ":components:bsb:dnd:api",
     ":components:bsb:dnd:impl",
+    ":components:bsb:appblocker:api",
+    ":components:bsb:appblocker:impl",
 
     ":components:bsb:auth:common",
     ":components:bsb:auth:main:impl",
