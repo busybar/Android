@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
+import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.core.ktx.jre.clickableRipple
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -40,11 +41,11 @@ fun BusyButtonComposable(
     Row(
         modifier
             .clip(RoundedCornerShape(16.dp))
-            .background(secondColor)
+            .background(LocalPallet.current.black.onColor)
             .padding(bottom = 24.dp)
             .border(
                 width = 2.dp,
-                color = secondColor,
+                color = LocalPallet.current.black.onColor,
                 shape = RoundedCornerShape(16.dp)
             )
             .background(

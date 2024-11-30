@@ -32,12 +32,12 @@ class ActiveTimerScreenDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     iconStyleProvider: ThemeStatusBarIconStyleProvider,
     private val timerApi: TimerApi
-) : ActiveTimerScreenDecomposeComponent(componentContext), StatusBarIconStyleProvider by iconStyleProvider {
+) : ActiveTimerScreenDecomposeComponent(componentContext),
+    StatusBarIconStyleProvider by iconStyleProvider {
     @Composable
     override fun Render(modifier: Modifier) {
         Column(
             modifier
-                .background(LocalPallet.current.black.invert)
         ) {
             Box(
                 Modifier

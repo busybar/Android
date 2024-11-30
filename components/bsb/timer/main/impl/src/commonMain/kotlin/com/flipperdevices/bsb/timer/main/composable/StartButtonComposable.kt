@@ -21,6 +21,6 @@ fun StartButtonComposable(
         icon = CommonRes.drawable.ic_play,
         text = Res.string.timer_main_busy,
         onClick = onClick,
-        secondColor = LocalPallet.current.black.invert
+        secondColor = LocalPallet.current.white.onColor
     )
 }
