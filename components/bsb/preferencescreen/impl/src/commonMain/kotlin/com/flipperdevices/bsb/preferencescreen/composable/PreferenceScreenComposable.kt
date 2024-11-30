@@ -25,13 +25,18 @@ import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.pr
 import busystatusbar.components.bsb.core.res.generated.resources.Res as CommonRes
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
+import com.flipperdevices.bsb.preferencescreen.model.PreferenceScreenState
+import com.flipperdevices.core.ktx.jre.clickableRipple
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun PreferenceScreenComposable(
     modifier: Modifier,
-    onRequestDND: () -> Unit
+    onBack: () -> Unit,
+    screenState: PreferenceScreenState,
+    onRequestDND: (Boolean) -> Unit,
+    onAppBlock: (Boolean) -> Unit
 ) {
     Column(
         modifier
@@ -79,7 +84,8 @@ fun PreferenceScreenComposable(
                 )
 
                 Icon(
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(24.dp)
+                        .clickableRipple(bounded = false, onClick = onBack),
                     painter = painterResource(CommonRes.drawable.ic_close),
                     contentDescription = null,
                     tint = LocalPallet.current.black.invert,
@@ -90,7 +96,9 @@ fun PreferenceScreenComposable(
                 modifier = Modifier
                     .padding(vertical = 24.dp, horizontal = 16.dp)
                     .weight(1f),
-                onRequestDND = onRequestDND
+                screenState = screenState,
+                onRequestDND = onRequestDND,
+                onAppBlock = onAppBlock
             )
         }
     }

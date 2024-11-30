@@ -14,32 +14,33 @@ import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.pr
 import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.preference_app_blocker_title
 import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.preference_notification_desc
 import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.preference_notification_title
+import com.flipperdevices.bsb.preferencescreen.model.PreferenceScreenState
 
 @Composable
 fun SettingsColumnComposable(
     modifier: Modifier,
-    onRequestDND: () -> Unit
+    screenState: PreferenceScreenState,
+    onRequestDND: (Boolean) -> Unit,
+    onAppBlock: (Boolean) -> Unit
 ) {
     Column(
         modifier,
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
-        var dndEnabled by remember { mutableStateOf(false) }
         SettingItemComposable(
             modifier = Modifier,
             title = Res.string.preference_notification_title,
             description = Res.string.preference_notification_desc,
-            enabled = dndEnabled,
-            onSwitch = { onRequestDND() }
+            enabled = screenState.isDndActive,
+            onSwitch = onRequestDND
         )
 
-        var appBlockerEnabled by remember { mutableStateOf(false) }
         SettingItemComposable(
             modifier = Modifier,
             title = Res.string.preference_app_blocker_title,
             description = Res.string.preference_app_blocker_desc,
-            enabled = appBlockerEnabled,
-            onSwitch = { appBlockerEnabled = it }
+            enabled = screenState.isAppBlockActive,
+            onSwitch = onAppBlock
         )
     }
 }

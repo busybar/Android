@@ -48,7 +48,7 @@ class TimerLoopJob(
         },
         initialTimerStateFlow
     ) { _, initialTimerState ->
-        withLock(mutex) {
+        withLock(mutex, "update") {
             timerStateFlow.update { original ->
                 if (original.pauseOn != null) {
                     original
@@ -66,7 +66,7 @@ class TimerLoopJob(
         job.cancelAndJoin()
     }
 
-    suspend fun onAction(action: TimerAction) = withLock(mutex) {
+    suspend fun onAction(action: TimerAction) = withLock(mutex, "action") {
         when (action) {
             TimerAction.MINUS -> addTime(TimerState(minute = 0, second = -5))
             TimerAction.PLUS -> addTime(TimerState(minute = 0, second = 5))

@@ -48,11 +48,12 @@ class CommonTimerApi(
 
     override fun startTimer(initialTimerState: TimerState) {
         scope.launch {
-            withLock(mutex) {
+            withLock(mutex, "start") {
                 stateInvalidateJob?.cancelAndJoin()
                 timerJob?.cancelAndJoin()
                 val timer = TimerLoopJob(scope, Clock.System.now(), initialTimerState)
                 timerJob = timer
+                compositeListeners.onTimerStart()
                 stateInvalidateJob = timer.getInternalState()
                     .onEach { internalState ->
                         if (internalState.timerState.minute <= 0 && internalState.timerState.second <= 0) {
@@ -69,7 +70,7 @@ class CommonTimerApi(
 
     override fun onAction(action: TimerAction) {
         scope.launch {
-            withLock(mutex) {
+            withLock(mutex, "action") {
                 timerJob?.onAction(action)
             }
         }
@@ -82,7 +83,7 @@ class CommonTimerApi(
     }
 
     private suspend fun stopSelf() {
-        withLock(mutex) {
+        withLock(mutex, "stop") {
             withContext(NonCancellable) {
                 stateInvalidateJob?.cancel()
                 timerJob?.cancelAndJoin()

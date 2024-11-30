@@ -8,6 +8,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.pushNew
 import com.flipperdevices.bsb.auth.main.api.AuthDecomposeComponent
 import com.flipperdevices.bsb.preferencescreen.api.PreferenceScreenDecomposeComponent
@@ -48,7 +49,8 @@ class RootDecomposeComponentImpl(
         )
 
         RootNavigationConfig.Settings -> preferenceScreenComponentFactory(
-            componentContext
+            componentContext,
+            navigation::pop
         )
     }
 
