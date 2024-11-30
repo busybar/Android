@@ -1,7 +1,6 @@
 package com.flipperdevices.bsb.appblocker.api
 
 import android.app.AppOpsManager
-import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
