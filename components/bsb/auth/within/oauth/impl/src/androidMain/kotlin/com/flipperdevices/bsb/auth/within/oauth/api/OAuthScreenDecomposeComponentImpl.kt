@@ -31,7 +31,8 @@ class OAuthScreenDecomposeComponentImpl(
             } else {
                 provider.darkIconId
             },
-            onClick = {}
+            onClick = {},
+            inProgress = authState == SignWithInState.IN_PROGRESS
         )
     }
 

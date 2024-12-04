@@ -114,6 +114,16 @@ fun AuthMainComposable(
             }
         )
 
-        signInWith(Modifier)
+        signInWith(
+            Modifier
+                .graphicsLayer {
+                    when (state) {
+                        AuthMainState.WaitingForInput -> {}
+                        AuthMainState.AuthInProgress -> {
+                            this.alpha = UiConstants.ALPHA_DISABLED
+                        }
+                    }
+                }
+        )
     }
 }

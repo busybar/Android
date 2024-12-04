@@ -8,7 +8,9 @@ import com.arkivanov.decompose.ComponentContext
 import com.flipperdevices.bsb.auth.within.common.composable.SignInWithButtonComposable
 import com.flipperdevices.bsb.auth.within.main.model.SignWithInState
 import com.flipperdevices.bsb.auth.within.main.model.SignWithInStateListener
+import com.flipperdevices.bsb.auth.within.onetap.viewmodel.GoogleOneTapViewModel
 import com.flipperdevices.core.di.AppGraph
+import com.flipperdevices.core.ui.lifecycle.viewModelWithFactoryWithoutRemember
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
@@ -16,14 +18,24 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 @Inject
 class GoogleOneTapAuthDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
-    @Assisted withInStateListener: SignWithInStateListener
+    @Assisted withInStateListener: SignWithInStateListener,
+    googleOneTapViewModel: (SignWithInStateListener) -> GoogleOneTapViewModel
 ) : GoogleOneTapAuthDecomposeComponent(componentContext) {
+    private val viewModel = viewModelWithFactoryWithoutRemember(withInStateListener) {
+        googleOneTapViewModel(withInStateListener)
+    }
+
     @Composable
     override fun Render(modifier: Modifier, authState: SignWithInState) {
         SignInWithButtonComposable(
             modifier = modifier,
             icon = Res.drawable.ic_google,
-            onClick = {}
+            onClick = {
+                if (authState == SignWithInState.WAITING_INPUT) {
+                    viewModel.onAuth()
+                }
+            },
+            inProgress = authState == SignWithInState.IN_PROGRESS
         )
     }
 
