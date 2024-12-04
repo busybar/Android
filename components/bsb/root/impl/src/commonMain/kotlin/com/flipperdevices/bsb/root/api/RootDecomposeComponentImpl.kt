@@ -55,7 +55,8 @@ class RootDecomposeComponentImpl(
         componentContext: ComponentContext
     ): DecomposeComponent = when (config) {
         RootNavigationConfig.Auth -> authDecomposeComponentFactory(
-            componentContext
+            componentContext,
+            navigation::pop
         )
 
         RootNavigationConfig.Timer -> timerMainDecomposeComponentFactory(

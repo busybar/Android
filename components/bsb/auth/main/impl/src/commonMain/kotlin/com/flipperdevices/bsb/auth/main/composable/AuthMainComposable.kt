@@ -28,10 +28,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import busystatusbar.components.bsb.auth.main.impl.generated.resources.Res
-import busystatusbar.components.bsb.auth.main.impl.generated.resources.ic_apple
-import busystatusbar.components.bsb.auth.main.impl.generated.resources.ic_apple_dark
-import busystatusbar.components.bsb.auth.main.impl.generated.resources.ic_google
-import busystatusbar.components.bsb.auth.main.impl.generated.resources.ic_microsoft
 import busystatusbar.components.bsb.auth.main.impl.generated.resources.login_main_btn
 import busystatusbar.components.bsb.auth.main.impl.generated.resources.login_main_email_title
 import busystatusbar.components.bsb.auth.main.impl.generated.resources.pic_busycloud
@@ -41,6 +37,7 @@ import com.flipperdevices.bsb.auth.common.composable.UiConstants
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.auth.main.model.AuthMainState
+import com.flipperdevices.bsb.auth.within.main.model.AuthWay
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -97,7 +94,7 @@ fun AuthMainComposable(
             onTextChange = { email = it },
             disabled = when (state) {
                 AuthMainState.WaitingForInput -> false
-                AuthMainState.AuthInProgress -> true
+                is AuthMainState.AuthInProgress -> true
             }
         )
 
@@ -110,8 +107,12 @@ fun AuthMainComposable(
             onClick = { onLogin(email) },
             inProgress = when (state) {
                 AuthMainState.WaitingForInput -> false
-                AuthMainState.AuthInProgress -> true
-            }
+                is AuthMainState.AuthInProgress -> state.authWay == AuthWay.EMAIL
+            },
+            disabled = when (state) {
+                AuthMainState.WaitingForInput -> false
+                is AuthMainState.AuthInProgress -> true
+            },
         )
 
         signInWith(
@@ -119,7 +120,7 @@ fun AuthMainComposable(
                 .graphicsLayer {
                     when (state) {
                         AuthMainState.WaitingForInput -> {}
-                        AuthMainState.AuthInProgress -> {
+                        is AuthMainState.AuthInProgress -> {
                             this.alpha = UiConstants.ALPHA_DISABLED
                         }
                     }

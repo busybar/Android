@@ -9,5 +9,7 @@ interface BSBAuthApi {
         email: String, password: String
     ): Result<Unit>
 
+    suspend fun jwtAuth(token: String): Result<Unit>
+
     suspend fun getUser(): Result<BSBUser>
 }

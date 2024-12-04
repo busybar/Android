@@ -54,6 +54,6 @@ class MainScreenDecomposeComponentImpl(
 }
 
 fun AuthMainState.toSignWithInState() = when (this) {
-    AuthMainState.AuthInProgress -> SignWithInState.IN_PROGRESS
-    AuthMainState.WaitingForInput -> SignWithInState.WAITING_INPUT
+    is AuthMainState.AuthInProgress -> SignWithInState.InProgress(authWay)
+    AuthMainState.WaitingForInput -> SignWithInState.WaitingForInput
 }

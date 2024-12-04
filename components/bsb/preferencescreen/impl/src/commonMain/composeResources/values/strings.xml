@@ -6,4 +6,5 @@
     <string name="preference_app_blocker_desc">Distracting apps will be automatically blocked when BUSY mode is activated</string>
     <string name="preference_version">Version %1$s</string>
     <string name="preference_auth">Auth</string>
+    <string name="preference_auth_desc">Email: %1$s</string>
 </resources>

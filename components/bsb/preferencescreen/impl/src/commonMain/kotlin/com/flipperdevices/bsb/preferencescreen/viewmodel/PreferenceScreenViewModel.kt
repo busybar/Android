@@ -2,6 +2,7 @@ package com.flipperdevices.bsb.preferencescreen.viewmodel
 
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.flipperdevices.bsb.appblocker.api.AppBlockerApi
+import com.flipperdevices.bsb.cloud.model.BSBUser
 import com.flipperdevices.bsb.dnd.api.BusyDNDApi
 import com.flipperdevices.bsb.preference.api.PreferenceApi
 import com.flipperdevices.bsb.preference.api.get
@@ -15,6 +16,7 @@ import com.flipperdevices.bsb.root.model.RootNavigationConfig
 import com.flipperdevices.core.ui.lifecycle.DecomposeViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
@@ -31,15 +33,18 @@ class PreferenceScreenViewModel(
             PreferenceScreenState(
                 isDndActive = dndApi.isDNDSupportActive(),
                 isAppBlockActive = appBlockerApi.isAppBlockerSupportActive(),
-                devMode = preferenceApi.get(SettingsEnum.DEV_MODE, false)
+                devMode = preferenceApi.get(SettingsEnum.DEV_MODE, false),
+                bsbUser = preferenceApi.get<BSBUser?>(SettingsEnum.USER_DATA, null)
             )
         )
 
     init {
-        preferenceApi.getFlow(SettingsEnum.DEV_MODE, false)
-            .onEach { devMode ->
-                state.update { it.copy(devMode = devMode) }
-            }.launchIn(viewModelScope)
+        combine(
+            preferenceApi.getFlow(SettingsEnum.DEV_MODE, false),
+            preferenceApi.getFlow<BSBUser?>(SettingsEnum.USER_DATA, null)
+        ) { devMode, bsbUser ->
+            state.update { it.copy(devMode = devMode, bsbUser = bsbUser) }
+        }.launchIn(viewModelScope)
     }
 
     fun getState() = state.asStateFlow()

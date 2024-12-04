@@ -32,7 +32,8 @@ class OAuthScreenDecomposeComponentImpl(
                 provider.darkIconId
             },
             onClick = {},
-            inProgress = authState == SignWithInState.IN_PROGRESS
+            inProgress = authState is SignWithInState.InProgress
+                    && authState.authWay == provider.authWay
         )
     }
 

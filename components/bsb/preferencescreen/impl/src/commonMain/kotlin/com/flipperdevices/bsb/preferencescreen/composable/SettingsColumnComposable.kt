@@ -18,6 +18,7 @@ import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.pr
 import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.preference_auth
 import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.preference_notification_desc
 import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.preference_notification_title
+import com.flipperdevices.bsb.preferencescreen.composable.debug.AuthComposable
 import com.flipperdevices.bsb.preferencescreen.model.PreferenceScreenState
 import com.flipperdevices.bsb.preferencescreen.model.SettingsAction
 import com.flipperdevices.core.ktx.jre.clickableRipple
@@ -54,13 +55,10 @@ fun SettingsColumnComposable(
             )
 
             if (screenState.devMode) {
-                SettingItemComposable(
-                    modifier = Modifier
-                        .clickableRipple { onAction(SettingsAction.OpenAuth) },
-                    title = Res.string.preference_auth,
-                    description = null,
-                    enabled = screenState.isAppBlockActive,
-                    onSwitch = null
+                AuthComposable(
+                    modifier = Modifier,
+                    onClick = { onAction(SettingsAction.OpenAuth) },
+                    bsbUser = screenState.bsbUser
                 )
             }
         }

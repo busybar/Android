@@ -13,6 +13,7 @@ import com.flipperdevices.bsb.auth.signup.api.SignupDecomposeComponent
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.ui.decompose.DecomposeComponent
+import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
@@ -20,6 +21,7 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 @Inject
 class AuthDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
+    @Assisted private val onBackParameter: DecomposeOnBackParameter,
     private val mainScreenDecomposeComponent: (
         ComponentContext,
         StackNavigation<AuthRootNavigationConfig>,
@@ -44,14 +46,14 @@ class AuthDecomposeComponentImpl(
         AuthRootNavigationConfig.AuthRoot -> mainScreenDecomposeComponent(
             componentContext,
             navigation,
-            {}
+            onBackParameter::invoke
         )
 
         is AuthRootNavigationConfig.LogIn -> loginDecomposeComponentFactory(
             componentContext,
             onBack = navigation::pop,
             email = config.email,
-            onComplete = {}
+            onComplete = onBackParameter::invoke
         )
 
         AuthRootNavigationConfig.SignUp -> signupDecomposeComponentFactory(
@@ -71,11 +73,13 @@ class AuthDecomposeComponentImpl(
     @ContributesBinding(AppGraph::class, AuthDecomposeComponent.Factory::class)
     class Factory(
         private val factory: (
-            componentContext: ComponentContext
+            componentContext: ComponentContext,
+            onBackParameter: DecomposeOnBackParameter,
         ) -> AuthDecomposeComponentImpl
     ) : AuthDecomposeComponent.Factory {
         override fun invoke(
-            componentContext: ComponentContext
-        ) = factory(componentContext)
+            componentContext: ComponentContext,
+            onBackParameter: DecomposeOnBackParameter,
+        ) = factory(componentContext, onBackParameter)
     }
 }

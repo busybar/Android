@@ -6,6 +6,7 @@ import busystatusbar.components.bsb.auth.within.onetap.impl.generated.resources.
 import busystatusbar.components.bsb.auth.within.onetap.impl.generated.resources.ic_google
 import com.arkivanov.decompose.ComponentContext
 import com.flipperdevices.bsb.auth.within.common.composable.SignInWithButtonComposable
+import com.flipperdevices.bsb.auth.within.main.model.AuthWay
 import com.flipperdevices.bsb.auth.within.main.model.SignWithInState
 import com.flipperdevices.bsb.auth.within.main.model.SignWithInStateListener
 import com.flipperdevices.bsb.auth.within.onetap.viewmodel.GoogleOneTapViewModel
@@ -31,11 +32,12 @@ class GoogleOneTapAuthDecomposeComponentImpl(
             modifier = modifier,
             icon = Res.drawable.ic_google,
             onClick = {
-                if (authState == SignWithInState.WAITING_INPUT) {
+                if (authState == SignWithInState.WaitingForInput) {
                     viewModel.onAuth()
                 }
             },
-            inProgress = authState == SignWithInState.IN_PROGRESS
+            inProgress = authState is SignWithInState.InProgress
+                    && authState.authWay == AuthWay.GOOGLE
         )
     }
 

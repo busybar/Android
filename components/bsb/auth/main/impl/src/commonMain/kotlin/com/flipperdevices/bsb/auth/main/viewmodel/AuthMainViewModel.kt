@@ -4,6 +4,7 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.pushToFront
 import com.flipperdevices.bsb.auth.main.model.AuthMainState
 import com.flipperdevices.bsb.auth.main.model.AuthRootNavigationConfig
+import com.flipperdevices.bsb.auth.within.main.model.AuthWay
 import com.flipperdevices.bsb.auth.within.main.model.SignWithInState
 import com.flipperdevices.bsb.auth.within.main.model.SignWithInStateListener
 import com.flipperdevices.bsb.cloud.api.BSBAuthApi
@@ -34,7 +35,7 @@ class AuthMainViewModel(
     fun onLogin(email: String) {
         info { "Start check email..." }
         viewModelScope.launch {
-            state.emit(AuthMainState.AuthInProgress)
+            state.emit(AuthMainState.AuthInProgress(AuthWay.EMAIL))
             authApi.isUserExist(email).onSuccess { userExist ->
                 withContext(Dispatchers.Main) {
                     if (userExist) {
@@ -52,9 +53,15 @@ class AuthMainViewModel(
 
     override fun invoke(withInState: SignWithInState) {
         when (withInState) {
-            SignWithInState.WAITING_INPUT -> state.value = AuthMainState.WaitingForInput
-            SignWithInState.IN_PROGRESS -> state.value = AuthMainState.AuthInProgress
-            SignWithInState.COMPLETE -> onComplete()
+            SignWithInState.Complete -> viewModelScope.launch(Dispatchers.Main) {
+                onComplete()
+            }
+
+            is SignWithInState.InProgress -> {
+                state.value = AuthMainState.AuthInProgress(withInState.authWay)
+            }
+
+            SignWithInState.WaitingForInput -> state.value = AuthMainState.WaitingForInput
         }
     }
 }
