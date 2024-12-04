@@ -3,6 +3,8 @@ package com.flipperdevices.bsb.auth.within.main.api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
+import com.flipperdevices.bsb.auth.within.main.model.SignWithInState
+import com.flipperdevices.bsb.auth.within.main.model.SignWithInStateListener
 import com.flipperdevices.core.di.AppGraph
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
@@ -15,7 +17,7 @@ class SignWithInMainDecomposeComponentNoop(
     ComponentContext by componentContext {
 
     @Composable
-    override fun Render(modifier: Modifier) {
+    override fun Render(modifier: Modifier, authState: SignWithInState) {
         // Empty
     }
 
@@ -27,7 +29,8 @@ class SignWithInMainDecomposeComponentNoop(
         ) -> SignWithInMainDecomposeComponentNoop
     ) : SignWithInMainDecomposeComponent.Factory {
         override fun invoke(
-            componentContext: ComponentContext
+            componentContext: ComponentContext,
+            withInStateListener: SignWithInStateListener
         ) = factory(componentContext)
     }
 }
