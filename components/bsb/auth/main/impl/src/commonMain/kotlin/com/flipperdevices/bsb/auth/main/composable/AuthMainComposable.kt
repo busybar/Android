@@ -28,10 +28,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import busystatusbar.components.bsb.auth.main.impl.generated.resources.Res
-import busystatusbar.components.bsb.auth.main.impl.generated.resources.ic_apple
-import busystatusbar.components.bsb.auth.main.impl.generated.resources.ic_apple_dark
-import busystatusbar.components.bsb.auth.main.impl.generated.resources.ic_google
-import busystatusbar.components.bsb.auth.main.impl.generated.resources.ic_microsoft
 import busystatusbar.components.bsb.auth.main.impl.generated.resources.login_main_btn
 import busystatusbar.components.bsb.auth.main.impl.generated.resources.login_main_email_title
 import busystatusbar.components.bsb.auth.main.impl.generated.resources.pic_busycloud
@@ -41,6 +37,7 @@ import com.flipperdevices.bsb.auth.common.composable.UiConstants
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.auth.main.model.AuthMainState
+import com.flipperdevices.bsb.auth.within.main.model.AuthWay
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -48,9 +45,10 @@ import org.jetbrains.compose.resources.stringResource
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun AuthMainComposable(
+    modifier: Modifier,
     state: AuthMainState,
     onLogin: (String) -> Unit,
-    modifier: Modifier
+    signInWith: @Composable (Modifier) -> Unit
 ) {
     val verticalScroll = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
@@ -96,7 +94,7 @@ fun AuthMainComposable(
             onTextChange = { email = it },
             disabled = when (state) {
                 AuthMainState.WaitingForInput -> false
-                AuthMainState.AuthInProgress -> true
+                is AuthMainState.AuthInProgress -> true
             }
         )
 
@@ -109,45 +107,24 @@ fun AuthMainComposable(
             onClick = { onLogin(email) },
             inProgress = when (state) {
                 AuthMainState.WaitingForInput -> false
-                AuthMainState.AuthInProgress -> true
-            }
+                is AuthMainState.AuthInProgress -> state.authWay == AuthWay.EMAIL
+            },
+            disabled = when (state) {
+                AuthMainState.WaitingForInput -> false
+                is AuthMainState.AuthInProgress -> true
+            },
         )
 
-        OrLineComposable(
-            Modifier.fillMaxWidth()
-                .padding(bottom = 32.dp)
-        )
-
-        Row(
-            Modifier.fillMaxWidth().graphicsLayer {
-                when (state) {
-                    AuthMainState.WaitingForInput -> {}
-                    AuthMainState.AuthInProgress -> {
-                        this.alpha = UiConstants.ALPHA_DISABLED
+        signInWith(
+            Modifier
+                .graphicsLayer {
+                    when (state) {
+                        AuthMainState.WaitingForInput -> {}
+                        is AuthMainState.AuthInProgress -> {
+                            this.alpha = UiConstants.ALPHA_DISABLED
+                        }
                     }
                 }
-            },
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            SignInWithButtonComposable(
-                modifier = Modifier.weight(1f),
-                icon = Res.drawable.ic_google,
-                onClick = {}
-            )
-            SignInWithButtonComposable(
-                modifier = Modifier.weight(1f),
-                icon = if (MaterialTheme.colors.isLight) {
-                    Res.drawable.ic_apple
-                } else {
-                    Res.drawable.ic_apple_dark
-                },
-                onClick = {}
-            )
-            SignInWithButtonComposable(
-                modifier = Modifier.weight(1f),
-                icon = Res.drawable.ic_microsoft,
-                onClick = {}
-            )
-        }
+        )
     }
 }

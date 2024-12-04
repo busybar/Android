@@ -21,6 +21,10 @@ class PreferenceApiImpl(
 ) : PreferenceApi {
     private val flowSettings = observableSettings.toFlowSettings()
 
+    override fun getFlowString(
+        key: SettingsEnum, default: String
+    ) = flowSettings.getStringFlow(key.key, default)
+
     override fun getFlowBoolean(
         key: SettingsEnum, default: Boolean
     ) = flowSettings.getBooleanFlow(key.key, default)
@@ -40,11 +44,15 @@ class PreferenceApiImpl(
             }
     }
 
+    override fun getString(key: SettingsEnum, default: String?): String? {
+        return observableSettings.getStringOrNull(key.key) ?: default
+    }
+
     override fun getBoolean(key: SettingsEnum, default: Boolean?): Boolean? {
         return observableSettings.getBooleanOrNull(key.key) ?: default
     }
 
-    override fun <T> getSerializable(
+    override fun <T : Any?> getSerializable(
         serializer: DeserializationStrategy<T>,
         key: SettingsEnum,
         default: T
@@ -66,5 +74,9 @@ class PreferenceApiImpl(
 
     override fun setBoolean(key: SettingsEnum, value: Boolean) {
         observableSettings.putBoolean(key.key, value)
+    }
+
+    override fun setString(key: SettingsEnum, value: String) {
+        observableSettings.putString(key.key, value)
     }
 }

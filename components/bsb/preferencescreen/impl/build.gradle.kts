@@ -19,6 +19,7 @@ commonDependencies {
     implementation(projects.components.bsb.dnd.api)
     implementation(projects.components.bsb.appblocker.api)
     implementation(projects.components.bsb.root.api)
+    implementation(projects.components.bsb.cloud.api)
 
     implementation(libs.decompose)
 }

@@ -28,19 +28,20 @@ import org.jetbrains.compose.resources.stringResource
 fun BusyBarButtonComposable(
     text: StringResource,
     onClick: () -> Unit,
-    inProgress: Boolean = false,
+    inProgress: Boolean,
+    disabled: Boolean = inProgress,
     modifier: Modifier = Modifier
 ) {
     Row(
         modifier.clip(RoundedCornerShape(8.dp))
             .graphicsLayer {
-                if (inProgress) {
+                if (disabled) {
                     this.alpha = ALPHA_DISABLED
                 }
             }
             .background(LocalPallet.current.brand.primary)
             .clickableRipple(onClick = {
-                if (inProgress.not()) {
+                if (disabled.not()) {
                     onClick()
                 }
             })

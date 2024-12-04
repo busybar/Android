@@ -1,5 +1,8 @@
 package com.flipperdevices.bsb.auth.main.api
 
+import androidx.compose.foundation.background
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
@@ -7,8 +10,10 @@ import com.arkivanov.decompose.router.stack.pop
 import com.flipperdevices.bsb.auth.login.api.LoginDecomposeComponent
 import com.flipperdevices.bsb.auth.main.model.AuthRootNavigationConfig
 import com.flipperdevices.bsb.auth.signup.api.SignupDecomposeComponent
+import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.ui.decompose.DecomposeComponent
+import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
@@ -16,9 +21,11 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 @Inject
 class AuthDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
+    @Assisted private val onBackParameter: DecomposeOnBackParameter,
     private val mainScreenDecomposeComponent: (
         ComponentContext,
-        StackNavigation<AuthRootNavigationConfig>
+        StackNavigation<AuthRootNavigationConfig>,
+        onComplete: () -> Unit
     ) -> MainScreenDecomposeComponentImpl,
     private val loginDecomposeComponentFactory: LoginDecomposeComponent.Factory,
     private val signupDecomposeComponentFactory: SignupDecomposeComponent.Factory
@@ -38,14 +45,15 @@ class AuthDecomposeComponentImpl(
     ): DecomposeComponent = when (config) {
         AuthRootNavigationConfig.AuthRoot -> mainScreenDecomposeComponent(
             componentContext,
-            navigation
+            navigation,
+            onBackParameter::invoke
         )
 
         is AuthRootNavigationConfig.LogIn -> loginDecomposeComponentFactory(
             componentContext,
             onBack = navigation::pop,
             email = config.email,
-            onComplete = {}
+            onComplete = onBackParameter::invoke
         )
 
         AuthRootNavigationConfig.SignUp -> signupDecomposeComponentFactory(
@@ -53,15 +61,25 @@ class AuthDecomposeComponentImpl(
         )
     }
 
+    @Composable
+    override fun Render(modifier: Modifier) {
+        super.Render(
+            modifier
+                .background(LocalPallet.current.surface.primary)
+        )
+    }
+
     @Inject
     @ContributesBinding(AppGraph::class, AuthDecomposeComponent.Factory::class)
     class Factory(
         private val factory: (
-            componentContext: ComponentContext
+            componentContext: ComponentContext,
+            onBackParameter: DecomposeOnBackParameter,
         ) -> AuthDecomposeComponentImpl
     ) : AuthDecomposeComponent.Factory {
         override fun invoke(
-            componentContext: ComponentContext
-        ) = factory(componentContext)
+            componentContext: ComponentContext,
+            onBackParameter: DecomposeOnBackParameter,
+        ) = factory(componentContext, onBackParameter)
     }
 }

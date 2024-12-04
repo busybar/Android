@@ -1,11 +1,14 @@
 package com.flipperdevices.bsb.cloud.di
 
+import com.flipperdevices.bsb.cloud.di.http.BSBAuthPlugin
+import com.flipperdevices.bsb.preference.api.PreferenceApi
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.core.log.TaggedLogger
 import com.flipperdevices.core.log.verbose
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.DefaultRequest
+import io.ktor.client.plugins.HttpSend
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.cookies.CookiesStorage
 import io.ktor.client.plugins.cookies.HttpCookies
@@ -25,12 +28,10 @@ private val ktorTimber = TaggedLogger("Ktor")
 @ContributesTo(AppGraph::class)
 interface HttpClientComponent {
     @Provides
-    fun provideHttpClient(
-        cookiesStorage: CookiesStorage
-    ): HttpClient = getHttpClient(cookiesStorage)
+    fun provideHttpClient(preferenceApi: PreferenceApi): HttpClient = getHttpClient(preferenceApi)
 }
 
-fun getHttpClient(cookiesStorage: CookiesStorage) = HttpClient(httpEngine()) {
+fun getHttpClient(preferenceApi: PreferenceApi) = HttpClient(httpEngine()) {
     install(ContentNegotiation) {
         json(
             Json {
@@ -51,8 +52,8 @@ fun getHttpClient(cookiesStorage: CookiesStorage) = HttpClient(httpEngine()) {
         level = LogLevel.INFO
     }
 
-    install(HttpCookies) {
-        storage = cookiesStorage
+    install(BSBAuthPlugin) {
+        this.preferenceApi = preferenceApi
     }
 
     install(DefaultRequest) {

@@ -70,6 +70,13 @@ include(
     ":components:bsb:auth:login:impl",
     ":components:bsb:auth:signup:api",
     ":components:bsb:auth:signup:impl",
+    ":components:bsb:auth:within:common",
+    ":components:bsb:auth:within:main:api",
+    ":components:bsb:auth:within:main:impl",
+    ":components:bsb:auth:within:oauth:api",
+    ":components:bsb:auth:within:oauth:impl",
+    ":components:bsb:auth:within:onetap:api",
+    ":components:bsb:auth:within:onetap:impl",
 
     ":components:bsb:timer:common",
     ":components:bsb:timer:setup:api",
