@@ -29,15 +29,19 @@ class MainActivity : ComponentActivity(), LogTagProvider {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (savedInstanceState != null) {
-            return
+        if (savedInstanceState == null) {
+            info {
+                "Create new activity with hashcode: ${this.hashCode()} " + "and intent ${intent.toFullString()}"
+            }
+        } else {
+
+            info {
+                "Restore activity from backstack, so return from onCreate method"
+            }
         }
 
         enableEdgeToEdge()
 
-        info {
-            "Create new activity with hashcode: ${this.hashCode()} " + "and intent ${intent.toFullString()}"
-        }
 
         val appComponent = ComponentHolder.component<AndroidAppComponent>()
 

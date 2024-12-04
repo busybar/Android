@@ -26,6 +26,7 @@ import busystatusbar.components.bsb.core.res.generated.resources.Res as CommonRe
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.preferencescreen.model.PreferenceScreenState
+import com.flipperdevices.bsb.preferencescreen.model.SettingsAction
 import com.flipperdevices.core.ktx.jre.clickableRipple
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -35,8 +36,7 @@ fun PreferenceScreenComposable(
     modifier: Modifier,
     onBack: () -> Unit,
     screenState: PreferenceScreenState,
-    onRequestDND: (Boolean) -> Unit,
-    onAppBlock: (Boolean) -> Unit
+    onAction: (SettingsAction) -> Unit
 ) {
     Column(
         modifier
@@ -97,8 +97,7 @@ fun PreferenceScreenComposable(
                     .padding(vertical = 24.dp, horizontal = 16.dp)
                     .weight(1f),
                 screenState = screenState,
-                onRequestDND = onRequestDND,
-                onAppBlock = onAppBlock
+                onAction = onAction
             )
         }
     }

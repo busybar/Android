@@ -5,10 +5,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
+import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.dnd.api.BusyDNDApi
 import com.flipperdevices.bsb.preference.api.ThemeStatusBarIconStyleProvider
 import com.flipperdevices.bsb.preferencescreen.composable.PreferenceScreenComposable
 import com.flipperdevices.bsb.preferencescreen.viewmodel.PreferenceScreenViewModel
+import com.flipperdevices.bsb.root.api.LocalRootNavigation
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.core.ui.lifecycle.viewModelWithFactoryWithoutRemember
 import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
@@ -33,13 +35,14 @@ class PreferenceScreenDecomposeComponentImpl(
 
     @Composable
     override fun Render(modifier: Modifier) {
+        val rootNavigation = LocalRootNavigation.current
+
         val state by viewModel.getState().collectAsState()
         PreferenceScreenComposable(
             modifier,
             onBack = onBackParameter::invoke,
             screenState = state,
-            onRequestDND = viewModel::onDndSwitch,
-            onAppBlock = viewModel::onAppBlock
+            onAction = { viewModel.onAction(it, rootNavigation) }
         )
     }
 
