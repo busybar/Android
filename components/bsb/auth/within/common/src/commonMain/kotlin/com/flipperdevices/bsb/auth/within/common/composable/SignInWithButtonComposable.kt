@@ -1,4 +1,4 @@
-package com.flipperdevices.bsb.auth.main.composable
+package com.flipperdevices.bsb.auth.within.common.composable
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

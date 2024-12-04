@@ -1,4 +1,4 @@
-package com.flipperdevices.bsb.auth.main.composable
+package com.flipperdevices.bsb.auth.within.main.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import busystatusbar.components.bsb.auth.main.impl.generated.resources.Res
-import busystatusbar.components.bsb.auth.main.impl.generated.resources.login_main_or_line
+import busystatusbar.components.bsb.auth.within.main.impl.generated.resources.Res
+import busystatusbar.components.bsb.auth.within.main.impl.generated.resources.login_within_or_line
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import org.jetbrains.compose.resources.stringResource
@@ -37,7 +37,7 @@ fun OrLineComposable(
             modifier = Modifier
                 .background(MaterialTheme.colors.background)
                 .padding(horizontal = 12.dp),
-            text = stringResource(Res.string.login_main_or_line),
+            text = stringResource(Res.string.login_within_or_line),
             color = LocalPallet.current.neutral.tertiary,
             fontSize = 14.sp,
             fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,

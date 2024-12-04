@@ -1,5 +1,8 @@
 package com.flipperdevices.bsb.auth.main.api
 
+import androidx.compose.foundation.background
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
@@ -7,6 +10,7 @@ import com.arkivanov.decompose.router.stack.pop
 import com.flipperdevices.bsb.auth.login.api.LoginDecomposeComponent
 import com.flipperdevices.bsb.auth.main.model.AuthRootNavigationConfig
 import com.flipperdevices.bsb.auth.signup.api.SignupDecomposeComponent
+import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.ui.decompose.DecomposeComponent
 import me.tatarka.inject.annotations.Assisted
@@ -18,7 +22,8 @@ class AuthDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     private val mainScreenDecomposeComponent: (
         ComponentContext,
-        StackNavigation<AuthRootNavigationConfig>
+        StackNavigation<AuthRootNavigationConfig>,
+        onComplete: () -> Unit
     ) -> MainScreenDecomposeComponentImpl,
     private val loginDecomposeComponentFactory: LoginDecomposeComponent.Factory,
     private val signupDecomposeComponentFactory: SignupDecomposeComponent.Factory
@@ -38,7 +43,8 @@ class AuthDecomposeComponentImpl(
     ): DecomposeComponent = when (config) {
         AuthRootNavigationConfig.AuthRoot -> mainScreenDecomposeComponent(
             componentContext,
-            navigation
+            navigation,
+            {}
         )
 
         is AuthRootNavigationConfig.LogIn -> loginDecomposeComponentFactory(
@@ -50,6 +56,14 @@ class AuthDecomposeComponentImpl(
 
         AuthRootNavigationConfig.SignUp -> signupDecomposeComponentFactory(
             componentContext
+        )
+    }
+
+    @Composable
+    override fun Render(modifier: Modifier) {
+        super.Render(
+            modifier
+                .background(LocalPallet.current.surface.primary)
         )
     }
 

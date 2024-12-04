@@ -32,6 +32,7 @@ import org.jetbrains.compose.resources.stringResource
 fun AuthMainComposableScreen(
     state: AuthMainState,
     onLogin: (String) -> Unit,
+    signInWith: @Composable (Modifier) -> Unit
 ) {
     Column(
         Modifier.fillMaxSize().systemBarsPadding(),
@@ -43,7 +44,8 @@ fun AuthMainComposableScreen(
             modifier = Modifier.padding(top = 32.dp)
                 .weight(1f),
             state = state,
-            onLogin = onLogin
+            onLogin = onLogin,
+            signInWith = signInWith
         )
 
         Markdown(

@@ -48,9 +48,10 @@ import org.jetbrains.compose.resources.stringResource
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun AuthMainComposable(
+    modifier: Modifier,
     state: AuthMainState,
     onLogin: (String) -> Unit,
-    modifier: Modifier
+    signInWith: @Composable (Modifier) -> Unit
 ) {
     val verticalScroll = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
@@ -113,41 +114,6 @@ fun AuthMainComposable(
             }
         )
 
-        OrLineComposable(
-            Modifier.fillMaxWidth()
-                .padding(bottom = 32.dp)
-        )
-
-        Row(
-            Modifier.fillMaxWidth().graphicsLayer {
-                when (state) {
-                    AuthMainState.WaitingForInput -> {}
-                    AuthMainState.AuthInProgress -> {
-                        this.alpha = UiConstants.ALPHA_DISABLED
-                    }
-                }
-            },
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            SignInWithButtonComposable(
-                modifier = Modifier.weight(1f),
-                icon = Res.drawable.ic_google,
-                onClick = {}
-            )
-            SignInWithButtonComposable(
-                modifier = Modifier.weight(1f),
-                icon = if (MaterialTheme.colors.isLight) {
-                    Res.drawable.ic_apple
-                } else {
-                    Res.drawable.ic_apple_dark
-                },
-                onClick = {}
-            )
-            SignInWithButtonComposable(
-                modifier = Modifier.weight(1f),
-                icon = Res.drawable.ic_microsoft,
-                onClick = {}
-            )
-        }
+        signInWith(Modifier)
     }
 }
