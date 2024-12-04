@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Switch
+import androidx.compose.material.SwitchColors
+import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,9 +26,9 @@ import org.jetbrains.compose.resources.stringResource
 fun SettingItemComposable(
     modifier: Modifier,
     title: StringResource,
-    description: StringResource,
+    description: StringResource?,
     enabled: Boolean,
-    onSwitch: (Boolean) -> Unit
+    onSwitch: ((Boolean) -> Unit)?
 ) {
     Column(
         modifier = modifier.clip(RoundedCornerShape(8.dp))
@@ -46,18 +48,27 @@ fun SettingItemComposable(
                 color = LocalPallet.current.black.invert,
                 fontSize = 22.sp
             )
-            Switch(
-                checked = enabled,
-                onCheckedChange = onSwitch
-            )
+            if (onSwitch != null) {
+                Switch(
+                    checked = enabled,
+                    onCheckedChange = onSwitch,
+                    colors = SwitchDefaults.colors(
+                        checkedThumbColor = LocalPallet.current.brand.primary,
+                        uncheckedThumbColor = LocalPallet.current.neutral.quaternary,
+                        uncheckedTrackColor = LocalPallet.current.white.onColor
+                    )
+                )
+            }
         }
 
-        Text(
-            text = stringResource(description),
-            fontFamily = LocalBusyBarFonts.current.pragmatica,
-            fontWeight = FontWeight.W500,
-            color = LocalPallet.current.neutral.tertiary,
-            fontSize = 16.sp
-        )
+        if (description != null) {
+            Text(
+                text = stringResource(description),
+                fontFamily = LocalBusyBarFonts.current.pragmatica,
+                fontWeight = FontWeight.W500,
+                color = LocalPallet.current.neutral.tertiary,
+                fontSize = 16.sp
+            )
+        }
     }
 }

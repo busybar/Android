@@ -1,4 +1,5 @@
 import com.flipperdevices.buildlogic.ApkConfig.CURRENT_FLAVOR_TYPE
+import com.flipperdevices.buildlogic.ApkConfig.VERSION_NAME
 
 plugins {
     id("flipper.multiplatform")
@@ -18,8 +19,8 @@ buildConfig {
         CURRENT_FLAVOR_TYPE.crashAppOnFailedChecks
     )
     buildConfigField(
-        Boolean::class.java,
-        "LOGGING_PENDING_COMMANDS",
-        CURRENT_FLAVOR_TYPE.loggingPendingCommands
+        String::class.java,
+        "VERSION",
+        project.VERSION_NAME
     )
 }

@@ -124,7 +124,7 @@ jobs:
         id: vars
         run: |
           export $(cat .github/workflows/version.env | xargs)
-          echo "major_version=0.0" >> $GITHUB_OUTPUT
+          echo "major_version=1.0" >> $GITHUB_OUTPUT
           echo "minor_version=${{ needs.build_number.outputs.number }}" >> $GITHUB_OUTPUT
       - name: Artifact build beautifier
         id: beautifier

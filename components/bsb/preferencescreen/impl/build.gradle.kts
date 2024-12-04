@@ -11,12 +11,14 @@ commonDependencies {
     implementation(projects.components.core.di)
     implementation(projects.components.core.ui.decompose)
     implementation(projects.components.core.ui.lifecycle)
+    implementation(projects.components.core.buildKonfig)
     implementation(projects.components.bsb.core.res)
     implementation(projects.components.bsb.core.theme)
 
     implementation(projects.components.bsb.preference.api)
     implementation(projects.components.bsb.dnd.api)
     implementation(projects.components.bsb.appblocker.api)
+    implementation(projects.components.bsb.root.api)
 
     implementation(libs.decompose)
 }

@@ -12,6 +12,7 @@ import com.flipperdevices.bsb.preference.api.get
 import com.flipperdevices.bsb.preference.api.set
 import com.flipperdevices.bsb.preference.model.SettingsEnum
 import com.flipperdevices.core.activityholder.CurrentActivityHolder
+import com.flipperdevices.core.activityholder.startActivity
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.core.ktx.android.highlightSettingsTo
 import com.flipperdevices.core.log.LogTagProvider
@@ -84,9 +85,8 @@ class AppBlockerApiImpl(
     private fun requestUsageStatsPermission() {
         val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
             .highlightSettingsTo(context.packageName)
-        intent.setFlags(FLAG_ACTIVITY_NEW_TASK)
-        val contextForLaunch = CurrentActivityHolder.getCurrentActivity() ?: context
-        contextForLaunch.startActivity(intent)
+
+        CurrentActivityHolder.startActivity(intent, context)
     }
 
     private fun requestDrawOverlayPermission() {
@@ -94,8 +94,7 @@ class AppBlockerApiImpl(
             Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
             Uri.parse("package:" + context.packageName)
         ).highlightSettingsTo(context.packageName)
-        intent.setFlags(FLAG_ACTIVITY_NEW_TASK)
-        val contextForLaunch = CurrentActivityHolder.getCurrentActivity() ?: context
-        contextForLaunch.startActivity(intent)
+
+        CurrentActivityHolder.startActivity(intent, context)
     }
 }

@@ -5,5 +5,6 @@ enum class SettingsEnum(val key: String) {
     USER_DATA("user_data"),
     SESSIONS("sessions"),
     DND_SUPPORT("dnd_support"),
-    APP_BLOCKING("app_blocking")
+    APP_BLOCKING("app_blocking"),
+    DEV_MODE("dev_mode")
 }
