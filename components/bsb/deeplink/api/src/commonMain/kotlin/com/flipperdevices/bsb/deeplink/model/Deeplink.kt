@@ -10,5 +10,11 @@ sealed interface Deeplink {
     sealed interface Root : Deeplink {
         @Serializable
         data class AppLockScreen(val applicationInfo: ApplicationInfo) : Root
+
+        @Serializable
+        sealed interface Auth : Root {
+            @Serializable
+            data class OAuth(val token: String) : Root
+        }
     }
 }

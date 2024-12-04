@@ -5,7 +5,7 @@ import com.flipperdevices.bsb.auth.within.main.api.SignWithInElementDecomposeCom
 import com.flipperdevices.bsb.auth.within.main.model.SignWithInStateListener
 import com.flipperdevices.bsb.auth.within.oauth.model.OAuthProvider
 
-abstract class OAuthScreenDecomposeComponent(
+abstract class OAuthElementDecomposeComponent(
     componentContext: ComponentContext
 ) : SignWithInElementDecomposeComponent(componentContext) {
     fun interface Factory {
@@ -13,6 +13,6 @@ abstract class OAuthScreenDecomposeComponent(
             componentContext: ComponentContext,
             oAuthProvider: OAuthProvider,
             withInStateListener: SignWithInStateListener
-        ): OAuthScreenDecomposeComponent
+        ): OAuthElementDecomposeComponent
     }
 }

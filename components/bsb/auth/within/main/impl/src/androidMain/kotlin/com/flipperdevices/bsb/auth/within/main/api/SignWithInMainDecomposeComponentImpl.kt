@@ -5,17 +5,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.childContext
 import com.flipperdevices.bsb.auth.within.main.composable.OrLineComposable
 import com.flipperdevices.bsb.auth.within.main.model.SignWithInState
 import com.flipperdevices.bsb.auth.within.main.model.SignWithInStateListener
-import com.flipperdevices.bsb.auth.within.oauth.api.OAuthScreenDecomposeComponent
+import com.flipperdevices.bsb.auth.within.oauth.api.OAuthElementDecomposeComponent
 import com.flipperdevices.bsb.auth.within.oauth.model.OAuthProvider
 import com.flipperdevices.bsb.auth.within.onetap.api.GoogleOneTapAuthDecomposeComponent
 import com.flipperdevices.core.di.AppGraph
@@ -28,19 +26,19 @@ class SignWithInMainDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     @Assisted withInStateListener: SignWithInStateListener,
     oneTapAuthDecomposeComponent: GoogleOneTapAuthDecomposeComponent.Factory,
-    oAuthScreenDecomposeComponent: OAuthScreenDecomposeComponent.Factory
+    oAuthElementDecomposeComponent: OAuthElementDecomposeComponent.Factory
 ) : SignWithInMainDecomposeComponent(componentContext),
     ComponentContext by componentContext {
     private val googleAuth = oneTapAuthDecomposeComponent(
         componentContext = childContext("signWithIn_google"),
         withInStateListener = withInStateListener
     )
-    private val appleAuth = oAuthScreenDecomposeComponent(
+    private val appleAuth = oAuthElementDecomposeComponent(
         componentContext = childContext("signWithIn_apple"),
         oAuthProvider = OAuthProvider.APPLE,
         withInStateListener = withInStateListener
     )
-    private val microsoftAuth = oAuthScreenDecomposeComponent(
+    private val microsoftAuth = oAuthElementDecomposeComponent(
         componentContext = childContext("signWithIn_microsoft"),
         oAuthProvider = OAuthProvider.MICROSOFT,
         withInStateListener = withInStateListener

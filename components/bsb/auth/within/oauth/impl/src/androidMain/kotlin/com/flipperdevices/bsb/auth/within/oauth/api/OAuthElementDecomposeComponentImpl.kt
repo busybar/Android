@@ -15,11 +15,11 @@ import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 
 @Inject
-class OAuthScreenDecomposeComponentImpl(
+class OAuthElementDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     @Assisted oAuthProvider: OAuthProvider,
     @Assisted withInStateListener: SignWithInStateListener
-) : OAuthScreenDecomposeComponent(componentContext) {
+) : OAuthElementDecomposeComponent(componentContext) {
     private val provider = oAuthProvider.toInternal()
 
     @Composable
@@ -38,14 +38,14 @@ class OAuthScreenDecomposeComponentImpl(
     }
 
     @Inject
-    @ContributesBinding(AppGraph::class, OAuthScreenDecomposeComponent.Factory::class)
+    @ContributesBinding(AppGraph::class, OAuthElementDecomposeComponent.Factory::class)
     class Factory(
         private val factory: (
             componentContext: ComponentContext,
             oAuthProvider: OAuthProvider,
             withInStateListener: SignWithInStateListener
-        ) -> OAuthScreenDecomposeComponentImpl
-    ) : OAuthScreenDecomposeComponent.Factory {
+        ) -> OAuthElementDecomposeComponentImpl
+    ) : OAuthElementDecomposeComponent.Factory {
         override fun invoke(
             componentContext: ComponentContext,
             oAuthProvider: OAuthProvider,

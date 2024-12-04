@@ -12,6 +12,8 @@ androidDependencies {
 
     implementation(projects.components.bsb.auth.within.main.api)
     implementation(projects.components.bsb.auth.within.common)
+    implementation(projects.components.bsb.deeplink.api)
+
 
 
     implementation(libs.decompose)
