@@ -70,6 +70,8 @@ include(
     ":components:bsb:auth:login:impl",
     ":components:bsb:auth:signup:api",
     ":components:bsb:auth:signup:impl",
+    ":components:bsb:auth:otp:api",
+    ":components:bsb:auth:otp:impl",
     ":components:bsb:auth:within:common",
     ":components:bsb:auth:within:main:api",
     ":components:bsb:auth:within:main:impl",
