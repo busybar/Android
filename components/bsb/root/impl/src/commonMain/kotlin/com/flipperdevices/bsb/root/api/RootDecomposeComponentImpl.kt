@@ -42,7 +42,7 @@ class RootDecomposeComponentImpl(
                     RootNavigationConfig.Timer,
                     RootDeeplinkHandlerImpl.getConfigFromDeeplink(initialDeeplink)
                 )
-            } else listOf(RootNavigationConfig.Timer)
+            } else listOf(RootNavigationConfig.Auth)
         },
         handleBackButton = true,
         childFactory = ::child,

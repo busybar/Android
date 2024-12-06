@@ -4,11 +4,13 @@ import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.childContext
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.flipperdevices.bsb.auth.login.api.LoginDecomposeComponent
 import com.flipperdevices.bsb.auth.main.model.AuthRootNavigationConfig
+import com.flipperdevices.bsb.auth.otp.api.AuthOtpElementDecomposeComponent
 import com.flipperdevices.bsb.auth.signup.api.SignupDecomposeComponent
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.core.di.AppGraph
@@ -28,9 +30,10 @@ class AuthDecomposeComponentImpl(
         onComplete: () -> Unit
     ) -> MainScreenDecomposeComponentImpl,
     private val loginDecomposeComponentFactory: LoginDecomposeComponent.Factory,
-    private val signupDecomposeComponentFactory: SignupDecomposeComponent.Factory
+    private val signupDecomposeComponentFactory: SignupDecomposeComponent.Factory,
 ) : AuthDecomposeComponent(),
     ComponentContext by componentContext {
+
     override val stack = childStack(
         source = navigation,
         serializer = AuthRootNavigationConfig.serializer(),

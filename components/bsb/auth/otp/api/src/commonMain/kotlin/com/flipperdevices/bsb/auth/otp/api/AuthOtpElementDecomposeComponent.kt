@@ -1,14 +1,19 @@
 package com.flipperdevices.bsb.auth.otp.api
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
 import com.flipperdevices.ui.decompose.ScreenDecomposeComponent
 
-abstract class AuthOtpScreenDecomposeComponent(
+abstract class AuthOtpElementDecomposeComponent(
     componentContext: ComponentContext
-) : ScreenDecomposeComponent(componentContext) {
+) : ComponentContext by componentContext {
+    @Composable
+    abstract fun Render(modifier: Modifier)
+
     fun interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,
-        ): AuthOtpScreenDecomposeComponent
+        ): AuthOtpElementDecomposeComponent
     }
 }
