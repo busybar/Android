@@ -10,7 +10,6 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.flipperdevices.bsb.auth.login.api.LoginDecomposeComponent
 import com.flipperdevices.bsb.auth.main.model.AuthRootNavigationConfig
-import com.flipperdevices.bsb.auth.otp.api.AuthOtpElementDecomposeComponent
 import com.flipperdevices.bsb.auth.signup.api.SignupDecomposeComponent
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.core.di.AppGraph
