@@ -43,6 +43,7 @@ include(
 
     ":components:bsb:core:theme",
     ":components:bsb:core:res",
+    ":components:bsb:core:markdown",
 
     ":components:bsb:root:api",
     ":components:bsb:root:impl",

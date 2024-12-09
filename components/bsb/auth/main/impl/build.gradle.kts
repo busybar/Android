@@ -14,6 +14,7 @@ commonDependencies {
     implementation(projects.components.core.ui.decompose)
     implementation(projects.components.core.ui.lifecycle)
     implementation(projects.components.bsb.core.theme)
+    implementation(projects.components.bsb.core.markdown)
 
     implementation(projects.components.bsb.cloud.api)
     implementation(projects.components.bsb.auth.common)
@@ -22,5 +23,4 @@ commonDependencies {
     implementation(projects.components.bsb.auth.within.main.api)
 
     implementation(libs.decompose)
-    implementation(libs.markdown.renderer)
 }
