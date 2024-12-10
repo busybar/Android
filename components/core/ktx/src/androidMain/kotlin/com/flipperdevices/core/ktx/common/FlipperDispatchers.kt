@@ -1,4 +1,4 @@
-package com.flipperdevices.core.ktx.jre
+package com.flipperdevices.core.ktx.common
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.asCoroutineDispatcher

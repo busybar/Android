@@ -14,7 +14,7 @@ import com.flipperdevices.bsb.di.AndroidAppComponent
 import com.flipperdevices.bsb.root.api.RootDecomposeComponent
 import com.flipperdevices.core.di.ComponentHolder
 import com.flipperdevices.core.ktx.android.toFullString
-import com.flipperdevices.core.ktx.jre.FlipperDispatchers
+import com.flipperdevices.core.ktx.common.FlipperDispatchers
 import com.flipperdevices.core.log.LogTagProvider
 import com.flipperdevices.core.log.info
 import com.flipperdevices.core.log.error

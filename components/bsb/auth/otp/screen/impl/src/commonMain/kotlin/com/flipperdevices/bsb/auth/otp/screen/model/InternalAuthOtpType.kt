@@ -14,6 +14,7 @@ import busystatusbar.components.bsb.auth.otp.screen.impl.generated.resources.log
 import busystatusbar.components.bsb.auth.otp.screen.impl.generated.resources.login_otp_screen_verify_code_title
 import busystatusbar.components.bsb.auth.otp.screen.impl.generated.resources.login_otp_screen_verify_desc
 import busystatusbar.components.bsb.auth.otp.screen.impl.generated.resources.login_otp_screen_verify_title
+import com.flipperdevices.bsb.cloud.model.BSBEmailVerificationType
 import org.jetbrains.compose.resources.StringResource
 
 @Stable
@@ -26,6 +27,8 @@ sealed interface InternalAuthOtpType {
     val textCodeBtn: StringResource
     val textCodeError: StringResource
 
+    val verificationEmailType: BSBEmailVerificationType
+
     @Stable
     data class ForgotPassword(
         override val email: String
@@ -36,6 +39,7 @@ sealed interface InternalAuthOtpType {
         override val textCodeDescMarkdown = Res.string.login_otp_screen_forgot_code_desc_markdown
         override val textCodeBtn = Res.string.login_otp_screen_forgot_code_btn
         override val textCodeError = Res.string.login_otp_screen_forgot_code_error
+        override val verificationEmailType = BSBEmailVerificationType.RESET_PASSWORD
     }
 
     @Stable
@@ -48,6 +52,7 @@ sealed interface InternalAuthOtpType {
         override val textCodeDescMarkdown = Res.string.login_otp_screen_verify_code_desc_markdown
         override val textCodeBtn = Res.string.login_otp_screen_verify_code_btn
         override val textCodeError = Res.string.login_otp_screen_verify_code_error
+        override val verificationEmailType = BSBEmailVerificationType.SIGN_UP
     }
 }
 

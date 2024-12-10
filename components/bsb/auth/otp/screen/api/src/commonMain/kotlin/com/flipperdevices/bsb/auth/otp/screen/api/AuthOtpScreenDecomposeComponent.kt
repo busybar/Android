@@ -12,7 +12,8 @@ abstract class AuthOtpScreenDecomposeComponent(
         operator fun invoke(
             componentContext: ComponentContext,
             onBack: DecomposeOnBackParameter,
-            otpType: AuthOtpType
+            otpType: AuthOtpType,
+            onOtpComplete: suspend (String) -> Unit,
         ): AuthOtpScreenDecomposeComponent
     }
 }

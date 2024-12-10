@@ -2,7 +2,6 @@ package com.flipperdevices.bsb.appblockerscreen.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,7 +18,7 @@ import busystatusbar.components.bsb.appblockerscreen.impl.generated.resources.ap
 import com.flipperdevices.bsb.appblocker.model.ApplicationInfo
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
-import com.flipperdevices.core.ktx.jre.clickableRipple
+import com.flipperdevices.core.ktx.common.clickableRipple
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

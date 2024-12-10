@@ -14,7 +14,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import busystatusbar.components.bsb.auth.otp.screen.impl.generated.resources.Res
 import busystatusbar.components.bsb.auth.otp.screen.impl.generated.resources.pic_email_verification
-import com.flipperdevices.bsb.auth.otp.screen.model.AuthOtpType
 import com.flipperdevices.bsb.auth.otp.screen.model.InternalAuthOtpType
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet

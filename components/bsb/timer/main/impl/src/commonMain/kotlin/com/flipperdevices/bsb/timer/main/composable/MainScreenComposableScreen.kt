@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import busystatusbar.components.bsb.timer.main.impl.generated.resources.Res
 import busystatusbar.components.bsb.timer.main.impl.generated.resources.ic_settings
 import com.flipperdevices.bsb.core.theme.LocalPallet
-import com.flipperdevices.core.ktx.jre.clickableRipple
+import com.flipperdevices.core.ktx.common.clickableRipple
 import org.jetbrains.compose.resources.painterResource
 
 @Composable

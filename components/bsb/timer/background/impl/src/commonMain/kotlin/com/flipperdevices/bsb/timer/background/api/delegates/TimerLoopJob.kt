@@ -2,8 +2,8 @@ package com.flipperdevices.bsb.timer.background.api.delegates
 
 import com.flipperdevices.bsb.timer.background.model.InternalControlledTimerState
 import com.flipperdevices.bsb.timer.background.model.TimerAction
-import com.flipperdevices.bsb.timer.background.model.TimerState
-import com.flipperdevices.core.ktx.jre.withLock
+import com.flipperdevices.core.data.timer.TimerState
+import com.flipperdevices.core.ktx.common.withLock
 import com.flipperdevices.core.log.LogTagProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancelAndJoin
@@ -56,7 +56,7 @@ class TimerLoopJob(
                     val delta =
                         Clock.System.now().epochSeconds - startTime.epochSeconds
                     val duration = initialTimerState.toDuration() - delta.seconds
-                    original.copy(timerState = duration.toTimerState())
+                    original.copy(timerState = TimerState(duration))
                 }
             }
         }
@@ -92,7 +92,7 @@ class TimerLoopJob(
             } else {
                 initialTimerStateFlow.update { originalInitialState ->
                     val delta = Clock.System.now() - original.pauseOn
-                    originalInitialState.add(delta.toTimerState())
+                    originalInitialState.add(TimerState(delta))
                 }
                 original.copy(pauseOn = null)
             }
@@ -120,13 +120,4 @@ fun TimerState.add(timerState: TimerState): TimerState {
 
 fun TimerState.toDuration(): Duration {
     return minute.minutes + second.seconds
-}
-
-fun Duration.toTimerState(): TimerState {
-    val seconds = inWholeSeconds - inWholeMinutes * 1.minutes.inWholeSeconds
-
-    return TimerState(
-        second = seconds.toInt(),
-        minute = inWholeMinutes.toInt()
-    )
 }

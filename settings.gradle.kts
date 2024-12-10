@@ -37,6 +37,7 @@ include(
     ":components:core:activityholder",
     ":components:core:log",
     ":components:core:ktx",
+    ":components:core:data",
     ":components:core:build-konfig",
     ":components:core:ui:decompose",
     ":components:core:ui:lifecycle",

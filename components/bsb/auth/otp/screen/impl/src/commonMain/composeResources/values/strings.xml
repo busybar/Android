@@ -2,6 +2,7 @@
 
     <string name="login_otp_screen_code_expires">Expires in %1$s</string>
     <string name="login_otp_screen_code_resend">Resend email</string>
+    <string name="login_otp_screen_code_incorrect">Incorrect code</string>
 
     <string name="login_otp_screen_forgot_title">Forgot your password?</string>
     <string name="login_otp_screen_forgot_desc">We’ve sent a password reset email to:</string>

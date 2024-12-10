@@ -11,6 +11,7 @@ commonDependencies {
     implementation(projects.components.core.di)
     implementation(projects.components.core.ktx)
     implementation(projects.components.core.log)
+    implementation(projects.components.core.data)
 
     implementation(libs.kotlin.coroutines)
     implementation(libs.kotlin.datetime)

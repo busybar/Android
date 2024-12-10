@@ -3,11 +3,9 @@ package com.flipperdevices.bsb.appblocker.listener
 import android.app.usage.UsageEvents
 import android.app.usage.UsageStatsManager
 import android.content.Context
-import android.content.Intent
 import com.flipperdevices.bsb.appblocker.deeplink.AppBlockDeeplinkParser
 import com.flipperdevices.core.di.AndroidPlatformDependencies
-import com.flipperdevices.core.di.AppGraph
-import com.flipperdevices.core.ktx.jre.withLock
+import com.flipperdevices.core.ktx.common.withLock
 import com.flipperdevices.core.log.LogTagProvider
 import com.flipperdevices.core.log.info
 import com.flipperdevices.core.log.verbose

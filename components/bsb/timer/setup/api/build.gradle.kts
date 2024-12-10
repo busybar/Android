@@ -6,6 +6,7 @@ plugins {
 commonDependencies {
     implementation(libs.decompose)
 
+    implementation(projects.components.core.data)
     implementation(projects.components.core.ui.decompose)
 
     implementation(projects.components.bsb.timer.background.api)

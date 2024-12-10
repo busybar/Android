@@ -1,6 +1,6 @@
 package com.flipperdevices.bsb.timer.main.model
 
-import com.flipperdevices.bsb.timer.background.model.TimerState
+import com.flipperdevices.core.data.timer.TimerState
 import kotlinx.serialization.Serializable
 
 @Serializable

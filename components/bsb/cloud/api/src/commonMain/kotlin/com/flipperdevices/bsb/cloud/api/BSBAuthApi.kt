@@ -1,5 +1,7 @@
 package com.flipperdevices.bsb.cloud.api
 
+import com.flipperdevices.bsb.cloud.model.BSBEmailVerificationResponse
+import com.flipperdevices.bsb.cloud.model.BSBEmailVerificationType
 import com.flipperdevices.bsb.cloud.model.BSBUser
 
 interface BSBAuthApi {
@@ -12,4 +14,15 @@ interface BSBAuthApi {
     suspend fun jwtAuth(token: String): Result<Unit>
 
     suspend fun getUser(): Result<BSBUser>
+
+    suspend fun requestVerifyEmail(
+        email: String,
+        verificationType: BSBEmailVerificationType
+    ): Result<BSBEmailVerificationResponse>
+
+    suspend fun checkCode(
+        email: String,
+        code: String,
+        verificationType: BSBEmailVerificationType
+    ): Result<Unit>
 }

@@ -9,7 +9,7 @@ import com.arkivanov.essenty.lifecycle.stop
 import com.arkivanov.essenty.statekeeper.StateKeeperDispatcher
 import com.flipperdevices.bsb.di.WasmJSAppComponent
 import com.flipperdevices.bsb.di.create
-import com.flipperdevices.core.ktx.jre.FlipperDispatchers
+import com.flipperdevices.core.ktx.common.FlipperDispatchers
 import com.russhwolf.settings.StorageSettings
 import com.russhwolf.settings.observable.makeObservable
 import kotlinx.browser.document

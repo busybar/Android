@@ -3,7 +3,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.flipperdevices.bsb.App
 import com.flipperdevices.bsb.di.IOSAppComponent
 import com.flipperdevices.bsb.di.create
-import com.flipperdevices.core.ktx.jre.FlipperDispatchers
+import com.flipperdevices.core.ktx.common.FlipperDispatchers
 import com.russhwolf.settings.Settings
 import com.russhwolf.settings.observable.makeObservable
 import kotlinx.coroutines.CoroutineScope

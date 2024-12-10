@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.TextStyle
@@ -35,6 +36,8 @@ fun OtpCellComposable(
     disabled: Boolean,
     value: OtpCell,
     focused: Boolean,
+    borderColor: Color,
+    backgroundColor: Color,
     onInput: (TextFieldValue) -> Unit
 ) {
     val focusRequester = remember { FocusRequester() }
@@ -64,6 +67,8 @@ fun OtpCellComposable(
         decorationBox = { innerTextField ->
             OtpCellDecorationBox(
                 innerTextField = innerTextField,
+                borderColor = borderColor,
+                backgroundColor = backgroundColor
             )
         }
     )
@@ -78,12 +83,14 @@ fun OtpCellComposable(
 @Composable
 private fun OtpCellDecorationBox(
     innerTextField: @Composable () -> Unit,
+    borderColor: Color,
+    backgroundColor: Color,
 ) {
     Box(
         modifier = Modifier
-            .border(1.dp, LocalPallet.current.neutral.quinary, RoundedCornerShape(8.dp))
+            .border(1.dp, borderColor, RoundedCornerShape(8.dp))
             .clip(RoundedCornerShape(8.dp))
-            .background(LocalPallet.current.neutral.septenary)
+            .background(backgroundColor)
             .padding(vertical = 24.dp),
         contentAlignment = Alignment.Center
     ) {

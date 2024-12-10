@@ -2,10 +2,15 @@ package com.flipperdevices.bsb.auth.login.api
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pushToFront
 import com.flipperdevices.bsb.auth.login.model.LoginNavigationConfig
+import com.flipperdevices.bsb.auth.otp.screen.api.AuthOtpScreenDecomposeComponent
+import com.flipperdevices.bsb.auth.otp.screen.model.AuthOtpType
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.ui.decompose.DecomposeComponent
 import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
+import com.flipperdevices.ui.decompose.popOr
+import kotlinx.datetime.Instant
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
@@ -21,7 +26,9 @@ class LoginDecomposeComponentImpl(
         onBack: DecomposeOnBackParameter,
         email: String,
         onComplete: () -> Unit,
-    ) -> LoginScreenDecomposeComponentImpl
+        onForgetPassword: (email: String, codeExpiryTime: Instant) -> Unit
+    ) -> LoginScreenDecomposeComponentImpl,
+    private val otpScreenDecomposeComponent: AuthOtpScreenDecomposeComponent.Factory
 ) : LoginDecomposeComponent<LoginNavigationConfig>(),
     ComponentContext by componentContext {
     override val stack = childStack(
@@ -38,9 +45,22 @@ class LoginDecomposeComponentImpl(
     ): DecomposeComponent = when (config) {
         LoginNavigationConfig.Password -> loginScreenDecomposeComponent(
             componentContext,
-            onBack,
+            { navigation.popOr(onBack::invoke) },
             email,
-            onComplete
+            onComplete,
+            { email, codeExpiryTime ->
+                navigation.pushToFront(LoginNavigationConfig.ResetPassword(email, codeExpiryTime))
+            }
+        )
+
+        is LoginNavigationConfig.ResetPassword -> otpScreenDecomposeComponent(
+            componentContext = componentContext,
+            onBack = { navigation.popOr(onBack::invoke) },
+            otpType = AuthOtpType.ForgotPassword(
+                email = config.email,
+                codeExpiryTime = config.codeExpiryTime
+            ),
+            onOtpComplete = {}
         )
     }
 

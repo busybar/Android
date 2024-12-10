@@ -4,8 +4,9 @@ import com.flipperdevices.bsb.cloud.api.BSBAuthApi
 import com.flipperdevices.bsb.preference.api.PreferenceApi
 import com.flipperdevices.bsb.preference.api.set
 import com.flipperdevices.bsb.preference.model.SettingsEnum
-import com.flipperdevices.busybar.auth.login.model.LoginState
-import com.flipperdevices.core.ktx.jre.transform
+import com.flipperdevices.bsb.auth.login.model.LoginState
+import com.flipperdevices.bsb.cloud.model.BSBEmailVerificationType
+import com.flipperdevices.core.ktx.common.transform
 import com.flipperdevices.core.log.LogTagProvider
 import com.flipperdevices.core.log.error
 import com.flipperdevices.core.ui.lifecycle.DecomposeViewModel
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.datetime.Instant
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
@@ -21,6 +23,7 @@ import me.tatarka.inject.annotations.Inject
 class SignInViewModel(
     @Assisted private val email: String,
     @Assisted private val onComplete: () -> Unit,
+    @Assisted private val onForgetPassword: (email: String, codeExpiryTime: Instant) -> Unit,
     private val settings: PreferenceApi,
     private val bsbAuthApi: BSBAuthApi
 ) : DecomposeViewModel(), LogTagProvider {
@@ -43,6 +46,19 @@ class SignInViewModel(
                 }
             }.onFailure {
                 error(it) { "Failure auth for $email" }
+            }
+        state.emit(LoginState.WaitingForInput)
+    }
+
+    fun onForgotPassword(email: String) = viewModelScope.launch {
+        state.emit(LoginState.AuthInProgress)
+        bsbAuthApi.requestVerifyEmail(email, BSBEmailVerificationType.RESET_PASSWORD)
+            .onSuccess {
+                withContext(Dispatchers.Main) {
+                    onForgetPassword(email, it.codeExpiryTime)
+                }
+            }.onFailure {
+                // TODO show error
             }
         state.emit(LoginState.WaitingForInput)
     }

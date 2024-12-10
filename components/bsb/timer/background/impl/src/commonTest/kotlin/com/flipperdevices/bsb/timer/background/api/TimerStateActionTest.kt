@@ -1,7 +1,7 @@
 package com.flipperdevices.bsb.timer.background.api
 
 import com.flipperdevices.bsb.timer.background.api.delegates.add
-import com.flipperdevices.bsb.timer.background.model.TimerState
+import com.flipperdevices.core.data.timer.TimerState
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

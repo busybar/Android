@@ -10,7 +10,6 @@ import com.arkivanov.essenty.lifecycle.coroutines.withLifecycle
 import com.flipperdevices.bsb.timer.active.api.ActiveTimerScreenDecomposeComponent
 import com.flipperdevices.bsb.timer.background.api.TimerApi
 import com.flipperdevices.bsb.timer.background.model.ControlledTimerState
-import com.flipperdevices.bsb.timer.background.model.TimerState
 import com.flipperdevices.bsb.timer.main.model.TimerMainNavigationConfig
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.ui.decompose.DecomposeComponent

@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
-import com.flipperdevices.bsb.timer.background.model.TimerState
+import com.flipperdevices.core.data.timer.TimerState
 
 @Composable
 fun TimerTimeComposable(

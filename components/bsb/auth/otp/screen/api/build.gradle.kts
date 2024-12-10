@@ -6,4 +6,6 @@ plugins {
 commonDependencies {
     implementation(libs.decompose)
     implementation(projects.components.core.ui.decompose)
+
+    implementation(libs.kotlin.datetime)
 }

@@ -23,4 +23,5 @@ commonDependencies {
     implementation(projects.components.bsb.auth.within.main.api)
 
     implementation(libs.decompose)
+    implementation(libs.markdown.renderer)
 }

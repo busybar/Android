@@ -5,23 +5,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.Res
 import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.preference_app_blocker_desc
 import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.preference_app_blocker_title
-import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.preference_auth
 import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.preference_notification_desc
 import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.preference_notification_title
 import com.flipperdevices.bsb.preferencescreen.composable.debug.AuthComposable
 import com.flipperdevices.bsb.preferencescreen.model.PreferenceScreenState
 import com.flipperdevices.bsb.preferencescreen.model.SettingsAction
-import com.flipperdevices.core.ktx.jre.clickableRipple
 
 @Composable
 fun SettingsColumnComposable(

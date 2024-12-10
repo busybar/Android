@@ -5,7 +5,7 @@ import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import com.arkivanov.essenty.lifecycle.Lifecycle
 import com.arkivanov.essenty.lifecycle.LifecycleOwner
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
-import com.flipperdevices.core.ktx.jre.FlipperDispatchers
+import com.flipperdevices.core.ktx.common.FlipperDispatchers
 import kotlinx.coroutines.SupervisorJob
 
 abstract class DecomposeViewModel : InstanceKeeper.Instance, LifecycleOwner {

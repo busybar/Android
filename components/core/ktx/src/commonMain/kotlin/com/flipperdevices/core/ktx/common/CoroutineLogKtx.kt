@@ -1,4 +1,4 @@
-package com.flipperdevices.core.ktx.jre
+package com.flipperdevices.core.ktx.common
 
 import com.flipperdevices.core.log.LogTagProvider
 import com.flipperdevices.core.log.info
