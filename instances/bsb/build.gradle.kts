@@ -151,6 +151,8 @@ commonDependencies {
     implementation(projects.components.bsb.appblockerscreen.impl)
     implementation(projects.components.bsb.deeplink.api)
     implementation(projects.components.bsb.deeplink.impl)
+    implementation(projects.components.bsb.inappnotification.api)
+    implementation(projects.components.bsb.inappnotification.impl)
 
     implementation(projects.components.bsb.auth.main.api)
     implementation(projects.components.bsb.auth.main.impl)

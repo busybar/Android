@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="error_update_title">Unable to Update</string>
+    <string name="error_update_desc">Сheck your internet connection or try again later</string>
+</resources>

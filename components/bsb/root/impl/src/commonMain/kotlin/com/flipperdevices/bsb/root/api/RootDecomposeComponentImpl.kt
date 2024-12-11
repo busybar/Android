@@ -1,10 +1,15 @@
 package com.flipperdevices.bsb.root.api
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.childContext
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.arkivanov.decompose.router.stack.childStack
@@ -18,6 +23,7 @@ import com.flipperdevices.bsb.root.deeplink.RootDeeplinkHandlerImpl
 import com.flipperdevices.bsb.root.model.RootNavigationConfig
 import com.flipperdevices.bsb.timer.main.api.TimerMainDecomposeComponent
 import com.flipperdevices.core.di.AppGraph
+import com.flipperdevices.inappnotification.api.InAppNotificationDecomposeComponent
 import com.flipperdevices.ui.decompose.DecomposeComponent
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
@@ -30,9 +36,14 @@ class RootDecomposeComponentImpl(
     private val authDecomposeComponentFactory: AuthDecomposeComponent.Factory,
     private val timerMainDecomposeComponentFactory: TimerMainDecomposeComponent.Factory,
     private val preferenceScreenComponentFactory: PreferenceScreenDecomposeComponent.Factory,
-    private val appLockComponentFactory: AppBlockerScreenDecomposeComponent.Factory
+    private val appLockComponentFactory: AppBlockerScreenDecomposeComponent.Factory,
+    private val inAppNotificationFactory: InAppNotificationDecomposeComponent.Factory
 ) : RootDecomposeComponent(),
     ComponentContext by componentContext {
+    private val inAppNotificationDecomposeComponent = inAppNotificationFactory(
+        componentContext = childContext("inAppNotification")
+    )
+
     override val stack = childStack(
         source = navigation,
         serializer = RootNavigationConfig.serializer(),
@@ -82,11 +93,22 @@ class RootDecomposeComponentImpl(
         CompositionLocalProvider(
             LocalRootNavigation provides this
         ) {
-            Children(
-                modifier = modifier,
-                stack = childStack,
+            Box(
+                modifier
+                    .fillMaxSize()
             ) {
-                it.instance.Render(Modifier)
+                Children(
+                    modifier = Modifier,
+                    stack = childStack,
+                ) {
+                    it.instance.Render(Modifier)
+                }
+
+                inAppNotificationDecomposeComponent.Render(
+                    Modifier
+                        .align(Alignment.CenterEnd)
+                        .systemBarsPadding()
+                )
             }
         }
     }

@@ -62,6 +62,8 @@ include(
     ":components:bsb:appblockerscreen:impl",
     ":components:bsb:deeplink:api",
     ":components:bsb:deeplink:impl",
+    ":components:bsb:inappnotification:api",
+    ":components:bsb:inappnotification:impl",
 
 
     ":components:bsb:auth:common",
