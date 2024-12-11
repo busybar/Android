@@ -22,6 +22,7 @@ commonDependencies {
     implementation(projects.components.bsb.auth.otp.screen.api)
     implementation(projects.components.bsb.cloud.api)
     implementation(projects.components.bsb.preference.api)
+    implementation(projects.components.bsb.inappnotification.api)
 
     implementation(libs.decompose)
     implementation(libs.kotlin.datetime)

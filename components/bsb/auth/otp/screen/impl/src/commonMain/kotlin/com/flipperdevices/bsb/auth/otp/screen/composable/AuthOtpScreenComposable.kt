@@ -3,9 +3,11 @@ package com.flipperdevices.bsb.auth.otp.screen.composable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -32,14 +34,18 @@ fun AuthOtpScreenComposable(
     onResend: () -> Unit,
     authOtpScreenState: AuthOtpScreenState
 ) {
-    Column(modifier) {
+    Column(
+        modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         LogInAppBarComposable(
             text = otpType.textTitle, onBack = onBack
         )
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
-                .padding(16.dp)
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AuthOtpScreenHeaderComposable(modifier = Modifier, otpType)
 
@@ -47,7 +53,7 @@ fun AuthOtpScreenComposable(
                 AuthOtpScreenState.CheckCodeInProgress,
                 AuthOtpScreenState.ResetPasswordInProgress,
                 is AuthOtpScreenState.WaitingForInput -> {
-                    otpCodeFieldComposable(Modifier)
+                    otpCodeFieldComposable(Modifier.padding(top = 16.dp))
 
                     BusyBarButtonComposable(
                         modifier = Modifier

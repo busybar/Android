@@ -98,7 +98,7 @@ class RootDecomposeComponentImpl(
                     .fillMaxSize()
             ) {
                 Children(
-                    modifier = Modifier,
+                    modifier = Modifier.fillMaxSize(),
                     stack = childStack,
                 ) {
                     it.instance.Render(Modifier)

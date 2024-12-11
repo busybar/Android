@@ -1,5 +1,7 @@
 package com.flipperdevices.bsb.auth.otp.screen.api
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -7,10 +9,8 @@ import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.childContext
 import com.flipperdevices.bsb.auth.otp.element.api.AuthOtpElementDecomposeComponent
-import com.flipperdevices.bsb.auth.otp.element.model.OtpElementState
 import com.flipperdevices.bsb.auth.otp.screen.composable.AuthOtpScreenComposable
 import com.flipperdevices.bsb.auth.otp.screen.composable.OtpCodeFieldComposable
-import com.flipperdevices.bsb.auth.otp.screen.model.AuthOtpScreenState
 import com.flipperdevices.bsb.auth.otp.screen.model.AuthOtpType
 import com.flipperdevices.bsb.auth.otp.screen.model.InternalAuthOtpType
 import com.flipperdevices.bsb.auth.otp.screen.model.toInternalAuthOtpType
@@ -18,8 +18,6 @@ import com.flipperdevices.bsb.auth.otp.screen.viewmodel.AuthOtpScreenViewModel
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.core.ui.lifecycle.viewModelWithFactoryWithoutRemember
 import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
-import com.flipperdevices.ui.decompose.ElementDecomposeComponent
-import kotlinx.datetime.Instant
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
@@ -59,7 +57,9 @@ class AuthOtpScreenDecomposeComponentImpl(
         val timerState by viewModel.getTimerState().collectAsState()
 
         AuthOtpScreenComposable(
-            modifier = modifier,
+            modifier = modifier
+                .fillMaxSize()
+                .statusBarsPadding(),
             otpType = internalOtpType,
             onConfirm = {
                 viewModel.onCodeApply(otpCode)

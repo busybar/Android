@@ -57,9 +57,9 @@ fun OtpCodeFieldComposable(
 
                 AuthOtpScreenState.ExpiryVerificationCode -> OtpElementState.WAITING_FOR_INPUT
                 is AuthOtpScreenState.WaitingForInput -> if (otpScreenState.wrongCodeInvalid) {
-                    OtpElementState.WAITING_FOR_INPUT
-                } else {
                     OtpElementState.ERROR
+                } else {
+                    OtpElementState.WAITING_FOR_INPUT
                 }
             }
         )

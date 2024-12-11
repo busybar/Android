@@ -49,7 +49,7 @@ fun getHttpClient(preferenceApi: PreferenceApi) = HttpClient(httpEngine()) {
                 ktorTimber.verbose { message }
             }
         }
-        level = LogLevel.INFO
+        level = LogLevel.ALL
     }
 
     install(BSBAuthPlugin) {

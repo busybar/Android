@@ -16,4 +16,8 @@ sealed class InAppNotification {
         val desc: StringResource?,
         override val duration: Duration = NOTIFICATION_DURATION
     ) : InAppNotification()
+
+    data class ErrorEmailSend(
+        override val duration: Duration = NOTIFICATION_DURATION
+    ) : InAppNotification()
 }

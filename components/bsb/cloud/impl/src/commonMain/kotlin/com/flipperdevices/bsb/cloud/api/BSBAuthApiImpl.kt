@@ -118,8 +118,8 @@ class BSBAuthApiImpl(
             }.body<BSBResponse<BSBApiEmailVerificationResponse>>()
         }.map {
             BSBEmailVerificationResponse(
-                Instant.fromEpochMilliseconds(
-                    Clock.System.now().toEpochMilliseconds() + it.response.codeLifetime
+                Instant.fromEpochSeconds(
+                    Clock.System.now().epochSeconds + it.response.codeLifetime
                 )
             )
         }
@@ -132,7 +132,7 @@ class BSBAuthApiImpl(
     ): Result<Unit> = withContext(networkDispatcher) {
         return@withContext runCatching {
             httpClient.post {
-                url("${NetworkConstants.BASE_URL}/v0/auth/verify-email")
+                url("${NetworkConstants.BASE_URL}/v0/auth/check-code")
                 parameter("confirm_type", verificationType.toVerificationTypeString())
                 setBody(BSBCheckCodeRequest(email, code))
             }.body<BSBResponse<*>>()

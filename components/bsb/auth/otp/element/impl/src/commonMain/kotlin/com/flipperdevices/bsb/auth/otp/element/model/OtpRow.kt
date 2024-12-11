@@ -37,12 +37,21 @@ data class OtpRow(
 
                 is OtpCellAction.MoveBracketRight -> {
                     currentIndex++
+                    if (currentIndex < cells.size) {
+                        newCells[currentIndex] = OtpCell(
+                            textFieldValue = newCells[currentIndex].textFieldValue.copy(
+                                selection = TextRange(
+                                    1
+                                )
+                            )
+                        )
+                    }
                     if (action.remainingText.isNullOrBlank()) {
                         nextState = null
                     } else {
                         nextState = TextFieldValue(
                             text = "$INVISIBLE_SYMBOL${action.remainingText}",
-                            selection = TextRange(2)
+                            selection = TextRange(1)
                         )
                     }
                 }

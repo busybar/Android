@@ -52,7 +52,7 @@ fun OtpCellComposable(
         value = value.textFieldValue,
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Next,
-            keyboardType = KeyboardType.Number
+            keyboardType = KeyboardType.Decimal
         ),
         onValueChange = { onInput(it) },
         maxLines = 1,

@@ -10,6 +10,8 @@ import com.flipperdevices.core.ktx.common.transform
 import com.flipperdevices.core.log.LogTagProvider
 import com.flipperdevices.core.log.error
 import com.flipperdevices.core.ui.lifecycle.DecomposeViewModel
+import com.flipperdevices.inappnotification.api.InAppNotificationStorage
+import com.flipperdevices.inappnotification.api.model.InAppNotification
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,7 +27,8 @@ class SignInViewModel(
     @Assisted private val onComplete: () -> Unit,
     @Assisted private val onForgetPassword: (email: String, codeExpiryTime: Instant) -> Unit,
     private val settings: PreferenceApi,
-    private val bsbAuthApi: BSBAuthApi
+    private val bsbAuthApi: BSBAuthApi,
+    private val inAppNotificationStorage: InAppNotificationStorage
 ) : DecomposeViewModel(), LogTagProvider {
     override val TAG = "SignInViewModel"
 
@@ -58,7 +61,7 @@ class SignInViewModel(
                     onForgetPassword(email, it.codeExpiryTime)
                 }
             }.onFailure {
-                // TODO show error
+                inAppNotificationStorage.addNotification(InAppNotification.ErrorEmailSend())
             }
         state.emit(LoginState.WaitingForInput)
     }

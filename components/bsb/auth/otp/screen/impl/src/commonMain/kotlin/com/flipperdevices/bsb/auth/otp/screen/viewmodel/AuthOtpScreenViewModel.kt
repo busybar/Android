@@ -4,7 +4,11 @@ import com.flipperdevices.bsb.auth.otp.screen.model.AuthOtpScreenState
 import com.flipperdevices.bsb.auth.otp.screen.model.InternalAuthOtpType
 import com.flipperdevices.bsb.cloud.api.BSBAuthApi
 import com.flipperdevices.core.data.timer.TimerState
+import com.flipperdevices.core.log.LogTagProvider
+import com.flipperdevices.core.log.info
 import com.flipperdevices.core.ui.lifecycle.DecomposeViewModel
+import com.flipperdevices.inappnotification.api.InAppNotificationStorage
+import com.flipperdevices.inappnotification.api.model.InAppNotification
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,8 +30,11 @@ class AuthOtpScreenViewModel(
     @Assisted private val otpType: InternalAuthOtpType,
     @Assisted private val onOtpComplete: suspend (String) -> Unit,
     @Assisted codeExpiryTimeMs: Long,
-    private val bsbAuthApi: BSBAuthApi
-) : DecomposeViewModel() {
+    private val bsbAuthApi: BSBAuthApi,
+    private val inAppNotificationStorage: InAppNotificationStorage
+) : DecomposeViewModel(), LogTagProvider {
+    override val TAG = "AuthOtpScreenViewModel"
+
     private val codeExpiryTime = Instant.fromEpochMilliseconds(codeExpiryTimeMs)
     private val codeExpiryTimeFlow = MutableStateFlow(codeExpiryTime)
     private val state = MutableStateFlow<AuthOtpScreenState>(
@@ -85,9 +92,9 @@ class AuthOtpScreenViewModel(
         bsbAuthApi.requestVerifyEmail(otpType.email, otpType.verificationEmailType)
             .onSuccess {
                 codeExpiryTimeFlow.emit(it.codeExpiryTime)
-                state.emit(AuthOtpScreenState.WaitingForInput(wrongCodeInvalid = false))
             }.onFailure {
-                //TODO show popup
+                inAppNotificationStorage.addNotification(InAppNotification.ErrorEmailSend())
             }
+        state.emit(AuthOtpScreenState.WaitingForInput(wrongCodeInvalid = false))
     }
 }

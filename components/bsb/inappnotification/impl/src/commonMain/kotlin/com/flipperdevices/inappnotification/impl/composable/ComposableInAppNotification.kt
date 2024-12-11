@@ -18,6 +18,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import busystatusbar.components.bsb.inappnotification.impl.generated.resources.Res
+import busystatusbar.components.bsb.inappnotification.impl.generated.resources.error_email_desc
+import busystatusbar.components.bsb.inappnotification.impl.generated.resources.error_email_title
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.inappnotification.api.model.InAppNotification
 import com.flipperdevices.inappnotification.impl.composable.type.ComposableInAppNotificationError
@@ -77,7 +80,14 @@ private fun ComposableInAppNotificationCard(
         ) {
             when (notification) {
                 is InAppNotification.Error -> ComposableInAppNotificationError(
-                    notification,
+                    title = notification.title,
+                    desc = notification.desc,
+                    onClickAction = onClickAction
+                )
+
+                is InAppNotification.ErrorEmailSend -> ComposableInAppNotificationError(
+                    title = Res.string.error_email_title,
+                    desc = Res.string.error_email_desc,
                     onClickAction = onClickAction
                 )
             }

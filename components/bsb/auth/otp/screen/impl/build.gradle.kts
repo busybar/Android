@@ -20,6 +20,7 @@ commonDependencies {
     implementation(projects.components.bsb.auth.otp.element.api)
 
     implementation(projects.components.bsb.cloud.api)
+    implementation(projects.components.bsb.inappnotification.api)
 
     implementation(libs.decompose)
     implementation(libs.markdown.renderer)

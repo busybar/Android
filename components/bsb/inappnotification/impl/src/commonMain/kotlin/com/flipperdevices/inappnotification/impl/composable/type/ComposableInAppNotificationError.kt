@@ -11,12 +11,14 @@ import androidx.compose.ui.unit.dp
 import busystatusbar.components.bsb.inappnotification.impl.generated.resources.Res
 import busystatusbar.components.bsb.inappnotification.impl.generated.resources.pic_update_error
 import com.flipperdevices.inappnotification.api.model.InAppNotification
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun ComposableInAppNotificationError(
-    error: InAppNotification.Error,
+    title: StringResource?,
+    desc: StringResource?,
     onClickAction: () -> Unit
 ) {
     ComposableInAppNotificationBase(
@@ -24,11 +26,11 @@ internal fun ComposableInAppNotificationError(
             Image(
                 modifier = Modifier.padding(12.dp).size(24.dp),
                 painter = painterResource(Res.drawable.pic_update_error),
-                contentDescription = error.title?.let { stringResource(it) },
+                contentDescription = title?.let { stringResource(it) },
             )
         },
-        title = error.title,
-        desc = error.desc,
+        title = title,
+        desc = desc,
         actionButton = null
     )
 }

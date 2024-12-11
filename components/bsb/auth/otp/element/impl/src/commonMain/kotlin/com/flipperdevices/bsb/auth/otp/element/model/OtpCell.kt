@@ -13,11 +13,13 @@ data class OtpCell(
     )
 ) {
     fun onApply(newState: TextFieldValue): Pair<OtpCell, OtpCellAction?> {
-        val newText = newState.text
+        val newText = newState.text.filter { it.isDigit() || it == INVISIBLE_SYMBOL }
 
         if (textFieldValue.text == newState.text) {
             return copy(
-                textFieldValue = newState
+                textFieldValue = newState.copy(
+                    selection = TextRange(1)
+                )
             ) to null
         }
 
@@ -39,7 +41,7 @@ data class OtpCell(
                 copy(
                     textFieldValue = newState.copy(
                         text = "$INVISIBLE_SYMBOL${subText.first()}",
-                        selection = TextRange(2)
+                        selection = TextRange(1)
                     )
                 ) to OtpCellAction.MoveBracketRight(
                     if (subText.length > 1) {
@@ -69,12 +71,15 @@ data class OtpCell(
         // "\u200E" -> "\u200E123"
         // "\u200E1" -> "\u200E12"
 
-        val subText = newText.substring(1)
+        var subText = newText.substring(1)
+        if (textFieldValue.selection.min == 1 && subText.length > 1) {
+            subText = subText.removeRange(1, 2)
+        }
 
         return copy(
             textFieldValue = newState.copy(
                 text = "$INVISIBLE_SYMBOL${subText.first()}",
-                selection = TextRange(2)
+                selection = TextRange(1)
             )
         ) to OtpCellAction.MoveBracketRight(
             if (subText.length > 1) {
