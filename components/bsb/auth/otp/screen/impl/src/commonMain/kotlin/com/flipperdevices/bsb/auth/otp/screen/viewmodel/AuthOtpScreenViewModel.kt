@@ -25,9 +25,10 @@ import kotlin.time.Duration.Companion.seconds
 class AuthOtpScreenViewModel(
     @Assisted private val otpType: InternalAuthOtpType,
     @Assisted private val onOtpComplete: suspend (String) -> Unit,
-    @Assisted codeExpiryTime: Instant,
+    @Assisted codeExpiryTimeMs: Long,
     private val bsbAuthApi: BSBAuthApi
 ) : DecomposeViewModel() {
+    private val codeExpiryTime = Instant.fromEpochMilliseconds(codeExpiryTimeMs)
     private val codeExpiryTimeFlow = MutableStateFlow(codeExpiryTime)
     private val state = MutableStateFlow<AuthOtpScreenState>(
         AuthOtpScreenState.WaitingForInput(

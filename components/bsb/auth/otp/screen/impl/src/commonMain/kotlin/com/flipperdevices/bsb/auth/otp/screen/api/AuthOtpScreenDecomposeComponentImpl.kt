@@ -33,14 +33,18 @@ class AuthOtpScreenDecomposeComponentImpl(
     private val viewModelFactory: (
         otpType: InternalAuthOtpType,
         onOtpComplete: suspend (String) -> Unit,
-        codeExpiryTime: Instant,
+        codeExpiryTimeMs: Long,
     ) -> AuthOtpScreenViewModel,
     otpCodeElementDecomposeComponentFactory: AuthOtpElementDecomposeComponent.Factory
 ) : AuthOtpScreenDecomposeComponent(componentContext) {
     private val internalOtpType = otpType.toInternalAuthOtpType()
 
     private val viewModel = viewModelWithFactoryWithoutRemember(internalOtpType) {
-        viewModelFactory(internalOtpType, onOtpComplete, otpType.codeExpiryTime)
+        viewModelFactory(
+            internalOtpType,
+            onOtpComplete,
+            otpType.codeExpiryTime.toEpochMilliseconds()
+        )
     }
 
     private val otpCodeElementDecomposeComponent = otpCodeElementDecomposeComponentFactory(
