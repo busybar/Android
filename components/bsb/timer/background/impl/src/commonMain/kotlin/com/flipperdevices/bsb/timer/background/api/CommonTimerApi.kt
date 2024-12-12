@@ -4,10 +4,10 @@ import com.flipperdevices.bsb.timer.background.api.delegates.CompositeTimerState
 import com.flipperdevices.bsb.timer.background.api.delegates.TimerLoopJob
 import com.flipperdevices.bsb.timer.background.model.ControlledTimerState
 import com.flipperdevices.bsb.timer.background.model.TimerAction
-import com.flipperdevices.bsb.timer.background.model.TimerState
+import com.flipperdevices.core.data.timer.TimerState
 import com.flipperdevices.bsb.timer.background.model.toPublicState
 import com.flipperdevices.core.di.AppGraph
-import com.flipperdevices.core.ktx.jre.withLock
+import com.flipperdevices.core.ktx.common.withLock
 import com.flipperdevices.core.log.LogTagProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job

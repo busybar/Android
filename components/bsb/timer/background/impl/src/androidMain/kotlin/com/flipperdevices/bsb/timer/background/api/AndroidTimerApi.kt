@@ -8,13 +8,13 @@ import android.os.IBinder
 import com.flipperdevices.bsb.timer.background.model.ControlledTimerState
 import com.flipperdevices.bsb.timer.background.model.TimerAction
 import com.flipperdevices.bsb.timer.background.service.TimerServiceActionEnum
-import com.flipperdevices.bsb.timer.background.model.TimerState
 import com.flipperdevices.bsb.timer.background.service.EXTRA_KEY_TIMER_ACTION
 import com.flipperdevices.bsb.timer.background.service.EXTRA_KEY_TIMER_STATE
 import com.flipperdevices.bsb.timer.background.service.TimerForegroundService
 import com.flipperdevices.bsb.timer.background.service.TimerServiceBinder
+import com.flipperdevices.core.data.timer.TimerState
 import com.flipperdevices.core.di.AppGraph
-import com.flipperdevices.core.ktx.jre.withLock
+import com.flipperdevices.core.ktx.common.withLock
 import com.flipperdevices.core.log.LogTagProvider
 import com.flipperdevices.core.log.error
 import com.flipperdevices.core.log.info

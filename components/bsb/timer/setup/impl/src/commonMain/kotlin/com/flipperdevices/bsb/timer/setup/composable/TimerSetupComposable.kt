@@ -29,7 +29,7 @@ import busystatusbar.components.bsb.timer.setup.impl.generated.resources.Res
 import busystatusbar.components.bsb.timer.setup.impl.generated.resources.ic_center_selector
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
-import com.flipperdevices.bsb.timer.background.model.TimerState
+import com.flipperdevices.core.data.timer.TimerState
 import kotlinx.coroutines.flow.distinctUntilChanged
 import org.jetbrains.compose.resources.painterResource
 import kotlin.time.Duration.Companion.hours

@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Switch
-import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,7 +20,7 @@ import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.pr
 import com.flipperdevices.bsb.cloud.model.BSBUser
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
-import com.flipperdevices.core.ktx.jre.clickableRipple
+import com.flipperdevices.core.ktx.common.clickableRipple
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -37,12 +37,14 @@ include(
     ":components:core:activityholder",
     ":components:core:log",
     ":components:core:ktx",
+    ":components:core:data",
     ":components:core:build-konfig",
     ":components:core:ui:decompose",
     ":components:core:ui:lifecycle",
 
     ":components:bsb:core:theme",
     ":components:bsb:core:res",
+    ":components:bsb:core:markdown",
 
     ":components:bsb:root:api",
     ":components:bsb:root:impl",
@@ -60,6 +62,8 @@ include(
     ":components:bsb:appblockerscreen:impl",
     ":components:bsb:deeplink:api",
     ":components:bsb:deeplink:impl",
+    ":components:bsb:inappnotification:api",
+    ":components:bsb:inappnotification:impl",
 
 
     ":components:bsb:auth:common",
@@ -70,6 +74,10 @@ include(
     ":components:bsb:auth:login:impl",
     ":components:bsb:auth:signup:api",
     ":components:bsb:auth:signup:impl",
+    ":components:bsb:auth:otp:element:api",
+    ":components:bsb:auth:otp:element:impl",
+    ":components:bsb:auth:otp:screen:api",
+    ":components:bsb:auth:otp:screen:impl",
     ":components:bsb:auth:within:common",
     ":components:bsb:auth:within:main:api",
     ":components:bsb:auth:within:main:impl",

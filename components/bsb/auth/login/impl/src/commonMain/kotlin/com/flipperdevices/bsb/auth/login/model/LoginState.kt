@@ -1,4 +1,4 @@
-package com.flipperdevices.busybar.auth.login.model
+package com.flipperdevices.bsb.auth.login.model
 
 sealed interface LoginState {
     data object WaitingForInput : LoginState

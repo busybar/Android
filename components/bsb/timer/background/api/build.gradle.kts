@@ -5,6 +5,8 @@ plugins {
 }
 
 commonDependencies {
+    implementation(projects.components.core.data)
+
     implementation(libs.kotlin.serialization.json)
 
     implementation(libs.kotlin.coroutines)

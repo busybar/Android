@@ -30,7 +30,7 @@ import busystatusbar.components.bsb.timer.common.generated.resources.Res as Comm
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.timer.background.model.TimerAction
-import com.flipperdevices.core.ktx.jre.clickableRipple
+import com.flipperdevices.core.ktx.common.clickableRipple
 import org.jetbrains.compose.resources.painterResource
 
 @Composable

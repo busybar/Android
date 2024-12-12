@@ -1,8 +1,8 @@
 package com.flipperdevices.core.ui.lifecycle
 
 import com.arkivanov.essenty.lifecycle.coroutines.coroutineScope
-import com.flipperdevices.core.ktx.jre.FlipperDispatchers
-import com.flipperdevices.core.ktx.jre.launchWithLock
+import com.flipperdevices.core.ktx.common.FlipperDispatchers
+import com.flipperdevices.core.ktx.common.launchWithLock
 import com.flipperdevices.core.log.LogTagProvider
 import com.flipperdevices.core.log.error
 import com.flipperdevices.core.log.info

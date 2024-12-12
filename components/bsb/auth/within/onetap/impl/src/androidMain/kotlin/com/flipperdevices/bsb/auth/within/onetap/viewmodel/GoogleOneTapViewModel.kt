@@ -9,7 +9,7 @@ import com.flipperdevices.bsb.auth.within.main.model.AuthWay
 import com.flipperdevices.bsb.auth.within.main.model.SignWithInState
 import com.flipperdevices.bsb.auth.within.main.model.SignWithInStateListener
 import com.flipperdevices.bsb.cloud.api.BSBAuthApi
-import com.flipperdevices.core.ktx.jre.transform
+import com.flipperdevices.core.ktx.common.transform
 import com.flipperdevices.core.log.LogTagProvider
 import com.flipperdevices.core.log.error
 import com.flipperdevices.core.ui.lifecycle.DecomposeViewModel

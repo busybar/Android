@@ -17,15 +17,8 @@ import busystatusbar.components.bsb.auth.main.impl.generated.resources.Res
 import busystatusbar.components.bsb.auth.main.impl.generated.resources.login_main_footer
 import busystatusbar.components.bsb.auth.main.impl.generated.resources.login_main_title
 import com.flipperdevices.bsb.auth.common.composable.appbar.LogInAppBarComposable
-import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
-import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.auth.main.model.AuthMainState
-import com.mikepenz.markdown.compose.Markdown
-import com.mikepenz.markdown.compose.components.markdownComponents
-import com.mikepenz.markdown.model.DefaultMarkdownColors
-import com.mikepenz.markdown.model.DefaultMarkdownTypography
-import com.mikepenz.markdown.model.MarkdownColors
-import com.mikepenz.markdown.model.MarkdownTypography
+import com.flipperdevices.bsb.core.markdown.ComposableMarkdown
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -48,52 +41,8 @@ fun AuthMainComposableScreen(
             signInWith = signInWith
         )
 
-        Markdown(
-            modifier = Modifier,
-            content = stringResource(Res.string.login_main_footer),
-            components = markdownComponents(),
-            colors = markdownColor(),
-            typography = markdownTypography()
+        ComposableMarkdown(
+            content = stringResource(Res.string.login_main_footer)
         )
     }
 }
-
-@Composable
-fun markdownColor(
-    defaultColor: Color = LocalPallet.current.neutral.tertiary
-): MarkdownColors = DefaultMarkdownColors(
-    text = defaultColor,
-    codeText = defaultColor,
-    inlineCodeText = defaultColor,
-    linkText = LocalPallet.current.bluetooth.primary,
-    codeBackground = defaultColor,
-    inlineCodeBackground = defaultColor,
-    dividerColor = defaultColor
-)
-
-@Composable
-fun markdownTypography(
-    defaultTypography: TextStyle = TextStyle(
-        fontSize = 12.sp,
-        fontWeight = FontWeight.W500,
-        fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
-    )
-): MarkdownTypography = DefaultMarkdownTypography(
-    h1 = defaultTypography,
-    h2 = defaultTypography,
-    h3 = defaultTypography,
-    h4 = defaultTypography,
-    h5 = defaultTypography,
-    h6 = defaultTypography,
-    text = defaultTypography,
-    code = defaultTypography,
-    inlineCode = defaultTypography,
-    quote = defaultTypography,
-    paragraph = defaultTypography,
-    ordered = defaultTypography,
-    bullet = defaultTypography,
-    list = defaultTypography,
-    link = defaultTypography.copy(
-        textDecoration = TextDecoration.Underline,
-    )
-)

@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.childContext
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
@@ -28,9 +29,10 @@ class AuthDecomposeComponentImpl(
         onComplete: () -> Unit
     ) -> MainScreenDecomposeComponentImpl,
     private val loginDecomposeComponentFactory: LoginDecomposeComponent.Factory,
-    private val signupDecomposeComponentFactory: SignupDecomposeComponent.Factory
+    private val signupDecomposeComponentFactory: SignupDecomposeComponent.Factory,
 ) : AuthDecomposeComponent(),
     ComponentContext by componentContext {
+
     override val stack = childStack(
         source = navigation,
         serializer = AuthRootNavigationConfig.serializer(),

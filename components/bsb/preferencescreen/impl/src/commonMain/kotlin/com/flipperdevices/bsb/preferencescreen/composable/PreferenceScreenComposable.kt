@@ -27,7 +27,7 @@ import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.preferencescreen.model.PreferenceScreenState
 import com.flipperdevices.bsb.preferencescreen.model.SettingsAction
-import com.flipperdevices.core.ktx.jre.clickableRipple
+import com.flipperdevices.core.ktx.common.clickableRipple
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

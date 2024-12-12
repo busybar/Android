@@ -32,7 +32,8 @@ import busystatusbar.components.bsb.auth.login.impl.generated.resources.pic_user
 import com.flipperdevices.bsb.auth.common.composable.BusyBarButtonComposable
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
-import com.flipperdevices.busybar.auth.login.model.LoginState
+import com.flipperdevices.bsb.auth.login.model.LoginState
+import com.flipperdevices.core.ktx.common.clickableRipple
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -43,7 +44,8 @@ fun LoginPasswordComposable(
     modifier: Modifier,
     state: LoginState,
     email: String,
-    onLogin: (String) -> Unit
+    onLogin: (String) -> Unit,
+    onForgotPassword: (String) -> Unit
 ) {
     val verticalScroll = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
@@ -109,7 +111,10 @@ fun LoginPasswordComposable(
         )
         Text(
             modifier = Modifier.fillMaxWidth()
-                .padding(vertical = 12.dp),
+                .padding(vertical = 12.dp)
+                .clickableRipple {
+                    onForgotPassword(email)
+                },
             text = stringResource(Res.string.login_signin_forgot_password),
             textAlign = TextAlign.End,
             fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,

@@ -7,7 +7,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.flipperdevices.bsb.timer.background.impl.R
 import com.flipperdevices.bsb.timer.background.model.ControlledTimerState
-import com.flipperdevices.bsb.timer.background.model.TimerState
+import com.flipperdevices.core.data.timer.TimerState
 
 private const val TIMER_NOTIFICATION_CHANNEL = "timer_notification_channel"
 
@@ -48,18 +48,4 @@ object NotificationTimerBuilder {
 
         notificationManager.createNotificationChannel(flipperChannel)
     }
-}
-
-fun TimerState.toHumanReadableString(): String {
-    var text = ""
-    if (minute < 10) {
-        text += "0"
-    }
-    text += "$minute:"
-
-    if (second < 10) {
-        text += "0"
-    }
-    text += second
-    return text
 }

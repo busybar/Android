@@ -19,7 +19,7 @@ import busystatusbar.components.bsb.auth.login.impl.generated.resources.ic_visib
 import busystatusbar.components.bsb.auth.login.impl.generated.resources.login_signin_password_hint
 import com.flipperdevices.bsb.auth.common.composable.textfield.AuthCommonTextFieldComposable
 import com.flipperdevices.bsb.core.theme.LocalPallet
-import com.flipperdevices.core.ktx.jre.clickableRipple
+import com.flipperdevices.core.ktx.common.clickableRipple
 import org.jetbrains.compose.resources.painterResource
 
 @Composable

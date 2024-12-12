@@ -8,7 +8,7 @@ import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.flipperdevices.bsb.di.DesktopAppComponent
 import com.flipperdevices.bsb.di.create
-import com.flipperdevices.core.ktx.jre.FlipperDispatchers
+import com.flipperdevices.core.ktx.common.FlipperDispatchers
 import com.russhwolf.settings.PreferencesSettings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
