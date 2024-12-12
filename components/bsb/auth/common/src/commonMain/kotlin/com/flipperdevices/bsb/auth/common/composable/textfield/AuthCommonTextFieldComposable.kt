@@ -42,7 +42,7 @@ fun AuthCommonTextFieldComposable(
     keyboardOptions: KeyboardOptions,
     disabled: Boolean = false,
     maxLines: Int = 1,
-    visualTransformation: VisualTransformation = VisualTransformation.None
+    visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
     BasicTextField(
         modifier = modifier.graphicsLayer {

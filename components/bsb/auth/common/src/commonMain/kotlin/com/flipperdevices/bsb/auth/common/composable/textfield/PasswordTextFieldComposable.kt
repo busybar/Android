@@ -1,4 +1,4 @@
-package com.flipperdevices.bsb.auth.login.composable
+package com.flipperdevices.bsb.auth.common.composable.textfield
 
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
@@ -12,14 +12,13 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import busystatusbar.components.bsb.auth.login.impl.generated.resources.Res
-import busystatusbar.components.bsb.auth.login.impl.generated.resources.ic_hidden
-import busystatusbar.components.bsb.auth.login.impl.generated.resources.ic_lock
-import busystatusbar.components.bsb.auth.login.impl.generated.resources.ic_visible
-import busystatusbar.components.bsb.auth.login.impl.generated.resources.login_signin_password_hint
-import com.flipperdevices.bsb.auth.common.composable.textfield.AuthCommonTextFieldComposable
+import busystatusbar.components.bsb.auth.common.generated.resources.Res
+import busystatusbar.components.bsb.auth.common.generated.resources.ic_hidden
+import busystatusbar.components.bsb.auth.common.generated.resources.ic_lock
+import busystatusbar.components.bsb.auth.common.generated.resources.ic_visible
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.core.ktx.common.clickableRipple
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -27,7 +26,8 @@ fun PasswordTextFieldComposable(
     modifier: Modifier,
     password: String,
     onPasswordChange: (String) -> Unit,
-    disabled: Boolean
+    disabled: Boolean,
+    hint: StringResource
 ) {
     var passwordHidden by remember { mutableStateOf(true) }
 
@@ -35,7 +35,7 @@ fun PasswordTextFieldComposable(
         modifier = modifier,
         text = password,
         onTextChange = onPasswordChange,
-        hint = Res.string.login_signin_password_hint,
+        hint = hint,
         icon = Res.drawable.ic_lock,
         endBlock = {
             HideIcon(passwordHidden, onClick = {

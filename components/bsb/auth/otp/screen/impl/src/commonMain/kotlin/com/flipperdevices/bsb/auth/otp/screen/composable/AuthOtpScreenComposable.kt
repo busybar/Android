@@ -13,8 +13,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import busystatusbar.components.bsb.auth.otp.screen.impl.generated.resources.Res
+import busystatusbar.components.bsb.auth.otp.screen.impl.generated.resources.login_otp_screen_code_resend
 import com.flipperdevices.bsb.auth.common.composable.BusyBarButtonComposable
 import com.flipperdevices.bsb.auth.common.composable.appbar.LogInAppBarComposable
+import com.flipperdevices.bsb.auth.common.composable.subaction.AuthTextSubActionComposable
 import com.flipperdevices.bsb.auth.otp.screen.model.AuthOtpScreenState
 import com.flipperdevices.bsb.auth.otp.screen.model.InternalAuthOtpType
 import com.flipperdevices.bsb.core.markdown.ComposableMarkdown
@@ -93,11 +96,20 @@ fun AuthOtpScreenComposable(
                 colors = markdownColor(LocalPallet.current.neutral.secondary)
             )
 
-            ResendEmailComposable(
+
+            AuthTextSubActionComposable(
                 Modifier
                     .padding(top = 32.dp),
                 onClick = onResend,
-                authOtpScreenState = authOtpScreenState
+                text = Res.string.login_otp_screen_code_resend,
+                inProgress = authOtpScreenState.inProgress,
+                disabled = when (authOtpScreenState) {
+                    AuthOtpScreenState.CheckCodeInProgress,
+                    is AuthOtpScreenState.WaitingForInput,
+                    AuthOtpScreenState.ExpiryVerificationCode -> false
+
+                    AuthOtpScreenState.ResetPasswordInProgress -> true
+                }
             )
         }
     }

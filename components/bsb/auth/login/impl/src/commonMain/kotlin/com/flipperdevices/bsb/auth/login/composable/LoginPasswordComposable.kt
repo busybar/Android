@@ -28,12 +28,14 @@ import busystatusbar.components.bsb.auth.login.impl.generated.resources.Res
 import busystatusbar.components.bsb.auth.login.impl.generated.resources.login_signin_btn
 import busystatusbar.components.bsb.auth.login.impl.generated.resources.login_signin_desc
 import busystatusbar.components.bsb.auth.login.impl.generated.resources.login_signin_forgot_password
+import busystatusbar.components.bsb.auth.login.impl.generated.resources.login_signin_password_hint
 import busystatusbar.components.bsb.auth.login.impl.generated.resources.pic_user_password
 import com.flipperdevices.bsb.auth.common.composable.BusyBarButtonComposable
+import com.flipperdevices.bsb.auth.common.composable.subaction.AuthTextSubActionComposable
+import com.flipperdevices.bsb.auth.common.composable.textfield.PasswordTextFieldComposable
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.auth.login.model.LoginState
-import com.flipperdevices.core.ktx.common.clickableRipple
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -92,7 +94,8 @@ fun LoginPasswordComposable(
             disabled = when (state) {
                 LoginState.AuthInProgress -> true
                 LoginState.WaitingForInput -> false
-            }
+            },
+            hint = Res.string.login_signin_password_hint
         )
         BusyBarButtonComposable(
             modifier = Modifier
@@ -109,18 +112,17 @@ fun LoginPasswordComposable(
                 LoginState.WaitingForInput -> false
             }
         )
-        Text(
-            modifier = Modifier.fillMaxWidth()
-                .padding(vertical = 12.dp)
-                .clickableRipple {
-                    onForgotPassword(email)
-                },
-            text = stringResource(Res.string.login_signin_forgot_password),
-            textAlign = TextAlign.End,
-            fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.W500,
-            color = LocalPallet.current.brand.primary
+
+
+        AuthTextSubActionComposable(
+            Modifier.fillMaxWidth()
+                .padding(vertical = 12.dp),
+            onClick = { onForgotPassword(email) },
+            text = Res.string.login_signin_forgot_password,
+            inProgress = when (state) {
+                LoginState.AuthInProgress -> true
+                LoginState.WaitingForInput -> false
+            }
         )
     }
 }
