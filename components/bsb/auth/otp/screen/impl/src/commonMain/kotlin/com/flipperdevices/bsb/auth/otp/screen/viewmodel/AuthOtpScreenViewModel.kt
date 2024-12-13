@@ -82,6 +82,7 @@ class AuthOtpScreenViewModel(
             withContext(Dispatchers.Main) {
                 onOtpComplete(otpCode)
             }
+            state.emit(AuthOtpScreenState.WaitingForInput(wrongCodeInvalid = false))
         }.onFailure {
             state.emit(AuthOtpScreenState.WaitingForInput(wrongCodeInvalid = true))
         }

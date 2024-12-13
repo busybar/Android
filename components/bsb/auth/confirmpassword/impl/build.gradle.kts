@@ -16,6 +16,7 @@ commonDependencies {
 
     implementation(projects.components.bsb.auth.common)
     implementation(projects.components.bsb.cloud.api)
+    implementation(projects.components.bsb.inappnotification.api)
 
     implementation(libs.decompose)
 }

@@ -9,10 +9,15 @@
     <string name="login_confirmpassword_confirm_hint_error">Passwords do not match</string>
     <string name="login_confirmpassword_btn">Submit</string>
 
+
     <string name="login_confirmpassword_register_title">Create password</string>
     <string name="login_confirmpassword_register_desc">Create a password for the account:</string>
     <string name="login_confirmpassword_register_back">Back to login</string>
+    <string name="login_confirmpassword_register_error_title">Failed create account</string>
+    <string name="login_confirmpassword_register_error_desc">Try again later</string>
 
     <string name="login_confirmpassword_forget_title">Set new password</string>
     <string name="login_confirmpassword_forget_desc">Set a new password for the account:</string>
+    <string name="login_confirmpassword_forget_error_title">Failed reset password</string>
+    <string name="login_confirmpassword_forget_error_desc">Try again later</string>
 </resources>

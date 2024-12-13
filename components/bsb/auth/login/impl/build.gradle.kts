@@ -20,6 +20,7 @@ commonDependencies {
 
     implementation(projects.components.bsb.auth.common)
     implementation(projects.components.bsb.auth.otp.screen.api)
+    implementation(projects.components.bsb.auth.confirmpassword.api)
     implementation(projects.components.bsb.cloud.api)
     implementation(projects.components.bsb.preference.api)
     implementation(projects.components.bsb.inappnotification.api)

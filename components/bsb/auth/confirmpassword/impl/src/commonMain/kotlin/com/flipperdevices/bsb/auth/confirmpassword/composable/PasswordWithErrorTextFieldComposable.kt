@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.flipperdevices.bsb.auth.common.composable.textfield.PasswordTextFieldComposable
@@ -16,6 +17,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun PasswordWithErrorTextFieldComposable(
     modifier: Modifier,
+    onFocus: () -> Unit,
     hint: StringResource,
     fieldState: PasswordFieldState,
     inProgress: Boolean,
@@ -23,11 +25,20 @@ fun PasswordWithErrorTextFieldComposable(
 ) {
     Column(modifier) {
         PasswordTextFieldComposable(
-            modifier = Modifier,
+            modifier = Modifier.onFocusChanged {
+                if (it.isFocused) {
+                    onFocus()
+                }
+            },
             password = fieldState.text,
             onPasswordChange = onPasswordChange,
             disabled = inProgress,
-            hint = hint
+            hint = hint,
+            isError = fieldState.validationError,
+            onAutofill = {
+                onPasswordChange(it)
+                onFocus()
+            }
         )
         fieldState.subText?.let { subText ->
             Text(

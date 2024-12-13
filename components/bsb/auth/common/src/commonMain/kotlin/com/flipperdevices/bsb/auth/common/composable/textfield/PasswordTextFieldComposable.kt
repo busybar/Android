@@ -7,7 +7,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.autofill.AutofillType
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -16,23 +18,31 @@ import busystatusbar.components.bsb.auth.common.generated.resources.Res
 import busystatusbar.components.bsb.auth.common.generated.resources.ic_hidden
 import busystatusbar.components.bsb.auth.common.generated.resources.ic_lock
 import busystatusbar.components.bsb.auth.common.generated.resources.ic_visible
+import com.flipperdevices.bsb.auth.common.composable.utils.autofill
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.core.ktx.common.clickableRipple
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun PasswordTextFieldComposable(
     modifier: Modifier,
     password: String,
     onPasswordChange: (String) -> Unit,
+    onAutofill: (String) -> Unit = onPasswordChange,
     disabled: Boolean,
-    hint: StringResource
+    hint: StringResource,
+    isError: Boolean = false
 ) {
     var passwordHidden by remember { mutableStateOf(true) }
 
     AuthCommonTextFieldComposable(
-        modifier = modifier,
+        modifier = modifier
+            .autofill(
+                AutofillType.Password,
+                onFill = onAutofill
+            ),
         text = password,
         onTextChange = onPasswordChange,
         hint = hint,
@@ -51,7 +61,8 @@ fun PasswordTextFieldComposable(
         } else {
             VisualTransformation.None
         },
-        disabled = disabled
+        disabled = disabled,
+        isError = isError
     )
 }
 

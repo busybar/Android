@@ -33,7 +33,7 @@ class FieldValidationViewModel : DecomposeViewModel() {
         fieldState.update {
             it.copy(
                 passwordField = PasswordFieldState(
-                    text = text,
+                    text = text.trim(),
                     validationError = validatePasswordText != null,
                     subText = validatePasswordText ?: Res.string.login_confirmpassword_hint
                 )
@@ -46,8 +46,8 @@ class FieldValidationViewModel : DecomposeViewModel() {
             fields.copy(
                 confirmField = PasswordFieldState(
                     text = text,
-                    validationError = text != fields.confirmField.text,
-                    subText = if (text == fields.confirmField.text) {
+                    validationError = text != fields.passwordField.text,
+                    subText = if (text.trim() == fields.passwordField.text.trim()) {
                         null
                     } else {
                         Res.string.login_confirmpassword_confirm_hint_error

@@ -12,7 +12,9 @@ abstract class AuthConfirmPasswordScreenDecomposeComponent(
         operator fun invoke(
             componentContext: ComponentContext,
             type: ConfirmPasswordType,
-            onBackParameter: DecomposeOnBackParameter
+            onBackParameter: DecomposeOnBackParameter,
+            code: String,
+            onComplete: () -> Unit,
         ): AuthConfirmPasswordScreenDecomposeComponent
     }
 }

@@ -2,13 +2,15 @@ package com.flipperdevices.bsb.cloud.api
 
 import com.flipperdevices.bsb.cloud.model.request.BSBApiCheckUserRequest
 import com.flipperdevices.bsb.cloud.model.request.BSBApiSignInRequest
-import com.flipperdevices.bsb.cloud.model.BSBApiToken
+import com.flipperdevices.bsb.cloud.model.response.BSBApiToken
 import com.flipperdevices.bsb.cloud.model.BSBApiUserObject
 import com.flipperdevices.bsb.cloud.model.BSBEmailVerificationResponse
 import com.flipperdevices.bsb.cloud.model.BSBEmailVerificationType
 import com.flipperdevices.bsb.cloud.model.BSBResponse
 import com.flipperdevices.bsb.cloud.model.request.BSBOneTapGoogleRequest
 import com.flipperdevices.bsb.cloud.model.BSBUser
+import com.flipperdevices.bsb.cloud.model.request.BSBApiCreateAccountRequest
+import com.flipperdevices.bsb.cloud.model.request.BSBApiResetPasswordRequest
 import com.flipperdevices.bsb.cloud.model.request.BSBCheckCodeRequest
 import com.flipperdevices.bsb.cloud.model.request.BSBEmailVerificationRequest
 import com.flipperdevices.bsb.cloud.model.response.BSBApiEmailVerificationResponse
@@ -135,7 +137,33 @@ class BSBAuthApiImpl(
                 url("${NetworkConstants.BASE_URL}/v0/auth/check-code")
                 parameter("confirm_type", verificationType.toVerificationTypeString())
                 setBody(BSBCheckCodeRequest(email, code))
-            }.body<BSBResponse<*>>()
+            }
         }.map { }
+    }
+
+    override suspend fun signUp(
+        email: String,
+        code: String,
+        password: String
+    ): Result<Unit> = withContext(networkDispatcher) {
+        return@withContext runCatching {
+            httpClient.post {
+                url("${NetworkConstants.BASE_URL}/v0/auth/sign-up/create-account")
+                setBody(BSBApiCreateAccountRequest(email, password, code))
+            }
+        }.transform { signIn(email, password) }
+    }
+
+    override suspend fun resetPassword(
+        email: String,
+        code: String,
+        password: String
+    ): Result<Unit> = withContext(networkDispatcher) {
+        return@withContext runCatching {
+            httpClient.post {
+                url("${NetworkConstants.BASE_URL}/v0/auth/sign-in/reset-password")
+                setBody(BSBApiResetPasswordRequest(email, password, code))
+            }
+        }.transform { signIn(email, password) }
     }
 }

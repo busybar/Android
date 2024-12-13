@@ -13,4 +13,10 @@ sealed interface LoginNavigationConfig {
         val email: String,
         val codeExpiryTime: Instant
     ) : LoginNavigationConfig
+
+    @Serializable
+    data class ResetConfirmPassword(
+        val email: String,
+        val code: String
+    ) : LoginNavigationConfig
 }

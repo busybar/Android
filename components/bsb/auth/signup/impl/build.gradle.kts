@@ -11,5 +11,8 @@ commonDependencies {
     implementation(projects.components.core.di)
     implementation(projects.components.core.ui.decompose)
 
+
+    implementation(projects.components.bsb.auth.confirmpassword.api)
+
     implementation(libs.decompose)
 }

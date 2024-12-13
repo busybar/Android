@@ -24,7 +24,9 @@ internal fun ComposableInAppNotificationError(
     ComposableInAppNotificationBase(
         icon = {
             Image(
-                modifier = Modifier.padding(12.dp).size(24.dp),
+                modifier = Modifier.padding(
+                    end = 8.dp,
+                ).size(32.dp),
                 painter = painterResource(Res.drawable.pic_update_error),
                 contentDescription = title?.let { stringResource(it) },
             )
