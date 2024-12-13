@@ -65,7 +65,6 @@ include(
     ":components:bsb:inappnotification:api",
     ":components:bsb:inappnotification:impl",
 
-
     ":components:bsb:auth:common",
     ":components:bsb:auth:main:impl",
     ":components:bsb:auth:main:api",
@@ -74,6 +73,8 @@ include(
     ":components:bsb:auth:login:impl",
     ":components:bsb:auth:signup:api",
     ":components:bsb:auth:signup:impl",
+    ":components:bsb:auth:confirmpassword:api",
+    ":components:bsb:auth:confirmpassword:impl",
     ":components:bsb:auth:otp:element:api",
     ":components:bsb:auth:otp:element:impl",
     ":components:bsb:auth:otp:screen:api",

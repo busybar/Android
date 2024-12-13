@@ -3,6 +3,8 @@ package com.flipperdevices.bsb.auth.login.api
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pushToFront
+import com.flipperdevices.bsb.auth.confirm.api.AuthConfirmPasswordScreenDecomposeComponent
+import com.flipperdevices.bsb.auth.confirmpassword.model.ConfirmPasswordType
 import com.flipperdevices.bsb.auth.login.model.LoginNavigationConfig
 import com.flipperdevices.bsb.auth.otp.screen.api.AuthOtpScreenDecomposeComponent
 import com.flipperdevices.bsb.auth.otp.screen.model.AuthOtpType
@@ -28,7 +30,8 @@ class LoginDecomposeComponentImpl(
         onComplete: () -> Unit,
         onForgetPassword: (email: String, codeExpiryTime: Instant) -> Unit
     ) -> LoginScreenDecomposeComponentImpl,
-    private val otpScreenDecomposeComponent: AuthOtpScreenDecomposeComponent.Factory
+    private val otpScreenDecomposeComponent: AuthOtpScreenDecomposeComponent.Factory,
+    private val confirmPasswordScreenDecomposeComponent: AuthConfirmPasswordScreenDecomposeComponent.Factory
 ) : LoginDecomposeComponent<LoginNavigationConfig>(),
     ComponentContext by componentContext {
     override val stack = childStack(
@@ -60,7 +63,22 @@ class LoginDecomposeComponentImpl(
                 email = config.email,
                 codeExpiryTime = config.codeExpiryTime
             ),
-            onOtpComplete = {}
+            onOtpComplete = { otpCode ->
+                navigation.pushToFront(
+                    LoginNavigationConfig.ResetConfirmPassword(
+                        email = config.email,
+                        code = otpCode
+                    )
+                )
+            }
+        )
+
+        is LoginNavigationConfig.ResetConfirmPassword -> confirmPasswordScreenDecomposeComponent(
+            componentContext = componentContext,
+            type = ConfirmPasswordType.ResetPassword(config.email),
+            onBackParameter = { navigation.popOr(onBack::invoke) },
+            code = config.code,
+            onComplete = onComplete
         )
     }
 

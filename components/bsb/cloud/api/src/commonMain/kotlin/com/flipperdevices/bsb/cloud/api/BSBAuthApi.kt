@@ -25,4 +25,16 @@ interface BSBAuthApi {
         code: String,
         verificationType: BSBEmailVerificationType
     ): Result<Unit>
+
+    suspend fun signUp(
+        email: String,
+        code: String,
+        password: String
+    ): Result<Unit>
+
+    suspend fun resetPassword(
+        email: String,
+        code: String,
+        password: String
+    ): Result<Unit>
 }

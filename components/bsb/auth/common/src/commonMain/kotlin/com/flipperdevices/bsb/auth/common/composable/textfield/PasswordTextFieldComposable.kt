@@ -1,4 +1,4 @@
-package com.flipperdevices.bsb.auth.login.composable
+package com.flipperdevices.bsb.auth.common.composable.textfield
 
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
@@ -7,35 +7,45 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.autofill.AutofillType
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import busystatusbar.components.bsb.auth.login.impl.generated.resources.Res
-import busystatusbar.components.bsb.auth.login.impl.generated.resources.ic_hidden
-import busystatusbar.components.bsb.auth.login.impl.generated.resources.ic_lock
-import busystatusbar.components.bsb.auth.login.impl.generated.resources.ic_visible
-import busystatusbar.components.bsb.auth.login.impl.generated.resources.login_signin_password_hint
-import com.flipperdevices.bsb.auth.common.composable.textfield.AuthCommonTextFieldComposable
+import busystatusbar.components.bsb.auth.common.generated.resources.Res
+import busystatusbar.components.bsb.auth.common.generated.resources.ic_hidden
+import busystatusbar.components.bsb.auth.common.generated.resources.ic_lock
+import busystatusbar.components.bsb.auth.common.generated.resources.ic_visible
+import com.flipperdevices.bsb.auth.common.composable.utils.autofill
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.core.ktx.common.clickableRipple
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun PasswordTextFieldComposable(
     modifier: Modifier,
     password: String,
     onPasswordChange: (String) -> Unit,
-    disabled: Boolean
+    onAutofill: (String) -> Unit = onPasswordChange,
+    disabled: Boolean,
+    hint: StringResource,
+    isError: Boolean = false
 ) {
     var passwordHidden by remember { mutableStateOf(true) }
 
     AuthCommonTextFieldComposable(
-        modifier = modifier,
+        modifier = modifier
+            .autofill(
+                AutofillType.Password,
+                onFill = onAutofill
+            ),
         text = password,
         onTextChange = onPasswordChange,
-        hint = Res.string.login_signin_password_hint,
+        hint = hint,
         icon = Res.drawable.ic_lock,
         endBlock = {
             HideIcon(passwordHidden, onClick = {
@@ -51,7 +61,8 @@ fun PasswordTextFieldComposable(
         } else {
             VisualTransformation.None
         },
-        disabled = disabled
+        disabled = disabled,
+        isError = isError
     )
 }
 

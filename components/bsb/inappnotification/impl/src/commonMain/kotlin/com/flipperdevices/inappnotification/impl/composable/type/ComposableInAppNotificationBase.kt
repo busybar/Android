@@ -44,14 +44,17 @@ internal fun ComposableInAppNotificationBase(
 ) {
     Row(
         modifier = modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .padding(
+                vertical = 8.dp,
+                horizontal = 12.dp
+            ),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         icon?.invoke()
         Column(
             Modifier
-                .padding(top = 9.dp, bottom = 9.dp, end = 12.dp)
                 .weight(1f)
         ) {
             if (title != null) {

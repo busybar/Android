@@ -1,4 +1,4 @@
-package com.flipperdevices.bsb.cloud.model
+package com.flipperdevices.bsb.cloud.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

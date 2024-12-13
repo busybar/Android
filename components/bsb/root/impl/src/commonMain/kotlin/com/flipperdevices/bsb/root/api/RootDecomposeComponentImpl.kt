@@ -106,7 +106,7 @@ class RootDecomposeComponentImpl(
 
                 inAppNotificationDecomposeComponent.Render(
                     Modifier
-                        .align(Alignment.CenterEnd)
+                        .align(Alignment.BottomCenter)
                         .systemBarsPadding()
                 )
             }
