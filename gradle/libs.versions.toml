@@ -1,20 +1,20 @@
 [versions]
-agp = "8.6.1"
+agp = "8.7.0"
 androidx-activityCompose = "1.9.3"
 androidx-annotation = "1.9.1"
 androidx-core = "1.15.0"
 appcompat = "1.7.0" # https://developer.android.com/jetpack/androidx/releases/appcompat
 constraintlayout = "0.5.0"
 compose-plugin = "1.7.1"
-kotlin = "2.0.21"
+kotlin = "2.1.0"
 kotlin-coroutines = "1.9.0"
 kotlin-serialization-runtime = "1.7.3"
 kotlin-datetime = "0.6.1" # https://github.com/Kotlin/kotlinx-datetime/releases
 kotlin-immutable = "0.3.8"
-ksp = "2.0.21-1.0.26"
+ksp = "2.1.0-1.0.29"
 kotlin-inject = "0.7.2"
 kotlin-inject-anvil = "0.1.0"
-decompose = "3.2.1"
+decompose = "3.2.2"
 essenty = "2.2.1"
 settings = "1.2.0"
 moko-permissions = "0.18.0"
@@ -30,6 +30,7 @@ detekt-ruleset-decompose = "1.0.1" # https://github.com/LionZXY/detekt-decompose
 buildkonfig = "5.4.0"
 atomicflu = "0.26.0" # https://github.com/Kotlin/kotlinx-atomicfu
 lifecycle = "2.8.7" # https://developer.android.com/jetpack/androidx/releases/lifecycle
+webview = "0.33.3"
 
 [libraries]
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -88,6 +89,8 @@ ktor-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version
 ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
+
+webview = { module = "io.github.KevinnZou:compose-webview-multiplatform", version.ref = "webview" }
 
 atomicflu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "atomicflu" }
 

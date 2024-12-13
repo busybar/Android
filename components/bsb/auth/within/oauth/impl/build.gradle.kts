@@ -13,6 +13,6 @@ androidDependencies {
     implementation(projects.components.bsb.auth.within.main.api)
     implementation(projects.components.bsb.auth.within.common)
 
-
     implementation(libs.decompose)
+    implementation(libs.webview)
 }
