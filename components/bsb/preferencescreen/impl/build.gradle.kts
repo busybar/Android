@@ -21,5 +21,7 @@ commonDependencies {
     implementation(projects.components.bsb.root.api)
     implementation(projects.components.bsb.cloud.api)
 
+    implementation(projects.components.bsb.deeplink.api)
+
     implementation(libs.decompose)
 }

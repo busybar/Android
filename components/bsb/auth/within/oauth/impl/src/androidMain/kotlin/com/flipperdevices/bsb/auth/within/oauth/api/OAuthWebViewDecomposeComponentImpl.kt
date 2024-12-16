@@ -1,24 +1,86 @@
 package com.flipperdevices.bsb.auth.within.oauth.api
 
+import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.ComponentContext
 import com.flipperdevices.bsb.auth.within.oauth.model.OAuthProvider
+import com.flipperdevices.bsb.auth.within.oauth.model.toInternal
+import com.flipperdevices.bsb.auth.within.oauth.utils.OAuthTokenExtractor
+import com.flipperdevices.bsb.cloud.api.BSBAuthApi
+import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.core.di.AppGraph
+import com.kevinnzou.web.LoadingState
+import com.kevinnzou.web.WebView
+import com.kevinnzou.web.rememberWebViewNavigator
+import com.kevinnzou.web.rememberWebViewState
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 
+@Inject
 class OAuthWebViewDecomposeComponentImpl(
-    @Assisted componentContext: ComponentContext
+    @Assisted componentContext: ComponentContext,
+    @Assisted oAuthProvider: OAuthProvider,
+    @Assisted private val onReceiveToken: (String) -> Unit,
+    bsbAuthApi: BSBAuthApi
 ) : OAuthWebViewDecomposeComponent(componentContext) {
+    private val internalOAuthProvider = oAuthProvider.toInternal()
+    private val oAuthInformation = bsbAuthApi.getUrlForOauth(internalOAuthProvider.apiProvider)
+
+    @SuppressLint("SetJavaScriptEnabled")
     @Composable
     override fun Render(modifier: Modifier) {
-        WebView
+        val state = rememberWebViewState(oAuthInformation.providerUrl)
+        val navigator = rememberWebViewNavigator()
+        val url = state.lastLoadedUrl
+
+        if (url?.startsWith(oAuthInformation.handleUrl) == true) {
+            LaunchedEffect(url) {
+                val token = OAuthTokenExtractor.extract(url, oAuthInformation)
+                if (token != null) {
+                    onReceiveToken(token)
+                }
+            }
+        }
+        Column(
+            modifier = modifier
+                .safeContentPadding()
+                .fillMaxSize()
+        ) {
+            val loadingState = state.loadingState
+            if (loadingState is LoadingState.Loading) {
+                LinearProgressIndicator(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    progress = loadingState.progress,
+                    color = LocalPallet.current.black.invert,
+                    backgroundColor = LocalPallet.current.transparent.blackInvert.secondary
+                )
+            }
+            WebView(
+                modifier = Modifier.fillMaxSize(),
+                state = state,
+                navigator = navigator,
+                onCreated = { it.settings.javaScriptEnabled = true }
+            )
+        }
     }
 
     @Inject
-    @ContributesBinding(AppGraph::class, OAuthScreenDecomposeComponent.Factory::class)
+    @ContributesBinding(AppGraph::class, OAuthWebViewDecomposeComponent.Factory::class)
     class Factory(
         private val factory: (
             componentContext: ComponentContext,

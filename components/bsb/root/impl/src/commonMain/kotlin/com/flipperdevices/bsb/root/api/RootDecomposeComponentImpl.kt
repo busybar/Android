@@ -12,6 +12,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.childContext
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
+import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.pushToFront
@@ -23,8 +24,10 @@ import com.flipperdevices.bsb.root.deeplink.RootDeeplinkHandlerImpl
 import com.flipperdevices.bsb.root.model.RootNavigationConfig
 import com.flipperdevices.bsb.timer.main.api.TimerMainDecomposeComponent
 import com.flipperdevices.core.di.AppGraph
+import com.flipperdevices.core.log.warn
 import com.flipperdevices.inappnotification.api.InAppNotificationDecomposeComponent
 import com.flipperdevices.ui.decompose.DecomposeComponent
+import com.flipperdevices.ui.decompose.findComponentByConfig
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
@@ -37,7 +40,7 @@ class RootDecomposeComponentImpl(
     private val timerMainDecomposeComponentFactory: TimerMainDecomposeComponent.Factory,
     private val preferenceScreenComponentFactory: PreferenceScreenDecomposeComponent.Factory,
     private val appLockComponentFactory: AppBlockerScreenDecomposeComponent.Factory,
-    private val inAppNotificationFactory: InAppNotificationDecomposeComponent.Factory
+    inAppNotificationFactory: InAppNotificationDecomposeComponent.Factory
 ) : RootDecomposeComponent(),
     ComponentContext by componentContext {
     private val inAppNotificationDecomposeComponent = inAppNotificationFactory(
@@ -53,7 +56,7 @@ class RootDecomposeComponentImpl(
                     RootNavigationConfig.Timer,
                     RootDeeplinkHandlerImpl.getConfigFromDeeplink(initialDeeplink)
                 )
-            } else listOf(RootNavigationConfig.Auth)
+            } else listOf(RootNavigationConfig.Timer)
         },
         handleBackButton = true,
         childFactory = ::child,
@@ -65,9 +68,10 @@ class RootDecomposeComponentImpl(
         config: RootNavigationConfig,
         componentContext: ComponentContext
     ): DecomposeComponent = when (config) {
-        RootNavigationConfig.Auth -> authDecomposeComponentFactory(
+        is RootNavigationConfig.Auth -> authDecomposeComponentFactory(
             componentContext,
-            navigation::pop
+            navigation::pop,
+            config.deeplink
         )
 
         RootNavigationConfig.Timer -> timerMainDecomposeComponentFactory(
@@ -118,7 +122,19 @@ class RootDecomposeComponentImpl(
     }
 
     override fun handleDeeplink(deeplink: Deeplink) {
-        deeplinkHandler.handleDeeplink(deeplink)
+        when (deeplink) {
+            is Deeplink.Root.Auth -> {
+                val component = stack.findComponentByConfig(RootNavigationConfig.Auth::class)
+                if (component == null || component !is AuthDecomposeComponent<*>) {
+                    warn { "Bottom bar component is not exist in stack, but first pair screen already passed" }
+                    navigation.bringToFront(RootNavigationConfig.Auth(deeplink))
+                } else {
+                    component.handleDeeplink(deeplink)
+                }
+            }
+
+            else -> deeplinkHandler.handleDeeplink(deeplink)
+        }
     }
 
     @Inject

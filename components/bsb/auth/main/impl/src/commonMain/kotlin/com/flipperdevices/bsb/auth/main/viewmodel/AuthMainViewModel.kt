@@ -53,8 +53,11 @@ class AuthMainViewModel(
 
     override fun invoke(withInState: SignWithInState) {
         when (withInState) {
-            SignWithInState.Complete -> viewModelScope.launch(Dispatchers.Main) {
-                onComplete()
+            SignWithInState.Complete -> {
+                state.value = AuthMainState.WaitingForInput
+                viewModelScope.launch(Dispatchers.Main) {
+                    onComplete()
+                }
             }
 
             is SignWithInState.InProgress -> {

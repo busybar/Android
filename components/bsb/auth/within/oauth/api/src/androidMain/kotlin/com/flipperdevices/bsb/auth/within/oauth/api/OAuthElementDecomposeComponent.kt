@@ -5,14 +5,17 @@ import com.flipperdevices.bsb.auth.within.main.api.SignWithInElementDecomposeCom
 import com.flipperdevices.bsb.auth.within.main.model.SignWithInStateListener
 import com.flipperdevices.bsb.auth.within.oauth.model.OAuthProvider
 
-abstract class OAuthScreenDecomposeComponent(
+abstract class OAuthElementDecomposeComponent(
     componentContext: ComponentContext
 ) : SignWithInElementDecomposeComponent(componentContext) {
+    abstract fun onReceiveAuthToken(token: String)
+
     fun interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,
             oAuthProvider: OAuthProvider,
-            withInStateListener: SignWithInStateListener
-        ): OAuthScreenDecomposeComponent
+            withInStateListener: SignWithInStateListener,
+            openWebView: () -> Unit
+        ): OAuthElementDecomposeComponent
     }
 }

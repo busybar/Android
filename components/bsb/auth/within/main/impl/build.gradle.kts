@@ -11,6 +11,8 @@ commonDependencies {
     implementation(projects.components.core.di)
     implementation(projects.components.core.ui.decompose)
 
+    implementation(projects.components.bsb.deeplink.api)
+
     implementation(libs.decompose)
 }
 

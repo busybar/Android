@@ -1,5 +1,5 @@
 [versions]
-agp = "8.7.0"
+agp = "8.7.3"
 androidx-activityCompose = "1.9.3"
 androidx-annotation = "1.9.1"
 androidx-core = "1.15.0"
@@ -30,7 +30,7 @@ detekt-ruleset-decompose = "1.0.1" # https://github.com/LionZXY/detekt-decompose
 buildkonfig = "5.4.0"
 atomicflu = "0.26.0" # https://github.com/Kotlin/kotlinx-atomicfu
 lifecycle = "2.8.7" # https://developer.android.com/jetpack/androidx/releases/lifecycle
-webview = "0.33.3"
+webview = "0.33.6"
 
 [libraries]
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -90,7 +90,7 @@ ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", versi
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 
-webview = { module = "io.github.KevinnZou:compose-webview-multiplatform", version.ref = "webview" }
+webview = { module = "io.github.kevinnzou:compose-webview", version.ref = "webview" }
 
 atomicflu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "atomicflu" }
 
