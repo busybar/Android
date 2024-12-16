@@ -3,9 +3,13 @@ plugins {
     id("flipper.multiplatform-dependencies")
 }
 
-androidDependencies {
+commonDependencies {
     implementation(libs.decompose)
     implementation(projects.components.core.ui.decompose)
 
+    api(projects.components.bsb.auth.within.oauth.data)
+}
+
+androidDependencies {
     implementation(projects.components.bsb.auth.within.main.api)
 }

@@ -6,6 +6,8 @@ import com.flipperdevices.bsb.cloud.model.response.BSBApiToken
 import com.flipperdevices.bsb.cloud.model.BSBApiUserObject
 import com.flipperdevices.bsb.cloud.model.BSBEmailVerificationResponse
 import com.flipperdevices.bsb.cloud.model.BSBEmailVerificationType
+import com.flipperdevices.bsb.cloud.model.BSBOAuthInformation
+import com.flipperdevices.bsb.cloud.model.BSBOAuthWebProvider
 import com.flipperdevices.bsb.cloud.model.BSBResponse
 import com.flipperdevices.bsb.cloud.model.request.BSBOneTapGoogleRequest
 import com.flipperdevices.bsb.cloud.model.BSBUser
@@ -74,8 +76,12 @@ class BSBAuthApiImpl(
                 url("${NetworkConstants.BASE_URL}/v0/auth/sign-in")
                 setBody(BSBApiSignInRequest(email, password))
             }.body<BSBApiToken>()
-        }.onSuccess {
-            preferenceApi.setString(SettingsEnum.AUTH_TOKEN, it.token)
+        }.transform { signIn(it.token) }
+    }
+
+    override suspend fun signIn(token: String): Result<Unit> {
+        return runCatching {
+            preferenceApi.setString(SettingsEnum.AUTH_TOKEN, token)
         }.transform { getUser() }
             .onSuccess { bsbUser ->
                 preferenceApi.set(SettingsEnum.USER_DATA, bsbUser)
@@ -86,8 +92,8 @@ class BSBAuthApiImpl(
         return@withContext runCatching {
             httpClient.get {
                 url("${NetworkConstants.BASE_URL}/v0/auth/me")
-            }.body<BSBApiUserObject>()
-        }.map { BSBUser(it.email) }
+            }.body<BSBResponse<BSBApiUserObject>>()
+        }.map { BSBUser(it.response.email) }
     }
 
     override suspend fun jwtAuth(token: String): Result<Unit> = withContext(networkDispatcher) {
@@ -165,5 +171,19 @@ class BSBAuthApiImpl(
                 setBody(BSBApiResetPasswordRequest(email, password, code))
             }
         }.transform { signIn(email, password) }
+    }
+
+    override fun getUrlForOauth(
+        oAuthProvider: BSBOAuthWebProvider
+    ): BSBOAuthInformation {
+        val providerKey = when (oAuthProvider) {
+            BSBOAuthWebProvider.MICROSOFT -> "microsoft"
+            BSBOAuthWebProvider.APPLE -> "apple"
+        }
+        return BSBOAuthInformation(
+            providerUrl = "${NetworkConstants.BASE_URL}/v0/oauth2/$providerKey/sign-in?redirect=busy-cloud-oauth-callback",
+            handleUrl = "${NetworkConstants.HOST_URL}/login/oauth-callback",
+            tokenQueryKey = "token"
+        )
     }
 }

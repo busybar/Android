@@ -13,6 +13,8 @@ import com.flipperdevices.bsb.auth.main.model.AuthRootNavigationConfig
 import com.flipperdevices.bsb.auth.main.viewmodel.AuthMainViewModel
 import com.flipperdevices.bsb.auth.within.main.api.SignWithInMainDecomposeComponent
 import com.flipperdevices.bsb.auth.within.main.model.SignWithInState
+import com.flipperdevices.bsb.auth.within.oauth.model.OAuthProvider
+import com.flipperdevices.bsb.deeplink.model.Deeplink
 import com.flipperdevices.core.ui.lifecycle.viewModelWithFactoryWithoutRemember
 import com.flipperdevices.ui.decompose.ScreenDecomposeComponent
 import me.tatarka.inject.annotations.Assisted
@@ -23,6 +25,8 @@ class MainScreenDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     @Assisted authNavigation: StackNavigation<AuthRootNavigationConfig>,
     @Assisted onComplete: () -> Unit,
+    @Assisted deeplink: Deeplink.Root.Auth?,
+    @Assisted openWebView: (OAuthProvider) -> Unit,
     authMainViewModel: (
         StackNavigation<AuthRootNavigationConfig>,
         onComplete: () -> Unit
@@ -34,7 +38,9 @@ class MainScreenDecomposeComponentImpl(
     }
     private val signWithInDecomposeComponent = signWithInMainDecomposeComponent(
         componentContext = childContext("signWithIn_main"),
-        withInStateListener = authViewModel
+        withInStateListener = authViewModel,
+        deeplink = deeplink as? Deeplink.Root.Auth.OAuth,
+        openWebView = openWebView
     )
 
     @Composable
@@ -50,6 +56,13 @@ class MainScreenDecomposeComponentImpl(
                 )
             }
         )
+    }
+
+    fun handleDeeplink(deeplink: Deeplink.Root.Auth) {
+        when (deeplink) {
+            is Deeplink.Root.Auth.OAuth -> signWithInDecomposeComponent.handleDeeplink(deeplink)
+        }
+
     }
 }
 

@@ -1,6 +1,7 @@
 package com.flipperdevices.bsb.root.model
 
 import com.flipperdevices.bsb.appblocker.model.ApplicationInfo
+import com.flipperdevices.bsb.deeplink.model.Deeplink
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -9,7 +10,7 @@ sealed interface RootNavigationConfig {
     data object Timer : RootNavigationConfig
 
     @Serializable
-    data object Auth : RootNavigationConfig
+    data class Auth(val deeplink: Deeplink.Root.Auth?) : RootNavigationConfig
 
     @Serializable
     data object Settings : RootNavigationConfig

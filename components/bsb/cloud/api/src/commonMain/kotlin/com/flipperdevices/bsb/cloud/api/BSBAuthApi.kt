@@ -2,6 +2,8 @@ package com.flipperdevices.bsb.cloud.api
 
 import com.flipperdevices.bsb.cloud.model.BSBEmailVerificationResponse
 import com.flipperdevices.bsb.cloud.model.BSBEmailVerificationType
+import com.flipperdevices.bsb.cloud.model.BSBOAuthInformation
+import com.flipperdevices.bsb.cloud.model.BSBOAuthWebProvider
 import com.flipperdevices.bsb.cloud.model.BSBUser
 
 interface BSBAuthApi {
@@ -9,6 +11,10 @@ interface BSBAuthApi {
 
     suspend fun signIn(
         email: String, password: String
+    ): Result<Unit>
+
+    suspend fun signIn(
+        token: String
     ): Result<Unit>
 
     suspend fun jwtAuth(token: String): Result<Unit>
@@ -37,4 +43,6 @@ interface BSBAuthApi {
         code: String,
         password: String
     ): Result<Unit>
+
+    fun getUrlForOauth(oAuthProvider: BSBOAuthWebProvider): BSBOAuthInformation
 }

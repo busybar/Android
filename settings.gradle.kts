@@ -83,6 +83,7 @@ include(
     ":components:bsb:auth:within:main:api",
     ":components:bsb:auth:within:main:impl",
     ":components:bsb:auth:within:oauth:api",
+    ":components:bsb:auth:within:oauth:data",
     ":components:bsb:auth:within:oauth:impl",
     ":components:bsb:auth:within:onetap:api",
     ":components:bsb:auth:within:onetap:impl",
