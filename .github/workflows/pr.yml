@@ -22,7 +22,6 @@ jobs:
   info:
     name: "Display concurrency info"
     runs-on: ubuntu-latest
-    needs: [ validate_gradle_wrapper ]
     steps:
       - run: |
           echo "github.workflow=${{ github.workflow }}"
@@ -32,7 +31,6 @@ jobs:
   test:
     name: "Run unit tests"
     runs-on: ubuntu-latest
-    needs: [ validate_gradle_wrapper ]
     strategy:
       matrix:
         target: [ "testDebugUnitTest", "desktopTest" ]
@@ -52,7 +50,6 @@ jobs:
   detekt:
     name: "Check project by linters"
     runs-on: ubuntu-latest
-    needs: [ validate_gradle_wrapper ]
     strategy:
       matrix:
         target: [ "detektMetadataCommonMain", "lint" ]
@@ -72,7 +69,6 @@ jobs:
   build:
     name: "Test build for Android/WasmJS/Desktop"
     runs-on: ubuntu-latest
-    needs: [ validate_gradle_wrapper ]
     strategy:
       matrix:
         target: [ "assembleDebug", "wasmJsBrowserDistribution", "packageDistributionForCurrentOS" ]
