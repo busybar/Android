@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Generate build number
         id: buildnumber
-        uses: onyxmueller/build-tag-number@v1
+        uses: onyxmueller/build-tag-number@4a0c81c9af350d967032d49204c83c38e6b0c8e4 # v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: 'Set output for simple build'
@@ -27,11 +27,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ build_number ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           submodules: 'recursive'
       - name: Set up JDK 1.17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b # v4
         with:
           distribution: 'temurin'
           java-version: '17'
@@ -41,7 +41,7 @@ jobs:
         run: ./gradlew assembleRelease bundleRelease
       - name: Sign AAB
         id: sign_aab
-        uses: r0adkll/sign-android-release@v1
+        uses: r0adkll/sign-android-release@349ebdef58775b1e0d8099458af0816dc79b6407 # v1
         with:
           releaseDirectory: instances/bsb/build/outputs/bundle/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
@@ -52,7 +52,7 @@ jobs:
           BUILD_TOOLS_VERSION: "34.0.0"
       - name: Sign APK
         id: sign_apk
-        uses: r0adkll/sign-android-release@v1
+        uses: r0adkll/sign-android-release@349ebdef58775b1e0d8099458af0816dc79b6407 # v1
         with:
           releaseDirectory: instances/bsb/build/outputs/apk/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
@@ -70,7 +70,7 @@ jobs:
           cp instances/bsb/build/outputs/mapping/release/mapping.txt artifacts/mapping.txt
           echo "path=artifacts/" >> $GITHUB_OUTPUT
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4
         with:
           name: artifacts
           path: ${{ steps.artifacts_copy.outputs.path }}
@@ -85,15 +85,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ build_release, build_number, build_desktop ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           submodules: 'recursive'
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4
         id: download
         with:
           name: artifacts
           path: download/artifacts
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4
         id: download-desktop
         with:
           name: ${{ needs.build_desktop.outputs.ARTIFACTS_NAME }}
@@ -105,7 +105,7 @@ jobs:
           cp ${{steps.download.outputs.download-path}}/* artifacts/
           echo "path=artifacts/" >> $GITHUB_OUTPUT
       - name: Install zip
-        uses: montudor/action-zip@v1
+        uses: montudor/action-zip@a8e75c9faefcd80fac3baf53ef40b9b119d5b702 # v1
       - name: Prepare mapping
         id: mappings
         run: |
@@ -132,7 +132,7 @@ jobs:
           mv ${{ steps.artifacts_copy.outputs.path }}/busystatusbar.apk ${{ steps.artifacts_copy.outputs.path }}/busystatusbar-${{ steps.vars.outputs.major_version }}.${{ steps.vars.outputs.minor_version }}.apk
       - name: Create internal Release
         id: create_internal_release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@e7a8f85e1c67a31e6ed99a94b41bd0b71bbee6b8 # v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
