@@ -30,8 +30,7 @@ class AuthOtpScreenDecomposeComponentImpl(
     @Assisted onOtpComplete: suspend (String) -> Unit,
     private val viewModelFactory: (
         otpType: InternalAuthOtpType,
-        onOtpComplete: suspend (String) -> Unit,
-        codeExpiryTimeMs: Long,
+        onOtpComplete: suspend (String) -> Unit
     ) -> AuthOtpScreenViewModel,
     otpCodeElementDecomposeComponentFactory: AuthOtpElementDecomposeComponent.Factory
 ) : AuthOtpScreenDecomposeComponent(componentContext) {
@@ -40,8 +39,7 @@ class AuthOtpScreenDecomposeComponentImpl(
     private val viewModel = viewModelWithFactoryWithoutRemember(internalOtpType) {
         viewModelFactory(
             internalOtpType,
-            onOtpComplete,
-            otpType.codeExpiryTime.toEpochMilliseconds()
+            onOtpComplete
         )
     }
 
@@ -54,7 +52,7 @@ class AuthOtpScreenDecomposeComponentImpl(
     override fun Render(modifier: Modifier) {
         val state by viewModel.getState().collectAsState()
         val otpCode by otpCodeElementDecomposeComponent.getOtpCodeState().collectAsState()
-        val timerState by viewModel.getTimerState().collectAsState()
+        val expiryState by viewModel.getExpiryTimerState().collectAsState()
 
         AuthOtpScreenComposable(
             modifier = modifier
@@ -74,8 +72,8 @@ class AuthOtpScreenDecomposeComponentImpl(
                         otpCodeElementDecomposeComponent.Render(otpCodeModifier, otpState)
                     },
                     otpScreenState = state,
-                    timerState = timerState,
-                    otpType = internalOtpType
+                    otpType = internalOtpType,
+                    expiryState = expiryState
                 )
             },
         )

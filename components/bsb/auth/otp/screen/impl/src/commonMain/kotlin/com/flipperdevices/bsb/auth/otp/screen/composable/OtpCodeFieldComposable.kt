@@ -12,12 +12,13 @@ import androidx.compose.ui.unit.sp
 import busystatusbar.components.bsb.auth.otp.screen.impl.generated.resources.Res
 import busystatusbar.components.bsb.auth.otp.screen.impl.generated.resources.login_otp_screen_code_expires
 import busystatusbar.components.bsb.auth.otp.screen.impl.generated.resources.login_otp_screen_code_incorrect
+import busystatusbar.components.bsb.auth.otp.screen.impl.generated.resources.login_otp_screen_verify_error_general
 import com.flipperdevices.bsb.auth.otp.element.model.OtpElementState
+import com.flipperdevices.bsb.auth.otp.screen.model.AuthOtpExpiryState
 import com.flipperdevices.bsb.auth.otp.screen.model.AuthOtpScreenState
 import com.flipperdevices.bsb.auth.otp.screen.model.InternalAuthOtpType
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
-import com.flipperdevices.core.data.timer.TimerState
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -25,8 +26,8 @@ fun OtpCodeFieldComposable(
     modifier: Modifier,
     otpCodeFieldComposable: @Composable (Modifier, OtpElementState) -> Unit,
     otpScreenState: AuthOtpScreenState,
-    timerState: TimerState,
-    otpType: InternalAuthOtpType
+    otpType: InternalAuthOtpType,
+    expiryState: AuthOtpExpiryState
 ) {
     Column(modifier) {
         Row(Modifier.padding(bottom = 8.dp)) {
@@ -38,22 +39,16 @@ fun OtpCodeFieldComposable(
                 fontWeight = FontWeight.W500,
                 fontSize = 12.sp
             )
-            Text(
+
+            ExpiryTimerTextComposable(
                 modifier = Modifier.padding(start = 16.dp),
-                text = stringResource(
-                    Res.string.login_otp_screen_code_expires,
-                    timerState.toHumanReadableString()
-                ),
-                color = LocalPallet.current.black.invert,
-                fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
-                fontWeight = FontWeight.W500,
-                fontSize = 12.sp
+                expiryState = expiryState
             )
         }
         otpCodeFieldComposable(
             Modifier, when (otpScreenState) {
-                AuthOtpScreenState.ResetPasswordInProgress,
-                AuthOtpScreenState.CheckCodeInProgress -> OtpElementState.DISABLED
+                is AuthOtpScreenState.RequestEmailInProgress,
+                AuthOtpScreenState.CheckCodeInProgress -> OtpElementState.IN_PROGRESS
 
                 AuthOtpScreenState.ExpiryVerificationCode -> OtpElementState.WAITING_FOR_INPUT
                 is AuthOtpScreenState.WaitingForInput -> if (otpScreenState.wrongCodeInvalid) {
@@ -67,7 +62,7 @@ fun OtpCodeFieldComposable(
         when (otpScreenState) {
             AuthOtpScreenState.CheckCodeInProgress,
             AuthOtpScreenState.ExpiryVerificationCode,
-            AuthOtpScreenState.ResetPasswordInProgress -> {
+            is AuthOtpScreenState.RequestEmailInProgress -> {
             }
 
             is AuthOtpScreenState.WaitingForInput -> if (otpScreenState.wrongCodeInvalid) {
@@ -81,5 +76,35 @@ fun OtpCodeFieldComposable(
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun ExpiryTimerTextComposable(
+    modifier: Modifier,
+    expiryState: AuthOtpExpiryState
+) {
+    when (expiryState) {
+        AuthOtpExpiryState.Empty -> {}
+        AuthOtpExpiryState.Error -> Text(
+            modifier = modifier,
+            text = stringResource(Res.string.login_otp_screen_verify_error_general),
+            color = LocalPallet.current.danger.primary,
+            fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
+            fontWeight = FontWeight.W500,
+            fontSize = 12.sp
+        )
+
+        is AuthOtpExpiryState.Ready -> Text(
+            modifier = modifier,
+            text = stringResource(
+                Res.string.login_otp_screen_code_expires,
+                expiryState.timerState.toHumanReadableString()
+            ),
+            color = LocalPallet.current.black.invert,
+            fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
+            fontWeight = FontWeight.W500,
+            fontSize = 12.sp
+        )
     }
 }

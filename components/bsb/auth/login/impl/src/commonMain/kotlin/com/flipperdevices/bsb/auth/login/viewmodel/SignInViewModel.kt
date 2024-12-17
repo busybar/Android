@@ -25,10 +25,8 @@ import me.tatarka.inject.annotations.Inject
 class SignInViewModel(
     @Assisted private val email: String,
     @Assisted private val onComplete: () -> Unit,
-    @Assisted private val onForgetPassword: (email: String, codeExpiryTime: Instant) -> Unit,
     private val settings: PreferenceApi,
-    private val bsbAuthApi: BSBAuthApi,
-    private val inAppNotificationStorage: InAppNotificationStorage
+    private val bsbAuthApi: BSBAuthApi
 ) : DecomposeViewModel(), LogTagProvider {
     override val TAG = "SignInViewModel"
 
@@ -49,19 +47,6 @@ class SignInViewModel(
                 }
             }.onFailure {
                 error(it) { "Failure auth for $email" }
-            }
-        state.emit(LoginState.WaitingForInput)
-    }
-
-    fun onForgotPassword(email: String) = viewModelScope.launch {
-        state.emit(LoginState.AuthInProgress)
-        bsbAuthApi.requestVerifyEmail(email, BSBEmailVerificationType.RESET_PASSWORD)
-            .onSuccess {
-                withContext(Dispatchers.Main) {
-                    onForgetPassword(email, it.codeExpiryTime)
-                }
-            }.onFailure {
-                inAppNotificationStorage.addNotification(InAppNotification.ErrorEmailSend())
             }
         state.emit(LoginState.WaitingForInput)
     }

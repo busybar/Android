@@ -47,7 +47,7 @@ fun LoginPasswordComposable(
     state: LoginState,
     email: String,
     onLogin: (String) -> Unit,
-    onForgotPassword: (String) -> Unit
+    onForgotPassword: () -> Unit
 ) {
     val verticalScroll = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
@@ -56,7 +56,7 @@ fun LoginPasswordComposable(
     Column(
         modifier.verticalScroll(verticalScroll)
             .imePadding(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
             painter = painterResource(Res.drawable.pic_user_password),
@@ -97,6 +97,7 @@ fun LoginPasswordComposable(
             },
             hint = Res.string.login_signin_password_hint
         )
+
         BusyBarButtonComposable(
             modifier = Modifier
                 .fillMaxWidth()
@@ -117,7 +118,7 @@ fun LoginPasswordComposable(
         AuthTextSubActionComposable(
             Modifier.fillMaxWidth()
                 .padding(vertical = 12.dp),
-            onClick = { onForgotPassword(email) },
+            onClick = onForgotPassword,
             text = Res.string.login_signin_forgot_password,
             inProgress = when (state) {
                 LoginState.AuthInProgress -> true

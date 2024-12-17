@@ -1,6 +1,8 @@
 package com.flipperdevices.bsb.auth.common.composable.subaction
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -29,7 +31,7 @@ fun AuthTextSubActionComposable(
     inProgress: Boolean = false,
     disabled: Boolean = inProgress
 ) {
-    Column(
+    Row(
         modifier
             .fillMaxWidth()
             .graphicsLayer {
@@ -37,7 +39,8 @@ fun AuthTextSubActionComposable(
                     this.alpha = ALPHA_DISABLED
                 }
             },
-        horizontalAlignment = Alignment.End
+        horizontalArrangement = Arrangement.End,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             modifier = Modifier.padding(12.dp)
@@ -56,9 +59,9 @@ fun AuthTextSubActionComposable(
 
         if (inProgress) {
             CircularProgressIndicator(
-                Modifier.size(22.dp)
-                    .padding(1.2.dp)
-                    .padding(start = 12.dp),
+                Modifier
+                    .size(22.dp)
+                    .padding(1.2.dp),
                 color = LocalPallet.current.brand.primary,
                 backgroundColor = LocalPallet.current.brand.secondary,
                 strokeWidth = 1.dp

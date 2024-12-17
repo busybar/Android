@@ -20,15 +20,14 @@ class LoginScreenDecomposeComponentImpl(
     @Assisted private val onBack: DecomposeOnBackParameter,
     @Assisted private val email: String,
     @Assisted private val onComplete: () -> Unit,
-    @Assisted onForgetPassword: (email: String, codeExpiryTime: Instant) -> Unit,
+    @Assisted private val onForgetPassword: () -> Unit,
     signInViewModel: (
         email: String,
-        onComplete: () -> Unit,
-        onForgetPassword: (email: String, codeExpiryTime: Instant) -> Unit
+        onComplete: () -> Unit
     ) -> SignInViewModel
 ) : ScreenDecomposeComponent(componentContext) {
     private val signInViewModel = viewModelWithFactoryWithoutRemember(email) {
-        signInViewModel(email, onComplete, onForgetPassword)
+        signInViewModel(email, onComplete)
     }
 
     @Composable
@@ -40,7 +39,7 @@ class LoginScreenDecomposeComponentImpl(
             email = email,
             onBack = onBack::invoke,
             onLogin = signInViewModel::onLogin,
-            onForgotPassword = signInViewModel::onForgotPassword
+            onForgotPassword = onForgetPassword
         )
     }
 }

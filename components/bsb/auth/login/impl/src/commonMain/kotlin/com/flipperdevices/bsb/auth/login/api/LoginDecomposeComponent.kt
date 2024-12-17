@@ -28,7 +28,7 @@ class LoginDecomposeComponentImpl(
         onBack: DecomposeOnBackParameter,
         email: String,
         onComplete: () -> Unit,
-        onForgetPassword: (email: String, codeExpiryTime: Instant) -> Unit
+        onForgetPassword: () -> Unit
     ) -> LoginScreenDecomposeComponentImpl,
     private val otpScreenDecomposeComponent: AuthOtpScreenDecomposeComponent.Factory,
     private val confirmPasswordScreenDecomposeComponent: AuthConfirmPasswordScreenDecomposeComponent.Factory
@@ -51,8 +51,8 @@ class LoginDecomposeComponentImpl(
             { navigation.popOr(onBack::invoke) },
             email,
             onComplete,
-            { email, codeExpiryTime ->
-                navigation.pushToFront(LoginNavigationConfig.ResetPassword(email, codeExpiryTime))
+            {
+                navigation.pushToFront(LoginNavigationConfig.ResetPassword(email))
             }
         )
 
@@ -60,8 +60,7 @@ class LoginDecomposeComponentImpl(
             componentContext = componentContext,
             onBack = { navigation.popOr(onBack::invoke) },
             otpType = AuthOtpType.ForgotPassword(
-                email = config.email,
-                codeExpiryTime = config.codeExpiryTime
+                email = config.email
             ),
             onOtpComplete = { otpCode ->
                 navigation.pushToFront(
