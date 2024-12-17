@@ -74,7 +74,10 @@ data class OtpCell(
         // "\u200E1" -> "\u200E12"
 
         var subText = newText.substring(1)
-        if (textFieldValue.selection.min == 1 && subText.length > 1) {
+        if (textFieldValue.selection.min == 1 &&
+            textFieldValue.text.length > 1 &&
+            subText.length > 1
+        ) {
             subText = subText.removeRange(1, 2)
         }
 

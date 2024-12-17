@@ -23,7 +23,7 @@ class OtpCellTest {
         assertEquals(
             TextFieldValue(
                 text = "\u200E1",
-                selection = TextRange(2)
+                selection = TextRange(1)
             ),
             cell.textFieldValue
         )
@@ -47,7 +47,7 @@ class OtpCellTest {
         assertEquals(
             TextFieldValue(
                 text = "\u200E1",
-                selection = TextRange(2)
+                selection = TextRange(1)
             ),
             cell.textFieldValue
         )
@@ -71,11 +71,11 @@ class OtpCellTest {
         assertEquals(
             TextFieldValue(
                 text = "\u200E1",
-                selection = TextRange(2)
+                selection = TextRange(1)
             ),
             cell.textFieldValue
         )
-        assertEquals(action, OtpCellAction.MoveBracketRight("23"))
+        assertEquals(OtpCellAction.MoveBracketRight("23"), action)
     }
 
     @Test
@@ -95,7 +95,7 @@ class OtpCellTest {
         assertEquals(
             TextFieldValue(
                 text = "\u200E1",
-                selection = TextRange(2)
+                selection = TextRange(1)
             ),
             cell.textFieldValue
         )
@@ -119,11 +119,11 @@ class OtpCellTest {
         assertEquals(
             TextFieldValue(
                 text = "\u200E1",
-                selection = TextRange(2)
+                selection = TextRange(1)
             ),
             cell.textFieldValue
         )
-        assertEquals(action, OtpCellAction.MoveBracketRight("2"))
+        assertEquals(action, OtpCellAction.MoveBracketRight(null))
     }
 
     // //
@@ -241,10 +241,35 @@ class OtpCellTest {
         assertEquals(
             TextFieldValue(
                 text = "\u200E1",
-                selection = TextRange(2)
+                selection = TextRange(1)
             ),
             cell.textFieldValue
         )
         assertEquals(action, null)
+    }
+
+
+    @Test
+    fun replaceFirstElement() {
+        val currentState = TextFieldValue(
+            text = "\u200E1",
+            selection = TextRange(1)
+        )
+
+        val newState = TextFieldValue(
+            text = "\u200E21",
+            selection = TextRange(2)
+        )
+
+        val (cell, action) = OtpCell(currentState).onApply(newState)
+
+        assertEquals(
+            TextFieldValue(
+                text = "\u200E2",
+                selection = TextRange(1)
+            ),
+            cell.textFieldValue
+        )
+        assertEquals(action, OtpCellAction.MoveBracketRight(null))
     }
 }

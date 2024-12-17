@@ -1,0 +1,18 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:best-practices',
+    'group:all',
+    'schedule:weekly',
+  ],
+  gradle: {
+    enabled: true,
+  },
+  rebaseLabel: 'rebase',
+  labels: [
+    'dependencies',
+  ],
+  packageRules: [
+
+  ],
+}
