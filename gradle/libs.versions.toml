@@ -31,7 +31,7 @@ buildkonfig = "5.4.0"
 atomicflu = "0.26.0" # https://github.com/Kotlin/kotlinx-atomicfu
 lifecycle = "2.8.7" # https://developer.android.com/jetpack/androidx/releases/lifecycle
 webview = "0.33.6"
-compose-placeholder = "2.0.0" # https://github.com/fornewid/placeholder/releases
+compose-placeholder = "1.0.8" # https://github.com/eygraber/compose-placeholder/releases
 
 [libraries]
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -75,7 +75,7 @@ essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = 
 essenty-lifecycle-coroutines = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "essenty" }
 markdown-renderer = { module = "com.mikepenz:multiplatform-markdown-renderer", version.ref = "markdown" }
 
-compose-placeholder = { module = "io.github.fornewid:placeholder-foundation", version.ref = "compose-placeholder" }
+compose-placeholder = { module = "com.eygraber:compose-placeholder", version.ref = "compose-placeholder" }
 
 androidx-lifecycle = { module = "androidx.lifecycle:lifecycle-service", version.ref = "lifecycle" }
 
