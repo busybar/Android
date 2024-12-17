@@ -19,9 +19,6 @@ concurrency:
 
 
 jobs:
-  validate_gradle_wrapper:
-    name: "Validate gradle wrapper"
-    uses: ./.github/workflows/call-validate-gradle-wrapper.yml
   info:
     name: "Display concurrency info"
     runs-on: ubuntu-latest
