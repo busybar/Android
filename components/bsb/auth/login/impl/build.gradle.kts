@@ -26,5 +26,4 @@ commonDependencies {
     implementation(projects.components.bsb.inappnotification.api)
 
     implementation(libs.decompose)
-    implementation(libs.kotlin.datetime)
 }

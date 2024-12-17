@@ -1,6 +1,5 @@
 package com.flipperdevices.bsb.auth.login.model
 
-import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -9,13 +8,8 @@ sealed interface LoginNavigationConfig {
     data object Password : LoginNavigationConfig
 
     @Serializable
-    data class ResetPassword(
-        val email: String
-    ) : LoginNavigationConfig
+    data object ResetPassword : LoginNavigationConfig
 
     @Serializable
-    data class ResetConfirmPassword(
-        val email: String,
-        val code: String
-    ) : LoginNavigationConfig
+    data class ResetConfirmPassword(val code: String) : LoginNavigationConfig
 }

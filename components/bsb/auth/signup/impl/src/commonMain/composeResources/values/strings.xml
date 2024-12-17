@@ -1,0 +1,5 @@
+<resources>
+    <string name="login_signup_title">Create account?</string>
+    <string name="login_signup_desc">Busy Cloud account for this email doesn’t exist yet:</string>
+    <string name="login_signup_btn">Create account</string>
+</resources>

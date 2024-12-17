@@ -21,7 +21,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.autofill.AutofillType
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
@@ -34,6 +36,7 @@ import busystatusbar.components.bsb.auth.main.impl.generated.resources.pic_busyc
 import busystatusbar.components.bsb.auth.main.impl.generated.resources.pic_busycloud_dark
 import com.flipperdevices.bsb.auth.common.composable.BusyBarButtonComposable
 import com.flipperdevices.bsb.auth.common.composable.UiConstants
+import com.flipperdevices.bsb.auth.common.composable.utils.autofill
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.auth.main.model.AuthMainState
@@ -42,12 +45,13 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalComposeUiApi::class)
 @Composable
 fun AuthMainComposable(
     modifier: Modifier,
     state: AuthMainState,
     onLogin: (String) -> Unit,
+    onPrefillPassword: (String) -> Unit,
     signInWith: @Composable (Modifier) -> Unit
 ) {
     val verticalScroll = rememberScrollState()
@@ -85,6 +89,10 @@ fun AuthMainComposable(
         EmailEditFieldComposable(
             modifier = Modifier
                 .fillMaxWidth()
+                .autofill(
+                    AutofillType.Password,
+                    onFill = onPrefillPassword
+                )
                 .onFocusChanged {
                     if (it.isFocused) {
                         coroutineScope.launch { bringIntoViewRequester.bringIntoView() }

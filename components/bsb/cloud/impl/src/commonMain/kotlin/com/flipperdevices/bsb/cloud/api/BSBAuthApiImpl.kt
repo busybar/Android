@@ -3,7 +3,7 @@ package com.flipperdevices.bsb.cloud.api
 import com.flipperdevices.bsb.cloud.model.request.BSBApiCheckUserRequest
 import com.flipperdevices.bsb.cloud.model.request.BSBApiSignInRequest
 import com.flipperdevices.bsb.cloud.model.response.BSBApiToken
-import com.flipperdevices.bsb.cloud.model.BSBApiUserObject
+import com.flipperdevices.bsb.cloud.model.response.BSBApiUserObject
 import com.flipperdevices.bsb.cloud.model.BSBEmailVerificationResponse
 import com.flipperdevices.bsb.cloud.model.BSBEmailVerificationType
 import com.flipperdevices.bsb.cloud.model.BSBOAuthInformation
@@ -16,6 +16,7 @@ import com.flipperdevices.bsb.cloud.model.request.BSBApiResetPasswordRequest
 import com.flipperdevices.bsb.cloud.model.request.BSBCheckCodeRequest
 import com.flipperdevices.bsb.cloud.model.request.BSBEmailVerificationRequest
 import com.flipperdevices.bsb.cloud.model.response.BSBApiEmailVerificationResponse
+import com.flipperdevices.bsb.cloud.model.response.BSBApiSignInResponse
 import com.flipperdevices.bsb.cloud.model.toVerificationTypeString
 import com.flipperdevices.bsb.cloud.utils.NetworkConstants
 import com.flipperdevices.bsb.preference.api.PreferenceApi
@@ -34,13 +35,11 @@ import io.ktor.client.request.post
 import io.ktor.client.request.url
 import io.ktor.client.request.setBody
 import io.ktor.http.HttpStatusCode
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
-import kotlin.random.Random
 
 private val networkDispatcher = FlipperDispatchers.default
 
@@ -77,8 +76,8 @@ class BSBAuthApiImpl(
             httpClient.post {
                 url("${NetworkConstants.BASE_URL}/v0/auth/sign-in")
                 setBody(BSBApiSignInRequest(email, password))
-            }.body<BSBApiToken>()
-        }.transform { signIn(it.token) }
+            }.body<BSBResponse<BSBApiSignInResponse>>()
+        }.transform { signIn(it.response.token.token) }
     }
 
     override suspend fun signIn(token: String): Result<Unit> {

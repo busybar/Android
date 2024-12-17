@@ -10,8 +10,10 @@ commonDependencies {
 
     implementation(projects.components.core.di)
     implementation(projects.components.core.ui.decompose)
+    implementation(projects.components.bsb.core.theme)
 
-
+    implementation(projects.components.bsb.auth.common)
+    implementation(projects.components.bsb.auth.otp.screen.api)
     implementation(projects.components.bsb.auth.confirmpassword.api)
 
     implementation(libs.decompose)

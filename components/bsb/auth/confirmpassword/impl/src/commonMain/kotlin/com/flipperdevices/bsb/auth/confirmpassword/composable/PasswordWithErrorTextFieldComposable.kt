@@ -17,15 +17,16 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun PasswordWithErrorTextFieldComposable(
     modifier: Modifier,
+    fieldModifier: Modifier,
     onFocus: () -> Unit,
     hint: StringResource,
     fieldState: PasswordFieldState,
     inProgress: Boolean,
-    onPasswordChange: (String) -> Unit
+    onPasswordChange: (String) -> Unit,
 ) {
     Column(modifier) {
         PasswordTextFieldComposable(
-            modifier = Modifier.onFocusChanged {
+            modifier = fieldModifier.onFocusChanged {
                 if (it.isFocused) {
                     onFocus()
                 }

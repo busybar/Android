@@ -19,4 +19,10 @@ class OtpRowViewModel : DecomposeViewModel() {
             it.onChange(index, newLine)
         }
     }
+
+    fun onFocus() {
+        state.update {
+            it.copy(currentFocusIndex = 0)
+        }
+    }
 }

@@ -5,14 +5,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
-import com.flipperdevices.bsb.core.theme.LocalPallet
-import com.flipperdevices.bsb.dnd.api.BusyDNDApi
 import com.flipperdevices.bsb.preference.api.ThemeStatusBarIconStyleProvider
 import com.flipperdevices.bsb.preferencescreen.composable.PreferenceScreenComposable
 import com.flipperdevices.bsb.preferencescreen.viewmodel.PreferenceScreenViewModel
 import com.flipperdevices.bsb.root.api.LocalRootNavigation
 import com.flipperdevices.core.di.AppGraph
-import com.flipperdevices.core.ui.lifecycle.viewModelWithFactoryWithoutRemember
+import com.flipperdevices.core.ui.lifecycle.viewModelWithFactory
 import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
 import com.flipperdevices.ui.decompose.statusbar.StatusBarIconStyleProvider
 import me.tatarka.inject.annotations.Assisted
@@ -28,7 +26,7 @@ class PreferenceScreenDecomposeComponentImpl(
 ) : PreferenceScreenDecomposeComponent(componentContext),
     StatusBarIconStyleProvider by statusBarIconStyleProvider {
 
-    private val viewModel = viewModelWithFactoryWithoutRemember(null) {
+    private val viewModel = viewModelWithFactory(null) {
         viewModelFactory()
     }
 

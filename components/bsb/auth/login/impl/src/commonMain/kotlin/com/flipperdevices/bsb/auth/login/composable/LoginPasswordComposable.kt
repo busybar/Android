@@ -47,7 +47,8 @@ fun LoginPasswordComposable(
     state: LoginState,
     email: String,
     onLogin: (String) -> Unit,
-    onForgotPassword: () -> Unit
+    onForgotPassword: () -> Unit,
+    preFilledPassword: String?
 ) {
     val verticalScroll = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
@@ -79,7 +80,7 @@ fun LoginPasswordComposable(
             textAlign = TextAlign.Center,
             color = LocalPallet.current.black.invert
         )
-        var password by remember { mutableStateOf("") }
+        var password by remember { mutableStateOf(preFilledPassword ?: "") }
 
         PasswordTextFieldComposable(
             Modifier.fillMaxWidth()
@@ -120,10 +121,6 @@ fun LoginPasswordComposable(
                 .padding(vertical = 12.dp),
             onClick = onForgotPassword,
             text = Res.string.login_signin_forgot_password,
-            inProgress = when (state) {
-                LoginState.AuthInProgress -> true
-                LoginState.WaitingForInput -> false
-            }
         )
     }
 }

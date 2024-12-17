@@ -13,6 +13,7 @@ import com.flipperdevices.core.ui.lifecycle.DecomposeViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import org.jetbrains.compose.resources.StringResource
 
@@ -22,8 +23,17 @@ private val PASSWORD_REGEX_UPPERCASE = "[A-Z]".toRegex()
 private val PASSWORD_REGEX_SPECIAL = "[^a-zA-Z0-9]".toRegex()
 
 @Inject
-class FieldValidationViewModel : DecomposeViewModel() {
+class FieldValidationViewModel(
+    @Assisted preFilledPassword: String?
+) : DecomposeViewModel() {
     private val fieldState = MutableStateFlow(PasswordFieldsState())
+
+    init {
+        if (!preFilledPassword.isNullOrBlank()) {
+            onPasswordFieldChange(preFilledPassword)
+            onConfirmFieldChange(preFilledPassword)
+        }
+    }
 
     fun getState() = fieldState.asStateFlow()
 

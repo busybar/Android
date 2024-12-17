@@ -10,6 +10,7 @@ abstract class LoginDecomposeComponent<C : Any> : CompositeDecomposeComponent<C>
             componentContext: ComponentContext,
             onBack: DecomposeOnBackParameter,
             email: String,
+            preFilledPassword: String?,
             onComplete: () -> Unit,
         ): LoginDecomposeComponent<*>
     }

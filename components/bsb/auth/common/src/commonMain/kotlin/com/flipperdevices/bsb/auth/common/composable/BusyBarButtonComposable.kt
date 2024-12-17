@@ -28,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 fun BusyBarButtonComposable(
     text: StringResource,
     onClick: () -> Unit,
-    inProgress: Boolean,
+    inProgress: Boolean = false,
     disabled: Boolean = inProgress,
     modifier: Modifier = Modifier
 ) {

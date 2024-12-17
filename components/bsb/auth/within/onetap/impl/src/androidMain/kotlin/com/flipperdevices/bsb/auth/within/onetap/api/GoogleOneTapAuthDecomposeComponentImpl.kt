@@ -11,7 +11,7 @@ import com.flipperdevices.bsb.auth.within.main.model.SignWithInState
 import com.flipperdevices.bsb.auth.within.main.model.SignWithInStateListener
 import com.flipperdevices.bsb.auth.within.onetap.viewmodel.GoogleOneTapViewModel
 import com.flipperdevices.core.di.AppGraph
-import com.flipperdevices.core.ui.lifecycle.viewModelWithFactoryWithoutRemember
+import com.flipperdevices.core.ui.lifecycle.viewModelWithFactory
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
@@ -22,7 +22,7 @@ class GoogleOneTapAuthDecomposeComponentImpl(
     @Assisted withInStateListener: SignWithInStateListener,
     googleOneTapViewModel: (SignWithInStateListener) -> GoogleOneTapViewModel
 ) : GoogleOneTapAuthDecomposeComponent(componentContext) {
-    private val viewModel = viewModelWithFactoryWithoutRemember(withInStateListener) {
+    private val viewModel = viewModelWithFactory(withInStateListener) {
         googleOneTapViewModel(withInStateListener)
     }
 

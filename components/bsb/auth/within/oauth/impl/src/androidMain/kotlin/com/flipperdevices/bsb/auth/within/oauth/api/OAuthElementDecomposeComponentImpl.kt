@@ -12,7 +12,7 @@ import com.flipperdevices.bsb.auth.within.oauth.model.OAuthProvider
 import com.flipperdevices.bsb.auth.within.oauth.model.toInternal
 import com.flipperdevices.bsb.auth.within.oauth.viewmodel.OAuthElementViewModel
 import com.flipperdevices.core.di.AppGraph
-import com.flipperdevices.core.ui.lifecycle.viewModelWithFactoryWithoutRemember
+import com.flipperdevices.core.ui.lifecycle.viewModelWithFactory
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
@@ -30,7 +30,7 @@ class OAuthElementDecomposeComponentImpl(
 ) : OAuthElementDecomposeComponent(componentContext) {
     private val provider = oAuthProvider.toInternal()
 
-    private val viewModel = viewModelWithFactoryWithoutRemember(provider) {
+    private val viewModel = viewModelWithFactory(provider) {
         viewModelFactory(withInStateListener, provider)
     }
 

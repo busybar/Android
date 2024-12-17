@@ -23,7 +23,7 @@ fun EmailEditFieldComposable(
 ) {
     AuthCommonTextFieldComposable(
         modifier = modifier.autofill(
-            AutofillType.Username,
+            AutofillType.EmailAddress,
             onFill = onTextChange
         ),
         icon = Res.drawable.ic_user,
