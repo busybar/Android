@@ -19,7 +19,7 @@ fun LoginPasswordScreenComposable(
     email: String,
     onBack: () -> Unit,
     onLogin: (String) -> Unit,
-    onForgotPassword: (String) -> Unit
+    onForgotPassword: () -> Unit
 ) {
     Column(
         Modifier.fillMaxSize().systemBarsPadding(),

@@ -11,10 +11,12 @@
     <string name="login_otp_screen_forgot_code_btn">Continue</string>
     <string name="login_otp_screen_forgot_code_error">Your password reset code has expired</string>
 
-    <string name="login_otp_screen_verify_title">Verify your email</string>
+    <string name="login_otp_screen_verify_title">Verify your email:</string>
+    <string name="login_otp_screen_verify_error_general">Network error — Try to resend email</string>
     <string name="login_otp_screen_verify_desc">We’ve sent a verification email to:</string>
     <string name="login_otp_screen_verify_code_title">Verification code:</string>
     <string name="login_otp_screen_verify_code_btn">Verify</string>
     <string name="login_otp_screen_verify_code_desc_markdown">Check your inbox (and spam folder) to proceed:\n* To verify via code, enter the code we’ve sent you in the email.\n* To verify via link, click the “Verify email” button in the email.</string>
     <string name="login_otp_screen_verify_code_error">Your verification code has expired</string>
+
 </resources>

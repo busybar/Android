@@ -15,9 +15,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -25,15 +23,15 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.flipperdevices.bsb.auth.common.composable.UiConstants
 import com.flipperdevices.bsb.auth.otp.element.model.OtpCell
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
+import com.flipperdevices.core.ktx.common.placeholder
 
 @Composable
 fun OtpCellComposable(
     modifier: Modifier,
-    disabled: Boolean,
+    inProgress: Boolean,
     value: OtpCell,
     focused: Boolean,
     borderColor: Color,
@@ -43,12 +41,12 @@ fun OtpCellComposable(
     val focusRequester = remember { FocusRequester() }
 
     BasicTextField(
-        modifier = modifier.graphicsLayer {
-            if (disabled) {
-                this.alpha = UiConstants.ALPHA_DISABLED
-            }
-        }.focusRequester(focusRequester),
-        enabled = disabled.not(),
+        modifier = modifier.focusRequester(focusRequester)
+            .placeholder(
+                inProgress,
+                shape = RoundedCornerShape(8.dp)
+            ),
+        enabled = inProgress.not(),
         value = value.textFieldValue,
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Next,

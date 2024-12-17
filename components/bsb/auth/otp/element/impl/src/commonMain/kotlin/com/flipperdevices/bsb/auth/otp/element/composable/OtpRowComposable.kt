@@ -19,16 +19,16 @@ fun OtpRowComposable(
     otpElementState: OtpElementState,
     onInput: (index: Int, newInput: TextFieldValue) -> Unit
 ) {
-    val disabled = when (otpElementState) {
+    val inProgress = when (otpElementState) {
         OtpElementState.WAITING_FOR_INPUT,
         OtpElementState.ERROR -> false
 
-        OtpElementState.DISABLED -> true
+        OtpElementState.IN_PROGRESS -> true
     }
 
     Row(
         modifier = modifier.graphicsLayer {
-            if (disabled) {
+            if (inProgress) {
                 this.alpha = ALPHA_DISABLED
             }
         },
@@ -37,19 +37,19 @@ fun OtpRowComposable(
         otpRow.cells.forEachIndexed { index, char ->
             OtpCellComposable(
                 modifier = Modifier.weight(1f),
-                disabled = disabled,
+                inProgress = inProgress,
                 value = char,
                 onInput = { onInput(index, it) },
                 focused = index == otpRow.currentFocusIndex,
                 borderColor = when (otpElementState) {
                     OtpElementState.WAITING_FOR_INPUT,
-                    OtpElementState.DISABLED -> LocalPallet.current.neutral.quinary
+                    OtpElementState.IN_PROGRESS -> LocalPallet.current.neutral.quinary
 
                     OtpElementState.ERROR -> LocalPallet.current.danger.secondary
                 },
                 backgroundColor = when (otpElementState) {
                     OtpElementState.WAITING_FOR_INPUT,
-                    OtpElementState.DISABLED -> LocalPallet.current.neutral.septenary
+                    OtpElementState.IN_PROGRESS -> LocalPallet.current.neutral.septenary
 
                     OtpElementState.ERROR -> LocalPallet.current.danger.tertiary
                 }

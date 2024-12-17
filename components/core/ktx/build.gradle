@@ -4,11 +4,14 @@ plugins {
 }
 
 commonDependencies {
+    implementation(projects.components.bsb.core.theme)
     implementation(projects.components.core.log)
     implementation(projects.components.core.buildKonfig)
 
     implementation(libs.kotlin.coroutines)
     implementation(libs.kotlin.datetime)
+
+    implementation(libs.compose.placeholder)
 }
 
 androidDependencies {

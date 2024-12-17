@@ -54,7 +54,7 @@ fun AuthOtpScreenComposable(
 
             when (authOtpScreenState) {
                 AuthOtpScreenState.CheckCodeInProgress,
-                AuthOtpScreenState.ResetPasswordInProgress,
+                is AuthOtpScreenState.RequestEmailInProgress,
                 is AuthOtpScreenState.WaitingForInput -> {
                     otpCodeFieldComposable(Modifier.padding(top = 16.dp))
 
@@ -65,7 +65,7 @@ fun AuthOtpScreenComposable(
                         text = otpType.textCodeBtn,
                         onClick = onConfirm,
                         inProgress = when (authOtpScreenState) {
-                            AuthOtpScreenState.ResetPasswordInProgress,
+                            is AuthOtpScreenState.RequestEmailInProgress,
                             AuthOtpScreenState.ExpiryVerificationCode,
                             is AuthOtpScreenState.WaitingForInput -> false
 
@@ -108,7 +108,9 @@ fun AuthOtpScreenComposable(
                     is AuthOtpScreenState.WaitingForInput,
                     AuthOtpScreenState.ExpiryVerificationCode -> false
 
-                    AuthOtpScreenState.ResetPasswordInProgress -> true
+                    is AuthOtpScreenState.RequestEmailInProgress -> {
+                        authOtpScreenState.launchedManually
+                    }
                 }
             )
         }
