@@ -2,6 +2,7 @@ package com.flipperdevices.bsb.auth.login.composable
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.runtime.Composable
@@ -15,14 +16,17 @@ import com.flipperdevices.bsb.auth.login.model.LoginState
 
 @Composable
 fun LoginPasswordScreenComposable(
+    modifier: Modifier,
     state: LoginState,
     email: String,
+    preFilledPassword: String?,
     onBack: () -> Unit,
     onLogin: (String) -> Unit,
     onForgotPassword: () -> Unit
 ) {
     Column(
-        Modifier.fillMaxSize().systemBarsPadding(),
+        modifier.fillMaxSize()
+            .navigationBarsPadding(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LogInAppBarComposable(
@@ -38,7 +42,8 @@ fun LoginPasswordScreenComposable(
             email = email,
             onLogin = onLogin,
             state = state,
-            onForgotPassword = onForgotPassword
+            onForgotPassword = onForgotPassword,
+            preFilledPassword = preFilledPassword
         )
     }
 }

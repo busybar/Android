@@ -1,4 +1,4 @@
-package com.flipperdevices.bsb.auth.confirm.api
+package com.flipperdevices.bsb.auth.confirmpassword.api
 
 import com.arkivanov.decompose.ComponentContext
 import com.flipperdevices.bsb.auth.confirmpassword.model.ConfirmPasswordType
@@ -13,7 +13,6 @@ abstract class AuthConfirmPasswordScreenDecomposeComponent(
             componentContext: ComponentContext,
             type: ConfirmPasswordType,
             onBackParameter: DecomposeOnBackParameter,
-            code: String,
             onComplete: () -> Unit,
         ): AuthConfirmPasswordScreenDecomposeComponent
     }

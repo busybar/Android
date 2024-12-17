@@ -15,7 +15,7 @@ import com.flipperdevices.bsb.auth.within.main.api.SignWithInMainDecomposeCompon
 import com.flipperdevices.bsb.auth.within.main.model.SignWithInState
 import com.flipperdevices.bsb.auth.within.oauth.model.OAuthProvider
 import com.flipperdevices.bsb.deeplink.model.Deeplink
-import com.flipperdevices.core.ui.lifecycle.viewModelWithFactoryWithoutRemember
+import com.flipperdevices.core.ui.lifecycle.viewModelWithFactory
 import com.flipperdevices.ui.decompose.ScreenDecomposeComponent
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
@@ -33,7 +33,7 @@ class MainScreenDecomposeComponentImpl(
     ) -> AuthMainViewModel,
     signWithInMainDecomposeComponent: SignWithInMainDecomposeComponent.Factory
 ) : ScreenDecomposeComponent(componentContext) {
-    private val authViewModel = viewModelWithFactoryWithoutRemember(authNavigation to onComplete) {
+    private val authViewModel = viewModelWithFactory(authNavigation to onComplete) {
         authMainViewModel(authNavigation, onComplete)
     }
     private val signWithInDecomposeComponent = signWithInMainDecomposeComponent(
@@ -48,7 +48,8 @@ class MainScreenDecomposeComponentImpl(
         val state by authViewModel.getState().collectAsState()
         AuthMainComposableScreen(
             state,
-            authViewModel::onLogin,
+            onLogin = authViewModel::onLogin,
+            onPrefillPassword = authViewModel::onPrefillPassword,
             signInWith = { signInWithModifier ->
                 signWithInDecomposeComponent.Render(
                     signInWithModifier,

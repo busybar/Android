@@ -32,6 +32,7 @@ interface HttpClientComponent {
 }
 
 fun getHttpClient(preferenceApi: PreferenceApi) = HttpClient(httpEngine()) {
+    expectSuccess = true // TODO replace with custom error handling when API has been stable
     install(ContentNegotiation) {
         json(
             Json {

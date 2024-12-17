@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleOwner
 import com.flipperdevices.core.di.AppGraph
-import com.flipperdevices.core.ui.lifecycle.viewModelWithFactoryWithoutRemember
+import com.flipperdevices.core.ui.lifecycle.viewModelWithFactory
 import com.flipperdevices.inappnotification.api.InAppNotificationDecomposeComponent
 import com.flipperdevices.inappnotification.impl.composable.ComposableInAppNotification
 import com.flipperdevices.inappnotification.impl.viewmodel.InAppNotificationState
@@ -21,7 +21,7 @@ class InAppNotificationDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     private val viewModelFactory: (LifecycleOwner) -> InAppNotificationViewModel
 ) : InAppNotificationDecomposeComponent(componentContext) {
-    private val viewModel = viewModelWithFactoryWithoutRemember(null) {
+    private val viewModel = viewModelWithFactory(null) {
         viewModelFactory(this@InAppNotificationDecomposeComponentImpl)
     }
 

@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
@@ -36,7 +37,8 @@ fun OtpCellComposable(
     focused: Boolean,
     borderColor: Color,
     backgroundColor: Color,
-    onInput: (TextFieldValue) -> Unit
+    onInput: (TextFieldValue) -> Unit,
+    onFocus: () -> Unit,
 ) {
     val focusRequester = remember { FocusRequester() }
 
@@ -45,7 +47,11 @@ fun OtpCellComposable(
             .placeholder(
                 inProgress,
                 shape = RoundedCornerShape(8.dp)
-            ),
+            ).onFocusChanged {
+                if (it.isFocused) {
+                    onFocus()
+                }
+            },
         enabled = inProgress.not(),
         value = value.textFieldValue,
         keyboardOptions = KeyboardOptions(
@@ -71,8 +77,8 @@ fun OtpCellComposable(
         }
     )
 
-    LaunchedEffect(focused) {
-        if (focused) {
+    LaunchedEffect(inProgress, focusRequester, focused) {
+        if (focused && !inProgress) {
             focusRequester.requestFocus()
         }
     }

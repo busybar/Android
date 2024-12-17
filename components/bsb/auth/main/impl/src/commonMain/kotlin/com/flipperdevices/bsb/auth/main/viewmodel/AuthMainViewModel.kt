@@ -29,6 +29,7 @@ class AuthMainViewModel(
     override val TAG = "AuthMainViewModel"
 
     private val state = MutableStateFlow<AuthMainState>(AuthMainState.WaitingForInput)
+    private var preFilledPassword: String? = null
 
     fun getState() = state.asStateFlow()
 
@@ -39,9 +40,19 @@ class AuthMainViewModel(
             authApi.isUserExist(email).onSuccess { userExist ->
                 withContext(Dispatchers.Main) {
                     if (userExist) {
-                        navigationStack.pushToFront(AuthRootNavigationConfig.LogIn(email))
+                        navigationStack.pushToFront(
+                            AuthRootNavigationConfig.LogIn(
+                                email,
+                                preFilledPassword
+                            )
+                        )
                     } else {
-                        navigationStack.pushToFront(AuthRootNavigationConfig.SignUp)
+                        navigationStack.pushToFront(
+                            AuthRootNavigationConfig.SignUp(
+                                email,
+                                preFilledPassword
+                            )
+                        )
                     }
                 }
             }.onFailure {
@@ -49,6 +60,10 @@ class AuthMainViewModel(
             }
             state.emit(AuthMainState.WaitingForInput)
         }
+    }
+
+    fun onPrefillPassword(password: String) {
+        preFilledPassword = password
     }
 
     override fun invoke(withInState: SignWithInState) {

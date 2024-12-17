@@ -2,6 +2,7 @@ package com.flipperdevices.bsb.auth.main.composable
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.runtime.Composable
@@ -25,10 +26,12 @@ import org.jetbrains.compose.resources.stringResource
 fun AuthMainComposableScreen(
     state: AuthMainState,
     onLogin: (String) -> Unit,
+    onPrefillPassword: (String) -> Unit,
     signInWith: @Composable (Modifier) -> Unit
 ) {
     Column(
-        Modifier.fillMaxSize().systemBarsPadding(),
+        Modifier.fillMaxSize()
+            .navigationBarsPadding(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LogInAppBarComposable(Res.string.login_main_title)
@@ -38,7 +41,8 @@ fun AuthMainComposableScreen(
                 .weight(1f),
             state = state,
             onLogin = onLogin,
-            signInWith = signInWith
+            signInWith = signInWith,
+            onPrefillPassword = onPrefillPassword
         )
 
         ComposableMarkdown(

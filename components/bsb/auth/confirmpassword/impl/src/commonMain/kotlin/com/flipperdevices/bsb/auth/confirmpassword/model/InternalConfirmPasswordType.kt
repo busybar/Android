@@ -13,7 +13,8 @@ import busystatusbar.components.bsb.auth.confirmpassword.impl.generated.resource
 import org.jetbrains.compose.resources.StringResource
 
 sealed interface InternalConfirmPasswordType {
-    val email: String
+    val original: ConfirmPasswordType
+
     val textTitle: StringResource
     val textDesc: StringResource
     val textBack: StringResource?
@@ -21,7 +22,7 @@ sealed interface InternalConfirmPasswordType {
     val errorPopUpDesc: StringResource
 
     data class ResetPassword(
-        override val email: String
+        override val original: ConfirmPasswordType
     ) : InternalConfirmPasswordType {
         override val textTitle = Res.string.login_confirmpassword_forget_title
         override val textDesc = Res.string.login_confirmpassword_forget_desc
@@ -31,7 +32,7 @@ sealed interface InternalConfirmPasswordType {
     }
 
     data class SignUpPassword(
-        override val email: String
+        override val original: ConfirmPasswordType
     ) : InternalConfirmPasswordType {
         override val textTitle = Res.string.login_confirmpassword_register_title
         override val textDesc = Res.string.login_confirmpassword_register_desc
@@ -42,6 +43,6 @@ sealed interface InternalConfirmPasswordType {
 }
 
 fun ConfirmPasswordType.toInternalPasswordType() = when (this) {
-    is ConfirmPasswordType.ResetPassword -> InternalConfirmPasswordType.ResetPassword(email)
-    is ConfirmPasswordType.SignUpPassword -> InternalConfirmPasswordType.SignUpPassword(email)
+    is ConfirmPasswordType.ResetPassword -> InternalConfirmPasswordType.ResetPassword(this)
+    is ConfirmPasswordType.SignUpPassword -> InternalConfirmPasswordType.SignUpPassword(this)
 }

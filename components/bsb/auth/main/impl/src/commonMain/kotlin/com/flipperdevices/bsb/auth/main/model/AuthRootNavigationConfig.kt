@@ -10,10 +10,10 @@ sealed interface AuthRootNavigationConfig {
     data class AuthRoot(val deeplink: Deeplink.Root.Auth?) : AuthRootNavigationConfig
 
     @Serializable
-    data class LogIn(val email: String) : AuthRootNavigationConfig
+    data class LogIn(val email: String, val preFilledPassword: String?) : AuthRootNavigationConfig
 
     @Serializable
-    data object SignUp : AuthRootNavigationConfig
+    data class SignUp(val email: String, val preFilledPassword: String?) : AuthRootNavigationConfig
 
     @Serializable
     data class WebView(val oAuthProvider: OAuthProvider) : AuthRootNavigationConfig

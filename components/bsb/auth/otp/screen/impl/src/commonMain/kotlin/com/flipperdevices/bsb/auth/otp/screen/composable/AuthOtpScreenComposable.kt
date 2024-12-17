@@ -1,9 +1,14 @@
 package com.flipperdevices.bsb.auth.otp.screen.composable
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -27,6 +32,7 @@ import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import org.jetbrains.compose.resources.stringResource
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun AuthOtpScreenComposable(
     modifier: Modifier,
@@ -35,10 +41,12 @@ fun AuthOtpScreenComposable(
     otpCodeFieldComposable: @Composable (Modifier) -> Unit,
     onConfirm: () -> Unit,
     onResend: () -> Unit,
-    authOtpScreenState: AuthOtpScreenState
+    authOtpScreenState: AuthOtpScreenState,
+    bringIntoViewRequester: BringIntoViewRequester
 ) {
     Column(
-        modifier,
+        modifier
+            .navigationBarsPadding(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LogInAppBarComposable(
@@ -46,8 +54,9 @@ fun AuthOtpScreenComposable(
         )
         Column(
             modifier = Modifier
-                .verticalScroll(rememberScrollState())
-                .padding(16.dp),
+                .imePadding()
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AuthOtpScreenHeaderComposable(modifier = Modifier, otpType)
@@ -61,7 +70,8 @@ fun AuthOtpScreenComposable(
                     BusyBarButtonComposable(
                         modifier = Modifier
                             .padding(vertical = 32.dp)
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .bringIntoViewRequester(bringIntoViewRequester),
                         text = otpType.textCodeBtn,
                         onClick = onConfirm,
                         inProgress = when (authOtpScreenState) {

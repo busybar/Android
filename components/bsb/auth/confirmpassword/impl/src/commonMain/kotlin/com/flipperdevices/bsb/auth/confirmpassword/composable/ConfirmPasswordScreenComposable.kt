@@ -12,10 +12,13 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -50,6 +53,7 @@ fun ConfirmPasswordScreenComposable(
     val scrollState = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
     val coroutineScope = rememberCoroutineScope()
+    val focusRequester = remember { FocusRequester() }
 
     Column(
         modifier
@@ -73,7 +77,7 @@ fun ConfirmPasswordScreenComposable(
         )
 
         Text(
-            text = confirmPasswordType.email,
+            text = confirmPasswordType.original.email,
             textAlign = TextAlign.Center,
             fontFamily = LocalBusyBarFonts.current.ppNeueMontreal,
             fontWeight = FontWeight.W600,
@@ -86,22 +90,28 @@ fun ConfirmPasswordScreenComposable(
             fieldState = fieldsState.passwordField,
             inProgress = screenState.inProgress,
             onPasswordChange = onPasswordFieldChange,
-            onFocus = { coroutineScope.launch { bringIntoViewRequester.bringIntoView() } }
+            onFocus = { coroutineScope.launch { bringIntoViewRequester.bringIntoView() } },
+            fieldModifier = Modifier.focusRequester(focusRequester),
         )
+        LaunchedEffect(focusRequester) {
+            focusRequester.requestFocus()
+        }
         PasswordWithErrorTextFieldComposable(
             modifier = Modifier.padding(top = 16.dp),
             hint = Res.string.login_confirmpassword_password_placeholder,
             fieldState = fieldsState.confirmField,
             inProgress = screenState.inProgress,
             onPasswordChange = onConfirmFieldChange,
-            onFocus = { coroutineScope.launch { bringIntoViewRequester.bringIntoView() } }
+            onFocus = { coroutineScope.launch { bringIntoViewRequester.bringIntoView() } },
+            fieldModifier = Modifier
         )
+
 
         BusyBarButtonComposable(
             modifier = Modifier
+                .bringIntoViewRequester(bringIntoViewRequester)
                 .padding(vertical = 32.dp)
-                .fillMaxWidth()
-                .bringIntoViewRequester(bringIntoViewRequester),
+                .fillMaxWidth(),
             text = Res.string.login_confirmpassword_btn,
             onClick = onConfirm,
             inProgress = screenState.inProgress,

@@ -11,7 +11,13 @@ abstract class AuthOtpElementDecomposeComponent(
     componentContext: ComponentContext
 ) : ComponentContext by componentContext {
     @Composable
-    abstract fun Render(modifier: Modifier, otpElementState: OtpElementState)
+    abstract fun Render(
+        modifier: Modifier,
+        otpElementState: OtpElementState,
+        onFocus: () -> Unit
+    )
+
+    abstract suspend fun onFocus()
 
     abstract fun getOtpCodeState(): StateFlow<String>
 

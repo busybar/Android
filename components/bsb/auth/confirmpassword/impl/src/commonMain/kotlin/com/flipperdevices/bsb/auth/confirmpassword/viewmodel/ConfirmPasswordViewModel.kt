@@ -7,16 +7,17 @@ import com.flipperdevices.bsb.cloud.api.BSBAuthApi
 import com.flipperdevices.core.ui.lifecycle.DecomposeViewModel
 import com.flipperdevices.inappnotification.api.InAppNotificationStorage
 import com.flipperdevices.inappnotification.api.model.InAppNotification
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
 @Inject
 class ConfirmPasswordViewModel(
     @Assisted private val confirmPasswordType: InternalConfirmPasswordType,
-    @Assisted private val otpCode: String,
     @Assisted private val onComplete: () -> Unit,
     private val authApi: BSBAuthApi,
     private val inAppNotificationStorage: InAppNotificationStorage
@@ -31,20 +32,22 @@ class ConfirmPasswordViewModel(
         screenState.emit(ConfirmPasswordScreenState.InProgress)
         val result = when (confirmPasswordType) {
             is InternalConfirmPasswordType.ResetPassword -> authApi.resetPassword(
-                email = confirmPasswordType.email,
-                code = otpCode,
+                email = confirmPasswordType.original.email,
+                code = confirmPasswordType.original.otpCode,
                 password = fieldsState.passwordField.text
             )
 
             is InternalConfirmPasswordType.SignUpPassword -> authApi.signUp(
-                email = confirmPasswordType.email,
-                code = otpCode,
+                email = confirmPasswordType.original.email,
+                code = confirmPasswordType.original.otpCode,
                 password = fieldsState.passwordField.text
             )
         }
 
         result.onSuccess {
-            onComplete()
+            withContext(Dispatchers.Main) {
+                onComplete()
+            }
         }.onFailure {
             inAppNotificationStorage.addNotification(
                 InAppNotification.Error(

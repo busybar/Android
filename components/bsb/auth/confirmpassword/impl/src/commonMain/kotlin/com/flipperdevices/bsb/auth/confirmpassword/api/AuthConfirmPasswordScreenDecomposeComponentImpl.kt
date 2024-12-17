@@ -2,10 +2,8 @@ package com.flipperdevices.bsb.auth.confirmpassword.api
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -13,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.ComponentContext
 import com.flipperdevices.bsb.auth.common.composable.appbar.LogInAppBarComposable
-import com.flipperdevices.bsb.auth.confirm.api.AuthConfirmPasswordScreenDecomposeComponent
 import com.flipperdevices.bsb.auth.confirmpassword.composable.ConfirmPasswordScreenComposable
 import com.flipperdevices.bsb.auth.confirmpassword.model.ConfirmPasswordType
 import com.flipperdevices.bsb.auth.confirmpassword.model.InternalConfirmPasswordType
@@ -21,7 +18,7 @@ import com.flipperdevices.bsb.auth.confirmpassword.model.toInternalPasswordType
 import com.flipperdevices.bsb.auth.confirmpassword.viewmodel.ConfirmPasswordViewModel
 import com.flipperdevices.bsb.auth.confirmpassword.viewmodel.FieldValidationViewModel
 import com.flipperdevices.core.di.AppGraph
-import com.flipperdevices.core.ui.lifecycle.viewModelWithFactoryWithoutRemember
+import com.flipperdevices.core.ui.lifecycle.viewModelWithFactory
 import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
@@ -32,32 +29,30 @@ class AuthConfirmPasswordScreenDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     @Assisted type: ConfirmPasswordType,
     @Assisted private val onBackParameter: DecomposeOnBackParameter,
-    @Assisted otpCode: String,
     @Assisted onComplete: () -> Unit,
-    fieldViewModelFactory: () -> FieldValidationViewModel,
+    fieldViewModelFactory: (preFilledPassword: String?) -> FieldValidationViewModel,
     confirmPasswordViewModelFactory: (
         confirmPasswordType: InternalConfirmPasswordType,
-        otpCode: String,
         onComplete: () -> Unit
     ) -> ConfirmPasswordViewModel
 ) : AuthConfirmPasswordScreenDecomposeComponent(componentContext) {
     private val confirmPasswordType = type.toInternalPasswordType()
 
-    private val fieldViewModel = viewModelWithFactoryWithoutRemember(null) {
-        fieldViewModelFactory()
+    private val fieldViewModel = viewModelWithFactory(type.preFilledPassword) {
+        fieldViewModelFactory(type.preFilledPassword)
     }
 
-    private val confirmPasswordViewModel = viewModelWithFactoryWithoutRemember(
-        confirmPasswordType to otpCode
+    private val confirmPasswordViewModel = viewModelWithFactory(
+        confirmPasswordType
     ) {
-        confirmPasswordViewModelFactory(confirmPasswordType, otpCode, onComplete)
+        confirmPasswordViewModelFactory(confirmPasswordType, onComplete)
     }
 
     @Composable
     override fun Render(modifier: Modifier) {
         Column(
             modifier.fillMaxSize()
-                .statusBarsPadding()
+                .navigationBarsPadding()
         ) {
             LogInAppBarComposable(
                 text = confirmPasswordType.textTitle,
@@ -87,7 +82,6 @@ class AuthConfirmPasswordScreenDecomposeComponentImpl(
             componentContext: ComponentContext,
             type: ConfirmPasswordType,
             onBackParameter: DecomposeOnBackParameter,
-            otpCode: String,
             onComplete: () -> Unit,
         ) -> AuthConfirmPasswordScreenDecomposeComponentImpl
     ) : AuthConfirmPasswordScreenDecomposeComponent.Factory {
@@ -95,8 +89,7 @@ class AuthConfirmPasswordScreenDecomposeComponentImpl(
             componentContext: ComponentContext,
             type: ConfirmPasswordType,
             onBackParameter: DecomposeOnBackParameter,
-            otpCode: String,
             onComplete: () -> Unit
-        ) = factory(componentContext, type, onBackParameter, otpCode, onComplete)
+        ) = factory(componentContext, type, onBackParameter, onComplete)
     }
 }

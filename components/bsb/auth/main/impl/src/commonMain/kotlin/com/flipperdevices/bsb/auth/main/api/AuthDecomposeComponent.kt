@@ -69,11 +69,16 @@ class AuthDecomposeComponentImpl(
             componentContext,
             onBack = navigation::pop,
             email = config.email,
-            onComplete = onBackParameter::invoke
+            onComplete = onBackParameter::invoke,
+            preFilledPassword = config.preFilledPassword
         )
 
-        AuthRootNavigationConfig.SignUp -> signupDecomposeComponentFactory(
-            componentContext
+        is AuthRootNavigationConfig.SignUp -> signupDecomposeComponentFactory(
+            componentContext,
+            onBack = navigation::pop,
+            email = config.email,
+            onComplete = onBackParameter::invoke,
+            preFilledPassword = config.preFilledPassword
         )
 
         is AuthRootNavigationConfig.WebView -> oAuthWebViewDecomposeComponentFactory(

@@ -31,6 +31,7 @@ import kotlin.time.Duration.Companion.seconds
 class AuthOtpScreenViewModel(
     @Assisted private val otpType: InternalAuthOtpType,
     @Assisted private val onOtpComplete: suspend (String) -> Unit,
+    @Assisted private val onFocus: suspend () -> Unit,
     private val bsbAuthApi: BSBAuthApi,
     private val inAppNotificationStorage: InAppNotificationStorage
 ) : DecomposeViewModel(), LogTagProvider {
@@ -95,6 +96,9 @@ class AuthOtpScreenViewModel(
             .onSuccess {
                 codeExpiryTimeFlow.emit(it.codeExpiryTime)
                 state.emit(AuthOtpScreenState.WaitingForInput(wrongCodeInvalid = false))
+                withContext(Dispatchers.Main) {
+                    onFocus()
+                }
             }.onFailure {
                 val originalExpiryState = expiryTimerState.getAndUpdate { expiryState ->
                     if (expiryState is AuthOtpExpiryState.Ready) {

@@ -17,6 +17,7 @@ fun OtpRowComposable(
     modifier: Modifier,
     otpRow: OtpRow,
     otpElementState: OtpElementState,
+    onFocus: () -> Unit,
     onInput: (index: Int, newInput: TextFieldValue) -> Unit
 ) {
     val inProgress = when (otpElementState) {
@@ -52,7 +53,8 @@ fun OtpRowComposable(
                     OtpElementState.IN_PROGRESS -> LocalPallet.current.neutral.septenary
 
                     OtpElementState.ERROR -> LocalPallet.current.danger.tertiary
-                }
+                },
+                onFocus = onFocus
             )
         }
     }
