@@ -8,6 +8,7 @@ import me.tatarka.inject.annotations.Provides
 
 interface AppComponent {
     @get:Provides val observableSettings: ObservableSettings
+
     @get:Provides val scope: CoroutineScope
 
     val rootDecomposeComponentFactory: RootDecomposeComponent.Factory

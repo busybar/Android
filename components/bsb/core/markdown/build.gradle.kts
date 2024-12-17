@@ -7,4 +7,3 @@ commonDependencies {
     implementation(projects.components.bsb.core.theme)
     implementation(libs.markdown.renderer)
 }
-

@@ -1,8 +1,8 @@
+import com.flipperdevices.buildlogic.ApkConfig.VERSION_NAME
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
-import com.flipperdevices.buildlogic.ApkConfig.VERSION_NAME
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)

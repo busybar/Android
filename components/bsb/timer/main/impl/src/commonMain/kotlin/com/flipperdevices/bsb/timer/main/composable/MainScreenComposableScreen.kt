@@ -21,11 +21,12 @@ import com.flipperdevices.core.ktx.common.clickableRipple
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
+@Suppress("LongMethod")
 fun MainScreenComposableScreen(
-    modifier: Modifier,
     setupComponent: @Composable (Modifier) -> Unit,
     onStart: () -> Unit,
-    onOpenSettings: () -> Unit
+    onOpenSettings: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier

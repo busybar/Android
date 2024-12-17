@@ -26,18 +26,18 @@ import androidx.compose.ui.unit.sp
 import busystatusbar.components.bsb.timer.active.impl.generated.resources.Res
 import busystatusbar.components.bsb.timer.active.impl.generated.resources.ic_pause
 import busystatusbar.components.bsb.timer.common.generated.resources.ic_play
-import busystatusbar.components.bsb.timer.common.generated.resources.Res as CommonRes
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.timer.background.model.TimerAction
 import com.flipperdevices.core.ktx.common.clickableRipple
 import org.jetbrains.compose.resources.painterResource
+import busystatusbar.components.bsb.timer.common.generated.resources.Res as CommonRes
 
 @Composable
 fun TimerControlPanelComposable(
-    modifier: Modifier,
     isOnPause: Boolean,
-    onAction: (TimerAction) -> Unit
+    onAction: (TimerAction) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier,
@@ -83,13 +83,14 @@ private fun ControlElementComposable(
     width?.let {
         modifier = modifier.size(it)
     }
-    Box(modifier
-        .clip(CircleShape)
-        .border(2.dp, LocalPallet.current.black.invert, CircleShape)
-        .onGloballyPositioned {
-            width = with(localDensity) { it.size.width.toDp() }
-        }
-        .clickableRipple(onClick = onClick),
+    Box(
+        modifier
+            .clip(CircleShape)
+            .border(2.dp, LocalPallet.current.black.invert, CircleShape)
+            .onGloballyPositioned {
+                width = with(localDensity) { it.size.width.toDp() }
+            }
+            .clickableRipple(onClick = onClick),
         contentAlignment = Alignment.Center
     ) {
         Text(

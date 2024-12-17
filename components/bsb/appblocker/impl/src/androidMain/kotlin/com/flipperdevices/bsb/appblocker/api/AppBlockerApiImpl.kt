@@ -3,7 +3,6 @@ package com.flipperdevices.bsb.appblocker.api
 import android.app.AppOpsManager
 import android.content.Context
 import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
@@ -18,7 +17,6 @@ import com.flipperdevices.core.ktx.android.highlightSettingsTo
 import com.flipperdevices.core.log.LogTagProvider
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
-
 
 @Inject
 @ContributesBinding(AppGraph::class, AppBlockerApi::class)
@@ -51,7 +49,6 @@ class AppBlockerApiImpl(
     override fun disableSupport() {
         preferenceApi.set(SettingsEnum.APP_BLOCKING, false)
     }
-
 
     private fun hasAllPermission(): Boolean {
         if (hasUsageStatsPermission().not()) {

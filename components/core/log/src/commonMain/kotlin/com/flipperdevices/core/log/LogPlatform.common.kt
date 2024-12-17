@@ -1,6 +1,6 @@
 package com.flipperdevices.core.log
 
-expect inline fun error(tag: String?,logMessage: () -> String)
+expect inline fun error(tag: String?, logMessage: () -> String)
 
 expect inline fun error(tag: String?, error: Throwable, logMessage: () -> String)
 

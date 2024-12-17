@@ -12,5 +12,4 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
  */
 @Inject
 @ContributesBinding(AppGraph::class, TimerStateListener::class, multibinding = true)
-class EmptyTimerStateListener : TimerStateListener {
-}
+class EmptyTimerStateListener : TimerStateListener

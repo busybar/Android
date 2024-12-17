@@ -33,6 +33,7 @@ import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 
 @Inject
+@Suppress("LongParameterList")
 class RootDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     @Assisted initialDeeplink: Deeplink?,
@@ -56,7 +57,9 @@ class RootDecomposeComponentImpl(
                     RootNavigationConfig.Timer,
                     RootDeeplinkHandlerImpl.getConfigFromDeeplink(initialDeeplink)
                 )
-            } else listOf(RootNavigationConfig.Timer)
+            } else {
+                listOf(RootNavigationConfig.Timer)
+            }
         },
         handleBackButton = true,
         childFactory = ::child,

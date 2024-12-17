@@ -10,8 +10,8 @@ import com.flipperdevices.bsb.timer.common.composable.BusyButtonComposable
 
 @Composable
 fun StopButtonComposable(
-    modifier: Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     BusyButtonComposable(
         modifier = modifier,

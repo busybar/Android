@@ -14,9 +14,7 @@ class OAuthWebViewDecomposeComponentNoop(
     @Assisted componentContext: ComponentContext,
 ) : OAuthWebViewDecomposeComponent(componentContext) {
     @Composable
-    override fun Render(modifier: Modifier) {
-
-    }
+    override fun Render(modifier: Modifier) = Unit
 
     @Inject
     @ContributesBinding(AppGraph::class, OAuthWebViewDecomposeComponent.Factory::class)

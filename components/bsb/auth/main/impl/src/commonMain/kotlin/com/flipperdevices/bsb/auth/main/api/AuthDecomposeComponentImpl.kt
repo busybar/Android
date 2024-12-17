@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.decompose.childContext
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
@@ -22,12 +21,12 @@ import com.flipperdevices.core.log.warn
 import com.flipperdevices.ui.decompose.DecomposeComponent
 import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
 import com.flipperdevices.ui.decompose.findChildByConfig
-import com.flipperdevices.ui.decompose.findComponentByConfig
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 
 @Inject
+@Suppress("LongParameterList")
 class AuthDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     @Assisted private val onBackParameter: DecomposeOnBackParameter,

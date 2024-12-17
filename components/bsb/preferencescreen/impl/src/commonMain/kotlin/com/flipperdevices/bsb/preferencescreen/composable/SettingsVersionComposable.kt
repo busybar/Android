@@ -32,8 +32,8 @@ private const val EXPERT_MODE_CLICK_COUNT = 10
 
 @Composable
 fun SettingsVersionComposable(
-    modifier: Modifier,
-    onActivateExpertMode: () -> Unit
+    onActivateExpertMode: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     var howMuchClick by remember { mutableIntStateOf(0) }
 

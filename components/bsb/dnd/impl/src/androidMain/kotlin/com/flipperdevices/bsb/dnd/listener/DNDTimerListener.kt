@@ -23,14 +23,14 @@ class DNDTimerListener(
     override fun onTimerStart() {
         if (dndApi.isDNDSupportActive()) {
             info { "Receive #onTimerStart and turn on DND" }
-            notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);
+            notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE)
         }
     }
 
     override fun onTimerStop() {
         if (dndApi.isDNDSupportActive()) {
             info { "Receive #onTimerStop and turn off DND" }
-            notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
+            notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
         }
     }
 }

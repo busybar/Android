@@ -1,10 +1,16 @@
 import com.flipperdevices.buildlogic.ApkConfig.CURRENT_FLAVOR_TYPE
 import com.flipperdevices.buildlogic.ApkConfig.VERSION_NAME
+import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
     id("flipper.multiplatform")
     id("flipper.multiplatform-dependencies")
     alias(libs.plugins.buildkonfig)
+}
+
+
+tasks.withType<Detekt>().configureEach {
+    enabled = false
 }
 
 buildConfig {

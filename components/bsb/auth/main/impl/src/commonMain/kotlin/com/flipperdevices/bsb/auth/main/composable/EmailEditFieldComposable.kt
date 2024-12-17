@@ -16,10 +16,10 @@ import com.flipperdevices.bsb.auth.common.composable.utils.autofill
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun EmailEditFieldComposable(
-    modifier: Modifier,
     text: String,
     onTextChange: (String) -> Unit,
-    disabled: Boolean
+    disabled: Boolean,
+    modifier: Modifier = Modifier,
 ) {
     AuthCommonTextFieldComposable(
         modifier = modifier.autofill(

@@ -23,8 +23,8 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AppBlockerContentComposable(
-    modifier: Modifier,
-    applicationInfo: ApplicationInfo
+    applicationInfo: ApplicationInfo,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier,

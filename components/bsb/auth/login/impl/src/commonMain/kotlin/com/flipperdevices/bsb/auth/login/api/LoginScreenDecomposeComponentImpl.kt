@@ -14,6 +14,7 @@ import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
 @Inject
+@Suppress("LongParameterList")
 class LoginScreenDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     @Assisted private val onBack: DecomposeOnBackParameter,

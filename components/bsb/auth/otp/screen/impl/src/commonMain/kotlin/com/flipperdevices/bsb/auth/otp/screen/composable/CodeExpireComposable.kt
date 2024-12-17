@@ -26,9 +26,9 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun CodeExpireComposable(
-    modifier: Modifier,
     otpType: InternalAuthOtpType,
-    onResend: () -> Unit
+    onResend: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier

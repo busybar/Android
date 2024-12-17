@@ -19,9 +19,9 @@ import com.flipperdevices.bsb.preferencescreen.model.SettingsAction
 
 @Composable
 fun SettingsColumnComposable(
-    modifier: Modifier,
     screenState: PreferenceScreenState,
-    onAction: (SettingsAction) -> Unit
+    onAction: (SettingsAction) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier
@@ -58,7 +58,7 @@ fun SettingsColumnComposable(
         }
 
         SettingsVersionComposable(
-            Modifier,
+            modifier = Modifier,
             onActivateExpertMode = { onAction(SettingsAction.ExpertMode) }
         )
     }

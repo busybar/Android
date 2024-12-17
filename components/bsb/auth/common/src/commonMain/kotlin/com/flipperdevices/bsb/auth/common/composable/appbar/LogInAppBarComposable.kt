@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -22,13 +23,15 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun LogInAppBarComposable(
     text: StringResource,
+    modifier: Modifier = Modifier,
     onBack: (() -> Unit)? = null
 ) {
     ThreeBlockAppBarComposable(
-        startBlock = { modifier ->
+        modifier = modifier,
+        startBlock = { startBlockModifier ->
             if (onBack != null) {
                 Icon(
-                    modifier = modifier
+                    modifier = startBlockModifier
                         .clickableRipple(onClick = onBack, bounded = false)
                         .size(24.dp),
                     painter = painterResource(Res.drawable.ic_back),
@@ -37,9 +40,9 @@ fun LogInAppBarComposable(
                 )
             }
         },
-        centerBlock = { modifier ->
+        centerBlock = { centerBlockModifier ->
             Text(
-                modifier = modifier.padding(
+                modifier = centerBlockModifier.padding(
                     horizontal = 16.dp,
                     vertical = 12.dp
                 ).fillMaxWidth(),

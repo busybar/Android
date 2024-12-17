@@ -1,22 +1,22 @@
 package com.flipperdevices.bsb.cloud.api
 
-import com.flipperdevices.bsb.cloud.model.request.BSBApiCheckUserRequest
-import com.flipperdevices.bsb.cloud.model.request.BSBApiSignInRequest
-import com.flipperdevices.bsb.cloud.model.response.BSBApiToken
-import com.flipperdevices.bsb.cloud.model.response.BSBApiUserObject
 import com.flipperdevices.bsb.cloud.model.BSBEmailVerificationResponse
 import com.flipperdevices.bsb.cloud.model.BSBEmailVerificationType
 import com.flipperdevices.bsb.cloud.model.BSBOAuthInformation
 import com.flipperdevices.bsb.cloud.model.BSBOAuthWebProvider
 import com.flipperdevices.bsb.cloud.model.BSBResponse
-import com.flipperdevices.bsb.cloud.model.request.BSBOneTapGoogleRequest
 import com.flipperdevices.bsb.cloud.model.BSBUser
+import com.flipperdevices.bsb.cloud.model.request.BSBApiCheckUserRequest
 import com.flipperdevices.bsb.cloud.model.request.BSBApiCreateAccountRequest
 import com.flipperdevices.bsb.cloud.model.request.BSBApiResetPasswordRequest
+import com.flipperdevices.bsb.cloud.model.request.BSBApiSignInRequest
 import com.flipperdevices.bsb.cloud.model.request.BSBCheckCodeRequest
 import com.flipperdevices.bsb.cloud.model.request.BSBEmailVerificationRequest
+import com.flipperdevices.bsb.cloud.model.request.BSBOneTapGoogleRequest
 import com.flipperdevices.bsb.cloud.model.response.BSBApiEmailVerificationResponse
 import com.flipperdevices.bsb.cloud.model.response.BSBApiSignInResponse
+import com.flipperdevices.bsb.cloud.model.response.BSBApiToken
+import com.flipperdevices.bsb.cloud.model.response.BSBApiUserObject
 import com.flipperdevices.bsb.cloud.model.toVerificationTypeString
 import com.flipperdevices.bsb.cloud.utils.NetworkConstants
 import com.flipperdevices.bsb.preference.api.PreferenceApi
@@ -32,8 +32,8 @@ import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
-import io.ktor.client.request.url
 import io.ktor.client.request.setBody
+import io.ktor.client.request.url
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.Clock
@@ -60,8 +60,8 @@ class BSBAuthApiImpl(
                 }
             }.map { true }
                 .recoverCatching { exception ->
-                    if (exception is ClientRequestException
-                        && exception.response.status == HttpStatusCode.NotFound
+                    if (exception is ClientRequestException &&
+                        exception.response.status == HttpStatusCode.NotFound
                     ) {
                         return@withContext Result.success(false)
                     }
@@ -70,7 +70,8 @@ class BSBAuthApiImpl(
         }
 
     override suspend fun signIn(
-        email: String, password: String
+        email: String,
+        password: String
     ): Result<Unit> = withContext(networkDispatcher) {
         runCatching {
             httpClient.post {
@@ -182,7 +183,9 @@ class BSBAuthApiImpl(
             BSBOAuthWebProvider.APPLE -> "apple"
         }
         return BSBOAuthInformation(
-            providerUrl = "${NetworkConstants.BASE_URL}/v0/oauth2/$providerKey/sign-in?redirect=busy-cloud-oauth-callback",
+            providerUrl = """
+                ${NetworkConstants.BASE_URL}/v0/oauth2/$providerKey/sign-in?redirect=busy-cloud-oauth-callback
+            """.trimIndent(),
             handleUrl = "${NetworkConstants.HOST_URL}/login/oauth-callback",
             tokenQueryKey = "token"
         )

@@ -6,9 +6,9 @@ import com.flipperdevices.bsb.deeplink.model.Deeplink
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.core.ktx.android.toFullString
 import com.flipperdevices.core.log.LogTagProvider
+import com.flipperdevices.core.log.error
 import com.flipperdevices.core.log.info
 import com.flipperdevices.core.log.warn
-import com.flipperdevices.core.log.error
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 

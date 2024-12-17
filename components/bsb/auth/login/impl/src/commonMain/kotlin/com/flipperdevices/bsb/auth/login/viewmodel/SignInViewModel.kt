@@ -1,11 +1,10 @@
 package com.flipperdevices.bsb.auth.login.viewmodel
 
+import com.flipperdevices.bsb.auth.login.model.LoginState
 import com.flipperdevices.bsb.cloud.api.BSBAuthApi
 import com.flipperdevices.bsb.preference.api.PreferenceApi
 import com.flipperdevices.bsb.preference.api.set
 import com.flipperdevices.bsb.preference.model.SettingsEnum
-import com.flipperdevices.bsb.auth.login.model.LoginState
-import com.flipperdevices.bsb.cloud.model.BSBEmailVerificationType
 import com.flipperdevices.core.ktx.common.transform
 import com.flipperdevices.core.log.LogTagProvider
 import com.flipperdevices.core.log.error

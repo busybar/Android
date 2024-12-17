@@ -76,7 +76,6 @@ class AuthOtpScreenViewModel(
         }.onFailure {
             state.emit(AuthOtpScreenState.WaitingForInput(wrongCodeInvalid = true))
         }
-
     }
 
     fun onReset() = viewModelScope.launch {
@@ -90,7 +89,9 @@ class AuthOtpScreenViewModel(
         expiryTimerState.update {
             if (it is AuthOtpExpiryState.Error) {
                 AuthOtpExpiryState.Empty
-            } else it
+            } else {
+                it
+            }
         }
         bsbAuthApi.requestVerifyEmail(otpType.email, otpType.verificationEmailType)
             .onSuccess {
@@ -129,7 +130,9 @@ class AuthOtpScreenViewModel(
             state.update {
                 if (it is AuthOtpScreenState.WaitingForInput) {
                     AuthOtpScreenState.ExpiryVerificationCode
-                } else it
+                } else {
+                    it
+                }
             }
         } else {
             expiryTimerState.emit(AuthOtpExpiryState.Ready(TimerState(expiryTime - now)))

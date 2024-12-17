@@ -21,7 +21,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OrLineComposable(
-    modifier: Modifier
+    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier,

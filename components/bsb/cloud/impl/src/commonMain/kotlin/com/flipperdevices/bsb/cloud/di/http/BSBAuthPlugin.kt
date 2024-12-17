@@ -13,7 +13,6 @@ val BSBAuthPlugin = createClientPlugin("BSBAuthPlugin", ::AuthPluginConfig) {
         }
         proceed(request)
     }
-
 }
 
 class AuthPluginConfig {

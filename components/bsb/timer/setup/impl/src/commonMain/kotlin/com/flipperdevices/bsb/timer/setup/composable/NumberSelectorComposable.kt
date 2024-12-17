@@ -1,11 +1,8 @@
 package com.flipperdevices.bsb.timer.setup.composable
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.PagerDefaults
@@ -26,24 +23,25 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.graphics.lerp
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.timer.setup.utils.NoLimitPagerSnapDistance
 import kotlin.math.absoluteValue
 
 @Composable
+@Suppress("LongMethod")
 fun NumberSelectorComposable(
-    modifier: Modifier,
     count: Int,
-    pagerState: PagerState
+    pagerState: PagerState,
+    modifier: Modifier = Modifier,
 ) {
     val fling = PagerDefaults.flingBehavior(
         state = pagerState,
@@ -60,6 +58,7 @@ fun NumberSelectorComposable(
                 .graphicsLayer(compositingStrategy = CompositingStrategy.Offscreen)
                 .drawWithContent {
                     drawContent()
+                    @Suppress("MagicNumber")
                     val brush = Brush.verticalGradient(
                         0f to backgroundColor.copy(alpha = 0f),
                         0.35f to backgroundColor.copy(alpha = 1f),
@@ -82,8 +81,10 @@ fun NumberSelectorComposable(
                 page,
                 pagerState.currentPageOffsetFraction
             ) {
-                val pageOffset = ((pagerState.currentPage - page) + pagerState
-                    .currentPageOffsetFraction).absoluteValue
+                val pageOffset = (
+                    (pagerState.currentPage - page) + pagerState
+                        .currentPageOffsetFraction
+                    ).absoluteValue
                 lerp(
                     start = activeColor,
                     stop = inactiveColor,
@@ -103,15 +104,19 @@ fun NumberSelectorComposable(
     }
 }
 
+private const val MIN_TWO_DIGIT_VALUE = 10
+
 @Composable
 private fun NumberElementComposable(
-    modifier: Modifier,
     number: Int,
-    color: Color
+    color: Color,
+    modifier: Modifier = Modifier,
 ) {
-    val numberText = if (number < 10) {
+    val numberText = if (number < MIN_TWO_DIGIT_VALUE) {
         "0$number"
-    } else number.toString()
+    } else {
+        number.toString()
+    }
     Row(
         modifier
     ) {

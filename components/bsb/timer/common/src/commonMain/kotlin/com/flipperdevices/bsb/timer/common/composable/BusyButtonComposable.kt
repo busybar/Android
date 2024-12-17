@@ -31,12 +31,12 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun BusyButtonComposable(
-    modifier: Modifier,
     buttonColor: Color,
     secondColor: Color,
     text: StringResource,
     icon: DrawableResource,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier

@@ -2,8 +2,9 @@ package com.flipperdevices.bsb.search.permissions
 
 import dev.icerock.moko.permissions.Permission
 
+@Suppress("CyclomaticComplexMethod")
 fun fromMoko(permission: Permission): com.flipperdevices.bsb.search.permissions.Permission {
-    return when(permission) {
+    return when (permission) {
         Permission.CAMERA -> com.flipperdevices.bsb.search.permissions.Permission.CAMERA
         Permission.GALLERY -> com.flipperdevices.bsb.search.permissions.Permission.GALLERY
         Permission.STORAGE -> com.flipperdevices.bsb.search.permissions.Permission.STORAGE
@@ -22,8 +23,9 @@ fun fromMoko(permission: Permission): com.flipperdevices.bsb.search.permissions.
     }
 }
 
+@Suppress("CyclomaticComplexMethod")
 fun toMoko(permission: com.flipperdevices.bsb.search.permissions.Permission): Permission {
-    return when(permission) {
+    return when (permission) {
         com.flipperdevices.bsb.search.permissions.Permission.CAMERA -> Permission.CAMERA
         com.flipperdevices.bsb.search.permissions.Permission.GALLERY -> Permission.GALLERY
         com.flipperdevices.bsb.search.permissions.Permission.STORAGE -> Permission.STORAGE

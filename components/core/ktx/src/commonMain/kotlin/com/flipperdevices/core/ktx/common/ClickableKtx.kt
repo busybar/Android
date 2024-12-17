@@ -8,6 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 
 @Composable
+@Suppress("ModifierComposable")
 fun Modifier.clickableRipple(
     bounded: Boolean = true,
     enabled: Boolean = true,

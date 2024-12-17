@@ -36,8 +36,8 @@ class GoogleOneTapAuthDecomposeComponentImpl(
                     viewModel.onAuth()
                 }
             },
-            inProgress = authState is SignWithInState.InProgress
-                    && authState.authWay == AuthWay.GOOGLE
+            inProgress = authState is SignWithInState.InProgress &&
+                authState.authWay == AuthWay.GOOGLE
         )
     }
 
@@ -54,5 +54,4 @@ class GoogleOneTapAuthDecomposeComponentImpl(
             withInStateListener: SignWithInStateListener
         ) = factory(componentContext, withInStateListener)
     }
-
 }

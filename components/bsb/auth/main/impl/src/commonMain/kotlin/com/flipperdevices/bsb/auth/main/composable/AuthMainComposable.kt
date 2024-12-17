@@ -2,9 +2,7 @@ package com.flipperdevices.bsb.auth.main.composable
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
@@ -37,22 +35,23 @@ import busystatusbar.components.bsb.auth.main.impl.generated.resources.pic_busyc
 import com.flipperdevices.bsb.auth.common.composable.BusyBarButtonComposable
 import com.flipperdevices.bsb.auth.common.composable.UiConstants
 import com.flipperdevices.bsb.auth.common.composable.utils.autofill
-import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
-import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.auth.main.model.AuthMainState
 import com.flipperdevices.bsb.auth.within.main.model.AuthWay
+import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
+import com.flipperdevices.bsb.core.theme.LocalPallet
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalComposeUiApi::class)
 @Composable
+@Suppress("LongMethod")
 fun AuthMainComposable(
-    modifier: Modifier,
     state: AuthMainState,
     onLogin: (String) -> Unit,
     onPrefillPassword: (String) -> Unit,
-    signInWith: @Composable (Modifier) -> Unit
+    signInWith: @Composable (Modifier) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val verticalScroll = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }

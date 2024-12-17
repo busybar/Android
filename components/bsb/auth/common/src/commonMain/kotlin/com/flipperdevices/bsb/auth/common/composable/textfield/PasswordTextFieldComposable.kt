@@ -27,13 +27,13 @@ import org.jetbrains.compose.resources.painterResource
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun PasswordTextFieldComposable(
-    modifier: Modifier,
     password: String,
     onPasswordChange: (String) -> Unit,
-    onAutofill: (String) -> Unit = onPasswordChange,
     disabled: Boolean,
     hint: StringResource,
-    isError: Boolean = false
+    modifier: Modifier = Modifier,
+    isError: Boolean = false,
+    onAutofill: (String) -> Unit = onPasswordChange,
 ) {
     var passwordHidden by remember { mutableStateOf(true) }
 

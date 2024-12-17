@@ -14,9 +14,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.autofill.AutofillType
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.graphicsLayer
@@ -26,7 +24,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.flipperdevices.bsb.auth.common.composable.UiConstants
-import com.flipperdevices.bsb.auth.common.composable.utils.autofill
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import org.jetbrains.compose.resources.DrawableResource
@@ -36,17 +33,17 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AuthCommonTextFieldComposable(
-    modifier: Modifier,
     text: String,
     onTextChange: (String) -> Unit,
     hint: StringResource,
     icon: DrawableResource,
-    endBlock: (@Composable () -> Unit)? = null,
     keyboardOptions: KeyboardOptions,
+    modifier: Modifier = Modifier,
     disabled: Boolean = false,
     maxLines: Int = 1,
     visualTransformation: VisualTransformation = VisualTransformation.None,
-    isError: Boolean = false
+    isError: Boolean = false,
+    endBlock: (@Composable () -> Unit)? = null,
 ) {
     BasicTextField(
         modifier = modifier.graphicsLayer {
@@ -68,7 +65,7 @@ fun AuthCommonTextFieldComposable(
         ),
         cursorBrush = SolidColor(LocalPallet.current.black.invert),
         decorationBox = { innerTextField ->
-            AuthEditDecorationBox(
+            AuthEditDecorationBoxComposable(
                 innerTextField = innerTextField,
                 icon = icon,
                 endBlock = endBlock,
@@ -81,23 +78,26 @@ fun AuthCommonTextFieldComposable(
 }
 
 @Composable
-fun AuthEditDecorationBox(
+fun AuthEditDecorationBoxComposable(
     innerTextField: @Composable () -> Unit,
     icon: DrawableResource,
     hint: StringResource,
-    endBlock: (@Composable () -> Unit)? = null,
     hintVisibility: Boolean,
-    isError: Boolean
+    isError: Boolean,
+    modifier: Modifier = Modifier,
+    endBlock: (@Composable () -> Unit)? = null,
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .clip(RoundedCornerShape(8.dp))
             .border(
-                1.dp, if (isError) {
+                1.dp,
+                if (isError) {
                     LocalPallet.current.danger.secondary
                 } else {
                     LocalPallet.current.neutral.quinary
-                }, RoundedCornerShape(8.dp)
+                },
+                RoundedCornerShape(8.dp)
             )
             .background(
                 if (isError) {

@@ -1,19 +1,33 @@
 *.iml
-.kotlin
 .gradle
-**/build/
-xcuserdata
-!src/**/build/
-local.properties
-.idea
+/local.properties
+/.idea/**
+/.fleet/**
+
+*.apk
+
+# IDEA/Android Studio Ignore exceptions
+!/.idea/codeStyles
+# Project icon
+!/.idea/icon.svg
+
+
 .DS_Store
-captures
+**/build/
+/captures
 .externalNativeBuild
 .cxx
+.kotlin
+
+# IOS
+xcuserdata
+captures
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/
 !*.xcodeproj/project.xcworkspace/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
+
+# KMP
 .fleet
