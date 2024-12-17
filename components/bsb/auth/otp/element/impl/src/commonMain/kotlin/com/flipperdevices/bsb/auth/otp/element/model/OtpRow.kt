@@ -64,7 +64,9 @@ data class OtpRow(
             cells = newCells.toPersistentList(),
             currentFocusIndex = if (currentIndex > cells.lastIndex) {
                 cells.lastIndex
-            } else currentIndex
+            } else {
+                currentIndex
+            }
         )
     }
 }

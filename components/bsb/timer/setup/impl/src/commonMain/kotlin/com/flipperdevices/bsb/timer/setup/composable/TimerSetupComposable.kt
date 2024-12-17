@@ -5,10 +5,8 @@ package com.flipperdevices.bsb.timer.setup.composable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.PagerState
@@ -43,8 +41,8 @@ internal const val DEFAULT_SECOND = 0
 
 @Composable
 fun TimerSetupComposable(
-    modifier: Modifier,
-    onChangeTimer: suspend (TimerState) -> Unit
+    onChangeTimer: suspend (TimerState) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier,
@@ -76,7 +74,7 @@ fun TimerSetupComposable(
                 pagerState = secondsState
             )
 
-            LaunchedEffect(minutesState, secondsState) {
+            LaunchedEffect(minutesState, secondsState, onChangeTimer) {
                 snapshotFlow {
                     TimerState(
                         minute = minutesState.currentPage.mod(TOTAL_MINUTES),
@@ -117,7 +115,7 @@ private fun CenterSelectorComposable() {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Image(
-            modifier = Modifier.rotate(180f),
+            modifier = Modifier.rotate(degrees = 180f),
             painter = painterResource(Res.drawable.ic_center_selector),
             contentDescription = null,
         )

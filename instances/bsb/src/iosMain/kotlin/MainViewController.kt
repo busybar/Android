@@ -10,6 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import platform.UIKit.UIViewController
 
+@Suppress("FunctionNaming")
 fun MainViewController(
     componentContext: ComponentContext,
     settings: Settings

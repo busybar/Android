@@ -44,8 +44,8 @@ class OAuthElementDecomposeComponentImpl(
                 provider.darkIconId
             },
             onClick = { openWebView() },
-            inProgress = authState is SignWithInState.InProgress
-                    && authState.authWay == provider.authWay
+            inProgress = authState is SignWithInState.InProgress &&
+                authState.authWay == provider.authWay
         )
     }
 
@@ -70,5 +70,4 @@ class OAuthElementDecomposeComponentImpl(
             openWebView: () -> Unit
         ) = factory(componentContext, oAuthProvider, withInStateListener, openWebView)
     }
-
 }

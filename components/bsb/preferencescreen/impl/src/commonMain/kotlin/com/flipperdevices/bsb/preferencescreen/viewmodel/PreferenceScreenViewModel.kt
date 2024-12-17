@@ -1,6 +1,5 @@
 package com.flipperdevices.bsb.preferencescreen.viewmodel
 
-import com.arkivanov.decompose.router.stack.StackNavigation
 import com.flipperdevices.bsb.appblocker.api.AppBlockerApi
 import com.flipperdevices.bsb.cloud.model.BSBUser
 import com.flipperdevices.bsb.dnd.api.BusyDNDApi
@@ -18,7 +17,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import me.tatarka.inject.annotations.Inject
 

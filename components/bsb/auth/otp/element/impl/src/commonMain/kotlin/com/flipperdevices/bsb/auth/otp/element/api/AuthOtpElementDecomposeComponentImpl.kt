@@ -39,9 +39,7 @@ class AuthOtpElementDecomposeComponentImpl(
             }.fastJoinToString("")
         }.stateIn(scope, SharingStarted.Lazily, "")
 
-
     override fun getOtpCodeState() = otpCodeState
-
 
     @Composable
     override fun Render(

@@ -3,7 +3,6 @@ package com.flipperdevices.bsb.auth.otp.element.model
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 
-
 internal const val INVISIBLE_SYMBOL = '‎'
 
 data class OtpCell(
@@ -12,6 +11,7 @@ data class OtpCell(
         selection = TextRange(1)
     )
 ) {
+    @Suppress("LongMethod")
     fun onApply(newState: TextFieldValue): Pair<OtpCell, OtpCellAction?> {
         val newText = newState.text.filter { it.isDigit() || it == INVISIBLE_SYMBOL }
 
@@ -46,7 +46,9 @@ data class OtpCell(
                 ) to OtpCellAction.MoveBracketRight(
                     if (subText.length > 1) {
                         subText.substring(1)
-                    } else null
+                    } else {
+                        null
+                    }
                 )
             } else { // "\u200E1" -> "1"
                 copy(
@@ -84,8 +86,9 @@ data class OtpCell(
         ) to OtpCellAction.MoveBracketRight(
             if (subText.length > 1) {
                 subText.substring(1)
-            } else null
+            } else {
+                null
+            }
         )
     }
-
 }

@@ -2,8 +2,6 @@ package com.flipperdevices.bsb.auth.otp.element.model
 
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
-import com.flipperdevices.bsb.auth.otp.element.model.OtpCell
-import com.flipperdevices.bsb.auth.otp.element.model.OtpCellAction
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -26,7 +24,8 @@ class OtpCellTest {
             TextFieldValue(
                 text = "\u200E1",
                 selection = TextRange(2)
-            ), cell.textFieldValue
+            ),
+            cell.textFieldValue
         )
         assertEquals(action, OtpCellAction.MoveBracketRight(null))
     }
@@ -49,7 +48,8 @@ class OtpCellTest {
             TextFieldValue(
                 text = "\u200E1",
                 selection = TextRange(2)
-            ), cell.textFieldValue
+            ),
+            cell.textFieldValue
         )
         assertEquals(action, OtpCellAction.MoveBracketRight(null))
     }
@@ -72,7 +72,8 @@ class OtpCellTest {
             TextFieldValue(
                 text = "\u200E1",
                 selection = TextRange(2)
-            ), cell.textFieldValue
+            ),
+            cell.textFieldValue
         )
         assertEquals(action, OtpCellAction.MoveBracketRight("23"))
     }
@@ -95,7 +96,8 @@ class OtpCellTest {
             TextFieldValue(
                 text = "\u200E1",
                 selection = TextRange(2)
-            ), cell.textFieldValue
+            ),
+            cell.textFieldValue
         )
         assertEquals(action, OtpCellAction.MoveBracketRight("23"))
     }
@@ -118,12 +120,13 @@ class OtpCellTest {
             TextFieldValue(
                 text = "\u200E1",
                 selection = TextRange(2)
-            ), cell.textFieldValue
+            ),
+            cell.textFieldValue
         )
         assertEquals(action, OtpCellAction.MoveBracketRight("2"))
     }
 
-    ////
+    // //
 
     @Test
     fun removeCharacter() {
@@ -143,7 +146,8 @@ class OtpCellTest {
             TextFieldValue(
                 text = "\u200E",
                 selection = TextRange(1)
-            ), cell.textFieldValue
+            ),
+            cell.textFieldValue
         )
         assertEquals(action, null)
     }
@@ -166,7 +170,8 @@ class OtpCellTest {
             TextFieldValue(
                 text = "\u200E1",
                 selection = TextRange(1)
-            ), cell.textFieldValue
+            ),
+            cell.textFieldValue
         )
         assertEquals(action, OtpCellAction.MoveBracketLeft)
     }
@@ -189,11 +194,11 @@ class OtpCellTest {
             TextFieldValue(
                 text = "\u200E",
                 selection = TextRange(1)
-            ), cell.textFieldValue
+            ),
+            cell.textFieldValue
         )
         assertEquals(action, OtpCellAction.MoveBracketLeft)
     }
-
 
     @Test
     fun removeWholeLite() {
@@ -213,11 +218,11 @@ class OtpCellTest {
             TextFieldValue(
                 text = "\u200E",
                 selection = TextRange(1)
-            ), cell.textFieldValue
+            ),
+            cell.textFieldValue
         )
         assertEquals(action, OtpCellAction.MoveBracketLeft)
     }
-
 
     @Test
     fun changeBracket() {
@@ -237,7 +242,8 @@ class OtpCellTest {
             TextFieldValue(
                 text = "\u200E1",
                 selection = TextRange(2)
-            ), cell.textFieldValue
+            ),
+            cell.textFieldValue
         )
         assertEquals(action, null)
     }

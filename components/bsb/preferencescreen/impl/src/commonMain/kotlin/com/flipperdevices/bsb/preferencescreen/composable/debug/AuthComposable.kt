@@ -25,9 +25,9 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AuthComposable(
-    modifier: Modifier,
     bsbUser: BSBUser?,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier

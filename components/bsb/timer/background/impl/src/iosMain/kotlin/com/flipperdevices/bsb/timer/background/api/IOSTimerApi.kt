@@ -10,5 +10,4 @@ import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
 @ContributesBinding(AppGraph::class, TimerApi::class)
 class IOSTimerApi(
     commonTimerApi: CommonTimerApi
-) : TimerApi by commonTimerApi {
-}
+) : TimerApi by commonTimerApi

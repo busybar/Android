@@ -4,7 +4,6 @@ import com.arkivanov.decompose.ComponentContext
 import com.flipperdevices.bsb.auth.within.main.model.SignWithInStateListener
 import com.flipperdevices.bsb.auth.within.oauth.model.OAuthProvider
 import com.flipperdevices.bsb.deeplink.model.Deeplink
-import com.flipperdevices.ui.decompose.ElementDecomposeComponent
 
 abstract class SignWithInMainDecomposeComponent(
     componentContext: ComponentContext

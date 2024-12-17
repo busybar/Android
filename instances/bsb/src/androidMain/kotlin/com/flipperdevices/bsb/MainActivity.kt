@@ -16,8 +16,8 @@ import com.flipperdevices.core.di.ComponentHolder
 import com.flipperdevices.core.ktx.android.toFullString
 import com.flipperdevices.core.ktx.common.FlipperDispatchers
 import com.flipperdevices.core.log.LogTagProvider
-import com.flipperdevices.core.log.info
 import com.flipperdevices.core.log.error
+import com.flipperdevices.core.log.info
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -34,14 +34,12 @@ class MainActivity : ComponentActivity(), LogTagProvider {
                 "Create new activity with hashcode: ${this.hashCode()} " + "and intent ${intent.toFullString()}"
             }
         } else {
-
             info {
                 "Restore activity from backstack, so return from onCreate method"
             }
         }
 
         enableEdgeToEdge()
-
 
         val appComponent = ComponentHolder.component<AndroidAppComponent>()
 

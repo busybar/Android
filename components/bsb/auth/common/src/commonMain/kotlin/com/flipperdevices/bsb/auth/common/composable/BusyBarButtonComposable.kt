@@ -28,9 +28,9 @@ import org.jetbrains.compose.resources.stringResource
 fun BusyBarButtonComposable(
     text: StringResource,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
     inProgress: Boolean = false,
     disabled: Boolean = inProgress,
-    modifier: Modifier = Modifier
 ) {
     Row(
         modifier.clip(RoundedCornerShape(8.dp))

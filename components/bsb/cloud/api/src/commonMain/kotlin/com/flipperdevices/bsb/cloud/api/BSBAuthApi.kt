@@ -10,7 +10,8 @@ interface BSBAuthApi {
     suspend fun isUserExist(email: String): Result<Boolean>
 
     suspend fun signIn(
-        email: String, password: String
+        email: String,
+        password: String
     ): Result<Unit>
 
     suspend fun signIn(

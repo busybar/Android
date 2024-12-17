@@ -67,10 +67,10 @@ recipe:
             to: api/src/commonMain/kotlin/com/flipperdevices/bsb/${__moduleName}/api/${__formattedModuleName}DecomposeComponent.kt
         - instantiate:
             from: root/impl/src/app_package/api/FeatureCompositeDecomposeComponent.kt.ftl
-            to: impl/src/commonMain/kotlin/com/flipperdevices/bsb/${__moduleName}/api/${__formattedModuleName}DecomposeComponent.kt
+            to: impl/src/commonMain/kotlin/com/flipperdevices/bsb/${__moduleName}/api/${__formattedModuleName}DecomposeComponentImpl.kt
         - instantiate:
             from: root/impl/src/app_package/api/SubFeatureCompositeScreenDecomposeComponent.kt.ftl
-            to: impl/src/commonMain/kotlin/com/flipperdevices/bsb/${__moduleName}/api/${__formattedModuleName}ScreenDecomposeComponent.kt
+            to: impl/src/commonMain/kotlin/com/flipperdevices/bsb/${__moduleName}/api/${__formattedModuleName}ScreenDecomposeComponentImpl.kt
         - instantiate:
             from: root/impl/src/app_package/model/FeatureNavigationConfig.kt.ftl
             to: impl/src/commonMain/kotlin/com/flipperdevices/bsb/${__moduleName}/model/${__formattedModuleName}NavigationConfig.kt

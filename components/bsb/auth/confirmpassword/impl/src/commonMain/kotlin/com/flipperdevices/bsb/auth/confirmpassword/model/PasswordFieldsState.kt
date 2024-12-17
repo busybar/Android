@@ -10,6 +10,6 @@ data class PasswordFieldsState(
     val confirmField: PasswordFieldState = PasswordFieldState()
 ) {
 
-    val confirmDisabled = passwordField.text.isBlank() || confirmField.text.isBlank()
-            || passwordField.validationError || confirmField.validationError
+    val confirmDisabled = passwordField.text.isBlank() || confirmField.text.isBlank() ||
+        passwordField.validationError || confirmField.validationError
 }

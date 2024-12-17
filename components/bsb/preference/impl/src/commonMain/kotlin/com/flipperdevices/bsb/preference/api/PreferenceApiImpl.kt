@@ -22,11 +22,13 @@ class PreferenceApiImpl(
     private val flowSettings = observableSettings.toFlowSettings()
 
     override fun getFlowString(
-        key: SettingsEnum, default: String
+        key: SettingsEnum,
+        default: String
     ) = flowSettings.getStringFlow(key.key, default)
 
     override fun getFlowBoolean(
-        key: SettingsEnum, default: Boolean
+        key: SettingsEnum,
+        default: Boolean
     ) = flowSettings.getBooleanFlow(key.key, default)
 
     override fun <T> getFlowSerializable(

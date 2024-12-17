@@ -17,19 +17,19 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import busystatusbar.components.bsb.timer.active.impl.generated.resources.Res
 import busystatusbar.components.bsb.timer.active.impl.generated.resources.timer_active_stop_active
 import busystatusbar.components.bsb.timer.common.generated.resources.ic_play
-import busystatusbar.components.bsb.timer.common.generated.resources.Res as CommonRes
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.timer.background.model.ControlledTimerState
 import com.flipperdevices.bsb.timer.background.model.TimerAction
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import busystatusbar.components.bsb.timer.common.generated.resources.Res as CommonRes
 
 @Composable
 fun TimerContainerComposable(
-    modifier: Modifier,
     timerState: ControlledTimerState,
-    onAction: (TimerAction) -> Unit
+    onAction: (TimerAction) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     ConstraintLayout(
         modifier.fillMaxWidth()
@@ -65,7 +65,7 @@ fun TimerContainerComposable(
 }
 
 @Composable
-private fun TimerActiveTextComposable(modifier: Modifier) {
+private fun TimerActiveTextComposable(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier.padding(vertical = 8.dp),
         horizontalArrangement = Arrangement.Center,

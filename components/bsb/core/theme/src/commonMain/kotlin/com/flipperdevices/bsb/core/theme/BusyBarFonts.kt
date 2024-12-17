@@ -1,3 +1,5 @@
+@file:Suppress("NoWildcardImports", "WildcardImport", "LongMethod")
+
 package com.flipperdevices.bsb.core.theme
 
 import androidx.compose.runtime.Composable
@@ -5,13 +7,14 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import busystatusbar.components.bsb.core.theme.generated.resources.Res
 import busystatusbar.components.bsb.core.theme.generated.resources.*
+import busystatusbar.components.bsb.core.theme.generated.resources.Res
 import org.jetbrains.compose.resources.Font
 
 val LocalBusyBarFonts = compositionLocalOf<BusyBarFonts> { error("No local pallet") }
 
-//TODO: Replace with variable fonts
+@Suppress("ForbiddenComment")
+// TODO: Replace with variable fonts
 data class BusyBarFonts(
     val ppNeueMontreal: FontFamily,
     val jetbrainsMono: FontFamily,
@@ -26,7 +29,6 @@ fun getBusyBarFonts() = BusyBarFonts(
     jetbrainsMonoNL = getJetBrainsMonoNL(),
     pragmatica = getPragmatica()
 )
-
 
 @Composable
 private fun getPragmatica() = FontFamily(
@@ -116,7 +118,6 @@ private fun getPPNeueMontreal() = FontFamily(
     ),
 )
 
-
 @Composable
 private fun getJetBrainsMono() = FontFamily(
     Font(
@@ -183,7 +184,6 @@ private fun getJetBrainsMono() = FontFamily(
         style = FontStyle.Italic
     ),
 )
-
 
 @Composable
 private fun getJetBrainsMonoNL() = FontFamily(

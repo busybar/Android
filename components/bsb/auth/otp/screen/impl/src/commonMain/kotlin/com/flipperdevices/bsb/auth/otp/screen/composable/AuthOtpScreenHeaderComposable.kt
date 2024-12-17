@@ -22,8 +22,8 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AuthOtpScreenHeaderComposable(
-    modifier: Modifier,
-    otpType: InternalAuthOtpType
+    otpType: InternalAuthOtpType,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier,

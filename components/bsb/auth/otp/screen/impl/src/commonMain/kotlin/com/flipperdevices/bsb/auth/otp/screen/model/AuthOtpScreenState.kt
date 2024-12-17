@@ -1,6 +1,5 @@
 package com.flipperdevices.bsb.auth.otp.screen.model
 
-
 sealed interface AuthOtpScreenState {
     val inProgress: Boolean
 

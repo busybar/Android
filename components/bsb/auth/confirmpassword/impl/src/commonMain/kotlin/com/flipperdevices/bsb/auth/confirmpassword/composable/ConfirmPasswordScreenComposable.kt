@@ -19,7 +19,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -40,8 +39,8 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
+@Suppress("LongMethod")
 fun ConfirmPasswordScreenComposable(
-    modifier: Modifier,
     confirmPasswordType: InternalConfirmPasswordType,
     screenState: ConfirmPasswordScreenState,
     fieldsState: PasswordFieldsState,
@@ -49,6 +48,7 @@ fun ConfirmPasswordScreenComposable(
     onConfirm: () -> Unit,
     onPasswordFieldChange: (String) -> Unit,
     onConfirmFieldChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val scrollState = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
@@ -106,7 +106,6 @@ fun ConfirmPasswordScreenComposable(
             fieldModifier = Modifier
         )
 
-
         BusyBarButtonComposable(
             modifier = Modifier
                 .bringIntoViewRequester(bringIntoViewRequester)
@@ -120,7 +119,7 @@ fun ConfirmPasswordScreenComposable(
 
         confirmPasswordType.textBack?.let { textBack ->
             AuthTextSubActionComposable(
-                Modifier,
+                modifier = Modifier,
                 onClick = onBack,
                 text = textBack
             )

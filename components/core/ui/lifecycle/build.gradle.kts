@@ -13,7 +13,6 @@ commonDependencies {
     api(libs.essenty.lifecycle)
     implementation(libs.essenty.lifecycle.coroutines)
 
-
     implementation(libs.androidx.annotation)
     implementation(libs.atomicflu)
 }

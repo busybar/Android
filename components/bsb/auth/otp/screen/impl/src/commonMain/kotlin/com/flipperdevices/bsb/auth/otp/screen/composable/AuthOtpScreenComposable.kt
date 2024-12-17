@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
@@ -34,15 +33,16 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
+@Suppress("LongMethod")
 fun AuthOtpScreenComposable(
-    modifier: Modifier,
     otpType: InternalAuthOtpType,
     onBack: () -> Unit,
     otpCodeFieldComposable: @Composable (Modifier) -> Unit,
     onConfirm: () -> Unit,
     onResend: () -> Unit,
     authOtpScreenState: AuthOtpScreenState,
-    bringIntoViewRequester: BringIntoViewRequester
+    bringIntoViewRequester: BringIntoViewRequester,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier
@@ -50,7 +50,8 @@ fun AuthOtpScreenComposable(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LogInAppBarComposable(
-            text = otpType.textTitle, onBack = onBack
+            text = otpType.textTitle,
+            onBack = onBack
         )
         Column(
             modifier = Modifier
@@ -59,7 +60,7 @@ fun AuthOtpScreenComposable(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AuthOtpScreenHeaderComposable(modifier = Modifier, otpType)
+            AuthOtpScreenHeaderComposable(modifier = Modifier, otpType = otpType)
 
             when (authOtpScreenState) {
                 AuthOtpScreenState.CheckCodeInProgress,
@@ -87,7 +88,7 @@ fun AuthOtpScreenComposable(
 
                 AuthOtpScreenState.ExpiryVerificationCode -> {
                     CodeExpireComposable(
-                        Modifier.padding(vertical = 32.dp),
+                        modifier = Modifier.padding(vertical = 32.dp),
                         otpType = otpType,
                         onResend = onResend
                     )
@@ -106,9 +107,8 @@ fun AuthOtpScreenComposable(
                 colors = markdownColor(LocalPallet.current.neutral.secondary)
             )
 
-
             AuthTextSubActionComposable(
-                Modifier
+                modifier = Modifier
                     .padding(top = 32.dp),
                 onClick = onResend,
                 text = Res.string.login_otp_screen_code_resend,

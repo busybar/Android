@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.sp
 import busystatusbar.components.bsb.core.res.generated.resources.ic_close
 import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.Res
 import busystatusbar.components.bsb.preferencescreen.impl.generated.resources.preference_title
-import busystatusbar.components.bsb.core.res.generated.resources.Res as CommonRes
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.preferencescreen.model.PreferenceScreenState
@@ -30,32 +29,19 @@ import com.flipperdevices.bsb.preferencescreen.model.SettingsAction
 import com.flipperdevices.core.ktx.common.clickableRipple
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import busystatusbar.components.bsb.core.res.generated.resources.Res as CommonRes
 
 @Composable
 fun PreferenceScreenComposable(
-    modifier: Modifier,
     onBack: () -> Unit,
     screenState: PreferenceScreenState,
-    onAction: (SettingsAction) -> Unit
+    onAction: (SettingsAction) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier
     ) {
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .clip(
-                    RoundedCornerShape(
-                        topStart = 0.dp,
-                        topEnd = 0.dp,
-                        bottomEnd = 16.dp,
-                        bottomStart = 16.dp
-                    )
-                )
-                .background(LocalPallet.current.surface.primary)
-                .statusBarsPadding()
-                .padding(top = 16.dp)
-        )
+        SettingsHeaderComposable()
         Column(
             Modifier
                 .padding(top = 2.dp)
@@ -101,5 +87,23 @@ fun PreferenceScreenComposable(
             )
         }
     }
+}
 
+@Composable
+private fun SettingsHeaderComposable() {
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .clip(
+                RoundedCornerShape(
+                    topStart = 0.dp,
+                    topEnd = 0.dp,
+                    bottomEnd = 16.dp,
+                    bottomStart = 16.dp
+                )
+            )
+            .background(LocalPallet.current.surface.primary)
+            .statusBarsPadding()
+            .padding(top = 16.dp)
+    )
 }

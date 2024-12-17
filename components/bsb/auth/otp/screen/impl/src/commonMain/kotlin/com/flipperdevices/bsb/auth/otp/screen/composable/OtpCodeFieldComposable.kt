@@ -23,11 +23,11 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OtpCodeFieldComposable(
-    modifier: Modifier,
     otpCodeFieldComposable: @Composable (Modifier, OtpElementState) -> Unit,
     otpScreenState: AuthOtpScreenState,
     otpType: InternalAuthOtpType,
-    expiryState: AuthOtpExpiryState
+    expiryState: AuthOtpExpiryState,
+    modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
         Row(Modifier.padding(bottom = 8.dp)) {
@@ -46,7 +46,8 @@ fun OtpCodeFieldComposable(
             )
         }
         otpCodeFieldComposable(
-            Modifier, when (otpScreenState) {
+            Modifier,
+            when (otpScreenState) {
                 is AuthOtpScreenState.RequestEmailInProgress,
                 AuthOtpScreenState.CheckCodeInProgress -> OtpElementState.IN_PROGRESS
 
@@ -81,8 +82,8 @@ fun OtpCodeFieldComposable(
 
 @Composable
 private fun ExpiryTimerTextComposable(
-    modifier: Modifier,
-    expiryState: AuthOtpExpiryState
+    expiryState: AuthOtpExpiryState,
+    modifier: Modifier = Modifier,
 ) {
     when (expiryState) {
         AuthOtpExpiryState.Empty -> {}

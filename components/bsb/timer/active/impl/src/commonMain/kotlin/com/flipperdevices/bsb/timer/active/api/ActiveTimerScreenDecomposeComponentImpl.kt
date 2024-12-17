@@ -16,7 +16,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.ComponentContext
-import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.preference.api.ThemeStatusBarIconStyleProvider
 import com.flipperdevices.bsb.timer.active.composable.StopButtonComposable
 import com.flipperdevices.bsb.timer.active.composable.TimerContainerComposable
@@ -50,7 +49,7 @@ class ActiveTimerScreenDecomposeComponentImpl(
                             bottomStart = 16.dp
                         )
                     )
-                    .background(Color(0xFFF42323))
+                    .background(Color(color = 0xFFF42323))
                     .statusBarsPadding()
                     .padding(top = 16.dp)
             )
@@ -68,9 +67,8 @@ class ActiveTimerScreenDecomposeComponentImpl(
                             bottomStart = 0.dp
                         )
                     )
-                    .background(Color(0xFFF42323))
+                    .background(Color(color = 0xFFF42323))
             ) {
-
                 TimerContainerComposable(
                     modifier = Modifier.weight(1f),
                     timerState = localState,

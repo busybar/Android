@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
 import com.flipperdevices.bsb.auth.otp.element.model.OtpElementState
-import com.flipperdevices.ui.decompose.ScreenDecomposeComponent
 import kotlinx.coroutines.flow.StateFlow
 
 abstract class AuthOtpElementDecomposeComponent(

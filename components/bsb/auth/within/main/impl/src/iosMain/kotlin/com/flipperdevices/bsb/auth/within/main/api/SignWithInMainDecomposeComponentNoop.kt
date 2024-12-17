@@ -17,14 +17,10 @@ class SignWithInMainDecomposeComponentNoop(
     @Assisted componentContext: ComponentContext,
 ) : SignWithInMainDecomposeComponent(componentContext),
     ComponentContext by componentContext {
-    override fun handleDeeplink(deeplink: Deeplink.Root.Auth.OAuth) {
-
-    }
+    override fun handleDeeplink(deeplink: Deeplink.Root.Auth.OAuth) = Unit
 
     @Composable
-    override fun Render(modifier: Modifier, authState: SignWithInState) {
-        // Empty
-    }
+    override fun Render(modifier: Modifier, authState: SignWithInState) = Unit
 
     @Inject
     @ContributesBinding(AppGraph::class, SignWithInMainDecomposeComponent.Factory::class)

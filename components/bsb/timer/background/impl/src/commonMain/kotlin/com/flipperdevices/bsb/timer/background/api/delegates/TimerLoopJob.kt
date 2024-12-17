@@ -81,7 +81,9 @@ class TimerLoopJob(
         timerStateFlow.update { currentTimer ->
             if (currentTimer.pauseOn != null) {
                 currentTimer.copy(timerState = currentTimer.timerState.add(stateToAdd))
-            } else currentTimer
+            } else {
+                currentTimer
+            }
         }
     }
 

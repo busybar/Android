@@ -16,13 +16,13 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun PasswordWithErrorTextFieldComposable(
-    modifier: Modifier,
-    fieldModifier: Modifier,
     onFocus: () -> Unit,
     hint: StringResource,
     fieldState: PasswordFieldState,
     inProgress: Boolean,
     onPasswordChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    fieldModifier: Modifier = Modifier,
 ) {
     Column(modifier) {
         PasswordTextFieldComposable(
@@ -55,5 +55,4 @@ fun PasswordWithErrorTextFieldComposable(
             )
         }
     }
-
 }

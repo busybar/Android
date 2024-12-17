@@ -61,13 +61,14 @@ fun BusyBarTheme(
 ) {
     val isLight = if (darkMode) {
         false
-    } else isSystemInDarkTheme().not()
+    } else {
+        isSystemInDarkTheme().not()
+    }
     BusyBarThemeInternal(
         isLight = isLight,
         content = content
     )
 }
-
 
 @Composable
 fun BusyBarThemeInternal(

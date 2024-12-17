@@ -12,6 +12,7 @@ import androidx.compose.ui.platform.LocalAutofill
 import androidx.compose.ui.platform.LocalAutofillTree
 
 @OptIn(ExperimentalComposeUiApi::class)
+@Suppress("ModifierComposed")
 fun Modifier.autofill(
     vararg autofillTypes: AutofillType,
     onFill: ((String) -> Unit),

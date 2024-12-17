@@ -14,11 +14,11 @@ import com.flipperdevices.bsb.core.theme.LocalPallet
 
 @Composable
 fun OtpRowComposable(
-    modifier: Modifier,
     otpRow: OtpRow,
     otpElementState: OtpElementState,
     onFocus: () -> Unit,
-    onInput: (index: Int, newInput: TextFieldValue) -> Unit
+    onInput: (index: Int, newInput: TextFieldValue) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val inProgress = when (otpElementState) {
         OtpElementState.WAITING_FOR_INPUT,

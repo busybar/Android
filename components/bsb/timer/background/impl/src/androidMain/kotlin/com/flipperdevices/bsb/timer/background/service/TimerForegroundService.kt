@@ -27,7 +27,6 @@ internal const val EXTRA_KEY_TIMER_ACTION = "timer_action"
 
 private const val NOTIFICATION_ID = 100
 
-
 class TimerForegroundService : LifecycleService(), LogTagProvider, TimerStateListener {
     override val TAG = "TimerForegroundService"
 
@@ -36,7 +35,6 @@ class TimerForegroundService : LifecycleService(), LogTagProvider, TimerStateLis
 
     private val binder = TimerServiceBinder(delegate)
     private val notificationManager by lazy { getSystemService(NotificationManager::class.java) }
-
 
     init {
         delegate.getState()

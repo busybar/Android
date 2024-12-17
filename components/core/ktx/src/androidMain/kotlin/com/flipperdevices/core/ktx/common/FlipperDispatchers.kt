@@ -7,4 +7,3 @@ import java.util.concurrent.Executors
 internal actual fun getDispatcher(): CoroutineDispatcher {
     return Executors.newWorkStealingPool().asCoroutineDispatcher()
 }
-

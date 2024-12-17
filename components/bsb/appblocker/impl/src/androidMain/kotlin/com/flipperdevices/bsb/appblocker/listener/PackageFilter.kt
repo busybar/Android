@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import me.tatarka.inject.annotations.Inject
 
-
 @Inject
 class PackageFilter(context: Context) {
     private val myPackageName by lazy { context.packageName }

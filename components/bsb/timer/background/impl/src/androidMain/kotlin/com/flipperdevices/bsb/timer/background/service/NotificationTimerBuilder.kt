@@ -7,7 +7,6 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.flipperdevices.bsb.timer.background.impl.R
 import com.flipperdevices.bsb.timer.background.model.ControlledTimerState
-import com.flipperdevices.core.data.timer.TimerState
 
 private const val TIMER_NOTIFICATION_CHANNEL = "timer_notification_channel"
 
@@ -20,7 +19,9 @@ object NotificationTimerBuilder {
         } else {
             timer.timerState.toHumanReadableString() + if (timer.isOnPause) {
                 " (Paused)"
-            } else ""
+            } else {
+                ""
+            }
         }
 
         return NotificationCompat.Builder(context, TIMER_NOTIFICATION_CHANNEL)

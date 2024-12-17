@@ -33,22 +33,23 @@ import busystatusbar.components.bsb.auth.login.impl.generated.resources.pic_user
 import com.flipperdevices.bsb.auth.common.composable.BusyBarButtonComposable
 import com.flipperdevices.bsb.auth.common.composable.subaction.AuthTextSubActionComposable
 import com.flipperdevices.bsb.auth.common.composable.textfield.PasswordTextFieldComposable
+import com.flipperdevices.bsb.auth.login.model.LoginState
 import com.flipperdevices.bsb.core.theme.LocalBusyBarFonts
 import com.flipperdevices.bsb.core.theme.LocalPallet
-import com.flipperdevices.bsb.auth.login.model.LoginState
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
+@Suppress("LongMethod")
 fun LoginPasswordComposable(
-    modifier: Modifier,
     state: LoginState,
     email: String,
     onLogin: (String) -> Unit,
     onForgotPassword: () -> Unit,
-    preFilledPassword: String?
+    preFilledPassword: String?,
+    modifier: Modifier = Modifier,
 ) {
     val verticalScroll = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
@@ -83,7 +84,7 @@ fun LoginPasswordComposable(
         var password by remember { mutableStateOf(preFilledPassword ?: "") }
 
         PasswordTextFieldComposable(
-            Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth()
                 .padding(top = 16.dp)
                 .onFocusChanged {
                     if (it.isFocused) {
@@ -115,9 +116,8 @@ fun LoginPasswordComposable(
             }
         )
 
-
         AuthTextSubActionComposable(
-            Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth()
                 .padding(vertical = 12.dp),
             onClick = onForgotPassword,
             text = Res.string.login_signin_forgot_password,

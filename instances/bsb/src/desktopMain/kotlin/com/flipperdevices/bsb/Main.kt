@@ -24,7 +24,8 @@ fun main() {
     )
     // Always create the root component outside Compose on the UI thread
     val appComponent = DesktopAppComponent::class.create(
-        settings, applicationScope
+        settings,
+        applicationScope
     )
     val root = runOnUiThread {
         appComponent.rootDecomposeComponentFactory(

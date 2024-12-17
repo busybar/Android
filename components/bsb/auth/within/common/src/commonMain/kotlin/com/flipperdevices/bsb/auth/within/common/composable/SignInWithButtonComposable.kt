@@ -20,10 +20,10 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun SignInWithButtonComposable(
-    modifier: Modifier,
     icon: DrawableResource,
     onClick: () -> Unit,
-    inProgress: Boolean
+    inProgress: Boolean,
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier

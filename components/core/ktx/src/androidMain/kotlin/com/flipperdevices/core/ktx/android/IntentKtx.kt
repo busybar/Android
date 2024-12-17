@@ -20,7 +20,6 @@ fun Intent.toFullString(): String {
     return sb.toString()
 }
 
-
 /**
  * Extras for settings
  */

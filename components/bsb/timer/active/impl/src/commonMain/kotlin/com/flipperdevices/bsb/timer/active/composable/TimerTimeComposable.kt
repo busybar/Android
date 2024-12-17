@@ -24,8 +24,8 @@ import com.flipperdevices.core.data.timer.TimerState
 
 @Composable
 fun TimerTimeComposable(
-    modifier: Modifier,
-    timerState: TimerState
+    timerState: TimerState,
+    modifier: Modifier = Modifier,
 ) {
     Row(modifier = modifier) {
         TimerNumberComposable(timerState.minute)
@@ -42,18 +42,22 @@ fun TimerTimeComposable(
     }
 }
 
+private const val MIN_TWO_DIGIT_VALUE = 10
+
 @Composable
 private fun TimerNumberComposable(number: Int) {
-    val numberText = if (number < 10) {
+    val numberText = if (number < MIN_TWO_DIGIT_VALUE) {
         "0$number"
-    } else number.toString()
+    } else {
+        number.toString()
+    }
     Row {
         numberText.forEach { symbol ->
             AnimatedContent(
                 targetState = symbol,
                 transitionSpec = {
                     slideInVertically { height -> height } + fadeIn() togetherWith
-                            slideOutVertically { height -> -height } + fadeOut()
+                        slideOutVertically { height -> -height } + fadeOut()
                 }
             ) {
                 Text(

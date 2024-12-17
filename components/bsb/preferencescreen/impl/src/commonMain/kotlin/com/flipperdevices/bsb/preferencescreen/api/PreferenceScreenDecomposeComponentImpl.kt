@@ -30,14 +30,13 @@ class PreferenceScreenDecomposeComponentImpl(
         viewModelFactory()
     }
 
-
     @Composable
     override fun Render(modifier: Modifier) {
         val rootNavigation = LocalRootNavigation.current
 
         val state by viewModel.getState().collectAsState()
         PreferenceScreenComposable(
-            modifier,
+            modifier = modifier,
             onBack = onBackParameter::invoke,
             screenState = state,
             onAction = { viewModel.onAction(it, rootNavigation) }

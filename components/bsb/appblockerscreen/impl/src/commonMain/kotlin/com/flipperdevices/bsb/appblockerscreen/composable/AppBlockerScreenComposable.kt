@@ -23,17 +23,17 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AppBlockerScreenComposable(
-    modifier: Modifier,
     applicationInfo: ApplicationInfo,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier,
         contentAlignment = Alignment.BottomCenter
     ) {
         AppBlockerContentComposable(
-            Modifier.fillMaxSize(),
-            applicationInfo
+            modifier = Modifier.fillMaxSize(),
+            applicationInfo = applicationInfo
         )
 
         Text(

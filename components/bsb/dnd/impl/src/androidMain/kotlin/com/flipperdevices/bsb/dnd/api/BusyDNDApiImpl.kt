@@ -3,8 +3,6 @@ package com.flipperdevices.bsb.dnd.api
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
-import android.net.Uri
 import android.provider.Settings
 import com.flipperdevices.bsb.preference.api.PreferenceApi
 import com.flipperdevices.bsb.preference.api.get
@@ -16,7 +14,6 @@ import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.core.ktx.android.highlightSettingsTo
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
-
 
 @Inject
 @ContributesBinding(AppGraph::class, BusyDNDApi::class)
@@ -36,7 +33,9 @@ class BusyDNDApiImpl(
     override fun enableSupport(): Result<Unit> {
         if (!notificationManager.isNotificationPolicyAccessGranted) {
             requestDNDPermission()
-            return Result.failure(RuntimeException("NotificationPolicyAccessGranted is false, so waiting action from user"))
+            return Result.failure(
+                RuntimeException("NotificationPolicyAccessGranted is false, so waiting action from user")
+            )
         }
         preferenceApi.set(SettingsEnum.DND_SUPPORT, true)
         return Result.success(Unit)

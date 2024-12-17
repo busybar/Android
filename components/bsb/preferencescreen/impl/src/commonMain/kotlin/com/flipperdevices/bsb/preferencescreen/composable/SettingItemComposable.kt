@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Switch
-import androidx.compose.material.SwitchColors
 import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -24,11 +23,11 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SettingItemComposable(
-    modifier: Modifier,
     title: StringResource,
     description: StringResource?,
     enabled: Boolean,
-    onSwitch: ((Boolean) -> Unit)?
+    onSwitch: ((Boolean) -> Unit)?,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier.clip(RoundedCornerShape(8.dp))

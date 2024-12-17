@@ -9,9 +9,10 @@ import io.github.fornewid.placeholder.foundation.PlaceholderHighlight
 import io.github.fornewid.placeholder.foundation.placeholder
 import io.github.fornewid.placeholder.foundation.shimmer
 
-private val placeholderColor = Color(0x2A2A2A)
+private val placeholderColor = Color(color = 0x2A2A2A)
 
 @Composable
+@Suppress("ModifierComposable")
 fun Modifier.placeholder(
     visible: Boolean,
     shape: Shape = RectangleShape

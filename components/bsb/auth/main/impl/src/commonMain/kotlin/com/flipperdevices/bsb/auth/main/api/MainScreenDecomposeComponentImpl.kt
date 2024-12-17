@@ -21,6 +21,7 @@ import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
 @Inject
+@Suppress("LongParameterList")
 class MainScreenDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     @Assisted authNavigation: StackNavigation<AuthRootNavigationConfig>,
@@ -63,7 +64,6 @@ class MainScreenDecomposeComponentImpl(
         when (deeplink) {
             is Deeplink.Root.Auth.OAuth -> signWithInDecomposeComponent.handleDeeplink(deeplink)
         }
-
     }
 }
 

@@ -42,7 +42,6 @@ class AuthOtpScreenDecomposeComponentImpl(
 ) : AuthOtpScreenDecomposeComponent(componentContext) {
     private val internalOtpType = otpType.toInternalAuthOtpType()
 
-
     private val otpCodeElementDecomposeComponent = otpCodeElementDecomposeComponentFactory(
         componentContext = childContext("otpCodeElement")
     )

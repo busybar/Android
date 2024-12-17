@@ -8,8 +8,7 @@ interface LogTagProvider {
     val TAG: String
 }
 
-
- inline fun LogTagProvider.error(logMessage: () -> String) {
+inline fun LogTagProvider.error(logMessage: () -> String) {
     if (BuildKonfig.IS_LOG_ENABLED) {
         error(TAG, logMessage)
     }

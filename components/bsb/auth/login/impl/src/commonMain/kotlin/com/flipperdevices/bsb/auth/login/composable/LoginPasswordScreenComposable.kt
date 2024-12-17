@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,13 +15,13 @@ import com.flipperdevices.bsb.auth.login.model.LoginState
 
 @Composable
 fun LoginPasswordScreenComposable(
-    modifier: Modifier,
     state: LoginState,
     email: String,
     preFilledPassword: String?,
     onBack: () -> Unit,
     onLogin: (String) -> Unit,
-    onForgotPassword: () -> Unit
+    onForgotPassword: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier.fillMaxSize()
