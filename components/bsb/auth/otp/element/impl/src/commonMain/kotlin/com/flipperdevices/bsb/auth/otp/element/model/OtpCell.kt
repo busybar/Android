@@ -78,7 +78,7 @@ data class OtpCell(
             textFieldValue.text.length > 1 &&
             subText.length > 1
         ) {
-            subText = subText.removeRange(1, 2)
+            subText = subText.removeRange(subText.lastIndex, subText.length)
         }
 
         return copy(
