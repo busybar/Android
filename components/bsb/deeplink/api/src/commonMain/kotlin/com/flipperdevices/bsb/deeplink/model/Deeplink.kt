@@ -24,6 +24,24 @@ sealed interface Deeplink {
                 @Serializable
                 data class Apple(override val token: String) : OAuth
             }
+
+            @Serializable
+            sealed interface VerifyEmailLink : Auth {
+                val otpCode: String
+                val email: String
+
+                @Serializable
+                data class ResetPassword(
+                    override val otpCode: String,
+                    override val email: String,
+                ) : VerifyEmailLink
+
+                @Serializable
+                data class SignUp(
+                    override val otpCode: String,
+                    override val email: String,
+                ) : VerifyEmailLink
+            }
         }
     }
 }

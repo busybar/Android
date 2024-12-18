@@ -18,6 +18,7 @@ import com.flipperdevices.bsb.auth.otp.screen.model.AuthOtpType
 import com.flipperdevices.bsb.auth.otp.screen.model.InternalAuthOtpType
 import com.flipperdevices.bsb.auth.otp.screen.model.toInternalAuthOtpType
 import com.flipperdevices.bsb.auth.otp.screen.viewmodel.AuthOtpScreenViewModel
+import com.flipperdevices.bsb.deeplink.model.Deeplink
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.core.ui.lifecycle.viewModelWithFactory
 import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
@@ -32,25 +33,31 @@ class AuthOtpScreenDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     @Assisted private val onBack: DecomposeOnBackParameter,
     @Assisted otpType: AuthOtpType,
+    @Assisted deeplink: Deeplink.Root.Auth.VerifyEmailLink?,
     @Assisted onOtpComplete: suspend (String) -> Unit,
     private val viewModelFactory: (
         otpType: InternalAuthOtpType,
         onOtpComplete: suspend (String) -> Unit,
-        onFocus: suspend () -> Unit
+        onFocus: suspend () -> Unit,
+        prefilledCode: String?
     ) -> AuthOtpScreenViewModel,
     otpCodeElementDecomposeComponentFactory: AuthOtpElementDecomposeComponent.Factory
 ) : AuthOtpScreenDecomposeComponent(componentContext) {
     private val internalOtpType = otpType.toInternalAuthOtpType()
 
     private val otpCodeElementDecomposeComponent = otpCodeElementDecomposeComponentFactory(
-        componentContext = childContext("otpCodeElement")
+        componentContext = childContext("otpCodeElement"),
+        preFilledCode = deeplink?.otpCode
     )
 
-    private val viewModel = viewModelWithFactory(internalOtpType to onOtpComplete to otpType) {
+    private val viewModel = viewModelWithFactory(
+        internalOtpType to onOtpComplete to otpType to deeplink
+    ) {
         viewModelFactory(
             internalOtpType,
             onOtpComplete,
-            { otpCodeElementDecomposeComponent.onFocus() }
+            { otpCodeElementDecomposeComponent.onFocus() },
+            deeplink?.otpCode
         )
     }
 
@@ -91,6 +98,11 @@ class AuthOtpScreenDecomposeComponentImpl(
         )
     }
 
+    override fun handleDeeplink(deeplink: Deeplink.Root.Auth.VerifyEmailLink) {
+        otpCodeElementDecomposeComponent.insertOtp(deeplink.otpCode)
+        viewModel.onCodeApply(deeplink.otpCode)
+    }
+
     @Inject
     @ContributesBinding(AppGraph::class, AuthOtpScreenDecomposeComponent.Factory::class)
     class Factory(
@@ -98,6 +110,7 @@ class AuthOtpScreenDecomposeComponentImpl(
             componentContext: ComponentContext,
             onBack: DecomposeOnBackParameter,
             otpType: AuthOtpType,
+            deeplink: Deeplink.Root.Auth.VerifyEmailLink?,
             onOtpComplete: suspend (String) -> Unit
         ) -> AuthOtpScreenDecomposeComponentImpl
     ) : AuthOtpScreenDecomposeComponent.Factory {
@@ -105,7 +118,8 @@ class AuthOtpScreenDecomposeComponentImpl(
             componentContext: ComponentContext,
             onBack: DecomposeOnBackParameter,
             otpType: AuthOtpType,
-            onOtpComplete: suspend (String) -> Unit
-        ) = factory(componentContext, onBack, otpType, onOtpComplete)
+            deeplink: Deeplink.Root.Auth.VerifyEmailLink?,
+            onOtpComplete: suspend (String) -> Unit,
+        ) = factory(componentContext, onBack, otpType, deeplink, onOtpComplete)
     }
 }

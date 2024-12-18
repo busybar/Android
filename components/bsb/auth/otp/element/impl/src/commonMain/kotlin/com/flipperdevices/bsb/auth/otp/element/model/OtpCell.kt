@@ -11,6 +11,13 @@ data class OtpCell(
         selection = TextRange(1)
     )
 ) {
+    constructor(symbol: Char) : this(
+        TextFieldValue(
+            "$INVISIBLE_SYMBOL$symbol",
+            selection = TextRange(1)
+        )
+    )
+
     @Suppress("LongMethod")
     fun onApply(newState: TextFieldValue): Pair<OtpCell, OtpCellAction?> {
         val newText = newState.text.filter { it.isDigit() || it == INVISIBLE_SYMBOL }

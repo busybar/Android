@@ -9,10 +9,18 @@ import kotlinx.coroutines.flow.update
 import me.tatarka.inject.annotations.Inject
 
 @Inject
-class OtpRowViewModel : DecomposeViewModel() {
-    private val state = MutableStateFlow(OtpRow())
+class OtpRowViewModel(
+    preFilledCode: String?
+) : DecomposeViewModel() {
+    private val state = MutableStateFlow(OtpRow(preFilledCode ?: ""))
 
     fun getState() = state.asStateFlow()
+
+    fun insertOtp(row: String) {
+        state.update {
+            OtpRow(row)
+        }
+    }
 
     fun onChange(index: Int, newLine: TextFieldValue) {
         state.update {

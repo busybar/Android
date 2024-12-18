@@ -18,11 +18,14 @@ abstract class AuthOtpElementDecomposeComponent(
 
     abstract suspend fun onFocus()
 
+    abstract fun insertOtp(row: String)
+
     abstract fun getOtpCodeState(): StateFlow<String>
 
     fun interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,
+            preFilledCode: String?
         ): AuthOtpElementDecomposeComponent
     }
 }
