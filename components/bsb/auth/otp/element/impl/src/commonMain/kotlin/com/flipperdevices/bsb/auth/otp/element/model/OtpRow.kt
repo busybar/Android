@@ -11,6 +11,7 @@ data class OtpRow(
     val cells: PersistentList<OtpCell> = Array(OTP_LENGTH) { OtpCell() }.toPersistentList(),
     val currentFocusIndex: Int? = 0
 ) {
+    @Suppress("NestedBlockDepth")
     fun onChange(index: Int, newState: TextFieldValue): OtpRow {
         if (index >= cells.size) {
             return this
@@ -20,7 +21,7 @@ data class OtpRow(
         var currentIndex = index
         var nextState: TextFieldValue? = newState
         while (currentIndex < cells.size && nextState != null) {
-            val (newCell, action) = newCells[index].onApply(nextState)
+            val (newCell, action) = newCells[currentIndex].onApply(nextState)
             newCells[currentIndex] = newCell
             when (action) {
                 OtpCellAction.MoveBracketLeft -> {
@@ -37,22 +38,27 @@ data class OtpRow(
 
                 is OtpCellAction.MoveBracketRight -> {
                     currentIndex++
-                    if (currentIndex < cells.size) {
+                    val nextCell = newCells.getOrNull(currentIndex)
+                    if (nextCell == null) {
+                        nextState = null
+                    } else {
                         newCells[currentIndex] = OtpCell(
-                            textFieldValue = newCells[currentIndex].textFieldValue.copy(
+                            textFieldValue = nextCell.textFieldValue.copy(
                                 selection = TextRange(
                                     1
                                 )
                             )
                         )
-                    }
-                    if (action.remainingText.isNullOrBlank()) {
-                        nextState = null
-                    } else {
-                        nextState = TextFieldValue(
-                            text = "$INVISIBLE_SYMBOL${action.remainingText}",
-                            selection = TextRange(1)
-                        )
+                        if (!action.remainingText.isNullOrBlank()) {
+                            nextState = TextFieldValue(
+                                text = nextCell.textFieldValue.text.replaceRange(
+                                    1,
+                                    1,
+                                    action.remainingText
+                                ),
+                                selection = TextRange(1)
+                            )
+                        }
                     }
                 }
 
