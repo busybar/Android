@@ -39,7 +39,8 @@ fun PasswordWithErrorTextFieldComposable(
             onAutofill = {
                 onPasswordChange(it)
                 onFocus()
-            }
+            },
+            isNewPassword = true
         )
         fieldState.subText?.let { subText ->
             Text(

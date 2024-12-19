@@ -34,13 +34,18 @@ fun PasswordTextFieldComposable(
     modifier: Modifier = Modifier,
     isError: Boolean = false,
     onAutofill: (String) -> Unit = onPasswordChange,
+    isNewPassword: Boolean,
 ) {
     var passwordHidden by remember { mutableStateOf(true) }
 
     AuthCommonTextFieldComposable(
         modifier = modifier
             .autofill(
-                AutofillType.Password,
+                if (isNewPassword) {
+                    AutofillType.NewPassword
+                } else {
+                    AutofillType.Password
+                },
                 onFill = onAutofill
             ),
         text = password,

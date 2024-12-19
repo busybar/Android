@@ -47,7 +47,30 @@ class AuthDecomposeComponentImpl(
     override val stack = childStack(
         source = navigation,
         serializer = AuthRootNavigationConfig.serializer(),
-        initialConfiguration = AuthRootNavigationConfig.AuthRoot(deeplink),
+        initialStack = {
+            when (deeplink) {
+                is Deeplink.Root.Auth.VerifyEmailLink.ResetPassword -> listOf(
+                    AuthRootNavigationConfig.AuthRoot(null),
+                    AuthRootNavigationConfig.LogIn(
+                        email = deeplink.email,
+                        preFilledPassword = null,
+                        deeplink = deeplink
+                    ),
+                )
+
+                is Deeplink.Root.Auth.VerifyEmailLink.SignUp -> listOf(
+                    AuthRootNavigationConfig.AuthRoot(null),
+                    AuthRootNavigationConfig.SignUp(
+                        email = deeplink.email,
+                        preFilledPassword = null,
+                        deeplink = deeplink
+                    ),
+                )
+
+                is Deeplink.Root.Auth.OAuth -> listOf(AuthRootNavigationConfig.AuthRoot(deeplink))
+                null -> listOf(AuthRootNavigationConfig.AuthRoot(null))
+            }
+        },
         handleBackButton = true,
         childFactory = ::child,
     )
@@ -69,7 +92,8 @@ class AuthDecomposeComponentImpl(
             onBack = navigation::pop,
             email = config.email,
             onComplete = onBackParameter::invoke,
-            preFilledPassword = config.preFilledPassword
+            preFilledPassword = config.preFilledPassword,
+            deeplink = config.deeplink
         )
 
         is AuthRootNavigationConfig.SignUp -> signupDecomposeComponentFactory(
@@ -77,7 +101,8 @@ class AuthDecomposeComponentImpl(
             onBack = navigation::pop,
             email = config.email,
             onComplete = onBackParameter::invoke,
-            preFilledPassword = config.preFilledPassword
+            preFilledPassword = config.preFilledPassword,
+            deeplink = config.deeplink
         )
 
         is AuthRootNavigationConfig.WebView -> oAuthWebViewDecomposeComponentFactory(
@@ -104,14 +129,40 @@ class AuthDecomposeComponentImpl(
     }
 
     override fun handleDeeplink(deeplink: Deeplink.Root.Auth) {
-        val child = stack.findChildByConfig(AuthRootNavigationConfig.AuthRoot::class)
-        val instance = child?.instance
-        if (child == null || instance !is MainScreenDecomposeComponentImpl) {
+        val (config, componentClass) = when (deeplink) {
+            is Deeplink.Root.Auth.OAuth -> AuthRootNavigationConfig.AuthRoot to MainScreenDecomposeComponentImpl::class
+            is Deeplink.Root.Auth.VerifyEmailLink.ResetPassword -> AuthRootNavigationConfig.LogIn(
+                email = deeplink.email,
+                preFilledPassword = null,
+                deeplink = deeplink
+            ) to LoginDecomposeComponent::class
+
+            is Deeplink.Root.Auth.VerifyEmailLink.SignUp -> AuthRootNavigationConfig.SignUp(
+                email = deeplink.email,
+                preFilledPassword = null,
+                deeplink = deeplink
+            ) to SignupDecomposeComponent::class
+        }
+
+        val child = stack.value.items.find {
+            it.configuration::class == config::class
+        }
+        val component = child?.instance
+        if (component == null || !componentClass.isInstance(component)) {
             warn { "Bottom bar component is not exist in stack, but first pair screen already passed" }
-            navigation.bringToFront(AuthRootNavigationConfig.AuthRoot(deeplink))
+            navigation.bringToFront(config as AuthRootNavigationConfig)
         } else {
             navigation.bringToFront(child.configuration)
-            instance.handleDeeplink(deeplink)
+            when (deeplink) {
+                is Deeplink.Root.Auth.OAuth ->
+                    (component as MainScreenDecomposeComponentImpl).handleDeeplink(deeplink)
+
+                is Deeplink.Root.Auth.VerifyEmailLink.ResetPassword ->
+                    (component as LoginDecomposeComponent<*>).handleDeeplink(deeplink)
+
+                is Deeplink.Root.Auth.VerifyEmailLink.SignUp ->
+                    (component as SignupDecomposeComponent<*>).handleDeeplink(deeplink)
+            }
         }
     }
 

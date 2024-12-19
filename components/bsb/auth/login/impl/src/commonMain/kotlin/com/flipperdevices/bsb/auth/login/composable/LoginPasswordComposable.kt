@@ -97,7 +97,8 @@ fun LoginPasswordComposable(
                 LoginState.AuthInProgress -> true
                 LoginState.WaitingForInput -> false
             },
-            hint = Res.string.login_signin_password_hint
+            hint = Res.string.login_signin_password_hint,
+            isNewPassword = false
         )
 
         BusyBarButtonComposable(

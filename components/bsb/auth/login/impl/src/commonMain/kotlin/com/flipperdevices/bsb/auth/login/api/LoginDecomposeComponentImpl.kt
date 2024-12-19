@@ -13,6 +13,7 @@ import com.flipperdevices.bsb.deeplink.model.Deeplink
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.ui.decompose.DecomposeComponent
 import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
+import com.flipperdevices.ui.decompose.findChildByConfig
 import com.flipperdevices.ui.decompose.findComponentByConfig
 import com.flipperdevices.ui.decompose.popOr
 import me.tatarka.inject.annotations.Assisted
@@ -97,9 +98,11 @@ class LoginDecomposeComponentImpl(
     }
 
     override fun handleDeeplink(deeplink: Deeplink.Root.Auth.VerifyEmailLink.ResetPassword) {
-        val component = stack.findComponentByConfig(LoginNavigationConfig.ResetPassword::class)
+        val child = stack.findChildByConfig(LoginNavigationConfig.ResetPassword::class) ?: return
+        val component = child.instance
         if (component != null && component is AuthOtpScreenDecomposeComponent) {
             component.handleDeeplink(deeplink)
+            navigation.pushToFront(child.configuration)
         } else {
             navigation.pushToFront(LoginNavigationConfig.ResetPassword(deeplink))
         }
