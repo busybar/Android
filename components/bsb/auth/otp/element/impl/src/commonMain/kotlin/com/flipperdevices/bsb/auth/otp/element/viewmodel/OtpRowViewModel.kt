@@ -6,11 +6,12 @@ import com.flipperdevices.core.ui.lifecycle.DecomposeViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
 @Inject
 class OtpRowViewModel(
-    preFilledCode: String?
+    @Assisted preFilledCode: String?
 ) : DecomposeViewModel() {
     private val state = MutableStateFlow(OtpRow(preFilledCode ?: ""))
 

@@ -31,10 +31,10 @@ fun PasswordTextFieldComposable(
     onPasswordChange: (String) -> Unit,
     disabled: Boolean,
     hint: StringResource,
+    isNewPassword: Boolean,
     modifier: Modifier = Modifier,
     isError: Boolean = false,
     onAutofill: (String) -> Unit = onPasswordChange,
-    isNewPassword: Boolean,
 ) {
     var passwordHidden by remember { mutableStateOf(true) }
 

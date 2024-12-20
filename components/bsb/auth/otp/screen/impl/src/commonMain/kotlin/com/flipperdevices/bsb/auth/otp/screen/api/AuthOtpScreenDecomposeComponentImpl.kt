@@ -27,8 +27,9 @@ import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 
-@OptIn(ExperimentalFoundationApi::class)
 @Inject
+@OptIn(ExperimentalFoundationApi::class)
+@Suppress("LongParameterList")
 class AuthOtpScreenDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
     @Assisted private val onBack: DecomposeOnBackParameter,

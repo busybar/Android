@@ -20,7 +20,6 @@ import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.core.log.warn
 import com.flipperdevices.ui.decompose.DecomposeComponent
 import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
-import com.flipperdevices.ui.decompose.findChildByConfig
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding

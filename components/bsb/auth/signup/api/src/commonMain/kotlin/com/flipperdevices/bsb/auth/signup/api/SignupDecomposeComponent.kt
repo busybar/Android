@@ -9,6 +9,7 @@ abstract class SignupDecomposeComponent<C : Any> : CompositeDecomposeComponent<C
     abstract fun handleDeeplink(deeplink: Deeplink.Root.Auth.VerifyEmailLink.SignUp)
 
     fun interface Factory {
+        @Suppress("LongParameterList")
         operator fun invoke(
             componentContext: ComponentContext,
             onBack: DecomposeOnBackParameter,

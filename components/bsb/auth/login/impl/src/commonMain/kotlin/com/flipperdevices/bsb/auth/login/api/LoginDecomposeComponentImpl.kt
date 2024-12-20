@@ -2,7 +2,6 @@ package com.flipperdevices.bsb.auth.login.api
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.childStack
-import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.router.stack.pushToFront
 import com.flipperdevices.bsb.auth.confirmpassword.api.AuthConfirmPasswordScreenDecomposeComponent
 import com.flipperdevices.bsb.auth.confirmpassword.model.ConfirmPasswordType
@@ -14,7 +13,6 @@ import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.ui.decompose.DecomposeComponent
 import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
 import com.flipperdevices.ui.decompose.findChildByConfig
-import com.flipperdevices.ui.decompose.findComponentByConfig
 import com.flipperdevices.ui.decompose.popOr
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
@@ -50,7 +48,9 @@ class LoginDecomposeComponentImpl(
                     LoginNavigationConfig.Password,
                     LoginNavigationConfig.ResetPassword(deeplink)
                 )
-            } else listOf(LoginNavigationConfig.Password)
+            } else {
+                listOf(LoginNavigationConfig.Password)
+            }
         },
         handleBackButton = true,
         childFactory = ::child,
@@ -116,8 +116,8 @@ class LoginDecomposeComponentImpl(
             onBack: DecomposeOnBackParameter,
             email: String,
             preFilledPassword: String?,
-            onComplete: () -> Unit,
             deeplink: Deeplink.Root.Auth.VerifyEmailLink.ResetPassword?,
+            onComplete: () -> Unit,
         ) -> LoginDecomposeComponentImpl
     ) : LoginDecomposeComponent.Factory {
         override fun invoke(
@@ -125,8 +125,8 @@ class LoginDecomposeComponentImpl(
             onBack: DecomposeOnBackParameter,
             email: String,
             preFilledPassword: String?,
+            deeplink: Deeplink.Root.Auth.VerifyEmailLink.ResetPassword?,
             onComplete: () -> Unit,
-            deeplink: Deeplink.Root.Auth.VerifyEmailLink.ResetPassword?
-        ) = factory(componentContext, onBack, email, preFilledPassword, onComplete, deeplink)
+        ) = factory(componentContext, onBack, email, preFilledPassword, deeplink, onComplete)
     }
 }

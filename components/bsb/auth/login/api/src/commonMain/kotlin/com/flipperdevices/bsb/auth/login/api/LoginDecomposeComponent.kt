@@ -9,13 +9,14 @@ abstract class LoginDecomposeComponent<C : Any> : CompositeDecomposeComponent<C>
     abstract fun handleDeeplink(deeplink: Deeplink.Root.Auth.VerifyEmailLink.ResetPassword)
 
     fun interface Factory {
+        @Suppress("LongParameterList")
         operator fun invoke(
             componentContext: ComponentContext,
             onBack: DecomposeOnBackParameter,
             email: String,
             preFilledPassword: String?,
+            deeplink: Deeplink.Root.Auth.VerifyEmailLink.ResetPassword?,
             onComplete: () -> Unit,
-            deeplink: Deeplink.Root.Auth.VerifyEmailLink.ResetPassword?
         ): LoginDecomposeComponent<*>
     }
 }

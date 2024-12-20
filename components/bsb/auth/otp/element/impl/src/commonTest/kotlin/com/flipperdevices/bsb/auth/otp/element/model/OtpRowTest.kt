@@ -31,7 +31,6 @@ class OtpRowTest {
         )
     }
 
-
     @Test
     fun pasteInFilledRow() {
         val emptyRow = OtpRow(
@@ -58,7 +57,6 @@ class OtpRowTest {
             message = "Expected: ${expected.toLine()}, but actual is ${newRow.toLine()}"
         )
     }
-
 
     @Test
     fun pasteInMiddle() {

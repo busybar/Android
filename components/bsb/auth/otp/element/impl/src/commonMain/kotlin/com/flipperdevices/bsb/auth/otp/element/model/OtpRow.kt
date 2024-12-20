@@ -11,11 +11,13 @@ data class OtpRow(
     val cells: PersistentList<OtpCell> = Array(OTP_LENGTH) { OtpCell() }.toPersistentList(),
     val currentFocusIndex: Int? = 0
 ) {
-    constructor(row: String) : this(Array(OTP_LENGTH) { index ->
-        row.getOrNull(index)?.let { symbol ->
-            OtpCell(symbol)
-        } ?: OtpCell()
-    }.toPersistentList())
+    constructor(row: String) : this(
+        Array(OTP_LENGTH) { index ->
+            row.getOrNull(index)?.let { symbol ->
+                OtpCell(symbol)
+            } ?: OtpCell()
+        }.toPersistentList()
+    )
 
     @Suppress("NestedBlockDepth")
     fun onChange(index: Int, newState: TextFieldValue): OtpRow {
