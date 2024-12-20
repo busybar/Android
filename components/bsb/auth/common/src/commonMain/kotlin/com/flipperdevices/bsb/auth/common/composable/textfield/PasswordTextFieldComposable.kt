@@ -31,6 +31,7 @@ fun PasswordTextFieldComposable(
     onPasswordChange: (String) -> Unit,
     disabled: Boolean,
     hint: StringResource,
+    isNewPassword: Boolean,
     modifier: Modifier = Modifier,
     isError: Boolean = false,
     onAutofill: (String) -> Unit = onPasswordChange,
@@ -40,7 +41,11 @@ fun PasswordTextFieldComposable(
     AuthCommonTextFieldComposable(
         modifier = modifier
             .autofill(
-                AutofillType.Password,
+                if (isNewPassword) {
+                    AutofillType.NewPassword
+                } else {
+                    AutofillType.Password
+                },
                 onFill = onAutofill
             ),
         text = password,

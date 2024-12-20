@@ -25,12 +25,13 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 @Inject
 class AuthOtpElementDecomposeComponentImpl(
     @Assisted componentContext: ComponentContext,
-    otpRowViewModelFactory: () -> OtpRowViewModel
+    @Assisted preFilledCode: String?,
+    otpRowViewModelFactory: (String?) -> OtpRowViewModel
 ) : AuthOtpElementDecomposeComponent(componentContext) {
     private val scope = coroutineScope(FlipperDispatchers.default)
 
-    private val viewModel = viewModelWithFactory(null) {
-        otpRowViewModelFactory()
+    private val viewModel = viewModelWithFactory(preFilledCode) {
+        otpRowViewModelFactory(preFilledCode)
     }
     private val otpCodeState = viewModel.getState()
         .map { row ->
@@ -62,15 +63,21 @@ class AuthOtpElementDecomposeComponentImpl(
         viewModel.onFocus()
     }
 
+    override fun insertOtp(row: String) {
+        viewModel.insertOtp(row)
+    }
+
     @Inject
     @ContributesBinding(AppGraph::class, AuthOtpElementDecomposeComponent.Factory::class)
     class Factory(
         private val factory: (
-            componentContext: ComponentContext
+            componentContext: ComponentContext,
+            preFilledCode: String?
         ) -> AuthOtpElementDecomposeComponentImpl
     ) : AuthOtpElementDecomposeComponent.Factory {
         override fun invoke(
-            componentContext: ComponentContext
-        ) = factory(componentContext)
+            componentContext: ComponentContext,
+            preFilledCode: String?
+        ) = factory(componentContext, preFilledCode)
     }
 }

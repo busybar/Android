@@ -18,7 +18,7 @@ fun <C : Any, T : Any> Value<ChildStack<C, T>>.findComponentByConfig(configClazz
     }?.instance
 }
 
-fun <C : Any, T : Any> Value<ChildStack<C, T>>.findChildByConfig(configClazz: KClass<out C>): Child<C, T>? {
+inline fun <C : Any, T : Any> Value<ChildStack<C, T>>.findChildByConfig(configClazz: KClass<out C>): Child<C, T>? {
     return value.items.find {
         it.configuration::class == configClazz
     }

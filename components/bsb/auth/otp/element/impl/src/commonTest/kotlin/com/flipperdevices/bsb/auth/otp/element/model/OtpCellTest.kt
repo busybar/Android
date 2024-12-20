@@ -248,7 +248,6 @@ class OtpCellTest {
         assertEquals(action, null)
     }
 
-
     @Test
     fun replaceFirstElement() {
         val currentState = TextFieldValue(

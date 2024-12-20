@@ -13,10 +13,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.getAndUpdate
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -32,6 +32,7 @@ class AuthOtpScreenViewModel(
     @Assisted private val otpType: InternalAuthOtpType,
     @Assisted private val onOtpComplete: suspend (String) -> Unit,
     @Assisted private val onFocus: suspend () -> Unit,
+    @Assisted private val prefilledCode: String?,
     private val bsbAuthApi: BSBAuthApi,
     private val inAppNotificationStorage: InAppNotificationStorage
 ) : DecomposeViewModel(), LogTagProvider {
@@ -44,15 +45,21 @@ class AuthOtpScreenViewModel(
     private val expiryTimerState = MutableStateFlow<AuthOtpExpiryState>(AuthOtpExpiryState.Empty)
 
     init {
-        codeExpiryTimeFlow.flatMapLatest { expiryTime ->
-            if (expiryTime == null) {
-                flow {
-                    requestEmailVerifyInternal(requestedManually = false)
-                }
-            } else {
-                getClockFlow(expiryTime)
+        viewModelScope.launch {
+            if (prefilledCode != null) {
+                onCodeApplyInternal(prefilledCode)
             }
-        }.launchIn(viewModelScope)
+
+            codeExpiryTimeFlow.flatMapLatest { expiryTime ->
+                if (expiryTime == null) {
+                    flow {
+                        requestEmailVerifyInternal(requestedManually = false)
+                    }
+                } else {
+                    getClockFlow(expiryTime)
+                }
+            }.collect()
+        }
     }
 
     fun getState() = state.asStateFlow()
@@ -60,6 +67,10 @@ class AuthOtpScreenViewModel(
     fun getExpiryTimerState() = expiryTimerState.asStateFlow()
 
     fun onCodeApply(otpCode: String) = viewModelScope.launch {
+        onCodeApplyInternal(otpCode)
+    }
+
+    private suspend fun onCodeApplyInternal(otpCode: String) {
         val originalState = state.getAndUpdate {
             AuthOtpScreenState.CheckCodeInProgress
         }

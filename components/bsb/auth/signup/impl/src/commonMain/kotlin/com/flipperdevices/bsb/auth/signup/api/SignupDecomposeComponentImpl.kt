@@ -8,9 +8,11 @@ import com.flipperdevices.bsb.auth.confirmpassword.model.ConfirmPasswordType
 import com.flipperdevices.bsb.auth.otp.screen.api.AuthOtpScreenDecomposeComponent
 import com.flipperdevices.bsb.auth.otp.screen.model.AuthOtpType
 import com.flipperdevices.bsb.auth.signup.model.SignupNavigationConfig
+import com.flipperdevices.bsb.deeplink.model.Deeplink
 import com.flipperdevices.core.di.AppGraph
 import com.flipperdevices.ui.decompose.DecomposeComponent
 import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
+import com.flipperdevices.ui.decompose.findChildByConfig
 import com.flipperdevices.ui.decompose.popOr
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
@@ -24,6 +26,7 @@ class SignupDecomposeComponentImpl(
     @Assisted private val email: String,
     @Assisted private val preFilledPassword: String?,
     @Assisted private val onComplete: () -> Unit,
+    @Assisted deeplink: Deeplink.Root.Auth.VerifyEmailLink.SignUp?,
     private val signupScreenDecomposeComponent: (
         componentContext: ComponentContext,
         onBack: DecomposeOnBackParameter,
@@ -37,7 +40,16 @@ class SignupDecomposeComponentImpl(
     override val stack = childStack(
         source = navigation,
         serializer = SignupNavigationConfig.serializer(),
-        initialConfiguration = SignupNavigationConfig.Main,
+        initialStack = {
+            if (deeplink != null) {
+                listOf(
+                    SignupNavigationConfig.Main,
+                    SignupNavigationConfig.ConfirmEmail(deeplink)
+                )
+            } else {
+                listOf(SignupNavigationConfig.Main)
+            }
+        },
         handleBackButton = true,
         childFactory = ::child,
     )
@@ -50,10 +62,10 @@ class SignupDecomposeComponentImpl(
             componentContext,
             { navigation.popOr(onBack::invoke) },
             email,
-            { navigation.pushToFront(SignupNavigationConfig.ConfirmEmail) },
+            { navigation.pushToFront(SignupNavigationConfig.ConfirmEmail(null)) },
         )
 
-        SignupNavigationConfig.ConfirmEmail -> otpScreenDecomposeComponent(
+        is SignupNavigationConfig.ConfirmEmail -> otpScreenDecomposeComponent(
             componentContext = componentContext,
             onBack = { navigation.popOr(onBack::invoke) },
             otpType = AuthOtpType.VerifyEmail(
@@ -61,7 +73,8 @@ class SignupDecomposeComponentImpl(
             ),
             onOtpComplete = { otpCode ->
                 navigation.pushToFront(SignupNavigationConfig.EnterPassword(code = otpCode))
-            }
+            },
+            deeplink = config.deeplink
         )
 
         is SignupNavigationConfig.EnterPassword -> confirmPasswordScreenDecomposeComponent(
@@ -76,6 +89,17 @@ class SignupDecomposeComponentImpl(
         )
     }
 
+    override fun handleDeeplink(deeplink: Deeplink.Root.Auth.VerifyEmailLink.SignUp) {
+        val child = stack.findChildByConfig(SignupNavigationConfig.ConfirmEmail::class) ?: return
+        val component = child.instance
+        if (component != null && component is AuthOtpScreenDecomposeComponent) {
+            component.handleDeeplink(deeplink)
+            navigation.pushToFront(child.configuration)
+        } else {
+            navigation.pushToFront(SignupNavigationConfig.ConfirmEmail(deeplink))
+        }
+    }
+
     @Inject
     @ContributesBinding(AppGraph::class, SignupDecomposeComponent.Factory::class)
     class Factory(
@@ -85,6 +109,7 @@ class SignupDecomposeComponentImpl(
             email: String,
             preFilledPassword: String?,
             onComplete: () -> Unit,
+            deeplink: Deeplink.Root.Auth.VerifyEmailLink.SignUp?
         ) -> SignupDecomposeComponentImpl
     ) : SignupDecomposeComponent.Factory {
         override fun invoke(
@@ -93,6 +118,7 @@ class SignupDecomposeComponentImpl(
             email: String,
             preFilledPassword: String?,
             onComplete: () -> Unit,
-        ) = factory(componentContext, onBack, email, preFilledPassword, onComplete)
+            deeplink: Deeplink.Root.Auth.VerifyEmailLink.SignUp?
+        ) = factory(componentContext, onBack, email, preFilledPassword, onComplete, deeplink)
     }
 }

@@ -88,6 +88,8 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.decompose.composeExtension)
+
+            implementation(libs.kotlin.coroutines.swing)
         }
         iosMain.dependencies {
             api(libs.decompose)

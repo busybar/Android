@@ -60,10 +60,8 @@ class MainScreenDecomposeComponentImpl(
         )
     }
 
-    fun handleDeeplink(deeplink: Deeplink.Root.Auth) {
-        when (deeplink) {
-            is Deeplink.Root.Auth.OAuth -> signWithInDecomposeComponent.handleDeeplink(deeplink)
-        }
+    fun handleDeeplink(deeplink: Deeplink.Root.Auth.OAuth) {
+        signWithInDecomposeComponent.handleDeeplink(deeplink)
     }
 }
 

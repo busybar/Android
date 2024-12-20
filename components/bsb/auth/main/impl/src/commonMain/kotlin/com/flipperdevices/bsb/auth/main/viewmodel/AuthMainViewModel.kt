@@ -43,14 +43,16 @@ class AuthMainViewModel(
                         navigationStack.pushToFront(
                             AuthRootNavigationConfig.LogIn(
                                 email,
-                                preFilledPassword
+                                preFilledPassword,
+                                deeplink = null
                             )
                         )
                     } else {
                         navigationStack.pushToFront(
                             AuthRootNavigationConfig.SignUp(
                                 email,
-                                preFilledPassword
+                                preFilledPassword,
+                                deeplink = null
                             )
                         )
                     }

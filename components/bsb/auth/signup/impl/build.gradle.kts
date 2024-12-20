@@ -16,5 +16,7 @@ commonDependencies {
     implementation(projects.components.bsb.auth.otp.screen.api)
     implementation(projects.components.bsb.auth.confirmpassword.api)
 
+    implementation(projects.components.bsb.deeplink.api)
+
     implementation(libs.decompose)
 }
