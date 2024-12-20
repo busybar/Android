@@ -103,9 +103,9 @@ class BSBAuthApiImpl(
             httpClient.post {
                 url("${NetworkConstants.BASE_URL}/v0/oauth2/google/one-tap")
                 setBody(BSBOneTapGoogleRequest(token))
-            }.body<BSBApiToken>()
+            }.body<BSBResponse<BSBApiToken>>()
         }.onSuccess {
-            preferenceApi.setString(SettingsEnum.AUTH_TOKEN, it.token)
+            preferenceApi.setString(SettingsEnum.AUTH_TOKEN, it.response.token)
         }.transform { getUser() }
             .onSuccess { bsbUser ->
                 preferenceApi.set(SettingsEnum.USER_DATA, bsbUser)
