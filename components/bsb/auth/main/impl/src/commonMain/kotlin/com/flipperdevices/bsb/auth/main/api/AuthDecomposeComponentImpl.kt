@@ -17,9 +17,11 @@ import com.flipperdevices.bsb.auth.within.oauth.model.OAuthProvider
 import com.flipperdevices.bsb.core.theme.LocalPallet
 import com.flipperdevices.bsb.deeplink.model.Deeplink
 import com.flipperdevices.core.di.AppGraph
+import com.flipperdevices.core.log.LogTagProvider
 import com.flipperdevices.core.log.warn
 import com.flipperdevices.ui.decompose.DecomposeComponent
 import com.flipperdevices.ui.decompose.DecomposeOnBackParameter
+import com.flipperdevices.ui.decompose.findChildByConfig
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
@@ -41,7 +43,9 @@ class AuthDecomposeComponentImpl(
     private val signupDecomposeComponentFactory: SignupDecomposeComponent.Factory,
     private val oAuthWebViewDecomposeComponentFactory: OAuthWebViewDecomposeComponent.Factory
 ) : AuthDecomposeComponent<AuthRootNavigationConfig>(),
-    ComponentContext by componentContext {
+    ComponentContext by componentContext,
+    LogTagProvider {
+    override val TAG = "AuthDecomposeComponentImpl"
 
     override val stack = childStack(
         source = navigation,
@@ -129,7 +133,10 @@ class AuthDecomposeComponentImpl(
 
     override fun handleDeeplink(deeplink: Deeplink.Root.Auth) {
         val (config, componentClass) = when (deeplink) {
-            is Deeplink.Root.Auth.OAuth -> AuthRootNavigationConfig.AuthRoot to MainScreenDecomposeComponentImpl::class
+            is Deeplink.Root.Auth.OAuth -> AuthRootNavigationConfig.AuthRoot(
+                deeplink = null
+            ) to MainScreenDecomposeComponentImpl::class
+
             is Deeplink.Root.Auth.VerifyEmailLink.ResetPassword -> AuthRootNavigationConfig.LogIn(
                 email = deeplink.email,
                 preFilledPassword = null,
@@ -143,13 +150,11 @@ class AuthDecomposeComponentImpl(
             ) to SignupDecomposeComponent::class
         }
 
-        val child = stack.value.items.find {
-            it.configuration::class == config::class
-        }
+        val child = stack.findChildByConfig(config::class)
         val component = child?.instance
         if (component == null || !componentClass.isInstance(component)) {
-            warn { "Bottom bar component is not exist in stack, but first pair screen already passed" }
-            navigation.bringToFront(config as AuthRootNavigationConfig)
+            warn { "Can't find config $config, find only $child " }
+            navigation.bringToFront(config)
         } else {
             navigation.bringToFront(child.configuration)
             when (deeplink) {

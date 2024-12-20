@@ -48,6 +48,7 @@ class OAuthWebViewDecomposeComponentImpl(
                     onReceiveToken(token)
                 }
             }
+            return
         }
         Column(
             modifier = modifier

@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+        xmlns:tools="http://schemas.android.com/tools">
 
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".BSBApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true">
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:name=".BSBApplication"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true">
         <meta-data
-            android:name="asset_statements"
-            android:resource="@string/asset_statements" />
+                android:name="asset_statements"
+                android:resource="@string/asset_statements" />
 
         <activity
-            android:name=".MainActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|mnc|colorMode|density|fontScale|fontWeightAdjustment|keyboard|layoutDirection|locale|mcc|navigation|smallestScreenSize|touchscreen|uiMode"
-            android:exported="true"
-            android:theme="@style/BSBTheme.SplashTheme">
+                android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|mnc|colorMode|density|fontScale|fontWeightAdjustment|keyboard|layoutDirection|locale|mcc|navigation|smallestScreenSize|touchscreen|uiMode"
+                android:exported="true"
+                android:launchMode="singleTask"
+                android:name=".MainActivity"
+                android:theme="@style/BSBTheme.SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,9 +34,9 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="cloud.dev.busy.bar"
-                    android:pathPrefix="/login/email-callback"
-                    android:scheme="https" />
+                        android:host="cloud.dev.busy.bar"
+                        android:pathPrefix="/login/email-callback"
+                        android:scheme="https" />
             </intent-filter>
         </activity>
     </application>
