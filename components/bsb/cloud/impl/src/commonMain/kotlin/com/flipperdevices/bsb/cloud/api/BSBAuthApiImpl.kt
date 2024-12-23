@@ -6,6 +6,8 @@ import com.flipperdevices.bsb.cloud.model.BSBOAuthInformation
 import com.flipperdevices.bsb.cloud.model.BSBOAuthWebProvider
 import com.flipperdevices.bsb.cloud.model.BSBResponse
 import com.flipperdevices.bsb.cloud.model.BSBUser
+import com.flipperdevices.bsb.cloud.model.exception.BSBApiError
+import com.flipperdevices.bsb.cloud.model.exception.BSBApiErrorException
 import com.flipperdevices.bsb.cloud.model.request.BSBApiCheckUserRequest
 import com.flipperdevices.bsb.cloud.model.request.BSBApiCreateAccountRequest
 import com.flipperdevices.bsb.cloud.model.request.BSBApiResetPasswordRequest
@@ -28,13 +30,10 @@ import com.flipperdevices.core.ktx.common.transform
 import com.flipperdevices.core.log.LogTagProvider
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.request.get
-import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
-import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
@@ -51,23 +50,24 @@ class BSBAuthApiImpl(
 ) : BSBAuthApi, LogTagProvider {
     override val TAG = "BSBAuthApi"
 
-    override suspend fun isUserExist(email: String): Result<Boolean> =
-        withContext(networkDispatcher) {
-            runCatching {
-                httpClient.post {
-                    url("${NetworkConstants.BASE_URL}/v0/auth/sign-up/check-user")
-                    setBody(BSBApiCheckUserRequest(email))
+    override suspend fun isUserExist(
+        email: String
+    ): Result<Boolean> = withContext(networkDispatcher) {
+        runCatching {
+            httpClient.post {
+                url("${NetworkConstants.BASE_URL}/v0/auth/sign-up/check-user")
+                setBody(BSBApiCheckUserRequest(email))
+            }
+        }.map { true }
+            .recoverCatching { exception ->
+                if (exception is BSBApiErrorException &&
+                    exception.errorCode == BSBApiError.UNKNOWN_USER
+                ) {
+                    return@withContext Result.success(false)
                 }
-            }.map { true }
-                .recoverCatching { exception ->
-                    if (exception is ClientRequestException &&
-                        exception.response.status == HttpStatusCode.NotFound
-                    ) {
-                        return@withContext Result.success(false)
-                    }
-                    return@withContext Result.failure(exception)
-                }
-        }
+                return@withContext Result.failure(exception)
+            }
+    }
 
     override suspend fun signIn(
         email: String,
@@ -78,7 +78,7 @@ class BSBAuthApiImpl(
                 url("${NetworkConstants.BASE_URL}/v0/auth/sign-in")
                 setBody(BSBApiSignInRequest(email, password))
             }.body<BSBResponse<BSBApiSignInResponse>>()
-        }.transform { signIn(it.response.token.token) }
+        }.transform { signIn(it.success.token.token) }
     }
 
     override suspend fun signIn(token: String): Result<Unit> {
@@ -95,7 +95,7 @@ class BSBAuthApiImpl(
             httpClient.get {
                 url("${NetworkConstants.BASE_URL}/v0/auth/me")
             }.body<BSBResponse<BSBApiUserObject>>()
-        }.map { BSBUser(it.response.email) }
+        }.map { BSBUser(it.success.email) }
     }
 
     override suspend fun jwtAuth(token: String): Result<Unit> = withContext(networkDispatcher) {
@@ -105,7 +105,7 @@ class BSBAuthApiImpl(
                 setBody(BSBOneTapGoogleRequest(token))
             }.body<BSBResponse<BSBApiToken>>()
         }.onSuccess {
-            preferenceApi.setString(SettingsEnum.AUTH_TOKEN, it.response.token)
+            preferenceApi.setString(SettingsEnum.AUTH_TOKEN, it.success.token)
         }.transform { getUser() }
             .onSuccess { bsbUser ->
                 preferenceApi.set(SettingsEnum.USER_DATA, bsbUser)
@@ -129,7 +129,7 @@ class BSBAuthApiImpl(
         }.map {
             BSBEmailVerificationResponse(
                 Instant.fromEpochSeconds(
-                    Clock.System.now().epochSeconds + it.response.codeLifetime
+                    Clock.System.now().epochSeconds + it.success.codeLifetime
                 )
             )
         }
@@ -143,8 +143,13 @@ class BSBAuthApiImpl(
         return@withContext runCatching {
             httpClient.post {
                 url("${NetworkConstants.BASE_URL}/v0/auth/check-code")
-                parameter("confirm_type", verificationType.toVerificationTypeString())
-                setBody(BSBCheckCodeRequest(email, code))
+                setBody(
+                    BSBCheckCodeRequest(
+                        email = email,
+                        code = code,
+                        confirmType = verificationType.toVerificationTypeString()
+                    )
+                )
             }
         }.map { }
     }

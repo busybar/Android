@@ -1,5 +1,5 @@
 plugins {
-    id("flipper.multiplatform")
+    id("flipper.multiplatform-compose")
     id("flipper.multiplatform-dependencies")
     alias(libs.plugins.kotlinSerialization)
 }

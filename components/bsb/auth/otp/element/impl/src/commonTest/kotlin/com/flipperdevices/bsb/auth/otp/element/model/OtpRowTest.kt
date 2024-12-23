@@ -2,11 +2,34 @@ package com.flipperdevices.bsb.auth.otp.element.model
 
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
-import kotlinx.collections.immutable.toPersistentList
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class OtpRowTest {
+    @Test
+    fun typeInEmptyRow() {
+        val emptyRow = OtpRow()
+
+        val newRow = emptyRow.onChange(
+            0,
+            TextFieldValue(
+                text = "\u200E1",
+                selection = TextRange(2)
+            ),
+        )
+
+        val expected = OtpRow(
+            "1",
+            currentFocusIndex = 1
+        )
+
+        assertEquals(
+            expected = expected,
+            actual = newRow,
+            message = "Expected: ${expected.toLine()}, but actual is ${newRow.toLine()}"
+        )
+    }
+
     @Test
     fun pasteInEmptyRow() {
         val emptyRow = OtpRow()
@@ -20,7 +43,7 @@ class OtpRowTest {
         )
 
         val expected = OtpRow(
-            cells = generateCells("123456"),
+            row = "123456",
             currentFocusIndex = 5
         )
 
@@ -34,7 +57,7 @@ class OtpRowTest {
     @Test
     fun pasteInFilledRow() {
         val emptyRow = OtpRow(
-            cells = generateCells("789012"),
+            row = "789012",
             currentFocusIndex = 0
         )
 
@@ -47,7 +70,7 @@ class OtpRowTest {
         )
 
         val expected = OtpRow(
-            cells = generateCells("123456"),
+            row = "123456",
             currentFocusIndex = 5
         )
 
@@ -77,7 +100,7 @@ class OtpRowTest {
         )
 
         val expected = OtpRow(
-            cells = generateCells("123123"),
+            row = "123123",
             currentFocusIndex = 5
         )
 
@@ -88,14 +111,5 @@ class OtpRowTest {
         )
     }
 }
-
-private fun generateCells(row: String) = row.map { symbol ->
-    OtpCell(
-        TextFieldValue(
-            text = "\u200E$symbol",
-            selection = TextRange(1)
-        )
-    )
-}.toPersistentList()
 
 private fun OtpRow.toLine() = cells.map { it.textFieldValue.text }.joinToString("")

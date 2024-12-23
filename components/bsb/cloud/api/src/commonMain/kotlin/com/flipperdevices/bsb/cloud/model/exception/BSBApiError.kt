@@ -1,0 +1,27 @@
+package com.flipperdevices.bsb.cloud.model.exception
+
+// Copy from https://github.com/busy-app/busy-cloud-core/blob/dev/app/utils/enum_utils.py
+@Suppress("MagicNumber")
+enum class BSBApiError(val code: Int) {
+    UNDEFINED(0),
+
+    UNKNOWN_USER(1001),
+    UNKNOWN_REDIRECT(1002),
+    UNKNOWN_CONFIRMATION_TYPE(1002),
+
+    AUTH_SESSION_NOT_PROVIDED(2200),
+    AUTH_EXPIRED_SESSION(2300),
+    AUTH_INVALID_TOKEN_CERTIFICATION(2100),
+    AUTH_INVALID_CONFIRMATION_CODE(2101),
+    AUTH_INVALID_USER_PASSWORD(2102),
+    AUTH_INVALID_PROVIDER(2103),
+    AUTH_INVALID_USERINFO(2104),
+    AUTH_INVALID_SESSION(2105),
+    AUTH_INVALID_STATE(2106),
+    AUTH_INVALID_TOKEN(2107),
+    AUTH_USER_EXISTS(2400),
+
+    UNPROCESSABLE_ENTITY(4001),
+
+    UNEXPECTED_ERROR(5000),
+}

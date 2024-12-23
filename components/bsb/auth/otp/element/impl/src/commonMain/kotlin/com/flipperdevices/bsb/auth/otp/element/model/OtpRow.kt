@@ -11,15 +11,16 @@ data class OtpRow(
     val cells: PersistentList<OtpCell> = Array(OTP_LENGTH) { OtpCell() }.toPersistentList(),
     val currentFocusIndex: Int? = 0
 ) {
-    constructor(row: String) : this(
+    constructor(row: String, currentFocusIndex: Int? = 0) : this(
         Array(OTP_LENGTH) { index ->
             row.getOrNull(index)?.let { symbol ->
                 OtpCell(symbol)
             } ?: OtpCell()
-        }.toPersistentList()
+        }.toPersistentList(),
+        currentFocusIndex
     )
 
-    @Suppress("NestedBlockDepth")
+    @Suppress("NestedBlockDepth", "LongMethod")
     fun onChange(index: Int, newState: TextFieldValue): OtpRow {
         if (index >= cells.size) {
             return this
@@ -57,7 +58,9 @@ data class OtpRow(
                                 )
                             )
                         )
-                        if (!action.remainingText.isNullOrBlank()) {
+                        if (action.remainingText.isNullOrBlank()) {
+                            nextState = null
+                        } else {
                             nextState = TextFieldValue(
                                 text = nextCell.textFieldValue.text.replaceRange(
                                     1,

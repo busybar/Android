@@ -1,5 +1,6 @@
 package com.flipperdevices.bsb.cloud.di
 
+import com.flipperdevices.bsb.cloud.di.http.BSBApiErrorHandlerPlugin
 import com.flipperdevices.bsb.cloud.di.http.BSBAuthPlugin
 import com.flipperdevices.bsb.preference.api.PreferenceApi
 import com.flipperdevices.core.di.AppGraph
@@ -29,7 +30,8 @@ interface HttpClientComponent {
 }
 
 fun getHttpClient(preferenceApi: PreferenceApi) = HttpClient(httpEngine()) {
-    expectSuccess = true // TODO replace with custom error handling when API has been stable
+    install(BSBApiErrorHandlerPlugin)
+
     install(ContentNegotiation) {
         json(
             Json {

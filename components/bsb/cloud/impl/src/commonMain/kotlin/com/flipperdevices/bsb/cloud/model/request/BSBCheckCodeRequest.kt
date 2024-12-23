@@ -8,5 +8,7 @@ data class BSBCheckCodeRequest(
     @SerialName("email")
     val email: String,
     @SerialName("code")
-    val code: String
+    val code: String,
+    @SerialName("confirm_type")
+    val confirmType: String
 )
