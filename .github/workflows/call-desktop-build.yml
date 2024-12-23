@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Setup Java JDK
-        uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b # v4.5.0
+        uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b # v4.6.0
         with:
           distribution: 'adopt'
           java-version: '17'
@@ -25,7 +25,7 @@ jobs:
           ORG_GRADLE_PROJECT_version_code: ${{ inputs.BUILD_NUMBER }}
         run: ./gradlew packageDistributionForCurrentOS
       - name: Upload Artifacts
-        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4
+        uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4
         with:
           name: artifacts-windows
           path: instances/bsb/build/compose/binaries/main/msi/*
@@ -34,7 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Setup Java JDK
-        uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b # v4.5.0
+        uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b # v4.6.0
         with:
           distribution: 'adopt'
           java-version: '17'
@@ -43,7 +43,7 @@ jobs:
           ORG_GRADLE_PROJECT_version_code: ${{ inputs.BUILD_NUMBER }}
         run: ./gradlew packageDistributionForCurrentOS
       - name: Upload Artifacts
-        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4
+        uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4
         with:
           name: artifacts-linux
           path: instances/bsb/build/compose/binaries/main/deb/*
@@ -52,7 +52,7 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Setup Java JDK
-        uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b # v4.5.0
+        uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b # v4.6.0
         with:
           distribution: 'adopt'
           java-version: '17'
@@ -61,7 +61,7 @@ jobs:
           ORG_GRADLE_PROJECT_version_code: ${{ inputs.BUILD_NUMBER }}
         run: ./gradlew packageDistributionForCurrentOS
       - name: Upload Artifacts
-        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4
+        uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4
         with:
           name: artifacts-macos
           path: instances/bsb/build/compose/binaries/main/dmg/*
@@ -79,7 +79,7 @@ jobs:
           pattern: artifacts-*
           merge-multiple: true
       - name: Upload Artifacts
-        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4
+        uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4
         with:
           name: artifacts-output
           path: ${{steps.download.outputs.download-path}}
